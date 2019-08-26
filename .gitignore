@@ -3,6 +3,8 @@
 /public/storage
 /storage/*.key
 /vendor
+/cypress/screenshots
+/cypress/videos
 .env
 .phpunit.result.cache
 Homestead.json
