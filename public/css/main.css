@@ -1,0 +1,48 @@
+html {
+  width: 100%;
+}
+
+body {
+  overflow-x: hidden !important;
+}
+
+body.show-spinner > main {
+  overflow: hidden !important;
+}
+
+/* Hide everything under body tag */
+body.show-spinner > *{
+  opacity: 0;
+}
+.show-spinner-background {
+    background: #242424;
+}
+/* Spinner */
+body.show-spinner::after{
+    background-image: url("../img/giphy.gif");
+    background-position: center;
+    content: " ";
+    display: inline-block;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    border-top-color: rgba(0, 0, 0, 0.3);
+    left: calc(45% - 15px);
+    top: calc(30% - 15px);
+    position: fixed;
+    z-index: 1;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes spin {
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+
