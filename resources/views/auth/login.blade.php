@@ -41,10 +41,10 @@
                                 <span>@lang('login.password')</span>
                             </label>
                             <div class="d-flex justify-content-between align-items-center">
-                                <a href="#">@lang('login.forget_password')?</a>
+{{--                                <a href="#">@lang('login.forget_password')?</a>--}}
                                 <button
                                     class="btn btn-primary btn-lg btn-shadow"
-                                    style="background-color: #db5d0b"
+                                    style="background-color: #db5d0b ; margin: 0 auto"
                                     type="submit">@lang('login.sign_in')</button>
                             </div>
                         </form>

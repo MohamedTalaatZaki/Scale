@@ -43,24 +43,6 @@ function loadStyle(href, callback) {
   var direction = "ltr";
   var radius = "rounded";
 
-  if (typeof Storage !== "undefined") {
-    if (localStorage.getItem("dore-theme")) {
-      theme = localStorage.getItem("dore-theme");
-    } else {
-      localStorage.setItem("dore-theme", theme);
-    }
-    if (localStorage.getItem("dore-direction")) {
-      direction = localStorage.getItem("dore-direction");
-    } else {
-      localStorage.setItem("dore-direction", direction);
-    }
-    if (localStorage.getItem("dore-radius")) {
-      radius = localStorage.getItem("dore-radius");
-    } else {
-      localStorage.setItem("dore-radius", radius);
-    }
-  }
-
   $(".theme-color[data-theme='" + theme + "']").addClass("active");
   $(".direction-radio[data-direction='" + direction + "']").attr("checked", true);
   $(".radius-radio[data-radius='" + radius + "']").attr("checked", true);

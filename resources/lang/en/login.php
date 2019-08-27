@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'juhayna'   =>  'Juhayna',
     'name'  =>  'User Name',
     'password'  =>  'Password',
     'forget_password'   =>  'Forget password',
