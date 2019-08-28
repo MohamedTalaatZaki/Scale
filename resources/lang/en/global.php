@@ -30,5 +30,6 @@ return [
     'light'             =>  'Light',
     'dark'              =>  'Dark',
     'select_role'       =>  'Select Role',
-    'is_active'         =>  'Is Active'
+    'is_active'         =>  'Is Active',
+    'logout'            =>  'Logout'
 ];

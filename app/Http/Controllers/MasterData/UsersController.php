@@ -20,6 +20,16 @@ class UsersController extends Controller
         return view('master-data.users.create');
     }
 
+    public function store(Request $request)
+    {
+        $this->validate($request , [
+            'full_name' =>  'required',
+            'user_name' =>  'required',
+            'password'  =>  'required|confirmed',
+            ''
+        ]);
+    }
+
     public function theme()
     {
         $user   =   \Auth::user();
