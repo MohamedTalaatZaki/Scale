@@ -2,14 +2,14 @@
     <div class="main-menu">
         <div class="scroll">
             <ul class="list-unstyled">
-                <li class="active">
-                    <a href="{{ route('home') }}">
+                <li>
+                    <a class="sidebar sidebar-dashboard" href="{{ route('home') }}">
                         <i class="iconsminds-shop-4"></i>
                         <span>@lang('global.dashboard')</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#masterData">
+                    <a class="sidebar sidebar-master-data" href="#masterData">
                         <i class="iconsminds-digital-drawing"></i> @lang('global.master_data')
                     </a>
                 </li>
@@ -54,13 +54,13 @@
                     <div id="collapseAuthorization" class="collapse show">
                         <ul class="list-unstyled inner-level-menu">
                             <li>
-                                <a href="{{ route('roles.index') }}">
+                                <a class="sidebar-sub sidebar-sub-roles" href="{{ route('roles.index') }}">
                                     <i class="simple-icon-user-following"></i> <span
                                         class="d-inline-block">@lang('global.roles')</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('users.index') }}">
+                                <a class="sidebar-sub sidebar-sub-users" href="{{ route('users.index') }}">
                                     <i class="simple-icon-user-follow"></i> <span
                                         class="d-inline-block">@lang('global.users')</span>
                                 </a>

@@ -69,7 +69,7 @@
     </div>
 
 
-    <a class="navbar-logo" href="#">
+    <a class="navbar-logo" href="{{ route('home') }}">
         <span class="logo d-none d-xs-block"></span>
         <span class="logo-mobile d-block d-xs-none"></span>
     </a>
@@ -252,6 +252,29 @@
 
 <script>
     $().ready(function () {
+        $('.' + localStorage.getItem('sidebar')).closest('li').addClass('active');
+
+        if (localStorage.getItem('hasSub') == '1') {
+            $('.' + localStorage.getItem('sidebar-sub')).closest('li').addClass('active');
+        }
+
+        $('.sidebar,.sidebar-sub').on('click' , function(event){
+            let target,classes;
+            let tagName = event.target.tagName;
+            if (tagName !== 'A')
+            {
+                target = $(event.target).closest('a');
+            } else {
+                target = $(event.target);
+            }
+            classes = $(target).attr('class').split(' ');
+            let hasSub = classes.find(function (elem) {
+                return elem == "sidebar-sub";
+            });
+            localStorage.setItem('hasSub' , hasSub ? '1' : '0');
+
+            localStorage.setItem(classes[0] , classes[1]);
+        });
 
         $("#switchDark").on("change", function (event) {
             $.ajax({
@@ -262,6 +285,7 @@
                 }
             });
         });
+
     });
 </script>
 @stack('scripts')
