@@ -69,7 +69,7 @@
     </div>
 
 
-    <a class="navbar-logo" href="Dashboard.Default.html">
+    <a class="navbar-logo" href="#">
         <span class="logo d-none d-xs-block"></span>
         <span class="logo-mobile d-block d-xs-none"></span>
     </a>
@@ -216,7 +216,7 @@
                 <a class="dropdown-item" href="#">Features</a>
                 <a class="dropdown-item" href="#">History</a>
                 <a class="dropdown-item" href="#">Support</a>
-                <a class="dropdown-item" href="#">Sign out</a>
+                <a class="dropdown-item" href="{{ route('logout') }}">@lang('global.logout')</a>
             </div>
         </div>
     </div>
