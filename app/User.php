@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'full_name', 'email', 'password' ,'user_name' ,'employee_number' ,'lang' ,'theme' , 'avatar'
     ];
 
     /**
@@ -36,4 +36,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    protected $appends  =   ['avatar_url'];
+
+    public function getAvatarUrlAttribute() {
+        $avatar =   is_null($this->avatar) ? asset('/img/default-user.png') : asset( '/storage/'.$this->avatar);
+        return $this->attributes['avatar']  =  $avatar;
+    }
 }
