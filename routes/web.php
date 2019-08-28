@@ -11,6 +11,22 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::middleware(['auth'])->group(function (){
+    Route::get('/', 'HomeController@index')->name('home');
+    Route::get('/home', 'HomeController@index');
+
+    Route::resource('master-data/roles' , 'MasterData\RolesController');
+    Route::resource('master-data/users' , 'MasterData\UsersController');
+
+
+    Route::get('logout' , function (){
+        Auth::logout();
+        return view('auth.login');
+    });
+    Route::get('change-theme' , 'MasterData\UsersController@theme')->name('change-theme');
 });
+
+
+Auth::routes();
+
+
