@@ -33,5 +33,16 @@ return [
     'is_active'         =>  'Is Active',
     'logout'            =>  'Logout',
     'user_created'      =>  'User Created Success',
-    'user_updated'      =>  'User Updated Success'
+    'user_updated'      =>  'User Updated Success',
+    'edit_user'         =>  'Edit User',
+    'governorates'      =>  'Governorates',
+    'en_name'           =>  'English Name',
+    'ar_name'           =>  'Arabic Name',
+    'cities'            =>  'Cities',
+    'centers'           =>  'Centers',
+    'create_governorates'   =>  'Create Governorates',
+    'edit_governorates'     =>  'Edit Governorates',
+    'governorate_created'   =>  'Governorate Created',
+    'governorate_updated'   =>  'Governorate Updated'
+
 ];

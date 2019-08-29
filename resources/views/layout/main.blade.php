@@ -69,7 +69,7 @@
     </div>
 
 
-    <a class="navbar-logo" href="{{ route('home') }}">
+    <a class="navbar-logo" href="#">
         <span class="logo d-none d-xs-block"></span>
         <span class="logo-mobile d-block d-xs-none"></span>
     </a>
@@ -205,9 +205,9 @@
         <div class="user d-inline-block">
             <button class="btn btn-empty p-0" type="button" data-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">
-                <span class="name">Sarah Kortney</span>
+                <span class="name" style="color: #c0702f">{{ Auth::user()->full_name }}</span>
                 <span>
-                        <img alt="Profile Picture" src="{{ asset('img/profile-pic-l.jpg') }}" />
+                        <img alt="Profile Picture" src="{{ Auth::user()->avatar_url }}" />
                     </span>
             </button>
 

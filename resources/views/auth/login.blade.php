@@ -58,6 +58,12 @@
 <script src="{{ asset('js/vendor/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('js/dore.script.js') }}"></script>
 <script src="{{ asset('js/login.js') }}"></script>
+<script>
+    $().ready(function () {
+        localStorage.setItem('sidebar' , 'sidebar-dashboard');
+        localStorage.setItem('hasSub' , '0');
+    })
+</script>
 </body>
 
 </html>

@@ -25,7 +25,7 @@ class MigrationServiceProvider extends ServiceProvider
     {
         $base_migration_dir = __DIR__.'/../../database/migrations';
         $paths = [
-            "{$base_migration_dir}/master_data",
+            "{$base_migration_dir}/MasterData",
         ];
         $this->loadMigrationsFrom($paths);
     }
