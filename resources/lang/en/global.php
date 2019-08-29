@@ -31,5 +31,7 @@ return [
     'dark'              =>  'Dark',
     'select_role'       =>  'Select Role',
     'is_active'         =>  'Is Active',
-    'logout'            =>  'Logout'
+    'logout'            =>  'Logout',
+    'user_created'      =>  'User Created Success',
+    'user_updated'      =>  'User Updated Success'
 ];

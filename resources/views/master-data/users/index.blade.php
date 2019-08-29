@@ -7,7 +7,7 @@
             <div class="text-zero top-right-button-container">
                 <a href="{{ route('users.create') }}">
                 <button type="button"
-                        class="btn btn-primary btn-lg top-right-button mr-1">@lang('global.create')</button>
+                        class="btn btn-primary btn-sm top-right-button mr-1">@lang('global.create')</button>
                 </a>
             </div>
             <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
@@ -29,6 +29,7 @@
         <div class="col-md-12">
         <div class="card">
             <div class="card-body"></div>
+            @include('components._validation')
             <table class="table">
                 <thead>
                 <tr>
@@ -45,7 +46,7 @@
                 @foreach($users as $user)
                     <tr>
                         <td>
-                            <img src="{{ $user->avatar_url }}" style="width: 35px ; height: 35px ; margin: 0 20px">
+                            <img src="{{ $user->avatar_url }}" class="rounded" style="width: 35px ; height: 35px ; margin: 0 20px">
                         </td>
                         <td>{{ $user->full_name }}</td>
                         <td>{{ $user->email }}</td>
@@ -53,8 +54,8 @@
                         <td>{{ $user->employee_code }}</td>
                         <td></td>
                         <td>
-                            <button type="button" class="btn btn-primary btn-sm mb-1">@lang('global.edit')</button>
-                            <button type="button" class="btn btn-danger btn-sm mb-1">@lang('global.delete')</button>
+                            <a href="{{ route('users.edit' , ['id' => $user->id]) }}" class="btn btn-primary btn-sm mb-1">@lang('global.edit')</a>
+{{--                            <button type="button" class="btn btn-danger btn-sm mb-1">@lang('global.delete')</button>--}}
                         </td>
                     </tr>
                 @endforeach
