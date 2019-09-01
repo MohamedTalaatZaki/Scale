@@ -53,4 +53,5 @@ class GovernoratesController extends Controller
 
         return redirect()->action('MasterData\GovernoratesController@index')->with('success' , trans('global.governorate_updated'));
     }
+
 }

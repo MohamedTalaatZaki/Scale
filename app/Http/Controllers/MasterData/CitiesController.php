@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\MasterData;
 
 use App\Models\City;
+use App\Models\Governorate;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -15,17 +16,19 @@ class CitiesController extends Controller
     }
 
     public function create(){
-        return view('master-data.cities.create');
+        $governorates   =   Governorate::query()->where('is_active' , true)->get();
+        return view('master-data.cities.create' , ['governorates' => $governorates]);
     }
 
     public function store(Request $request) {
         $this->validate($request , [
-            'gov_id'    =>  'required',
+            'gov_id'    =>  'required|exists:governorates,id',
             'en_name'   =>  'required|unique:cities,en_name',
             'ar_name'   =>  'required|unique:cities,ar_name'
         ]);
 
-        $gov    =   City::query()->create([
+        $city    =   City::query()->create([
+            'gov_id'   =>  $request->get('gov_id'),
             'en_name'   =>  $request->get('en_name'),
             'ar_name'   =>  $request->get('ar_name'),
             'is_active' =>  $request->has('is_active') ? 1 : 0,
@@ -35,19 +38,21 @@ class CitiesController extends Controller
     }
 
     public function edit($id){
+        $governorates   =   Governorate::query()->where('is_active' , true)->get();
         $city    =   City::query()->findOrFail($id);
-        return view('master-data.cities.edit' , ['city' => $city]);
+        return view('master-data.cities.edit' , ['governorates' => $governorates , 'city' => $city]);
     }
 
     public function update(Request $request , $id) {
         $this->validate($request , [
-            'gov_id'    =>  'required',
+            'gov_id'    =>  'required|exists:governorates,id',
             'en_name'   =>  'required|unique:cities,id',
             'ar_name'   =>  'required|unique:cities,id'
         ]);
-        $gov    =   City::query()->findOrFail($id);
+        $city    =   City::query()->findOrFail($id);
 
-        $gov->update([
+        $city->update([
+            'gov_id'   =>  $request->get('gov_id'),
             'en_name'   =>  $request->get('en_name'),
             'ar_name'   =>  $request->get('ar_name'),
             'is_active' =>  $request->has('is_active') ? 1 : 0,

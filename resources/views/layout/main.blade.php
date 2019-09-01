@@ -78,7 +78,7 @@
         <div class="header-icons d-inline-block align-middle">
             <div class="d-none d-md-inline-block align-text-bottom mr-3">
                 <div class="custom-switch custom-switch-primary-inverse custom-switch-small pl-1"
-                     data-toggle="tooltip" data-placement="left" title="Dark Mode">
+                     data-toggle="tooltip" data-placement="left" title="{{ Auth::user()->theme == 'light' ? 'Dark Mode' : 'Light Mode' }}">
                     <input class="custom-switch-input" id="switchDark" type="checkbox" {{ Auth::user()->theme == 'light' ? "" : "checked" }}>
                     <label class="custom-switch-btn" for="switchDark"></label>
                 </div>

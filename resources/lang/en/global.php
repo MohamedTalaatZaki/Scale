@@ -43,6 +43,16 @@ return [
     'create_governorates'   =>  'Create Governorates',
     'edit_governorates'     =>  'Edit Governorates',
     'governorate_created'   =>  'Governorate Created',
-    'governorate_updated'   =>  'Governorate Updated'
+    'governorate_updated'   =>  'Governorate Updated',
+    'governorate_name'      =>  'Governorate Name',
+    'create_city'           =>  'Create City',
+    'select_gov'            =>  'Select Governorate',
+    'edit_city'             =>  'Edit City',
+    'city_created'          =>  'City Created Successful',
+    'city_updated'          =>  'City Updated Successful',
+    'create_center'         =>  'Create Center',
+    'edit_center'           =>  'Edit Center',
+    'select_city'           =>  'Select City',
+    'city_name'             =>  'City Name',
 
 ];
