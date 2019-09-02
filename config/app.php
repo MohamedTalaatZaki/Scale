@@ -167,6 +167,7 @@ return [
          */
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         Zizaco\Entrust\EntrustServiceProvider::class,
+        Orangehill\Iseed\IseedServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -178,6 +179,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         \App\Providers\MigrationServiceProvider::class,
         \App\Providers\RelationServiceProvider::class,
+        \App\Providers\ComposerServiceProvider::class,
 
     ],
 
