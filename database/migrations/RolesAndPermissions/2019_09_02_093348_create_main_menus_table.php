@@ -15,8 +15,12 @@ class CreateMainMenusTable extends Migration
     {
         Schema::create('main_menus', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            $table->string('class');
+            $table->string('en_name');
+            $table->string('ar_name');
+            $table->string('class')->nullable();
+            $table->string('href');
+            $table->string('sub_class')->nullable();
+            $table->string('data_link')->nullable();
             $table->timestamps();
         });
     }
