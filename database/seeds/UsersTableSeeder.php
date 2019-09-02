@@ -12,7 +12,6 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            'id'                =>  1,
             'full_name'         =>  'Admin',
             'user_name'         =>  'admin',
             'employee_number'   =>  1,
