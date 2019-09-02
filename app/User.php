@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
@@ -42,5 +43,9 @@ class User extends Authenticatable
     public function getAvatarUrlAttribute() {
         $avatar =   is_null($this->avatar) ? asset('/img/default-user.png') : asset( '/storage/'.$this->avatar);
         return $this->attributes['avatar']  =  $avatar;
+    }
+
+    public function setPasswordAttribute($value) {
+        return $this->attributes['password']    =   Hash::make($value);
     }
 }
