@@ -27,7 +27,7 @@
             <div class="card">
                 <div class="card-body">
                     <div>
-                        <h5 class="mb-4">@lang('global.create_user')</h5>
+                        <h5 class="mb-4">@lang('global.edit_user')</h5>
                         <div>
                             <a href="#" class="user-img">
                                 <img id="user-img" src="{{ $user->avatar_url }}"
