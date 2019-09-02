@@ -31,6 +31,6 @@ describe('Login',function(){
     cy.get('.btn').click()
     cy.url().should('contain', '/');
     cy.get('.user > button').click();
-    cy.get('[href="http://dev.juhayna/logout"]').click();  cy.url().should('contain', '/logout');
+    cy.get('[href="http://dev.juhayna/login"]').click();  cy.url().should('contain', '/logout');
   })
 })
