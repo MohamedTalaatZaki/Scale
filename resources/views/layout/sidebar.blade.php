@@ -2,14 +2,14 @@
     <div class="main-menu">
         <div class="scroll">
             <ul class="list-unstyled">
-                <li class="active">
-                    <a href="{{ route('home') }}">
+                <li>
+                    <a class="sidebar sidebar-dashboard" href="{{ route('home') }}">
                         <i class="iconsminds-shop-4"></i>
                         <span>@lang('global.dashboard')</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#masterData">
+                    <a class="sidebar sidebar-master-data" href="#masterData">
                         <i class="iconsminds-digital-drawing"></i> @lang('global.master_data')
                     </a>
                 </li>
@@ -54,13 +54,13 @@
                     <div id="collapseAuthorization" class="collapse show">
                         <ul class="list-unstyled inner-level-menu">
                             <li>
-                                <a href="{{ route('roles.index') }}">
+                                <a class="sidebar-sub sidebar-sub-roles" href="{{ route('roles.index') }}">
                                     <i class="simple-icon-user-following"></i> <span
                                         class="d-inline-block">@lang('global.roles')</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="{{ route('users.index') }}">
+                                <a class="sidebar-sub sidebar-sub-users" href="{{ route('users.index') }}">
                                     <i class="simple-icon-user-follow"></i> <span
                                         class="d-inline-block">@lang('global.users')</span>
                                 </a>
@@ -72,31 +72,23 @@
                 <li>
                     <a href="#" data-toggle="collapse" data-target="#collapseProduct" aria-expanded="true"
                        aria-controls="collapseProduct" class="rotate-arrow-icon opacity-50">
-                        <i class="simple-icon-arrow-down"></i> <span class="d-inline-block">Product</span>
+                        <i class="simple-icon-arrow-down"></i> <span class="d-inline-block">Governorates</span>
                     </a>
                     <div id="collapseProduct" class="collapse show">
                         <ul class="list-unstyled inner-level-menu">
                             <li>
-                                <a href="Pages.Product.List.html">
-                                    <i class="simple-icon-credit-card"></i> <span class="d-inline-block">Data
-                                            List</span>
+                                <a class="sidebar-sub sidebar-sub-governorates" href="{{ route('governorates.index') }}">
+                                    <i class="simple-icon-credit-card"></i> <span class="d-inline-block">@lang('global.governorates')</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="Pages.Product.Thumbs.html">
-                                    <i class="simple-icon-list"></i> <span class="d-inline-block">Thumb
-                                            List</span>
+                                <a class="sidebar-sub sidebar-sub-cities" href="{{ route('cities.index') }}">
+                                    <i class="simple-icon-list"></i> <span class="d-inline-block">@lang('global.cities')</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="Pages.Product.Images.html">
-                                    <i class="simple-icon-grid"></i> <span class="d-inline-block">Image
-                                            List</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="Pages.Product.Detail.html">
-                                    <i class="simple-icon-book-open"></i> <span class="d-inline-block">Detail</span>
+                                <a class="sidebar-sub sidebar-sub-centers" href="{{ route('centers.index') }}">
+                                    <i class="simple-icon-grid"></i> <span class="d-inline-block">@lang('global.centers')</span>
                                 </a>
                             </li>
                         </ul>

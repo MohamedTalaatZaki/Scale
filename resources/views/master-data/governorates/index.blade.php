@@ -3,9 +3,9 @@
 
     <div class="row">
         <div class="col-12">
-            <h1>@lang('global.users')</h1>
+            <h1>@lang('global.governorates')</h1>
             <div class="text-zero top-right-button-container">
-                <a href="{{ route('users.create') }}">
+                <a href="{{ route('governorates.create') }}">
                 <button type="button"
                         class="btn btn-primary btn-sm top-right-button mr-1">@lang('global.create')</button>
                 </a>
@@ -16,7 +16,7 @@
                         <a href="#">@lang('global.master_data')</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="#">@lang('global.users')</a>
+                        <a href="#">@lang('global.governorates')</a>
                     </li>
                     <li class="breadcrumb-item " aria-current="page">@lang('global.index')</li>
                 </ol>
@@ -34,28 +34,22 @@
                 <thead>
                 <tr>
                     <th>#</th>
-                    <th>@lang('global.full_name')</th>
-                    <th>@lang('global.user_name')</th>
-                    <th>@lang('global.email')</th>
-                    <th>@lang('global.employee_code')</th>
-                    <th>@lang('global.user_role')</th>
+                    <th>@lang('global.en_name')</th>
+                    <th>@lang('global.ar_name')</th>
+                    <th>@lang('global.is_active')</th>
                     <th>@lang('global.actions')</th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($users as $user)
+                @foreach($governorates as $governorate)
                     <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $governorate->en_name }}</td>
+                        <td>{{ $governorate->ar_name }}</td>
+                        <td><i class="simple-icon-{{ $governorate->is_active ? 'check' : 'close' }}" ></i></td>
+
                         <td>
-                            <img src="{{ $user->avatar_url }}" class="rounded" style="width: 35px ; height: 35px ; margin: 0 20px">
-                        </td>
-                        <td>{{ $user->full_name }}</td>
-                        <td>{{ $user->email }}</td>
-                        <td>{{ $user->user_name }}</td>
-                        <td>{{ $user->employee_code }}</td>
-                        <td></td>
-                        <td>
-                            <a href="{{ route('users.edit' , ['id' => $user->id]) }}" class="btn btn-primary btn-sm mb-1">@lang('global.edit')</a>
-{{--                            <button type="button" class="btn btn-danger btn-sm mb-1">@lang('global.delete')</button>--}}
+                            <a href="{{ route('governorates.edit' , ['id' => $governorate->id]) }}" class="btn btn-primary btn-sm mb-1">@lang('global.edit')</a>
                         </td>
                     </tr>
                 @endforeach
@@ -67,7 +61,7 @@
 
     <div class="row">
         <div class="col-12 list">
-            {{ $users->links() }}
+            {{ $governorates->links() }}
         </div>
     </div>
 @endsection

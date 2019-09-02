@@ -205,9 +205,9 @@
         <div class="user d-inline-block">
             <button class="btn btn-empty p-0" type="button" data-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">
-                <span class="name">Sarah Kortney</span>
+                <span class="name" style="color: #c0702f">{{ Auth::user()->full_name }}</span>
                 <span>
-                        <img alt="Profile Picture" src="{{ asset('img/profile-pic-l.jpg') }}" />
+                        <img alt="Profile Picture" src="{{ Auth::user()->avatar_url }}" />
                     </span>
             </button>
 
@@ -252,6 +252,29 @@
 
 <script>
     $().ready(function () {
+        $('.' + localStorage.getItem('sidebar')).closest('li').addClass('active');
+
+        if (localStorage.getItem('hasSub') == '1') {
+            $('.' + localStorage.getItem('sidebar-sub')).closest('li').addClass('active');
+        }
+
+        $('.sidebar,.sidebar-sub').on('click' , function(event){
+            let target,classes;
+            let tagName = event.target.tagName;
+            if (tagName !== 'A')
+            {
+                target = $(event.target).closest('a');
+            } else {
+                target = $(event.target);
+            }
+            classes = $(target).attr('class').split(' ');
+            let hasSub = classes.find(function (elem) {
+                return elem == "sidebar-sub";
+            });
+            localStorage.setItem('hasSub' , hasSub ? '1' : '0');
+
+            localStorage.setItem(classes[0] , classes[1]);
+        });
 
         $("#switchDark").on("change", function (event) {
             $.ajax({
@@ -262,6 +285,7 @@
                 }
             });
         });
+
     });
 </script>
 @stack('scripts')
