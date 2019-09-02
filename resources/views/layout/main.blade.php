@@ -210,13 +210,13 @@
                         <img alt="Profile Picture" src="{{ Auth::user()->avatar_url }}" />
                     </span>
             </button>
-
+            <form action="{{route('logout')}}" id="logout" method="post">@csrf</form>
             <div class="dropdown-menu dropdown-menu-right mt-3">
                 <a class="dropdown-item" href="#">Account</a>
                 <a class="dropdown-item" href="#">Features</a>
                 <a class="dropdown-item" href="#">History</a>
                 <a class="dropdown-item" href="#">Support</a>
-                <a class="dropdown-item" href="{{ route('logout') }}">@lang('global.logout')</a>
+                <a class="dropdown-item" href="javascript:void(0);" onclick="document.getElementById('logout').submit()">@lang('global.logout')</a>
             </div>
         </div>
     </div>
