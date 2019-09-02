@@ -389,7 +389,6 @@
                 </li>
 
             </ul>
-
             <ul class="list-unstyled" data-link="menu" id="menuTypes">
                 <li>
                     <a href="#" data-toggle="collapse" data-target="#collapseMenuTypes" aria-expanded="true"
