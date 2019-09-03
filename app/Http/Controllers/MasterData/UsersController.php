@@ -5,6 +5,7 @@ namespace App\Http\Controllers\MasterData;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
@@ -52,7 +53,7 @@ class UsersController extends Controller
             'full_name' =>  'required',
             'user_name' =>  'required|unique:users,user_name,'.$id,
             'password'  =>  'nullable|confirmed|min:6',
-            'email'     =>  'nullable|email|unique:users,id',
+            'email'     =>  'nullable|email|unique:users,email,'.$id,
         ]);
 
         $user = User::query()->findOrFail($id);
@@ -80,7 +81,7 @@ class UsersController extends Controller
 
     public function theme()
     {
-        $user   =   \Auth::user();
+        $user   =   Auth::user();
 
         $user->update([
             'theme' =>  $user->theme == "light" ? 'dark': 'light',
