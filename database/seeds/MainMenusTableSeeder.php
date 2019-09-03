@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class MainMenusTableSeeder extends Seeder
 {
@@ -14,12 +15,11 @@ class MainMenusTableSeeder extends Seeder
     {
         
 
-        \DB::table('main_menus')->delete();
+        DB::table('main_menus')->truncate();
         
-        \DB::table('main_menus')->insert(array (
+        DB::table('main_menus')->insert(array (
             0 => 
             array (
-                'id' => 1,
                 'en_name' => 'Dashboard',
                 'ar_name' => 'لوحة التحكم',
                 'class' => 'sidebar sidebar-dashboard',
@@ -31,7 +31,6 @@ class MainMenusTableSeeder extends Seeder
             ),
             1 => 
             array (
-                'id' => 2,
                 'en_name' => 'Master Data',
                 'ar_name' => 'البيانات الاساسية',
                 'class' => 'sidebar sidebar-master-data',

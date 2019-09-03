@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class MenuGroupsTableSeeder extends Seeder
 {
@@ -14,12 +15,11 @@ class MenuGroupsTableSeeder extends Seeder
     {
         
 
-        \DB::table('menu_groups')->delete();
+        DB::table('menu_groups')->truncate();
         
-        \DB::table('menu_groups')->insert(array (
+        DB::table('menu_groups')->insert(array (
             0 => 
             array (
-                'id' => 1,
                 'main_menu_id' => 2,
                 'en_name' => 'Administration',
                 'ar_name' => 'ادارة الصلاحيات والاعضاء',
@@ -30,7 +30,6 @@ class MenuGroupsTableSeeder extends Seeder
             ),
             1 => 
             array (
-                'id' => 2,
                 'main_menu_id' => 2,
                 'en_name' => 'Governorates',
                 'ar_name' => 'المحافظات',
