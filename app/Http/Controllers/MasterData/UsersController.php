@@ -49,7 +49,7 @@ class UsersController extends Controller
     {
         $this->validate($request , [
             'full_name' =>  'required',
-            'user_name' =>  'required|unique:users,id',
+            'user_name' =>  'required|unique:users,user_name,'.$id,
             'password'  =>  'nullable|confirmed|min:6',
             'email'     =>  'nullable|unique:users,id',
         ]);

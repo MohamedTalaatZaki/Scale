@@ -66,18 +66,6 @@
                             </div>
                         </div>
 
-                        <div class="form-group row mb-1">
-                            <label class="col-12 col-form-label">@lang('global.is_active')</label>
-                            <div class="col-12">
-                                <div class="custom-switch custom-switch-primary-inverse mb-2" style="padding-left: 0">
-                                    <input class="custom-switch-input" id="switch3" type="checkbox" value="1" name="is_active" {{ old('is_active' , '1') == '1' ? 'checked' : '' }}>
-                                    <label class="custom-switch-btn" for="switch3"></label>
-                                </div>
-                                @if($errors->has('is_active'))
-                                    <div id="jQueryName-error" class="error" style="">{{ $errors->first('is_active') }}</div>
-                                @endif
-                            </div>
-                        </div>
                         <div class="form-group col-md-12">
                             <div class="float-right">
                                 <a href="{{ route('cities.index') }}">
