@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Models;
+namespace App\Models\Roles;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Center extends Model
+class SubMenu extends Model
 {
-    protected $table    =   'centers';
+    protected $table    =   'sub_menus';
     protected $guarded  =   ['id'];
+    protected $appends  =   ['name'];
 
-
-    public function city(){
-        return $this->belongsTo(City::class , 'city_id' , 'id');
+    public function menuGroup() {
+        return $this->belongsTo(MenuGroup::class , 'menu_group' , 'id');
     }
 
     public function getNameAttribute() {

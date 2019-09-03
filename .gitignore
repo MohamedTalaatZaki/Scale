@@ -4,7 +4,10 @@
 /public/storage
 /storage/*.key
 /vendor
+/cypress/screenshots
+/cypress/videos
 .env
+cypress.json
 .phpunit.result.cache
 Homestead.json
 Homestead.yaml

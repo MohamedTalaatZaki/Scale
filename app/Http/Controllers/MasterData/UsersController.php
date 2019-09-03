@@ -5,6 +5,7 @@ namespace App\Http\Controllers\MasterData;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -26,10 +27,10 @@ class UsersController extends Controller
             'full_name' =>  'required',
             'user_name' =>  'required|unique:users',
             'password'  =>  'required|confirmed|min:6',
-            'email'     =>  'nullable|unique:users',
+            'email'     =>  'nullable|email|unique:users',
         ]);
 
-        $user = User::query()->create($request->input());
+        $user = User::query()->create(array_merge($request->input(),['password'=>Hash::make($request->input('password'))]));
 
         if($request->hasFile('avatar')) {
             $path   =   $request->file('avatar')->store("/users/avatars/{$user->id}"  , 'public');
@@ -49,14 +50,14 @@ class UsersController extends Controller
     {
         $this->validate($request , [
             'full_name' =>  'required',
-            'user_name' =>  'required|unique:users,id',
+            'user_name' =>  'required|unique:users,user_name,'.$id,
             'password'  =>  'nullable|confirmed|min:6',
-            'email'     =>  'nullable|unique:users,id',
+            'email'     =>  'nullable|email|unique:users,id',
         ]);
 
         $user = User::query()->findOrFail($id);
         $user->update(
-            is_null($request->get('password')) ? $request->except('password') : $request->input()
+            is_null($request->get('password')) ? $request->except('password') : array_merge($request->input(),['password'=>Hash::make($request->input('password'))])
         );
 
         if($request->hasFile('avatar')) {

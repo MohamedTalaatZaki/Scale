@@ -128,6 +128,7 @@
                                 @endif
                             </div>
                         </div>
+                        @unless($user->is_active)
                         <div class="form-group row mb-1">
                             <label class="col-12 col-form-label">@lang('global.is_active')</label>
                             <div class="col-12">
@@ -140,6 +141,7 @@
                                 @endif
                             </div>
                         </div>
+                        @endunless
                         <div class="form-group col-md-12">
                             <div class="float-right">
                                 <a href="{{ route('users.index') }}">

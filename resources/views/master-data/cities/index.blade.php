@@ -37,7 +37,6 @@
                     <th>@lang('global.governorate_name')</th>
                     <th>@lang('global.en_name')</th>
                     <th>@lang('global.ar_name')</th>
-                    <th>@lang('global.is_active')</th>
                     <th>@lang('global.actions')</th>
                 </tr>
                 </thead>
@@ -48,7 +47,6 @@
                         <td>{{ $city->governorate->name }}</td>
                         <td>{{ $city->en_name }}</td>
                         <td>{{ $city->ar_name }}</td>
-                        <td><i class="simple-icon-{{ $city->is_active ? 'check' : 'close' }}" ></i></td>
 
                         <td>
                             <a href="{{ route('cities.edit' , ['id' => $city->id]) }}" class="btn btn-primary btn-sm mb-1">@lang('global.edit')</a>

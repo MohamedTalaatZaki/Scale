@@ -10,11 +10,9 @@
                 </ul>
             </div>
         @elseif (Session::has('success'))
-            <div class="alert alert-success alert-dismissable fade in">
+            <div class="alert alert-success alert-dismissable rounded" role="alert">
                 <a href="#" class="close text-default" data-dismiss="alert" aria-label="close">&times;</a>
-                <ul style="padding-left: 2%">
-                    <li>{{ Session::get('success') }}</li>
-                </ul>
+                <h5 class="text-center">{{ Session::get('success') }}</h5>
             </div>
         @endif
     </div>
