@@ -2,9 +2,10 @@
 
 namespace App\Providers;
 
+use App\ViewComposers\SidebarComposer;
 use Illuminate\Support\ServiceProvider;
 
-class MigrationServiceProvider extends ServiceProvider
+class ComposerServiceProvider extends ServiceProvider
 {
     /**
      * Register services.
@@ -23,11 +24,6 @@ class MigrationServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $base_migration_dir = __DIR__.'/../../database/migrations';
-        $paths = [
-            "{$base_migration_dir}/MasterData",
-            "{$base_migration_dir}/RolesAndPermissions",
-        ];
-        $this->loadMigrationsFrom($paths);
+        view()->composer('layout.sidebar' , SidebarComposer::class);
     }
 }
