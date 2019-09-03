@@ -31,7 +31,7 @@ class MenuGroupsTableSeeder extends Seeder
             1 => 
             array (
                 'main_menu_id' => 2,
-                'en_name' => 'Governorates',
+                'en_name' => 'Governments',
                 'ar_name' => 'المحافظات',
                 'aria_controls' => 'collapseGovernorates',
                 'order' => 2,

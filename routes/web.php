@@ -16,7 +16,7 @@ Route::middleware(['auth'])->group(function (){
 
     Route::resource('master-data/roles' , 'MasterData\RolesController');
     Route::resource('master-data/users' , 'MasterData\UsersController');
-    Route::resource('master-data/governorates' , 'MasterData\GovernoratesController');
+    Route::resource('master-data/government' , 'MasterData\GovernmentsController');
     Route::resource('master-data/cities' , 'MasterData\CitiesController');
     Route::resource('master-data/centers' , 'MasterData\CentersController');
 

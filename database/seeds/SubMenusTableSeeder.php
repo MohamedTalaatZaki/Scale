@@ -45,9 +45,9 @@ class SubMenusTableSeeder extends Seeder
             2 => 
             array (
                 'menu_group_id' => 2,
-                'en_name' => 'Governorates',
+                'en_name' => 'Governments',
                 'ar_name' => 'المحافظات',
-                'route' => 'governorates.index',
+                'route' => 'government.index',
                 'a_class' => 'sidebar-sub sidebar-sub-governorates',
                 'i_class' => 'simple-icon-credit-card',
                 'order' => 1,

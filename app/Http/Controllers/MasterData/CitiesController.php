@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\MasterData;
 
 use App\Models\City;
-use App\Models\Governorate;
+use App\Models\Government;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -16,7 +16,7 @@ class CitiesController extends Controller
     }
 
     public function create(){
-        $governorates   =   Governorate::query()->where('is_active' , true)->get();
+        $governorates   =   Government::query()->where('is_active' , true)->get();
         return view('master-data.cities.create' , ['governorates' => $governorates]);
     }
 
@@ -38,7 +38,7 @@ class CitiesController extends Controller
     }
 
     public function edit($id){
-        $governorates   =   Governorate::query()->where('is_active' , true)->get();
+        $governorates   =   Government::query()->where('is_active' , true)->get();
         $city    =   City::query()->findOrFail($id);
         return view('master-data.cities.edit' , ['governorates' => $governorates , 'city' => $city]);
     }
