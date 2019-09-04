@@ -128,7 +128,7 @@
                                 @endif
                             </div>
                         </div>
-                        @unless($user->is_active)
+                        @unless($user->is_admin)
                         <div class="form-group row mb-1">
                             <label class="col-12 col-form-label">@lang('global.is_active')</label>
                             <div class="col-12">
