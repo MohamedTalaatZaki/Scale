@@ -25,14 +25,14 @@ describe('Login', function () {
         cy.get(':nth-child(3) > .form-control').type('666666')
         cy.contains('Sign In').click()
         cy.url().should('contain', '/login');
-        cy.get('li').should('contain', 'These credentials do not match our records.')
+        cy.get('li').should('contain', 'Invalid User name or password')
     })
     it('invalid user name and invalid password', function () {
         cy.get(':nth-child(2) > .form-control').type('amin')
         cy.get(':nth-child(3) > .form-control').type('666666')
         cy.contains('Sign In').click()
         cy.url().should('contain', '/login');
-        cy.get('li').should('contain', 'These credentials do not match our records.')
+        cy.get('li').should('contain', 'Invalid User name or password')
     })
 
     it('Successful Login with valid user name and valid password', function () {
@@ -52,6 +52,3 @@ describe('Login', function () {
 
 
 })
-
-
-
