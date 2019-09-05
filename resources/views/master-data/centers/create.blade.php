@@ -8,10 +8,10 @@
             <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
                 <ol class="breadcrumb pt-0">
                     <li class="breadcrumb-item">
-                        <a href="#">@lang('global.master_data')</a>
+                        <a href="#" class="default-cursor">@lang('global.master_data')</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="#">@lang('global.centers')</a>
+                        <a href="{{ route('centers.index') }}">@lang('global.centers')</a>
                     </li>
                     <li class="breadcrumb-item " aria-current="page">@lang('global.create')</li>
                 </ol>
