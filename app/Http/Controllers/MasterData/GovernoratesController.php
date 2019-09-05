@@ -6,7 +6,7 @@ use App\Models\Government;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class GovernmentsController extends Controller
+class GovernoratesController extends Controller
 {
     public function index()
     {
