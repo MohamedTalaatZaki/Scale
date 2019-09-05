@@ -6,30 +6,35 @@
     <title>@lang('global.juhayna')</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="stylesheet" href="{{ asset('font/iconsmind-s/css/iconsminds.css') }}" />
-    <link rel="stylesheet" href="{{ asset('font/simple-line-icons/css/simple-line-icons.css') }}" />
+    <link rel="stylesheet" href="{{ asset('font/iconsmind-s/css/iconsminds.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('font/simple-line-icons/css/simple-line-icons.css') }}"/>
 
-    <link rel="stylesheet" href="{{ asset('css/vendor/bootstrap.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('css/vendor/bootstrap.rtl.only.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('css/vendor/fullcalendar.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('css/vendor/dataTables.bootstrap4.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('css/vendor/datatables.responsive.bootstrap4.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('css/vendor/select2.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('css/vendor/perfect-scrollbar.css') }}" />
-    <link rel="stylesheet" href="{{ asset('css/vendor/owl.carousel.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('css/vendor/bootstrap-stars.css') }}" />
-    <link rel="stylesheet" href="{{ asset('css/vendor/nouislider.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('css/vendor/bootstrap-datepicker3.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('css/vendor/component-custom-switch.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/vendor/bootstrap.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/vendor/bootstrap.rtl.only.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/vendor/fullcalendar.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/vendor/dataTables.bootstrap4.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/vendor/datatables.responsive.bootstrap4.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/vendor/select2.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/vendor/perfect-scrollbar.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/vendor/owl.carousel.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/vendor/bootstrap-stars.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/vendor/nouislider.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/vendor/bootstrap-datepicker3.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('css/vendor/component-custom-switch.min.css') }}"/>
     @if (Auth::check() && Auth::user()->theme == 'light')
         <link rel="stylesheet" type="text/css" href="{{ asset('css/dore.light.orange.min.css') }}">
     @else
         <link rel="stylesheet" type="text/css" href="{{ asset('css/dore.dark.orange.min.css') }}">
     @endif
-    <link rel="stylesheet" href="{{ asset('css/main.css') }}" />
+    <link rel="stylesheet" href="{{ asset('css/main.css') }}"/>
+
     <style>
-        body,.table{
+        body, .table {
             color: #c0702f;
+        }
+
+        .form-control:disabled {
+            background-color: transparent;
         }
     </style>
     @stack('styles')
@@ -40,22 +45,22 @@
     <div class="d-flex align-items-center navbar-left">
         <a href="#" class="menu-button d-none d-md-block">
             <svg class="main" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 9 17">
-                <rect x="0.48" y="0.5" width="7" height="1" />
-                <rect x="0.48" y="7.5" width="7" height="1" />
-                <rect x="0.48" y="15.5" width="7" height="1" />
+                <rect x="0.48" y="0.5" width="7" height="1"/>
+                <rect x="0.48" y="7.5" width="7" height="1"/>
+                <rect x="0.48" y="15.5" width="7" height="1"/>
             </svg>
             <svg class="sub" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 17">
-                <rect x="1.56" y="0.5" width="16" height="1" />
-                <rect x="1.56" y="7.5" width="16" height="1" />
-                <rect x="1.56" y="15.5" width="16" height="1" />
+                <rect x="1.56" y="0.5" width="16" height="1"/>
+                <rect x="1.56" y="7.5" width="16" height="1"/>
+                <rect x="1.56" y="15.5" width="16" height="1"/>
             </svg>
         </a>
 
         <a href="#" class="menu-button-mobile d-xs-block d-sm-block d-md-none">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 17">
-                <rect x="0.5" y="0.5" width="25" height="1" />
-                <rect x="0.5" y="7.5" width="25" height="1" />
-                <rect x="0.5" y="15.5" width="25" height="1" />
+                <rect x="0.5" y="0.5" width="25" height="1"/>
+                <rect x="0.5" y="7.5" width="25" height="1"/>
+                <rect x="0.5" y="15.5" width="25" height="1"/>
             </svg>
         </a>
 
@@ -78,8 +83,10 @@
         <div class="header-icons d-inline-block align-middle">
             <div class="d-none d-md-inline-block align-text-bottom mr-3">
                 <div class="custom-switch custom-switch-primary-inverse custom-switch-small pl-1"
-                     data-toggle="tooltip" data-placement="left" title="{{ Auth::user()->theme == 'light' ? 'Dark Mode' : 'Light Mode' }}">
-                    <input class="custom-switch-input" id="switchDark" type="checkbox" {{ Auth::user()->theme == 'light' ? "" : "checked" }}>
+                     data-toggle="tooltip" data-placement="left"
+                     title="{{ Auth::user()->theme == 'light' ? 'Dark Mode' : 'Light Mode' }}">
+                    <input class="custom-switch-input" id="switchDark"
+                           type="checkbox" {{ Auth::user()->theme == 'light' ? "" : "checked" }}>
                     <label class="custom-switch-btn" for="switchDark"></label>
                 </div>
             </div>
@@ -145,7 +152,7 @@
                         <div class="d-flex flex-row mb-3 pb-3 border-bottom">
                             <a href="#">
                                 <img src="{{ asset('img/profile-pic-l-2.jpg') }}" alt="Notification Image"
-                                     class="img-thumbnail list-thumbnail xsmall border-0 rounded-circle" />
+                                     class="img-thumbnail list-thumbnail xsmall border-0 rounded-circle"/>
                             </a>
                             <div class="pl-3">
                                 <a href="#">
@@ -157,7 +164,7 @@
                         <div class="d-flex flex-row mb-3 pb-3 border-bottom">
                             <a href="#">
                                 <img src="{{ asset('img/notification-thumb.jpg') }}" alt="Notification Image"
-                                     class="img-thumbnail list-thumbnail xsmall border-0 rounded-circle" />
+                                     class="img-thumbnail list-thumbnail xsmall border-0 rounded-circle"/>
                             </a>
                             <div class="pl-3">
                                 <a href="#">
@@ -169,7 +176,7 @@
                         <div class="d-flex flex-row mb-3 pb-3 border-bottom">
                             <a href="#">
                                 <img src="{{ asset('img/notification-thumb-2.jpg') }}" alt="Notification Image"
-                                     class="img-thumbnail list-thumbnail xsmall border-0 rounded-circle" />
+                                     class="img-thumbnail list-thumbnail xsmall border-0 rounded-circle"/>
                             </a>
                             <div class="pl-3">
                                 <a href="#">
@@ -181,7 +188,7 @@
                         <div class="d-flex flex-row mb-3 pb-3 ">
                             <a href="#">
                                 <img src="{{ asset('img/notification-thumb-3.jpg') }}" alt="Notification Image"
-                                     class="img-thumbnail list-thumbnail xsmall border-0 rounded-circle" />
+                                     class="img-thumbnail list-thumbnail xsmall border-0 rounded-circle"/>
                             </a>
                             <div class="pl-3">
                                 <a href="#">
@@ -207,16 +214,15 @@
                     aria-expanded="false">
                 <span class="name" style="color: #c0702f">{{ Auth::user()->full_name }}</span>
                 <span>
-                        <img alt="Profile Picture" src="{{ Auth::user()->avatar_url }}" />
+                        <img alt="Profile Picture" src="{{ Auth::user()->avatar_url }}"/>
                     </span>
             </button>
             <form action="{{route('logout')}}" id="logout" method="post">@csrf</form>
             <div class="dropdown-menu dropdown-menu-right mt-3">
-                <a class="dropdown-item" href="#">Account</a>
-                <a class="dropdown-item" href="#">Features</a>
-                <a class="dropdown-item" href="#">History</a>
-                <a class="dropdown-item" href="#">Support</a>
-                <a class="dropdown-item" href="javascript:void(0);" onclick="document.getElementById('logout').submit()">@lang('global.logout')</a>
+                <a class="dropdown-item" href="#" data-toggle="modal"
+                   data-target="#account-info"> @lang('global.change_acc_info')</a>
+                <a class="dropdown-item" href="javascript:void(0);"
+                   onclick="document.getElementById('logout').submit()">@lang('global.logout')</a>
             </div>
         </div>
     </div>
@@ -230,6 +236,99 @@
     </div>
 </main>
 
+<div class="modal" id="account-info" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">@lang('global.change_acc_info')</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="{{ route('users.change-acc-info') }}" method="post">
+                @csrf
+                <div class="modal-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label>@lang('global.full_name')</label>
+                            <input type="text" class="form-control" name="full_name"
+                                   value="{{ old('full_name' , Auth::user()->full_name) }}"
+                                   placeholder="@lang('global.full_name')" disabled>
+                            @if($errors->has('full_name'))
+                                <div id="jQueryName-error" class="error"
+                                     style="">{{ $errors->first('full_name') }}</div>
+                            @endif
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>@lang('global.user_name')</label>
+                            <input type="text" class="form-control" name="user_name"
+                                   value="{{ old('user_name' , Auth::user()->user_name) }}"
+                                   placeholder="@lang('global.user_name')" disabled>
+                            @if($errors->has('user_name'))
+                                <div id="jQueryName-error" class="error"
+                                     style="">{{ $errors->first('user_name') }}</div>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="password">@lang('global.password')</label>
+                            <input type="password" class="form-control" id="password" name="password"
+                                   placeholder="@lang('global.password')">
+                            @if($errors->has('password'))
+                                <div id="jQueryName-error" class="error" style="">{{ $errors->first('password') }}</div>
+                            @endif
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="password_confirmation">@lang('global.confirm_password')</label>
+                            <input type="password" class="form-control" id="password_confirmation"
+                                   name="password_confirmation"
+                                   placeholder="@lang('global.confirm_password')">
+                            @if($errors->has('password_confirmation'))
+                                <div id="jQueryName-error" class="error"
+                                     style="">{{ $errors->first('password_confirmation') }}</div>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputState1">@lang('global.select_theme')</label>
+                            <select id="inputState1" class="form-control" name="theme">
+                                <option value="light" {{ old('theme' , Auth::user()->theme) == 'light' ? 'selected' : '' }}>
+                                    @lang('global.light')
+                                </option>
+                                <option value="dark" {{ old('theme' , Auth::user()->theme) == 'dark' ? 'selected' : '' }}>
+                                    @lang('global.dark')
+                                </option>
+                            </select>
+                            @if($errors->has('theme'))
+                                <div id="jQueryName-error" class="error" style="">{{ $errors->first('theme') }}</div>
+                            @endif
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputState2">@lang('global.select_lang')</label>
+                            <select id="inputState2" class="form-control" name="lang">
+                                <option value="ar" {{ old('lang' , Auth::user()->lang) == 'ar' ? 'selected' : '' }}>
+                                    @lang('global.arabic')
+                                </option>
+                                <option value="en" {{ old('lang' , Auth::user()->lang) == 'en' ? 'selected' : '' }}>
+                                    @lang('global.english')
+                                </option>
+                            </select>
+                            @if($errors->has('lang'))
+                                <div id="jQueryName-error" class="error" style="">{{ $errors->first('lang') }}</div>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">@lang('global.save')</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">@lang('global.close')</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 <script src="{{ asset('js/vendor/jquery-3.3.1.min.js') }}"></script>
 <script src="{{ asset('js/vendor/bootstrap.bundle.min.js') }}"></script>
@@ -249,20 +348,31 @@
 <script src="{{ asset('js/vendor/mousetrap.min.js') }}"></script>
 <script src="{{ asset('js/dore.script.js') }}"></script>
 <script src="{{ asset('js/scripts.js') }}"></script>
+<script src="{{ asset('js/notify.min.js') }}"></script>
 
 <script>
     $().ready(function () {
+
+        let notify = parseInt('{{ Session::has('notify') }}');
+        let openAccountInfo = parseInt('{{ Session::has('openAccountInfo') }}');
+
         $('.' + localStorage.getItem('sidebar')).closest('li').addClass('active');
 
         if (localStorage.getItem('hasSub') == '1') {
             $('.' + localStorage.getItem('sidebar-sub')).closest('li').addClass('active');
         }
 
-        $('.sidebar,.sidebar-sub').on('click' , function(event){
-            let target,classes;
+        if(openAccountInfo) {
+            $('#account-info').modal('show');
+        }
+
+        if(notify) {
+            $.notify('{{ Session::get('notify') }}' , {position: "right bottom" , className:'success' , autoHideDelay: 9000});
+        }
+        $('.sidebar,.sidebar-sub').on('click', function (event) {
+            let target, classes;
             let tagName = event.target.tagName;
-            if (tagName !== 'A')
-            {
+            if (tagName !== 'A') {
                 target = $(event.target).closest('a');
             } else {
                 target = $(event.target);
@@ -271,16 +381,16 @@
             let hasSub = classes.find(function (elem) {
                 return elem == "sidebar-sub";
             });
-            localStorage.setItem('hasSub' , hasSub ? '1' : '0');
+            localStorage.setItem('hasSub', hasSub ? '1' : '0');
 
-            localStorage.setItem(classes[0] , classes[1]);
+            localStorage.setItem(classes[0], classes[1]);
         });
 
         $("#switchDark").on("change", function (event) {
             $.ajax({
-                'method' : 'get',
-                'url'    : '{{ route('change-theme') }}',
-                success  :   () => {
+                'method': 'get',
+                'url': '{{ route('change-theme') }}',
+                success: () => {
                     window.location.reload();
                 }
             });
