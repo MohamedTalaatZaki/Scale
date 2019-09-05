@@ -26,13 +26,16 @@ class UsersController extends Controller
     {
         $this->validate($request , [
             'full_name' =>  'required',
-            'user_name' =>  'required|unique:users',
+            'user_name' =>  'required|unique:users|min:4',
             'password'  =>  'required|confirmed|min:6',
             'email'     =>  'nullable|email|unique:users',
         ]);
 
-        $user = User::query()->create(array_merge($request->input(),['password'=>Hash::make($request->input('password'))]));
-
+        $data = collect($request->input());
+        $data = $data->merge(['is_active'=>$request->input('is_active',0)]) ;
+        $data = is_null($request->get('role_id')) ? $data->merge(['is_active'=>0]) : $data ;
+        $user = User::query()
+            ->create($data->merge(['password'=>Hash::make($request->input('password'))])->all());
         if($request->hasFile('avatar')) {
             $path   =   $request->file('avatar')->store("/users/avatars/{$user->id}"  , 'public');
             $user->update(['avatar' =>  $path]);
@@ -51,16 +54,18 @@ class UsersController extends Controller
     {
         $this->validate($request , [
             'full_name' =>  'required',
-            'user_name' =>  'required|unique:users,user_name,'.$id,
+            'user_name' =>  'required|min:4|unique:users,user_name,'.$id,
             'password'  =>  'nullable|confirmed|min:6',
             'email'     =>  'nullable|email|unique:users,email,'.$id,
         ]);
-
         $user = User::query()->findOrFail($id);
+        $data = collect($request->input());
+        $data = $data->merge(['is_active'=>$request->input('is_active',0)]) ;
+        $data = is_null($request->get('password')) ? $data->except(['password','password_confirmation']) : $data->merge(['password'=>Hash::make($request->input('password'))]) ;
+        $data = is_null($request->get('role_id')) ? $data->merge(['is_active'=>0]) : $data ;
         $user->update(
-            is_null($request->get('password')) ? $request->except('password') : array_merge($request->input(),['password'=>Hash::make($request->input('password'))])
+            $data->all()
         );
-
         if($request->hasFile('avatar')) {
             $path   =   $request->file('avatar')->store("/users/avatars/{$user->id}"  , 'public');
             $user->update(['avatar' =>  $path]);
