@@ -5,10 +5,12 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Support\Facades\Hash;
+use Zizaco\Entrust\Traits\EntrustUserTrait;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable , EntrustUserTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -44,5 +46,9 @@ class User extends Authenticatable
     public function getAvatarUrlAttribute() {
         $avatar =   is_null($this->avatar) ? asset('/img/default-user.png') : asset( '/storage/'.$this->avatar);
         return $this->attributes['avatar']  =  $avatar;
+    }
+
+    public function setPasswordAttribute($value) {
+        return $this->attributes['password']    =   Hash::make($value);
     }
 }

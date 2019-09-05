@@ -53,9 +53,8 @@
                         <td>{{ $user->user_name }}</td>
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->employee_code }}</td>
-                        <td></td>
+                        <td>{{ optional($user->roles()->first())->name }}</td>
                         <td><i class="simple-icon-{{ $user->is_active == 1 ? 'check' : 'close' }}" ></i></td>
-
                         <td>
                             @if($user->is_admin && Auth::user()->is_admin)
                             <a href="{{ route('users.edit' , ['id' => $user->id]) }}" class="btn btn-primary btn-sm mb-1">@lang('global.edit')</a>

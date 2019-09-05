@@ -11,7 +11,7 @@ class City extends Model
     protected $appends  =   ['name'];
 
     public function governorate(){
-        return $this->belongsTo(Government::class , 'gov_id' , 'id');
+        return $this->belongsTo(Governorate::class , 'gov_id' , 'id');
     }
 
     public function centers()
