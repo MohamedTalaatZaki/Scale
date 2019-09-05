@@ -118,8 +118,8 @@
                                 @endif
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="inputState3">@lang('global.select_role')</label>
-                                <select id="inputState3" class="form-control" name="role_id">
+                                <label for="role">@lang('global.select_role')</label>
+                                <select id="role" class="form-control" name="role_id">
                                     <option value=""  selected>@lang('global.select_role')</option>
                                     @foreach($roles as $role)
                                         <option value="{{ $role->id }}" {{ old('role_id') == 'role_id' || $user->hasRole($role->name) ? 'selected' : '' }}> {{ $role->name }}</option>
@@ -130,18 +130,21 @@
                                 @endif
                             </div>
                         </div>
+                        @unless($user->is_admin)
                         <div class="form-group row mb-1">
-                            <label class="col-12 col-form-label">@lang('global.is_active')</label>
+                            <label class="col-12 col-form-label">@lang('global.is_active') ( @lang('global.is_active_note') )</label>
                             <div class="col-12">
                                 <div class="custom-switch custom-switch-primary-inverse mb-2" style="padding-left: 0">
-                                    <input class="custom-switch-input" id="switch3" type="checkbox" value="1" name="is_active" {{ old('is_active' , $user->is_active) == '1' ? 'checked' : '' }}>
-                                    <label class="custom-switch-btn" for="switch3"></label>
+                                    <input class="custom-switch-input" id="is_active" type="checkbox" value="1" name="is_active"
+                                            {{ old('is_active' , $user->is_active) == '1' ? 'checked' : '' }}>
+                                    <label class="custom-switch-btn" for="is_active"></label>
                                 </div>
                                 @if($errors->has('is_active'))
                                     <div id="jQueryName-error" class="error" style="">{{ $errors->first('is_active') }}</div>
                                 @endif
                             </div>
                         </div>
+                        @endunless
                         <div class="form-group col-md-12">
                             <div class="float-right">
                                 <a href="{{ route('users.index') }}">
@@ -174,6 +177,17 @@
         $().ready(function () {
             $('.user-img').on('click' , function () {
                 $('.select-img').click();
+            });
+
+            var roleInput = document.getElementById('role');
+            roleInput.addEventListener('change',function(e){
+                var isActiveInput = document.getElementById('is_active');
+                if(e.target.value){
+                    isActiveInput.disabled = false;
+                }else{
+                    isActiveInput.checked = false;
+                    isActiveInput.disabled = true;
+                }
             });
         })
     </script>

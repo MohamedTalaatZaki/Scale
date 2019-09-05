@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class SubMenusTableSeeder extends Seeder
 {
@@ -14,12 +15,11 @@ class SubMenusTableSeeder extends Seeder
     {
         
 
-        \DB::table('sub_menus')->delete();
+        DB::table('sub_menus')->delete();
         
-        \DB::table('sub_menus')->insert(array (
+        DB::table('sub_menus')->insert(array (
             0 => 
             array (
-                'id' => 1,
                 'menu_group_id' => 1,
                 'en_name' => 'Roles',
                 'ar_name' => 'الصلاحيات',
@@ -32,7 +32,6 @@ class SubMenusTableSeeder extends Seeder
             ),
             1 => 
             array (
-                'id' => 2,
                 'menu_group_id' => 1,
                 'en_name' => 'Users',
                 'ar_name' => 'المستخدمين',
@@ -45,11 +44,10 @@ class SubMenusTableSeeder extends Seeder
             ),
             2 => 
             array (
-                'id' => 3,
                 'menu_group_id' => 2,
-                'en_name' => 'Governorates',
+                'en_name' => 'Governments',
                 'ar_name' => 'المحافظات',
-                'route' => 'governorates.index',
+                'route' => 'government.index',
                 'a_class' => 'sidebar-sub sidebar-sub-governorates',
                 'i_class' => 'simple-icon-credit-card',
                 'order' => 1,
@@ -58,7 +56,6 @@ class SubMenusTableSeeder extends Seeder
             ),
             3 => 
             array (
-                'id' => 4,
                 'menu_group_id' => 2,
                 'en_name' => 'Cities',
                 'ar_name' => 'المدن',
@@ -71,7 +68,6 @@ class SubMenusTableSeeder extends Seeder
             ),
             4 => 
             array (
-                'id' => 5,
                 'menu_group_id' => 2,
                 'en_name' => 'Centers',
                 'ar_name' => 'المراكز',

@@ -54,6 +54,7 @@ return [
     'edit_center'           =>  'Edit Center',
     'select_city'           =>  'Select City',
     'city_name'             =>  'City Name',
+    'is_active_note'        => 'Disabled if user has no role.',
     'name'                  =>  'Name',
     'permissions_count'     =>  'Permissions Count',
     'users_count'           =>  'Users Count',

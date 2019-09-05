@@ -30,7 +30,7 @@
                         <h5 class="mb-4">@lang('global.create_user')</h5>
                         <div>
                             <a href="#" class="user-img">
-                                <img id="user-img" src="{{ asset('img/profile-pic-l-4.jpg') }}"
+                                <img id="user-img" src="{{ asset('img/default-user.png') }}"
                                      style="left: 95%!important;top: -55px!important;max-height: 114px;max-width: 114px"
                                      class="img-thumbnail card-img social-profile-img" />
                             </a>
@@ -117,8 +117,8 @@
                                 @endif
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="inputState3">@lang('global.select_role')</label>
-                                <select id="inputState3" class="form-control" name="role_id">
+                                <label for="role">@lang('global.select_role')</label>
+                                <select id="role" class="form-control" name="role_id">
                                     <option value=""  selected>@lang('global.select_role')</option>
                                     @foreach($roles as $role)
                                         <option value="{{ $role->id }}" {{ old('role_id') == 'role_id' ? 'selected' : '' }}> {{ $role->name }}</option>
@@ -130,11 +130,11 @@
                             </div>
                         </div>
                         <div class="form-group row mb-1">
-                            <label class="col-12 col-form-label">@lang('global.is_active')</label>
+                            <label class="col-12 col-form-label">@lang('global.is_active') ( @lang('global.is_active_note') )</label>
                             <div class="col-12">
                                 <div class="custom-switch custom-switch-primary-inverse mb-2" style="padding-left: 0">
-                                    <input class="custom-switch-input" id="switch3" type="checkbox" value="1" name="is_active" {{ old('is_active') == '1' ? 'checked' : '' }}>
-                                    <label class="custom-switch-btn" for="switch3"></label>
+                                    <input class="custom-switch-input" id="is_active" type="checkbox" disabled value="1" name="is_active" {{ old('is_active') == '1' ? 'checked' : '' }}>
+                                    <label class="custom-switch-btn" for="is_active"></label>
                                 </div>
                                 @if($errors->has('is_active'))
                                     <div id="jQueryName-error" class="error" style="">{{ $errors->first('is_active') }}</div>
@@ -173,6 +173,17 @@
         $().ready(function () {
             $('.user-img').on('click' , function () {
                 $('.select-img').click();
+            });
+
+            var roleInput = document.getElementById('role');
+            roleInput.addEventListener('change',function(e){
+                var isActiveInput = document.getElementById('is_active');
+                if(e.target.value){
+                    isActiveInput.disabled = false;
+                }else{
+                    isActiveInput.checked = false;
+                    isActiveInput.disabled = true;
+                }
             });
         })
     </script>

@@ -10,13 +10,19 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('test' , function(){
+    dd('test');
+});
+Route::get('/', function () {
+    return view('layout.main');
+});
 
 Route::middleware(['auth'])->group(function (){
     Route::get('/', 'HomeController@index')->name('home');
 
     Route::resource('master-data/roles' , 'MasterData\RolesController');
     Route::resource('master-data/users' , 'MasterData\UsersController');
-    Route::resource('master-data/governorates' , 'MasterData\GovernoratesController');
+    Route::resource('master-data/government' , 'MasterData\GovernmentsController');
     Route::resource('master-data/cities' , 'MasterData\CitiesController');
     Route::resource('master-data/centers' , 'MasterData\CentersController');
 

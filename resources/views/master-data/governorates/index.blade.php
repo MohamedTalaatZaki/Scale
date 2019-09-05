@@ -5,7 +5,7 @@
         <div class="col-12">
             <h1>@lang('global.governorates')</h1>
             <div class="text-zero top-right-button-container">
-                <a href="{{ route('governorates.create') }}">
+                <a href="{{ route('government.create') }}">
                 <button type="button"
                         class="btn btn-primary btn-sm top-right-button mr-1">@lang('global.create')</button>
                 </a>
@@ -36,7 +36,6 @@
                     <th>#</th>
                     <th>@lang('global.en_name')</th>
                     <th>@lang('global.ar_name')</th>
-                    <th>@lang('global.is_active')</th>
                     <th>@lang('global.actions')</th>
                 </tr>
                 </thead>
@@ -46,10 +45,8 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $governorate->en_name }}</td>
                         <td>{{ $governorate->ar_name }}</td>
-                        <td><i class="simple-icon-{{ $governorate->is_active ? 'check' : 'close' }}" ></i></td>
-
                         <td>
-                            <a href="{{ route('governorates.edit' , ['id' => $governorate->id]) }}" class="btn btn-primary btn-sm mb-1">@lang('global.edit')</a>
+                            <a href="{{ route('government.edit' , ['id' => $governorate->id]) }}" class="btn btn-primary btn-sm mb-1">@lang('global.edit')</a>
                         </td>
                     </tr>
                 @endforeach

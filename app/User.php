@@ -37,6 +37,8 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'is_active' => 'boolean',
+
     ];
 
     protected $appends  =   ['avatar_url'];

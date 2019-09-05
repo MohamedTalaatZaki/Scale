@@ -6,6 +6,8 @@ use App\Models\Roles\Role;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
@@ -26,9 +28,9 @@ class UsersController extends Controller
     {
         $this->validate($request , [
             'full_name' =>  'required',
-            'user_name' =>  'required|unique:users',
+            'user_name' =>  'required|unique:users|min:4',
             'password'  =>  'required|confirmed|min:6',
-            'email'     =>  'nullable|unique:users',
+            'email'     =>  'nullable|email|unique:users',
             'role_id'   =>  'nullable|exists:roles,id'
         ]);
 
@@ -41,6 +43,7 @@ class UsersController extends Controller
 
         if($request->get('role_id') != null) {
             $user->attachRole($request->get('role_id'));
+            $user->update(['is_active' => $request->input('is_active' , 0)]);
         } else {
             $user->update(['is_active' => false]);
         }
@@ -59,9 +62,9 @@ class UsersController extends Controller
     {
         $this->validate($request , [
             'full_name' =>  'required',
-            'user_name' =>  'required|unique:users,id',
+            'user_name' =>  'required|min:4|unique:users,user_name,'.$id,
             'password'  =>  'nullable|confirmed|min:6',
-            'email'     =>  'nullable|unique:users,id',
+            'email'     =>  'nullable|email|unique:users,email,'.$id,
             'role_id'   =>  'nullable|exists:roles,id'
         ]);
 
@@ -78,6 +81,7 @@ class UsersController extends Controller
         if($request->get('role_id') != null) {
             $user->roles()->sync([]);
             $user->attachRole($request->get('role_id'));
+            $user->update(['is_active' => $request->input('is_active' , 0)]);
         } else {
             $user->roles()->sync([]);
             $user->update(['is_active' => false]);
@@ -98,7 +102,7 @@ class UsersController extends Controller
 
     public function theme()
     {
-        $user   =   \Auth::user();
+        $user   =   Auth::user();
 
         $user->update([
             'theme' =>  $user->theme == "light" ? 'dark': 'light',
