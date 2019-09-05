@@ -27,6 +27,7 @@ Route::middleware(['auth'])->group(function (){
     Route::resource('master-data/centers' , 'MasterData\CentersController');
 
     Route::get('change-theme' , 'MasterData\UsersController@theme')->name('change-theme');
+    Route::post('change-acc-info' , 'MasterData\UsersController@changeAccInfo')->name('users.change-acc-info');
 
 });
 

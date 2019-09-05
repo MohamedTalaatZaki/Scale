@@ -62,5 +62,8 @@ return [
     'select_permissions'    =>  'Select Permissions',
     'role_created'          =>  'Role Created',
     'role_updated'          =>  'Role Updated',
+    'change_acc_info'       =>  'Change Account Info',
+    'close'                 =>  'Close',
+    'change_acc_info_success'   =>  'Change Account Info Success',
 
 ];

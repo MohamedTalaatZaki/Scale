@@ -31,7 +31,9 @@ class UsersController extends Controller
             'user_name' =>  'required|unique:users|min:4',
             'password'  =>  'required|confirmed|min:6',
             'email'     =>  'nullable|email|unique:users',
-            'role_id'   =>  'nullable|exists:roles,id'
+            'role_id'   =>  'nullable|exists:roles,id',
+            'lang'      =>  'in:ar,en',
+            'theme'     =>  'in:light,dark',
         ]);
 
         $user = User::query()->create($request->input());
@@ -65,7 +67,9 @@ class UsersController extends Controller
             'user_name' =>  'required|min:4|unique:users,user_name,'.$id,
             'password'  =>  'nullable|confirmed|min:6',
             'email'     =>  'nullable|email|unique:users,email,'.$id,
-            'role_id'   =>  'nullable|exists:roles,id'
+            'role_id'   =>  'nullable|exists:roles,id',
+            'lang'      =>  'in:ar,en',
+            'theme'     =>  'in:light,dark',
         ]);
 
         $user = User::query()->findOrFail($id);
@@ -108,5 +112,29 @@ class UsersController extends Controller
             'theme' =>  $user->theme == "light" ? 'dark': 'light',
         ]);
         return "done";
+    }
+
+    public function changeAccInfo(Request $request) {
+        $validate   =   \Validator::make($request->all(),[
+            'password'  =>  'nullable|confirmed|min:6',
+            'lang'      =>  'in:ar,en',
+            'theme'     =>  'in:light,dark',
+        ]);
+
+        if($validate->fails()) {
+            return redirect()->back()->with('openAccountInfo' , '')->withErrors($validate->errors());
+        }
+
+        $user = Auth::user();
+        $user->update([
+            'lang'  =>  $request->get('lang'),
+            'theme'  =>  $request->get('theme'),
+        ]);
+
+        if(!is_null($request->get('password'))) {
+            $user->update(['password' => $request->get('password')]);
+        }
+
+        return redirect()->back()->with('notify' , trans('global.change_acc_info_success'));
     }
 }
