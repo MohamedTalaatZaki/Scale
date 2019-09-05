@@ -28,12 +28,14 @@
                                 <div id="{{ $group->aria_controls }}" class="collapse show">
                                     <ul class="list-unstyled inner-level-menu">
                                         @foreach($group->subMenus as $sub)
-                                            <li>
-                                                <a class="{{ $sub->a_class }}" href="{{ route($sub->route) }}">
-                                                    <i class="{{ $sub->i_class }}"></i> <span
-                                                        class="d-inline-block">{{ $sub->name }}</span>
-                                                </a>
-                                            </li>
+                                            @permission($sub->route)
+                                                <li>
+                                                    <a class="{{ $sub->a_class }}" href="{{ route($sub->route) }}">
+                                                        <i class="{{ $sub->i_class }}"></i> <span
+                                                            class="d-inline-block">{{ $sub->name }}</span>
+                                                    </a>
+                                                </li>
+                                            @endpermission
                                         @endforeach
                                     </ul>
                                 </div>

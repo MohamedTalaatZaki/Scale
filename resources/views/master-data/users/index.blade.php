@@ -52,7 +52,7 @@
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->user_name }}</td>
                         <td>{{ $user->employee_code }}</td>
-                        <td></td>
+                        <td>{{ optional($user->roles()->first())->name }}</td>
                         <td>
                             <a href="{{ route('users.edit' , ['id' => $user->id]) }}" class="btn btn-primary btn-sm mb-1">@lang('global.edit')</a>
 {{--                            <button type="button" class="btn btn-danger btn-sm mb-1">@lang('global.delete')</button>--}}

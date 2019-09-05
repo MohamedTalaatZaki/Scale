@@ -54,5 +54,12 @@ return [
     'edit_center'           =>  'Edit Center',
     'select_city'           =>  'Select City',
     'city_name'             =>  'City Name',
+    'name'                  =>  'Name',
+    'permissions_count'     =>  'Permissions Count',
+    'users_count'           =>  'Users Count',
+    'create_role'           =>  'Create Role',
+    'select_permissions'    =>  'Select Permissions',
+    'role_created'          =>  'Role Created',
+    'role_updated'          =>  'Role Updated',
 
 ];
