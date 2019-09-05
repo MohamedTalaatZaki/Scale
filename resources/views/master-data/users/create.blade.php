@@ -30,8 +30,8 @@
                         <h5 class="mb-4">@lang('global.create_user')</h5>
                         <div>
                             <a href="#" class="user-img">
-                                <img id="user-img" src="{{ asset('img/default-user.png') }}"
-                                     style="left: 95%!important;top: -55px!important;max-height: 114px;max-width: 114px"
+                                <img id="user-img" src="{{ asset('img/GOHAINA.png') }}"
+                                     style="left: 95%!important;top: -55px!important;max-height: 114px;max-width: 114px;object-fit: contain"
                                      class="img-thumbnail card-img social-profile-img" />
                             </a>
                         </div>
