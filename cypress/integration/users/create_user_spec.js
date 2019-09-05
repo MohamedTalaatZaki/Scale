@@ -15,97 +15,105 @@ describe('Create user', function () {
     it('checks required fields', function () {
       cy.get('div.card-body > form').invoke('attr', 'noValidate','true');
       cy.get('div.card-body > form').should('have.attr', 'noValidate','true');
-      cy.get('.btn-primary').click();
+      cy.get('.card-body .btn-primary').click();
       cy.wait(2000);
       cy.url().should('contain','/master-data/users/create');
       cy.get('.error').should('contain','The full name field is required.')
     })
     it('checks username minimum length',function(){
-      cy.get('input[name="full_name"]').type('Tonaguy');
-      cy.get('input[name="user_name"]').type('q');
-      cy.get('input[name="password"]').type('Tonaguy');
-      cy.get('input[name="password_confirmation"]').type('Tonaguy');
-      cy.get('.btn-primary').click();
+      cy.get('.card-body input[name="full_name"]').type('Tonaguy');
+      cy.get('.card-body input[name="user_name"]').type('q');
+      cy.get('.card-body input[name="password"]').type('Tonaguy');
+      cy.get('.card-body input[name="password_confirmation"]').type('Tonaguy');
+      cy.get('.card-body .btn-primary').click();
       cy.wait(2000);
       cy.url().should('contain','/master-data/users/create');
       cy.get('.error').should('contain','The user name must be at least 4 characters.')
     })
     it('checks password length',function(){
-      cy.get('input[name="full_name"]').type('Tonaguy');
-      cy.get('input[name="user_name"]').type('q');
-      cy.get('input[name="password"]').type('123');
-      cy.get('input[name="password_confirmation"]').type('123');
-      cy.get('.btn-primary').click();
+      cy.get('.card-body input[name="full_name"]').type('Tonaguy');
+      cy.get('.card-body input[name="user_name"]').type('q');
+      cy.get('.card-body input[name="password"]').type('123');
+      cy.get('.card-body input[name="password_confirmation"]').type('123');
+      cy.get('.card-body .btn-primary').click();
       cy.get('.error').should('contain','The password must be at least 6 characters.')
     })
     it('checks password match',function(){
-      cy.get('input[name="full_name"]').type('Tonaguy');
-      cy.get('input[name="user_name"]').type('q');
-      cy.get('input[name="password"]').type('123');
-      cy.get('input[name="password_confirmation"]').type('1234');
-      cy.get('.btn-primary').click();
+      cy.get('.card-body input[name="full_name"]').type('Tonaguy');
+      cy.get('.card-body input[name="user_name"]').type('q');
+      cy.get('.card-body input[name="password"]').type('123');
+      cy.get('.card-body input[name="password_confirmation"]').type('1234');
+      cy.get('.card-body .btn-primary').click();
       cy.get('.error').should('contain','The password confirmation does not match.')
     })
     it('checks default theme',function(){
-      cy.get('#inputState1 :selected').invoke('attr', 'value').should('contain', 'light')
+      cy.get('.card-body #inputState1 :selected').invoke('attr', 'value').should('contain', 'light')
     })
     it('checks unique email',function(){
-      cy.get('input[name="email"]').type('admin@admin.com');
-      cy.get('input[name="full_name"]').type('Tonaguy');
-      cy.get('input[name="user_name"]').type('q');
-      cy.get('input[name="password"]').type('123456');
-      cy.get('input[name="password_confirmation"]').type('123456');
-      cy.get('.btn-primary').click();
+      cy.get('.card-body input[name="email"]').type('admin@admin.com');
+      cy.get('.card-body input[name="full_name"]').type('Tonaguy');
+      cy.get('.card-body input[name="user_name"]').type('q');
+      cy.get('.card-body input[name="password"]').type('123456');
+      cy.get('.card-body input[name="password_confirmation"]').type('123456');
+      cy.get('.card-body .btn-primary').click();
       cy.get('.error').should('contain','The email has already been taken.')
     })
     it('checks unique username',function(){
-      cy.get('input[name="full_name"]').type('Tonaguy');
-      cy.get('input[name="user_name"]').type('admin');
-      cy.get('input[name="password"]').type('123456');
-      cy.get('input[name="password_confirmation"]').type('123456');
-      cy.get('.btn-primary').click();
+      cy.get('.card-body input[name="full_name"]').type('Tonaguy');
+      cy.get('.card-body input[name="user_name"]').type('admin');
+      cy.get('.card-body input[name="password"]').type('123456');
+      cy.get('.card-body input[name="password_confirmation"]').type('123456');
+      cy.get('.card-body .btn-primary').click();
       cy.get('.error').should('contain','The user name has already been taken.')
     })
     it('checks default language',function(){
       cy.get('#inputState2 :selected').invoke('attr', 'value').should('contain', 'ar')
     })
     it('checks unassigned role warning',function(){
-      cy.get('input[name="full_name"]').type('Tonaguy');
-      cy.get('input[name="user_name"]').type('tonaguy');
-      cy.get('input[name="password"]').type('123456');
-      cy.get('input[name="password_confirmation"]').type('123456');
-      cy.get('#role > option[value=""]').invoke('attr', 'selected',true);
-      cy.get('.btn-primary').click();
+      cy.get('.card-body input[name="full_name"]').type('Tonaguy');
+      cy.get('.card-body input[name="user_name"]').type('tonaguy');
+      cy.get('.card-body input[name="password"]').type('123456');
+      cy.get('.card-body input[name="password_confirmation"]').type('123456');
+      cy.get('.card-body #role > option[value=""]').invoke('attr', 'selected',true);
+      cy.get('.card-body .btn-primary').click();
       cy.get('.warning').should('contain','The user has no role')
     })
     it('checks default inactive for no roles',function(){
-      cy.get('input[name="full_name"]').type('Tonaguy');
-      cy.get('input[name="user_name"]').type('tonaguy');
-      cy.get('input[name="password"]').type('123456');
-      cy.get('input[name="password_confirmation"]').type('123456');
-      cy.get('#role > option[value=""]').invoke('attr', 'selected',true);
-      cy.get('#is_active').invoke('attr', 'value','1');
-      cy.get('.btn-primary').click();
+      cy.get('.card-body input[name="full_name"]').type('Tonaguy');
+      cy.get('.card-body input[name="user_name"]').type('tonaguy');
+      cy.get('.card-body input[name="password"]').type('123456');
+      cy.get('.card-body input[name="password_confirmation"]').type('123456');
+      cy.get('.card-body #role > option[value=""]').invoke('attr', 'selected',true);
+      cy.get('.card-body #is_active').invoke('attr', 'value','1');
+      cy.get('.card-body .btn-primary').click();
     //  cy.get('.error').should('contain','The user name has already been taken.')
     })
     it('checks default avatar',function(){
-      cy.get('#user-img').get('[src=""]').should('not.exist');
+      cy.get('.card-body #user-img').get('[src=""]').should('not.exist');
     })
     it('checks passing nullable fields',function(){
-      cy.get('input[name="full_name"]').type('Tonaguy');
-      cy.get('input[name="user_name"]').type('tonaguy');
-      cy.get('input[name="password"]').type('123456');
-      cy.get('input[name="password_confirmation"]').type('123456');
-      cy.get('.btn-primary').click();
+      cy.get('.card-body input[name="full_name"]').type('Tonaguy');
+      cy.get('.card-body input[name="user_name"]').type('tonaguy');
+      cy.get('.card-body input[name="password"]').type('123456');
+      cy.get('.card-body input[name="password_confirmation"]').type('123456');
+      cy.get('.card-body .btn-primary').click();
       cy.url().should('contain','/master-data/users');
+      cy.server();
+      cy.request('get','/api/user/tonagy').then((response)=>{
+        console.log(response);
+      });
     })
     it('checks all fields',function(){
-      cy.get('input[name="full_name"]').type('Tonaguy');
-      cy.get('input[name="user_name"]').type('tonaguy');
-      cy.get('input[name="password"]').type('123456');
-      cy.get('input[name="password_confirmation"]').type('123456');
-      cy.get('input[name="employee_code"]').type(123);
-      cy.get('.btn-primary').click();
+      cy.get('.card-body input[name="full_name"]').type('Tonaguy');
+      cy.get('.card-body input[name="user_name"]').type('tonagy');
+      cy.get('.card-body input[name="password"]').type('123456');
+      cy.get('.card-body input[name="password_confirmation"]').type('123456');
+      cy.get('.card-body input[name="employee_code"]').type(123);
+      cy.get('.card-body .btn-primary').click();
       cy.url().should('contain','/master-data/users');
+      cy.server();
+      cy.request('get','/api/user/tonagy').then((response)=>{
+        console.log(response);
+      });
     })
 })
