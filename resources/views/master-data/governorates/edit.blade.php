@@ -8,10 +8,10 @@
             <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
                 <ol class="breadcrumb pt-0">
                     <li class="breadcrumb-item">
-                        <a href="#">@lang('global.master_data')</a>
+                        <a href="#" class="default-cursor">@lang('global.master_data')</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="#">@lang('global.governorates')</a>
+                        <a href="{{ route('governorates.index') }}">@lang('global.governorates')</a>
                     </li>
                     <li class="breadcrumb-item " aria-current="page">@lang('global.edit')</li>
                 </ol>
@@ -30,7 +30,7 @@
                         <h5 class="mb-4">@lang('global.edit_governorates')</h5>
                     </div>
 
-                    <form action="{{ route('government.update' , ['id' => $governorate->id ]) }}" method="post">
+                    <form action="{{ route('governorates.update' , ['id' => $governorate->id ]) }}" method="post">
                         @csrf
                         @method('PUT')
                         <div class="form-row">
@@ -52,7 +52,7 @@
                         </div>
                         <div class="form-group col-md-12">
                             <div class="float-right">
-                                <a href="{{ route('government.index') }}">
+                                <a href="{{ route('governorates.index') }}">
                                     <button type="button" class="btn btn-danger btn-sm mt-3">@lang('global.cancel')</button>
                                 </a>
                                 <button type="submit" class="btn btn-primary btn-sm mt-3">@lang('global.save')</button>

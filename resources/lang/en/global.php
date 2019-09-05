@@ -65,5 +65,7 @@ return [
     'change_acc_info'       =>  'Change Account Info',
     'close'                 =>  'Close',
     'change_acc_info_success'   =>  'Change Account Info Success',
+    'user_created_without_role' =>  'User Created Success But User Has No Role.',
+    'user_updated_without_role' =>  'User Updated Success But User Has No Role.'
 
 ];

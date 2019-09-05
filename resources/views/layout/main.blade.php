@@ -36,6 +36,9 @@
         .form-control:disabled {
             background-color: transparent;
         }
+        .default-cursor {
+            cursor: default;
+        }
     </style>
     @stack('styles')
 </head>

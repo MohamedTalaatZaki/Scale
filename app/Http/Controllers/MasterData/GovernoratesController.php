@@ -35,7 +35,7 @@ class GovernoratesController extends Controller
             'ar_name'   =>  $request->get('ar_name'),
         ]);
 
-        return redirect()->action('MasterData\GovernmentsController@index')->with('success' , trans('global.governorate_created'));
+        return redirect()->action('MasterData\GovernoratesController@index')->with('success' , trans('global.governorate_created'));
     }
 
     public function edit($id){
@@ -60,7 +60,7 @@ class GovernoratesController extends Controller
             'ar_name'   =>  $request->get('ar_name'),
         ]);
 
-        return redirect()->action('MasterData\GovernmentsController@index')->with('success' , trans('global.governorate_updated'));
+        return redirect()->action('MasterData\GovernoratesController@index')->with('success' , trans('global.governorate_updated'));
     }
 
 }

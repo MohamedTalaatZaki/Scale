@@ -8,10 +8,10 @@
             <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
                 <ol class="breadcrumb pt-0">
                     <li class="breadcrumb-item">
-                        <a href="#">@lang('global.master_data')</a>
+                        <a href="#" class="default-cursor">@lang('global.master_data')</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="#">@lang('global.users')</a>
+                        <a href="{{ route('users.index') }}">@lang('global.users')</a>
                     </li>
                     <li class="breadcrumb-item " aria-current="page">@lang('global.create')</li>
                 </ol>
@@ -30,8 +30,8 @@
                         <h5 class="mb-4">@lang('global.create_user')</h5>
                         <div>
                             <a href="#" class="user-img">
-                                <img id="user-img" src="{{ asset('img/default-user.png') }}"
-                                     style="left: 95%!important;top: -55px!important;max-height: 114px;max-width: 114px"
+                                <img id="user-img" src="{{ asset('img/GOHAINA.png') }}"
+                                     style="left: 95%!important;top: -55px!important;max-height: 114px;max-width: 114px;object-fit: contain"
                                      class="img-thumbnail card-img social-profile-img" />
                             </a>
                         </div>

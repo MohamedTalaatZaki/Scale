@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class SubMenusTableSeeder extends Seeder
 {
@@ -15,12 +14,26 @@ class SubMenusTableSeeder extends Seeder
     {
         
 
-        DB::table('sub_menus')->delete();
+        \DB::table('sub_menus')->delete();
         
-        DB::table('sub_menus')->insert(array (
+        \DB::table('sub_menus')->insert(array (
             0 => 
             array (
+                'id' => 1,
                 'menu_group_id' => 1,
+                'en_name' => 'Dashboard',
+                'ar_name' => 'لوحة التحكم',
+                'route' => 'home',
+                'a_class' => 'sidebar-sub sidebar-sub-roles',
+                'i_class' => 'simple-icon-user-following',
+                'order' => 1,
+                'created_at' => '2019-09-02 17:42:40',
+                'updated_at' => '2019-09-02 17:42:41',
+            ),
+            1 => 
+            array (
+                'id' => 2,
+                'menu_group_id' => 2,
                 'en_name' => 'Roles',
                 'ar_name' => 'الصلاحيات',
                 'route' => 'roles.index',
@@ -30,9 +43,10 @@ class SubMenusTableSeeder extends Seeder
                 'created_at' => '2019-09-02 17:42:40',
                 'updated_at' => '2019-09-02 17:42:41',
             ),
-            1 => 
+            2 => 
             array (
-                'menu_group_id' => 1,
+                'id' => 3,
+                'menu_group_id' => 2,
                 'en_name' => 'Users',
                 'ar_name' => 'المستخدمين',
                 'route' => 'users.index',
@@ -42,21 +56,23 @@ class SubMenusTableSeeder extends Seeder
                 'created_at' => '2019-09-02 17:42:40',
                 'updated_at' => '2019-09-02 17:42:41',
             ),
-            2 => 
+            3 => 
             array (
-                'menu_group_id' => 2,
-                'en_name' => 'Governments',
+                'id' => 4,
+                'menu_group_id' => 3,
+                'en_name' => 'Governorates',
                 'ar_name' => 'المحافظات',
-                'route' => 'government.index',
+                'route' => 'governorates.index',
                 'a_class' => 'sidebar-sub sidebar-sub-governorates',
                 'i_class' => 'simple-icon-credit-card',
                 'order' => 1,
                 'created_at' => '2019-09-02 17:42:40',
                 'updated_at' => '2019-09-02 17:42:41',
             ),
-            3 => 
+            4 => 
             array (
-                'menu_group_id' => 2,
+                'id' => 5,
+                'menu_group_id' => 3,
                 'en_name' => 'Cities',
                 'ar_name' => 'المدن',
                 'route' => 'cities.index',
@@ -66,9 +82,10 @@ class SubMenusTableSeeder extends Seeder
                 'created_at' => '2019-09-02 17:42:40',
                 'updated_at' => '2019-09-02 17:42:41',
             ),
-            4 => 
+            5 => 
             array (
-                'menu_group_id' => 2,
+                'id' => 6,
+                'menu_group_id' => 3,
                 'en_name' => 'Centers',
                 'ar_name' => 'المراكز',
                 'route' => 'centers.index',
