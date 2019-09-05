@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\MasterData;
 
-use App\Models\Government;
+use App\Models\Governorate;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -10,7 +10,7 @@ class GovernoratesController extends Controller
 {
     public function index()
     {
-        $governorates   =   Government::query()->paginate(25);
+        $governorates   =   Governorate::query()->paginate(25);
         return view('master-data.governorates.index' , ['governorates' => $governorates]);
     }
 
@@ -30,7 +30,7 @@ class GovernoratesController extends Controller
                 'ar_name.unique'=>trans('master.errors.gov_ar_name_exist'),
             ]);
 
-        $gov    =   Government::query()->create([
+        $gov    =   Governorate::query()->create([
             'en_name'   =>  $request->get('en_name'),
             'ar_name'   =>  $request->get('ar_name'),
         ]);
@@ -39,7 +39,7 @@ class GovernoratesController extends Controller
     }
 
     public function edit($id){
-        $governorate    =   Government::query()->findOrFail($id);
+        $governorate    =   Governorate::query()->findOrFail($id);
         return view('master-data.governorates.edit' , ['governorate' => $governorate]);
     }
 
@@ -54,7 +54,7 @@ class GovernoratesController extends Controller
             'en_name.unique'=>trans('master.errors.gov_en_name_exist'),
             'ar_name.unique'=>trans('master.errors.gov_ar_name_exist'),
         ]);
-        $gov    =   Government::query()->findOrFail($id);
+        $gov    =   Governorate::query()->findOrFail($id);
         $gov->update([
             'en_name'   =>  $request->get('en_name'),
             'ar_name'   =>  $request->get('ar_name'),

@@ -3,7 +3,7 @@
 namespace Tests\Feature\MasterData;
 
 use App\Http\Middleware\VerifyCsrfToken;
-use App\Models\Government;
+use App\Models\Governorate;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Artisan;
@@ -33,7 +33,7 @@ class GovernmentTest extends TestCase
             'ar_name'=>'الإسكندرية',
             'en_name'=>'Alexandria'
         ]);
-        $gov = Government::where('en_name','Alexandria')->first();
+        $gov = Governorate::where('en_name','Alexandria')->first();
         $this->assertNotNull($gov);
         $this->assertEquals('Alexandria',$gov->en_name);
         $this->assertEquals('الإسكندرية',$gov->ar_name);
@@ -79,7 +79,7 @@ class GovernmentTest extends TestCase
             'ar_name'=>'الإسكندرية',
             'en_name'=>'Alexandria'
         ]);
-        $gov = Government::where('en_name','Alexandria')->first();
+        $gov = Governorate::where('en_name','Alexandria')->first();
         $this->assertNotNull($gov);
         $this->assertEquals('Alexandria',$gov->en_name);
         $this->assertEquals('الإسكندرية',$gov->ar_name);
@@ -94,7 +94,7 @@ class GovernmentTest extends TestCase
             'ar_name'=>'الإسكندرية',
             'en_name'=>'Alexandria'
         ]);
-        $gov = Government::where('en_name','Alexandria')->first();
+        $gov = Governorate::where('en_name','Alexandria')->first();
         $gov->update([
             'ar_name'=>'بورسعيد',
             'en_name'=>'port said',
