@@ -5,7 +5,7 @@
         <div class="col-12">
             <h1>@lang('global.governorates')</h1>
             <div class="text-zero top-right-button-container">
-                <a href="{{ route('government.create') }}">
+                <a href="{{ route('governorates.create') }}">
                 <button type="button"
                         class="btn btn-primary btn-sm top-right-button mr-1">@lang('global.create')</button>
                 </a>
@@ -46,7 +46,7 @@
                         <td>{{ $governorate->en_name }}</td>
                         <td>{{ $governorate->ar_name }}</td>
                         <td>
-                            <a href="{{ route('government.edit' , ['id' => $governorate->id]) }}" class="btn btn-primary btn-sm mb-1">@lang('global.edit')</a>
+                            <a href="{{ route('governorates.edit' , ['id' => $governorate->id]) }}" class="btn btn-primary btn-sm mb-1">@lang('global.edit')</a>
                         </td>
                     </tr>
                 @endforeach

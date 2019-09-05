@@ -30,7 +30,7 @@
                         <h5 class="mb-4">@lang('global.edit_governorates')</h5>
                     </div>
 
-                    <form action="{{ route('government.update' , ['id' => $governorate->id ]) }}" method="post">
+                    <form action="{{ route('governorates.update' , ['id' => $governorate->id ]) }}" method="post">
                         @csrf
                         @method('PUT')
                         <div class="form-row">
@@ -52,7 +52,7 @@
                         </div>
                         <div class="form-group col-md-12">
                             <div class="float-right">
-                                <a href="{{ route('government.index') }}">
+                                <a href="{{ route('governorates.index') }}">
                                     <button type="button" class="btn btn-danger btn-sm mt-3">@lang('global.cancel')</button>
                                 </a>
                                 <button type="submit" class="btn btn-primary btn-sm mt-3">@lang('global.save')</button>

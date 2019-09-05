@@ -31,7 +31,7 @@
                     </div>
 
 
-                    <form action="{{ route('government.store') }}" method="post">
+                    <form action="{{ route('governorates.store') }}" method="post">
                         @csrf
 
                         <div class="form-row">
@@ -53,7 +53,7 @@
                         </div>
                         <div class="form-group col-md-12">
                             <div class="float-right">
-                                <a href="{{ route('government.index') }}">
+                                <a href="{{ route('governorates.index') }}">
                                     <button type="button" class="btn btn-danger btn-sm mt-3">@lang('global.cancel')</button>
                                 </a>
                                 <button type="submit" class="btn btn-primary btn-sm mt-3">@lang('global.save')</button>
