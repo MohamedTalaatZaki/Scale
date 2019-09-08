@@ -44,14 +44,14 @@
                         <div class="form-row">
                             <input type="file" class="select-img" name="avatar" onchange="readURL(this)" style="display: none">
                             <div class="form-group col-md-4">
-                                <label>@lang('global.full_name')</label>
+                                <label>@lang('global.full_name') *</label>
                                 <input type="text" class="form-control" name="full_name" value="{{ old('full_name') }}" placeholder="@lang('global.full_name')" required>
                                 @if($errors->has('full_name'))
                                     <div id="jQueryName-error" class="error" style="">{{ $errors->first('full_name') }}</div>
                                 @endif
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="inputPassword1">@lang('global.user_name')</label>
+                                <label for="inputPassword1">@lang('global.user_name') *</label>
                                 <input type="text" class="form-control" id="inputPassword1" name="user_name" value="{{ old('user_name') }}"
                                        placeholder="@lang('global.user_name')" required>
                                 @if($errors->has('user_name'))
@@ -78,7 +78,7 @@
                                 @endif
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="inputPassword3">@lang('global.password')</label>
+                                <label for="inputPassword3">@lang('global.password') *</label>
                                 <input type="password" class="form-control" id="inputPassword3" name="password"
                                        placeholder="@lang('global.password')">
                                 @if($errors->has('password'))
@@ -86,7 +86,7 @@
                                 @endif
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="inputPassword5">@lang('global.confirm_password')</label>
+                                <label for="inputPassword5">@lang('global.confirm_password') *</label>
                                 <input type="password" class="form-control" id="inputPassword5" name="password_confirmation"
                                        placeholder="@lang('global.confirm_password')">
                                 @if($errors->has('password_confirmation'))

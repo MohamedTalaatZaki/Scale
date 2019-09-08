@@ -4037,17 +4037,17 @@ $.dore = function (element, options) {
     }
 
     /* 03.33. Showing Body */
-    $("body > *").css({ opacity: 0 });
+    //$("body > *").css({ opacity: 0 });
 
     setTimeout(function () {
-      $("html,body").removeClass("show-spinner-background");
-      $("body").removeClass("show-spinner");
+      // $("html,body").removeClass("show-spinner-background");
+      // $("body").removeClass("show-spinner");
       $("main").addClass("default-transition");
       $(".sub-menu").addClass("default-transition");
       $(".main-menu").addClass("default-transition");
       $(".theme-colors").addClass("default-transition");
-      $("body > *").animate({ opacity: 1 }, 100);
-    }, 1500);
+     // $("body > *").animate({ opacity: 1 }, 0);
+    }, 0);
 
 
     /*03.34. Keyboard Shortcuts*/
