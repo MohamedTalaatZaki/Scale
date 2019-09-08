@@ -43,7 +43,7 @@
     @stack('styles')
 </head>
 
-<body id="app-container" class="menu-default show-spinner show-spinner-background">
+<body id="app-container" class="menu-default">
 <nav class="navbar fixed-top">
     <div class="d-flex align-items-center navbar-left">
         <a href="#" class="menu-button d-none d-md-block">
