@@ -91,7 +91,8 @@ class UsersController extends Controller
             $user->update(['is_active' => false]);
         }
 
-        return redirect()->action('MasterData\UsersController@index')->with('success' , trans('global.'.is_null($request->get('role_id')) ? "user_updated_without_role" : "user_updated"));
+        return redirect()->action('MasterData\UsersController@index')
+            ->with('success' , trans('global.'.is_null($request->get('role_id')) ? trans("global.user_updated_without_role") : trans("global.user_updated")));
     }
 
     public function show($id) {

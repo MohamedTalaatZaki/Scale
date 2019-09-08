@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="show-spinner-background">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
