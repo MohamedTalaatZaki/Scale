@@ -36,14 +36,14 @@
 
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label>@lang('global.en_name')</label>
+                                <label>@lang('global.en_name') *</label>
                                 <input type="text" class="form-control" name="en_name" value="{{ old('en_name') }}" placeholder="@lang('global.en_name')" required>
                                 @if($errors->has('en_name'))
                                     <div id="jQueryName-error" class="error" style="">{{ $errors->first('en_name') }}</div>
                                 @endif
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="inputPassword1">@lang('global.ar_name')</label>
+                                <label for="inputPassword1">@lang('global.ar_name') *</label>
                                 <input type="text" class="form-control" id="inputPassword1" name="ar_name" value="{{ old('ar_name') }}"
                                        placeholder="@lang('global.ar_name')" required>
                                 @if($errors->has('ar_name'))
