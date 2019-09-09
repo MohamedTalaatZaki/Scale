@@ -5,10 +5,8 @@ beforeEach(function () {
     cy.get(':nth-child(2) > .form-control').type('admin')
     cy.get(':nth-child(3) > .form-control').type('123456')
     cy.contains('Sign In').click()
-    cy.wait(2000);
     cy.visit('/master-data/users');
     cy.get('a > .btn').click();
-    cy.wait(2000);
     cy.url().should('contain', '/master-data/users/create');
 })
 describe('Create user', function () {
@@ -71,7 +69,7 @@ describe('Create user', function () {
   })
   it('checks unassigned role warning',function(){
     cy.get('.card-body input[name="full_name"]').type('Tonaguy');
-    cy.get('.card-body input[name="user_name"]').type('tonaguy');
+    cy.get('.card-body input[name="user_name"]').type('useruser');
     cy.get('.card-body input[name="password"]').type('123456');
     cy.get('.card-body input[name="password_confirmation"]').type('123456');
     cy.get('.card-body #role > option[value=""]').invoke('attr', 'selected',true);
@@ -80,7 +78,7 @@ describe('Create user', function () {
   })
   it('checks default inactive for no roles',function(){
     cy.get('.card-body input[name="full_name"]').type('Tonaguy');
-    cy.get('.card-body input[name="user_name"]').type('tonaguy');
+    cy.get('.card-body input[name="user_name"]').type('username');
     cy.get('.card-body input[name="password"]').type('123456');
     cy.get('.card-body input[name="password_confirmation"]').type('123456');
     cy.get('.card-body #role > option[value=""]').invoke('attr', 'selected',true);
@@ -97,6 +95,7 @@ describe('Create user', function () {
     cy.get('.card-body input[name="password_confirmation"]').type('123456');
     cy.get('.card-body .btn-primary').click();
     cy.url().should('contain','/master-data/users');
+    cy.get('.text-center').should('contain','User Created Successfully But User Has No Role.')
     cy.server();
     cy.request('get','/api/user/tonagy').then((response)=>{
       console.log(response);
@@ -107,9 +106,11 @@ describe('Create user', function () {
     cy.get('.card-body input[name="user_name"]').type('tonagy');
     cy.get('.card-body input[name="password"]').type('123456');
     cy.get('.card-body input[name="password_confirmation"]').type('123456');
+    cy.get('.card-body #role > option[value=1]').invoke('attr', 'selected',true);
     cy.get('.card-body input[name="employee_code"]').type(123);
     cy.get('.card-body .btn-primary').click();
     cy.url().should('contain','/master-data/users');
+    cy.get('.text-center').should('contain','User Created Success')
     cy.server();
     cy.request('get','/api/user/tonagy').then((response)=>{
       console.log(response);
