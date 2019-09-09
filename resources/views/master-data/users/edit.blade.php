@@ -117,6 +117,8 @@
                                     <div id="jQueryName-error" class="error" style="">{{ $errors->first('lang') }}</div>
                                 @endif
                             </div>
+                        @unless($user->is_admin)
+
                             <div class="form-group col-md-4">
                                 <label for="role">@lang('global.select_role')</label>
                                 <select id="role" class="form-control" name="role_id">
@@ -130,7 +132,6 @@
                                 @endif
                             </div>
                         </div>
-                        @unless($user->is_admin)
                         <div class="form-group row mb-1">
                             <label class="col-12 col-form-label">@lang('global.is_active') ( @lang('global.is_active_note') )</label>
                             <div class="col-12">
