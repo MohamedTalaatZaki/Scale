@@ -62,6 +62,9 @@
     $().ready(function () {
         localStorage.setItem('sidebar' , 'sidebar-dashboard');
         localStorage.setItem('hasSub' , '0');
+        setTimeout(function () {
+            $("body").removeClass("show-spinner");
+        }, 3000);
     })
 </script>
 </body>
