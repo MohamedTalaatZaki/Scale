@@ -79,20 +79,21 @@ describe('Edit Users test', function () {
         cy.get('.sidebar-sub.sidebar-sub-users').click();
         cy.url().should('contain', '/master-data/users');
         cy.get("a[href|='http://127.0.0.1:8000/master-data/users/1000/edit']").click();
-        cy.get('.card-body input[name=user_name]').type('t');
+        cy.get('.card-body input[name=user_name]').clear().type('t');
         cy.contains('Save').click();
+        console.log(cy.url())
         cy.contains('The user name must be at least 4 characters.').should('be.visible');
     })
-    it('unique fields check', function () {
+    it.only('unique fields check', function () {
         cy.exec('php artisan test:create_user2');
         cy.contains('Master Data').click();
         cy.get('.sidebar-sub.sidebar-sub-users').click();
         cy.url().should('contain', '/master-data/users');
         cy.get("a[href|='http://127.0.0.1:8000/master-data/users/1001/edit']").click();
-        cy.get('.card-body input[name=user_name]').type('test');
+        cy.get('.card-body input[name=user_name]').clear().type('test');
         cy.contains('Save').click();
         cy.contains('The user name has already been taken.').should('be.visible');
-        cy.get('input[name=email]').type('test@test.com');
+        cy.get('.card-body input[name=email]').clear().type('test@test.com');
         cy.contains('Save').click();
         cy.contains('The email has already been taken.').should('be.visible');
         cy.exec('php artisan test:delete_user2');
