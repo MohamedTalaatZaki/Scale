@@ -50,7 +50,9 @@ class UsersController extends Controller
             $user->update(['is_active' => false]);
         }
 
-        return redirect()->action('MasterData\UsersController@index')->with('success' , trans('global.'.is_null($request->get('role_id')) ? "user_created_without_role" : "user_created"));
+        return redirect()
+            ->action('MasterData\UsersController@index')
+            ->with('success' , is_null($request->get('role_id')) ? trans("global.user_created_without_role") : trans("global.user_created"));
     }
 
     public function edit($id)
@@ -88,11 +90,11 @@ class UsersController extends Controller
             $user->update(['is_active' => $request->input('is_active' , 0)]);
         } else {
             $user->roles()->sync([]);
-            $user->update(['is_active' => false]);
+            $user->update(['is_active' =>!!$user->is_admin]);
         }
 
         return redirect()->action('MasterData\UsersController@index')
-            ->with('success' , trans('global.'.is_null($request->get('role_id')) ? trans("global.user_updated_without_role") : trans("global.user_updated")));
+            ->with('success' , is_null($request->get('role_id')) ? trans("global.user_updated_without_role") : trans("global.user_updated"));
     }
 
     public function show($id) {

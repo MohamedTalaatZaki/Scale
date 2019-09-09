@@ -117,12 +117,14 @@
                                     <div id="jQueryName-error" class="error" style="">{{ $errors->first('lang') }}</div>
                                 @endif
                             </div>
+                        @unless($user->is_admin)
+
                             <div class="form-group col-md-4">
                                 <label for="role">@lang('global.select_role')</label>
                                 <select id="role" class="form-control" name="role_id">
                                     <option value=""  selected>@lang('global.select_role')</option>
                                     @foreach($roles as $role)
-                                        <option value="{{ $role->id }}" {{ old('role_id') == 'role_id' || $user->hasRole($role->name) ? 'selected' : '' }}> {{ $role->name }}</option>
+                                        <option value="{{ $role->id }}" {{ old('role_id',$user->hasRole($role->name)) == $role->id ? 'selected' : '' }}> {{ $role->name }}</option>
                                     @endforeach
                                 </select>
                                 @if($errors->has('role_id'))
@@ -130,7 +132,6 @@
                                 @endif
                             </div>
                         </div>
-                        @unless($user->is_admin)
                         <div class="form-group row mb-1">
                             <label class="col-12 col-form-label">@lang('global.is_active') ( @lang('global.is_active_note') )</label>
                             <div class="col-12">
@@ -180,6 +181,9 @@
             });
 
             var roleInput = document.getElementById('role');
+            if(!roleInput.value){
+                document.getElementById('is_active').disabled = true;
+            }
             roleInput.addEventListener('change',function(e){
                 var isActiveInput = document.getElementById('is_active');
                 if(e.target.value){
