@@ -88,7 +88,7 @@ class UsersController extends Controller
             $user->update(['is_active' => $request->input('is_active' , 0)]);
         } else {
             $user->roles()->sync([]);
-            $user->update(['is_active' => false]);
+            $user->update(['is_active' =>!!$user->is_admin]);
         }
 
         return redirect()->action('MasterData\UsersController@index')
