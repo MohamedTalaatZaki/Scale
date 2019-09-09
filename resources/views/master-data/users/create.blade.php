@@ -121,7 +121,7 @@
                                 <select id="role" class="form-control" name="role_id">
                                     <option value=""  selected>@lang('global.select_role')</option>
                                     @foreach($roles as $role)
-                                        <option value="{{ $role->id }}" {{ old('role_id') == 'role_id' ? 'selected' : '' }}> {{ $role->name }}</option>
+                                        <option value="{{ $role->id }}" {{ old('role_id') == $role->id ? 'selected' : '' }}> {{ $role->name }}</option>
                                     @endforeach
                                 </select>
                                 @if($errors->has('role_id'))
