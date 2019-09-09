@@ -48,7 +48,9 @@
                             <td>{{ $role->perms->count() }}</td>
                             <td>{{ $role->users->count() }}</td>
                             <td>
-                                <a href="{{ route('roles.edit' , ['id' => $role->id]) }}" class="btn btn-primary btn-sm mb-1">@lang('global.edit')</a>
+                                @unless($role->is_admin)
+                                    <a href="{{ route('roles.edit' , ['id' => $role->id]) }}" class="btn btn-primary btn-sm mb-1">@lang('global.edit')</a>
+                                @endunless
                             </td>
                         </tr>
                     @endforeach
