@@ -181,6 +181,9 @@
             });
 
             var roleInput = document.getElementById('role');
+            if(!roleInput.value){
+                document.getElementById('is_active').disabled = true;
+            }
             roleInput.addEventListener('change',function(e){
                 var isActiveInput = document.getElementById('is_active');
                 if(e.target.value){
