@@ -13,10 +13,10 @@
             <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
                 <ol class="breadcrumb pt-0">
                     <li class="breadcrumb-item">
-                        <a href="#">@lang('global.master_data')</a>
+                        <a href="#" class="default-cursor">@lang('global.master_data')</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="#">@lang('global.users')</a>
+                        <a href="{{ route('users.index') }}">@lang('global.users')</a>
                     </li>
                     <li class="breadcrumb-item " aria-current="page">@lang('global.index')</li>
                 </ol>
@@ -53,9 +53,8 @@
                         <td>{{ $user->user_name }}</td>
                         <td>{{ $user->email }}</td>
                         <td>{{ $user->employee_code }}</td>
-                        <td></td>
+                        <td>{{ optional($user->roles()->first())->name }}</td>
                         <td><i class="simple-icon-{{ $user->is_active == 1 ? 'check' : 'close' }}" ></i></td>
-
                         <td>
                             @if($user->is_admin && Auth::user()->is_admin)
                             <a href="{{ route('users.edit' , ['id' => $user->id]) }}" class="btn btn-primary btn-sm mb-1">@lang('global.edit')</a>

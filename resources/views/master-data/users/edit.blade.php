@@ -8,10 +8,10 @@
             <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
                 <ol class="breadcrumb pt-0">
                     <li class="breadcrumb-item">
-                        <a href="#">@lang('global.master_data')</a>
+                        <a href="#" class="default-cursor">@lang('global.master_data')</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="#">@lang('global.users')</a>
+                        <a href="{{ route('users.index') }}">@lang('global.users')</a>
                     </li>
                     <li class="breadcrumb-item " aria-current="page">@lang('global.edit')</li>
                 </ol>
@@ -31,7 +31,7 @@
                         <div>
                             <a href="#" class="user-img">
                                 <img id="user-img" src="{{ $user->avatar_url }}"
-                                     style="left: 95%!important;top: -55px!important;max-height: 114px;max-width: 114px"
+                                     style="left: 95%!important;top: -55px!important;max-height: 114px;max-width: 114px;object-fit: contain"
                                      class="img-thumbnail card-img social-profile-img" />
                             </a>
                         </div>
@@ -45,14 +45,14 @@
                         <div class="form-row">
                             <input type="file" class="select-img" name="avatar" onchange="readURL(this)" style="display: none">
                             <div class="form-group col-md-4">
-                                <label>@lang('global.full_name')</label>
+                                <label>@lang('global.full_name') *</label>
                                 <input type="text" class="form-control" name="full_name" value="{{ old('full_name' , $user->full_name) }}" placeholder="@lang('global.full_name')" required>
                                 @if($errors->has('full_name'))
                                     <div id="jQueryName-error" class="error" style="">{{ $errors->first('full_name') }}</div>
                                 @endif
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="inputPassword1">@lang('global.user_name')</label>
+                                <label for="inputPassword1">@lang('global.user_name') *</label>
                                 <input type="text" class="form-control" id="inputPassword1" name="user_name" value="{{ old('user_name' , $user->user_name) }}"
                                        placeholder="@lang('global.user_name')" required>
                                 @if($errors->has('user_name'))
@@ -118,10 +118,12 @@
                                 @endif
                             </div>
                             <div class="form-group col-md-4">
-                                <label for="inputState3">@lang('global.select_role')</label>
-                                <select id="inputState3" class="form-control" name="role_id">
+                                <label for="role">@lang('global.select_role')</label>
+                                <select id="role" class="form-control" name="role_id">
                                     <option value=""  selected>@lang('global.select_role')</option>
-                                    <option value="" {{ old('role_id' , $user->role_id) == 'role_id' ? 'selected' : '' }}></option>
+                                    @foreach($roles as $role)
+                                        <option value="{{ $role->id }}" {{ old('role_id') == 'role_id' || $user->hasRole($role->name) ? 'selected' : '' }}> {{ $role->name }}</option>
+                                    @endforeach
                                 </select>
                                 @if($errors->has('role_id'))
                                     <div id="jQueryName-error" class="error" style="">{{ $errors->first('role_id') }}</div>
@@ -130,11 +132,12 @@
                         </div>
                         @unless($user->is_admin)
                         <div class="form-group row mb-1">
-                            <label class="col-12 col-form-label">@lang('global.is_active')</label>
+                            <label class="col-12 col-form-label">@lang('global.is_active') ( @lang('global.is_active_note') )</label>
                             <div class="col-12">
                                 <div class="custom-switch custom-switch-primary-inverse mb-2" style="padding-left: 0">
-                                    <input class="custom-switch-input" id="switch3" type="checkbox" value="1" name="is_active" {{ old('is_active' , $user->is_active) == '1' ? 'checked' : '' }}>
-                                    <label class="custom-switch-btn" for="switch3"></label>
+                                    <input class="custom-switch-input" id="is_active" type="checkbox" value="1" name="is_active"
+                                            {{ old('is_active' , $user->is_active) == '1' ? 'checked' : '' }}>
+                                    <label class="custom-switch-btn" for="is_active"></label>
                                 </div>
                                 @if($errors->has('is_active'))
                                     <div id="jQueryName-error" class="error" style="">{{ $errors->first('is_active') }}</div>
@@ -174,6 +177,17 @@
         $().ready(function () {
             $('.user-img').on('click' , function () {
                 $('.select-img').click();
+            });
+
+            var roleInput = document.getElementById('role');
+            roleInput.addEventListener('change',function(e){
+                var isActiveInput = document.getElementById('is_active');
+                if(e.target.value){
+                    isActiveInput.disabled = false;
+                }else{
+                    isActiveInput.checked = false;
+                    isActiveInput.disabled = true;
+                }
             });
         })
     </script>

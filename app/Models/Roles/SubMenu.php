@@ -3,6 +3,7 @@
 namespace App\Models\Roles;
 
 use Illuminate\Database\Eloquent\Model;
+use Zizaco\Entrust\EntrustPermission;
 
 class SubMenu extends Model
 {
@@ -16,5 +17,9 @@ class SubMenu extends Model
 
     public function getNameAttribute() {
         return $this->attributes['name']   = app()->getLocale() == 'ar' ? $this->ar_name : $this->en_name;
+    }
+
+    public function permissions() {
+        return $this->hasMany(Permission::class , 'sub_menu_id' , 'id');
     }
 }
