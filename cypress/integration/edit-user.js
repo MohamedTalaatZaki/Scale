@@ -44,8 +44,8 @@ describe('Edit Users test', function () {
         cy.get('.sidebar-sub.sidebar-sub-users').click();
         cy.url().should('contain', '/master-data/users');
         cy.get("a[href|='http://127.0.0.1:8000/master-data/users/1000/edit']").click();
-        cy.get('input[name=password]').type('123456');
-        cy.get('input[name=password_confirmation]').type('123459');
+        cy.get('.card-body input[name=password]').type('123456');
+        cy.get('.card-body input[name=password_confirmation]').type('123459');
         cy.contains('Save').click();
         cy.contains('The password confirmation does not match.').should('be.visible');
     })
@@ -54,8 +54,8 @@ describe('Edit Users test', function () {
         cy.get('.sidebar-sub.sidebar-sub-users').click();
         cy.url().should('contain', '/master-data/users');
         cy.get("a[href|='http://127.0.0.1:8000/master-data/users/1000/edit']").click();
-        cy.get('input[name=password]').type('12345');
-        cy.get('input[name=password_confirmation]').type('12345');
+        cy.get('.card-body input[name=password]').type('12345');
+        cy.get('.card-body input[name=password_confirmation]').type('12345');
         cy.contains('Save').click();
         cy.contains('The password must be at least 6 characters.').should('be.visible');
     })
@@ -79,7 +79,7 @@ describe('Edit Users test', function () {
         cy.get('.sidebar-sub.sidebar-sub-users').click();
         cy.url().should('contain', '/master-data/users');
         cy.get("a[href|='http://127.0.0.1:8000/master-data/users/1000/edit']").click();
-        cy.get('input[name=user_name]').type('t');
+        cy.get('.card-body input[name=user_name]').type('t');
         cy.contains('Save').click();
         cy.contains('The user name must be at least 4 characters.').should('be.visible');
     })
@@ -89,7 +89,7 @@ describe('Edit Users test', function () {
         cy.get('.sidebar-sub.sidebar-sub-users').click();
         cy.url().should('contain', '/master-data/users');
         cy.get("a[href|='http://127.0.0.1:8000/master-data/users/1001/edit']").click();
-        cy.get('input[name=user_name]').type('test');
+        cy.get('.card-body input[name=user_name]').type('test');
         cy.contains('Save').click();
         cy.contains('The user name has already been taken.').should('be.visible');
         cy.get('input[name=email]').type('test@test.com');
