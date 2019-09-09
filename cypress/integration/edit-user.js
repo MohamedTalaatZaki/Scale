@@ -84,7 +84,7 @@ describe('Edit Users test', function () {
         console.log(cy.url())
         cy.contains('The user name must be at least 4 characters.').should('be.visible');
     })
-    it.only('unique fields check', function () {
+    it('unique fields check', function () {
         cy.exec('php artisan test:create_user2');
         cy.contains('Master Data').click();
         cy.get('.sidebar-sub.sidebar-sub-users').click();
