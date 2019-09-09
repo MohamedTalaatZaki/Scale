@@ -76,7 +76,7 @@ describe('Create user', function () {
     cy.get('.card-body input[name="password_confirmation"]').type('123456');
     cy.get('.card-body #role > option[value=""]').invoke('attr', 'selected',true);
     cy.get('.card-body .btn-primary').click();
-    cy.get('.warning').should('contain','User Updated Successfully But User Has No Role.')
+    cy.get('.text-center').should('contain','User Created Successfully But User Has No Role.')
   })
   it('checks default inactive for no roles',function(){
     cy.get('.card-body input[name="full_name"]').type('Tonaguy');
