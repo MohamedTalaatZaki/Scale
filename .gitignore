@@ -6,6 +6,7 @@
 /vendor
 /cypress/screenshots
 /cypress/videos
+/database/seeds/tests
 .env
 cypress.json
 .phpunit.result.cache
