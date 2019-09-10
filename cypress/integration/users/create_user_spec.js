@@ -120,24 +120,17 @@ describe('Create user', function () {
     cy.request('get','/api/user/tonagy').then((response)=>{
       console.log(response);
     });
-    it('checks create permissions',function(){
-      cy.exec("php artisan user:remove_permission users.create");
-      cy.visit('/master-data/users');
-      cy.get('.d-inline-block').contains('Create').should('not.exist');
-      cy.server()
-      cy.route('get', '/master-data/users/create').as('create');
-      cy.get('@create').then(function (xhr) {
-        expect(xhr.status).to.eq(403)
-      });
-      cy.exec("php artisan user:remove_permission users.index");
-      cy.get('.d-inline-block').contains('Users').should('not.exist');
-      cy.server()
-      cy.route('get', '/master-data/users/create').as('users');
-      cy.get('@users').then(function (xhr) {
-        expect(xhr.status).to.eq(403)
-      });
-    })
   })
+  it.only('checks create permissions',function(){
+    cy.exec("php artisan user:remove_permission users.create");
+    cy.visit('/master-data/users');
+    cy.get('.button-container > a > button').should('not.exist');
+    cy.visit('/master-data/users/create',{ failOnStatusCode: false});
+    cy.get('.code').should('contain','403')
+    cy.exec("php artisan user:remove_permission users.index");
+    cy.visit('/master-data/users',{ failOnStatusCode: false});
+    cy.get('.code').should('contain','403')
+  });
   after(function(){
     cy.exec("php artisan migrate:refresh && php artisan db:seed");
   });
