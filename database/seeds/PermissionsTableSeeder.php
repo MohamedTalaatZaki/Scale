@@ -164,5 +164,42 @@ class PermissionsTableSeeder extends Seeder
         ]);
 
 
+        $subMenu = SubMenu::where('code', 6)->first();
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'item-group.index',
+            'en_display_name' => 'List Item Groups',
+            'ar_display_name' => 'عرض مجموعات الاصناف',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'item-group.create',
+            'en_display_name' => 'Create Item Groups',
+            'ar_display_name' => 'إضافة مجموعات الاصناف',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'item-group.edit',
+            'en_display_name' => 'Edit Item Groups',
+            'ar_display_name' => 'تعديل مجموعات الاصناف',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'item-group.destroy',
+            'en_display_name' => 'Edit Item Groups',
+            'ar_display_name' => 'تعديل مجموعات الاصناف',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+
+
     }
 }
