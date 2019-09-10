@@ -3,12 +3,15 @@
         <div class="scroll">
             <ul class="list-unstyled">
                 @foreach($main_menus as $main_menu)
+                    @if($main_menu->hasPermissions())
                     <li>
                     <a class="{{ $main_menu->class }}" href="{{ $main_menu->href }}">
                         <i class="{{ $main_menu->sub_class }}"></i>
                         <span>{{ $main_menu->name }}</span>
                     </a>
-                </li>
+                    </li>
+
+                    @endif
                 @endforeach
             </ul>
         </div>
@@ -17,9 +20,10 @@
     <div class="sub-menu">
         <div class="scroll">
             @foreach($main_menus as $main_menu)
-                @if($main_menu->data_link != null)
+                @if($main_menu->data_link != null && $main_menu->hasPermissions())
                     <ul class="list-unstyled" data-link="{{ $main_menu->data_link }}" id="{{ $main_menu->data_link }}">
                         @foreach($main_menu->menuGroups as $group)
+                            @if($group->hasPermissions())
                             <li>
                                 <a href="#" data-toggle="collapse" data-target="#{{ $group->aria_controls }}" aria-expanded="true"
                                    aria-controls="{{ $group->aria_controls }}" class="rotate-arrow-icon opacity-50">
@@ -40,6 +44,7 @@
                                     </ul>
                                 </div>
                             </li>
+                            @endif
                         @endforeach
                     </ul>
                 @endif

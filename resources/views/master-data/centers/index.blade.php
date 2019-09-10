@@ -5,10 +5,12 @@
         <div class="col-12">
             <h1>@lang('global.centers')</h1>
             <div class="text-zero top-right-button-container">
+                @permission('centers.create')
                 <a href="{{ route('centers.create') }}">
                 <button type="button"
                         class="btn btn-primary btn-sm top-right-button mr-1">@lang('global.create')</button>
                 </a>
+                @endpermission
             </div>
             <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
                 <ol class="breadcrumb pt-0">
@@ -51,9 +53,10 @@
                         <td>{{ $center->en_name }}</td>
                         <td>{{ $center->ar_name }}</td>
                         <td><i class="simple-icon-{{ $center->is_active ? 'check' : 'close' }}" ></i></td>
-
                         <td>
+                            @permission('centers.edit')
                             <a href="{{ route('centers.edit' , ['id' => $center->id]) }}" class="btn btn-primary btn-sm mb-1">@lang('global.edit')</a>
+                            @endpermission
                         </td>
                     </tr>
                 @endforeach

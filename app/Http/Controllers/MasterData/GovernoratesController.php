@@ -3,22 +3,28 @@
 namespace App\Http\Controllers\MasterData;
 
 use App\Models\Governorate;
+use App\Traits\AuthorizeTrait;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class GovernoratesController extends Controller
 {
+    use AuthorizeTrait;
+
     public function index()
     {
+        $this->authorized('governorates.index');
         $governorates   =   Governorate::query()->paginate(25);
         return view('master-data.governorates.index' , ['governorates' => $governorates]);
     }
 
     public function create(){
+        $this->authorized('governorates.create');
         return view('master-data.governorates.create');
     }
 
     public function store(Request $request) {
+        $this->authorized('governorates.create');
         $this->validate($request , [
             'en_name'   =>  'required|unique:governorates,en_name',
             'ar_name'   =>  'required|unique:governorates,ar_name'
@@ -39,11 +45,13 @@ class GovernoratesController extends Controller
     }
 
     public function edit($id){
+        $this->authorized('governorates.edit');
         $governorate    =   Governorate::query()->findOrFail($id);
         return view('master-data.governorates.edit' , ['governorate' => $governorate]);
     }
 
     public function update(Request $request , $id) {
+        $this->authorized('governorates.edit');
         $this->validate($request , [
             'en_name'   =>  'required|unique:governorates,en_name,'.$id,
             'ar_name'   =>  'required|unique:governorates,ar_name,'.$id
