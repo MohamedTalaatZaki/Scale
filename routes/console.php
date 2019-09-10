@@ -25,7 +25,7 @@ Artisan::command('test:create_user', function () {
     DB::table('users')->insert([
         'id'=> 1000,
         'full_name'         =>  'test',
-        'user_name'         =>  'test',
+        'user_name'         =>  'testing',
         'employee_number'   =>  10000,
         'email'             =>  'test@test.com',
         'password'          =>  Hash::make(123456),

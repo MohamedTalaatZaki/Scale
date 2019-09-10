@@ -2,10 +2,12 @@ describe('Edit Users test', function () {
 
 
     beforeEach(function () {
-        cy.visit('http://127.0.0.1:8000');
+        cy.exec('php artisan user:add_permission users.index');
+        cy.exec('php artisan user:add_permission users.edit');
+        cy.visit('http://127.0.0.1:8000/');
         cy.wait(2000);
         cy.url().should('contain', '/login');
-        cy.get(':nth-child(2) > .form-control').type('admin');
+        cy.get(':nth-child(2) > .form-control').type('test');
         cy.get(':nth-child(3) > .form-control').type('123456');
         cy.contains('Sign In').click();
         cy.wait(2000);
@@ -15,9 +17,6 @@ describe('Edit Users test', function () {
         cy.exec('php artisan test:delete_user2');
     })
 
-    afterEach(function () {
-        cy.exec('php artisan test:delete_user');
-    })
 
     it('check nullable values', function () {
         cy.contains('Master Data').click()
@@ -102,6 +101,15 @@ describe('Edit Users test', function () {
         cy.get('.user > button').click();
         cy.get('[href="javascript:void(0);"]').click();
         cy.url().should('contain', '/login');
+        cy.exec('php artisan user:remove_permission users.edit');
+        cy.visit('http://127.0.0.1:8000/master-data/users');
+        cy.get("a[href|='http://127.0.0.1:8000/master-data/users/1001/edit']").should('not.exist');
+        cy.visit('http://127.0.0.1:8000/master-data/users/1001/edit',{ failOnStatusCode: false});
+        cy.get('.code').should('contain','403');
+        cy.exec('php artisan user:remove_permission users.index');
+        cy.get('.sidebar-sub-users').should('not.exist');
+        cy.visit('http://127.0.0.1:8000/master-data/users',{ failOnStatusCode: false});
+        cy.get('.code').should('contain','403');
     })
 
 
