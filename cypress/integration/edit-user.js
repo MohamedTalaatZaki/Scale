@@ -98,5 +98,11 @@ describe('Edit Users test', function () {
         cy.contains('The email has already been taken.').should('be.visible');
         cy.exec('php artisan test:delete_user2');
     })
+    after(function () {
+        cy.get('.user > button').click();
+        cy.get('[href="javascript:void(0);"]').click();
+        cy.url().should('contain', '/login');
+    })
+
 
 })

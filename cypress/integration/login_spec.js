@@ -46,7 +46,7 @@ describe('Login', function () {
         cy.url().should('contain', '/login');
     })
 
-    it('password is astrisks', function () {
+    it('password is asterisks', function () {
         cy.get(':nth-child(3) > .form-control').invoke('attr', 'type').should('contain', 'password')
     })
 
