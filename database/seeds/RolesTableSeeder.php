@@ -30,12 +30,21 @@ class RolesTableSeeder extends Seeder
             'is_admin'=>1
         ]);
 
+
         $adminUser = User::where('is_admin',1)->pluck('id');
         $roleAdmin->users()->sync($adminUser->all());
         $permissions = Permission::pluck('id')->all();
         $roleAdmin->perms()->sync($permissions);
 
-        
-        
+
+        $roleAdmin = Role::create([
+            'name' => 'test',
+            'display_name' => NULL,
+            'description' => NULL,
+            'is_active' => 1,
+            'is_admin'=>0
+        ]);
+        $adminUser = User::where('user_name','test')->pluck('id');
+        $roleAdmin->users()->sync($adminUser->all());
     }
 }

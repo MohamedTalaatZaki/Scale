@@ -69,5 +69,6 @@ return [
     'user_updated_without_role' =>  'User Updated Successfully But User Has No Role.',
     'center_created'=>'Center created successfully',
     'center_updated'=>'Center updated successfully',
+    'edit_role'=>'Edit Role'
 
 ];

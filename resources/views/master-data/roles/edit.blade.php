@@ -37,7 +37,7 @@
 
                         <div class="form-row">
                             <div class="form-group col-md-12">
-                                <label>@lang('global.name')</label>
+                                <label>@lang('global.name') *</label>
                                 <input type="text" class="form-control" name="name" value="{{ old('name' , $role->name) }}" placeholder="@lang('global.name')" required>
                                 @if($errors->has('name'))
                                     <div id="jQueryName-error" class="error" style="">{{ $errors->first('name') }}</div>
@@ -73,7 +73,8 @@
                                                                                 <input type="checkbox"
                                                                                        name="permissions[]"
                                                                                        value="{{ $permission->id }}"
-                                                                                       class="custom-control-input"
+                                                                                       class="custom-control-input permissions"
+                                                                                       data-name="{{$permission->name}}"
                                                                                        id="permission{{ $permission->id }}"
                                                                                        {{ $role->hasPermission($permission->name) ? 'checked' : '' }}
                                                                                 >
@@ -128,4 +129,23 @@
             color: darkgray;
         }
     </style>
+@endpush
+@push('scripts')
+    <script>
+
+        $().ready(function () {
+           $('.permissions').on('change',function (e) {
+               var self = $(this);
+               var parent = self.closest('.form-group');
+               var name = self.data('name');
+               if(name.includes('index') && self.prop('checked') === false){
+                   $('input[type=checkbox]',parent).prop('checked',false);
+                   return;
+               }
+               if((name.includes('edit') || name.includes('create')) && self.prop('checked') === true){
+                   $('input[data-name*=index]',parent).prop('checked',true);
+               }
+           });
+        })
+    </script>
 @endpush
