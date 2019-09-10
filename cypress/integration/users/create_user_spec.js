@@ -121,7 +121,7 @@ describe('Create user', function () {
       console.log(response);
     });
   })
-  it.only('checks create permissions',function(){
+  it('checks create permissions',function(){
     cy.exec("php artisan user:remove_permission users.create");
     cy.visit('/master-data/users');
     cy.get('.button-container > a > button').should('not.exist');
