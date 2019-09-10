@@ -69,6 +69,11 @@ return [
     'user_updated_without_role' =>  'User Updated Successfully But User Has No Role.',
     'center_created'=>'Center created successfully',
     'center_updated'=>'Center updated successfully',
-    'edit_role'=>'Edit Role'
+    'edit_role'=>'Edit Role',
+    'item_group'    =>  'Item Group',
+    'create_item_group' =>  'Create Item Group',
+    'edit_item_group' =>  'Edit Item Group',
+    'item_group_created'    =>  'Item Group Created',
+    'item_group_updated'    =>  'Item Group Updated',
 
 ];
