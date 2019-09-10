@@ -98,9 +98,6 @@ describe('Edit Users test', function () {
         cy.exec('php artisan test:delete_user2');
     })
     after(function () {
-        cy.get('.user > button').click();
-        cy.get('[href="javascript:void(0);"]').click();
-        cy.url().should('contain', '/login');
         cy.exec('php artisan user:remove_permission users.edit');
         cy.visit('http://127.0.0.1:8000/master-data/users');
         cy.get("a[href|='http://127.0.0.1:8000/master-data/users/1001/edit']").should('not.exist');
@@ -111,6 +108,4 @@ describe('Edit Users test', function () {
         cy.visit('http://127.0.0.1:8000/master-data/users',{ failOnStatusCode: false});
         cy.get('.code').should('contain','403');
     })
-
-
 })
