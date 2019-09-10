@@ -14,7 +14,7 @@ class MainMenusTableSeeder extends Seeder
      */
     public function run()
     {
-        
+
 
         DB::table('main_menus')->truncate();
         DB::table('menu_groups')->truncate();
@@ -120,6 +120,25 @@ class MainMenusTableSeeder extends Seeder
                 'code'=>5
             ]
         ]);
-        
+
+        $group = $main->menuGroups()->create([
+            'en_name' => 'Items',
+            'ar_name' => 'الاصناف',
+            'aria_controls' => 'collapseItems',
+            'order' => 3,
+        ]);
+
+        $group->subMenus()->createMany([
+            [
+                'en_name' => 'Item Groups',
+                'ar_name' => 'مجموعات الاصناف',
+                'route' => 'item-group.index',
+                'a_class' => 'sidebar-sub sidebar-sub-item-group',
+                'i_class' => 'simple-icon-user-follow',
+                'order' => 1,
+                'code'=>6
+            ]
+        ]);
+
     }
 }
