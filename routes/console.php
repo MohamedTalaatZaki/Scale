@@ -48,31 +48,12 @@ Artisan::command('test:create_user', function () {
         'password'          =>  Hash::make(123456),
         'is_active'         => 0
     ]);
-})->describe('creates user 1');
+})->describe('Display an inspiring quote');
 
 Artisan::command('test:delete_user', function () {
-    optional(User::find(1000))->delete();
-})->describe('delete user 1');
+    optional(App\User::find(1000))->delete();
+})->describe('Display an inspiring quote');
 
 
 
-Artisan::command('test:create_user2', function () {
-    DB::table('users')->insert([
-        'id'=> 1001,
-        'full_name'         =>  'test2',
-        'user_name'         =>  'test2',
-        'employee_number'   =>  10001,
-        'email'             =>  'test2@test.com',
-        'password'          =>  Hash::make(123456),
-        'is_active'         => 0
-    ]);
-})->describe('creates user 2');
-
-Artisan::command('test:delete_user2', function () {
-    optional(User::find(1001))->delete();
-})->describe('delete user 2');
-
-Artisan::command('test:delete_role_new', function () {
-    optional(role::find('new'))->delete();
-})->describe('delete role new');
 

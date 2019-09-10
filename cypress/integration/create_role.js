@@ -10,8 +10,11 @@ describe('create roles test', function () {
         cy.contains('Sign In').click();
         cy.wait(2000);
         cy.url().should('eq', 'http://127.0.0.1:8000/');
+        cy.exec('php artisan test:delete_user');
         cy.exec('php artisan test:create_user');
     })
+
+
 
     it('check mandatory and unique fields', function () {
         cy.contains('Master Data').click();
@@ -22,8 +25,12 @@ describe('create roles test', function () {
         cy.get('.form-control').type('new');
         cy.contains('Role Created').should('be visible');
 
-        //cy.exec('php artisan test:delete_role_new');
 
+
+    })
+
+    afterEach(function () {
+        cy.exec('php artisan test:delete_user');
     })
 
 
