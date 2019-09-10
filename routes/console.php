@@ -1,6 +1,7 @@
 <?php
 
 use App\User;
+use App\Models\Roles\Permission;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -59,3 +60,19 @@ Artisan::command('test:create_user2', function () {
 Artisan::command('test:delete_user2', function () {
     optional(User::find(1001))->delete();
 })->describe('Display an inspiring quote');
+Artisan::command('user:add_permission {permission}', function ($permission) {
+    $permission = Permission::where('name',$permission)->first();
+    if(!is_null($permission)){
+        $role = \App\Models\Roles\Role::where('name','test')->first();
+        optional($role)->detachPermission($permission);
+        optional($role)->attachPermission($permission);
+    }
+})->describe('Add permission to test role');
+
+Artisan::command('user:remove_permission {permission}', function ($permission) {
+    $permission = Permission::where('name',$permission)->first();
+    if(!is_null($permission)){
+        $role = \App\Models\Roles\Role::where('name','test')->first();
+        optional($role)->detachPermission($permission);
+    }
+})->describe('remove permission to test role');

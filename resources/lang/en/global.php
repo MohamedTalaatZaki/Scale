@@ -66,6 +66,9 @@ return [
     'close'                 =>  'Close',
     'change_acc_info_success'   =>  'Change Account Info Success',
     'user_created_without_role' =>  'User Created Successfully But User Has No Role.',
-    'user_updated_without_role' =>  'User Updated Successfully But User Has No Role.'
+    'user_updated_without_role' =>  'User Updated Successfully But User Has No Role.',
+    'center_created'=>'Center created successfully',
+    'center_updated'=>'Center updated successfully',
+    'edit_role'=>'Edit Role'
 
 ];

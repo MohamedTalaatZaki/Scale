@@ -20,7 +20,7 @@ class MainMenusTableSeeder extends Seeder
         DB::table('menu_groups')->truncate();
         DB::table('sub_menus')->truncate();
 
-        MainMenu::create([
+        $main = MainMenu::create([
             'en_name' => 'Dashboard',
             'ar_name' => 'لوحة التحكم',
             'class' => 'sidebar sidebar-dashboard',
@@ -28,8 +28,23 @@ class MainMenusTableSeeder extends Seeder
             'sub_class' => 'iconsminds-shop-4',
             'data_link' => NULL,
         ]);
-
-
+        $group = $main->menuGroups()->create([
+            'en_name' => 'Dashboard',
+            'ar_name' => 'لوحة التحكم',
+            'aria_controls' => 'collapseAdministration',
+            'order' => 1,
+        ]);
+        $group->subMenus()->createMany([
+            [
+                'en_name' => 'Dashboard',
+                'ar_name' => 'لوحة التحكم',
+                'route' => 'home',
+                'a_class' => 'sidebar-sub sidebar-sub-roles',
+                'i_class' => 'simple-icon-user-following',
+                'order' => 1,
+                'code'=>0
+            ]
+        ]);
 
         $main =  MainMenu::create([
             'en_name' => 'Master Data',

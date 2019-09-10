@@ -5,10 +5,12 @@
         <div class="col-12">
             <h1>@lang('global.users')</h1>
             <div class="text-zero top-right-button-container">
+                @permission('users.create')
                 <a href="{{ route('users.create') }}">
                 <button type="button"
                         class="btn btn-primary btn-sm top-right-button mr-1">@lang('global.create')</button>
                 </a>
+                @endpermission
             </div>
             <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
                 <ol class="breadcrumb pt-0">
@@ -56,12 +58,14 @@
                         <td>{{ optional($user->roles()->first())->name }}</td>
                         <td><i class="simple-icon-{{ $user->is_active == 1 ? 'check' : 'close' }}" ></i></td>
                         <td>
-                            @if($user->is_admin && Auth::user()->is_admin)
-                            <a href="{{ route('users.edit' , ['id' => $user->id]) }}" class="btn btn-primary btn-sm mb-1">@lang('global.edit')</a>
-                            @elseif(!$user->is_admin)
-                                <a href="{{ route('users.edit' , ['id' => $user->id]) }}" class="btn btn-primary btn-sm mb-1">@lang('global.edit')</a>
-                            @endif
+                            @permission('users.edit')
+                                @if($user->is_admin && Auth::user()->is_admin)
+                                    <a href="{{ route('users.edit' , ['id' => $user->id]) }}" class="btn btn-primary btn-sm mb-1">@lang('global.edit')</a>
+                                    @elseif(!$user->is_admin)
+                                        <a href="{{ route('users.edit' , ['id' => $user->id]) }}" class="btn btn-primary btn-sm mb-1">@lang('global.edit')</a>
+                                    @endif
 {{--                            <button type="button" class="btn btn-danger btn-sm mb-1">@lang('global.delete')</button>--}}
+                            @endpermission
                         </td>
                     </tr>
                 @endforeach
