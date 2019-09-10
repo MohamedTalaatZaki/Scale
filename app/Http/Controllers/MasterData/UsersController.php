@@ -3,16 +3,20 @@
 namespace App\Http\Controllers\MasterData;
 
 use App\Models\Roles\Role;
+use App\Traits\AuthorizeTrait;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UsersController extends Controller
 {
+    use AuthorizeTrait;
     public function index()
     {
+        $this->authorized('users.index');
         return view('master-data.users.index' , [
             'users' =>  User::query()->paginate(15),
         ]);
@@ -20,12 +24,14 @@ class UsersController extends Controller
 
     public function create()
     {
+        $this->authorized('users.create');
         $roles  =   Role::all();
         return view('master-data.users.create' , ['roles' => $roles]);
     }
 
     public function store(Request $request)
     {
+        $this->authorized('users.create');
         $this->validate($request , [
             'full_name' =>  'required',
             'user_name' =>  'required|unique:users|min:4',
@@ -57,6 +63,7 @@ class UsersController extends Controller
 
     public function edit($id)
     {
+        $this->authorized('users.edit');
         $user   =   User::query()->findOrFail($id);
         $roles  =   Role::all();
         return view('master-data.users.edit' , ['user'  =>  $user , 'roles' => $roles]);
@@ -64,6 +71,7 @@ class UsersController extends Controller
 
     public function update(Request $request , $id)
     {
+        $this->authorized('users.edit');
         $this->validate($request , [
             'full_name' =>  'required',
             'user_name' =>  'required|min:4|unique:users,user_name,'.$id,

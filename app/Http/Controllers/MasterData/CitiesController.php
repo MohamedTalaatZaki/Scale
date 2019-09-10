@@ -4,23 +4,28 @@ namespace App\Http\Controllers\MasterData;
 
 use App\Models\City;
 use App\Models\Governorate;
+use App\Traits\AuthorizeTrait;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class CitiesController extends Controller
 {
+    use AuthorizeTrait;
     public function index()
     {
+        $this->authorized('cities.index');
         $cities   =   City::query()->paginate(25);
         return view('master-data.cities.index' , ['cities' => $cities]);
     }
 
     public function create(){
+        $this->authorized('cities.create');
         $governorates   =   Governorate::query()->get();
         return view('master-data.cities.create' , ['governorates' => $governorates]);
     }
 
     public function store(Request $request) {
+        $this->authorized('cities.createس');
         $this->validate($request , [
             'gov_id'    =>  'required',
             'en_name'   =>  'required|unique:cities,en_name',
@@ -44,12 +49,14 @@ class CitiesController extends Controller
     }
 
     public function edit($id){
+        $this->authorized('cities.edit');
         $governorates   =   Governorate::query()->get();
         $city    =   City::query()->findOrFail($id);
         return view('master-data.cities.edit' , ['governorates' => $governorates , 'city' => $city]);
     }
 
     public function update(Request $request , $id) {
+        $this->authorized('cities.edit');
         $this->validate($request , [
             'gov_id'    =>  'required',
             'en_name'   =>  'required|unique:cities,en_name,'.$id,

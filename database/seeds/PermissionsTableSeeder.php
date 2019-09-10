@@ -18,9 +18,9 @@ class PermissionsTableSeeder extends Seeder
 
 
         DB::table('permissions')->delete();
-
+        $subMenu = SubMenu::where('code', 0)->first();
         Permission::create([
-            'sub_menu_id' => 1,
+            'sub_menu_id' => $subMenu->id,
             'name' => 'home',
             'en_display_name' => 'Home',
             'ar_display_name' => 'لوحة التحكم',
