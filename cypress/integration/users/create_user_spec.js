@@ -1,11 +1,16 @@
 beforeEach(function () {
+    cy.exec("php artisan user:add_permission users.index");
+    cy.exec("php artisan user:add_permission users.create");
     cy.visit('/');
     cy.wait(2000);
     cy.url().should('contain', '/login');
-    cy.get(':nth-child(2) > .form-control').type('admin')
+    cy.get(':nth-child(2) > .form-control').type('test')
     cy.get(':nth-child(3) > .form-control').type('123456')
-    cy.contains('Sign In').click()
-    cy.visit('/master-data/users');
+    cy.contains('Sign In').click();
+    cy.get('a[href="#masterData"]').should('be.visible');
+    cy.get('a[href="#masterData"]').click();
+    cy.get('.sidebar-sub-users').click({ force: true });
+    cy.url().should('contain','/master-data/users');
     cy.get('a > .btn').click();
     cy.url().should('contain', '/master-data/users/create');
 })
@@ -115,6 +120,23 @@ describe('Create user', function () {
     cy.request('get','/api/user/tonagy').then((response)=>{
       console.log(response);
     });
+    it('checks create permissions',function(){
+      cy.exec("php artisan user:remove_permission users.create");
+      cy.visit('/master-data/users');
+      cy.get('.d-inline-block').contains('Create').should('not.exist');
+      cy.server()
+      cy.route('get', '/master-data/users/create').as('create');
+      cy.get('@create').then(function (xhr) {
+        expect(xhr.status).to.eq(403)
+      });
+      cy.exec("php artisan user:remove_permission users.index");
+      cy.get('.d-inline-block').contains('Users').should('not.exist');
+      cy.server()
+      cy.route('get', '/master-data/users/create').as('users');
+      cy.get('@users').then(function (xhr) {
+        expect(xhr.status).to.eq(403)
+      });
+    })
   })
   after(function(){
     cy.exec("php artisan migrate:refresh && php artisan db:seed");
