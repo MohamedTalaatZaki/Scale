@@ -12,11 +12,6 @@ class ItemGroupController extends Controller
 {
     use AuthorizeTrait;
 
-    public function authorized($permission)
-    {
-        return true;
-    }
-
     public function index()
     {
         $this->authorized('item-group.index');
