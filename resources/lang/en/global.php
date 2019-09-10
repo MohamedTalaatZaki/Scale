@@ -82,6 +82,7 @@ return [
     'item_types_updated'    =>  'Item Type Updated',
     'create_item_types'    =>  'Create Item Type',
     'edit_item_types'   =>  'Edit Item Types',
+    'is_testable'   =>  'Is Testable',
 
 
 ];
