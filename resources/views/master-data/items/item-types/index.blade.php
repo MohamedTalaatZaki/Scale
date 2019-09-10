@@ -38,6 +38,7 @@
                     <th>#</th>
                     <th>@lang('global.en_name')</th>
                     <th>@lang('global.ar_name')</th>
+                    <th>@lang('global.is_testable')</th>
                     <th>@lang('global.actions')</th>
                 </tr>
                 </thead>
@@ -47,6 +48,7 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $item_type->en_name }}</td>
                         <td>{{ $item_type->ar_name }}</td>
+                        <td><i class="simple-icon-{{ $item_type->testable == 1 ? 'check' : 'close' }}" ></i></td>
                         <td>
                             @permission('item-types.edit')
                             <a href="{{ route('item-types.edit' , ['id' => $item_type->id]) }}" class="btn btn-primary btn-sm mb-1">@lang('global.edit')</a>

@@ -49,6 +49,18 @@
                                     <div id="jQueryName-error" class="error" style="">{{ $errors->first('ar_name') }}</div>
                                 @endif
                             </div>
+                            <div class="form-group row mb-1">
+                                <label class="col-12 col-form-label">@lang('global.is_testable') </label>
+                                <div class="col-12">
+                                    <div class="custom-switch custom-switch-primary-inverse mb-2" style="padding-left: 0">
+                                        <input class="custom-switch-input" id="testable" type="checkbox" value="1" name="testable" {{ old('testable' , $item_type->testable) == '1' ? 'checked' : '' }}>
+                                        <label class="custom-switch-btn" for="testable"></label>
+                                    </div>
+                                    @if($errors->has('testable'))
+                                        <div id="jQueryName-error" class="error" style="">{{ $errors->first('testable') }}</div>
+                                    @endif
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group col-md-12">
                             <div class="float-right">
