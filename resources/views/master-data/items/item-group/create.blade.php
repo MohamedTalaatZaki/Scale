@@ -51,6 +51,19 @@
                                 @endif
                             </div>
                         </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label for="testable">@lang('global.is_testable')</label>
+                                <select id="testable" class="form-control select2-single" name="testable">
+                                    <option label="&nbsp;" value="&nbsp;">&nbsp; @lang('global.is_testable')</option>
+                                    <option value="0" >@lang('global.not_testable')</option>
+                                    <option value="1" >@lang('global.yes_testable')</option>
+                                </select>
+                                @if($errors->has('testable'))
+                                    <div id="jQueryName-error" class="error" style="">{{ $errors->first('testable') }}</div>
+                                @endif
+                            </div>
+                        </div>
                         <div class="form-group col-md-12">
                             <div class="float-right">
                                 <a href="{{ route('item-group.index') }}">

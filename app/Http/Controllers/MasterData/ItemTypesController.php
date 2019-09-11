@@ -41,7 +41,6 @@ class ItemTypesController extends Controller
         $item_types = ItemType::query()->create([
             'en_name' => $request->get('en_name'),
             'ar_name' => $request->get('ar_name'),
-            'testable'  =>  $request->input('testable' , 0)
         ]);
 
         return redirect()->action('MasterData\ItemTypesController@index')->with('success', trans('global.item_types_created'));
@@ -71,7 +70,6 @@ class ItemTypesController extends Controller
         $item_types->update([
             'en_name' => $request->get('en_name'),
             'ar_name' => $request->get('ar_name'),
-            'testable'  =>  $request->input('testable' , 0)
         ]);
 
         return redirect()->action('MasterData\ItemTypesController@index')->with('success', trans('global.item_types_updated'));

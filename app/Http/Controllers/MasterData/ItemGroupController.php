@@ -28,7 +28,8 @@ class ItemGroupController extends Controller
         $this->authorized('item-group.create');
         $this->validate($request , [
             'en_name'   =>  'required|unique:item_group,en_name',
-            'ar_name'   =>  'required|unique:item_group,ar_name'
+            'ar_name'   =>  'required|unique:item_group,ar_name',
+            'testable'  =>  'required|in:0,1'
         ],
             [
                 'en_name.required'=>trans('master.errors.en_name_required'),
@@ -40,6 +41,7 @@ class ItemGroupController extends Controller
         $item_group    =   ItemGroup::query()->create([
             'en_name'   =>  $request->get('en_name'),
             'ar_name'   =>  $request->get('ar_name'),
+            'testable'  =>  $request->get('testable')
         ]);
 
         return redirect()->action('MasterData\ItemGroupController@index')->with('success' , trans('global.item_group_created'));
@@ -55,7 +57,8 @@ class ItemGroupController extends Controller
         $this->authorized('item-group.edit');
         $this->validate($request , [
             'en_name'   =>  'required|unique:item_group,en_name,'.$id,
-            'ar_name'   =>  'required|unique:item_group,ar_name,'.$id
+            'ar_name'   =>  'required|unique:item_group,ar_name,'.$id,
+            'testable'  =>  'required|in:0,1'
         ],
             [
                 'en_name.required'=>trans('master.errors.en_name_required'),
@@ -67,6 +70,7 @@ class ItemGroupController extends Controller
         $item_group->update([
             'en_name'   =>  $request->get('en_name'),
             'ar_name'   =>  $request->get('ar_name'),
+            'testable'  =>  $request->get('testable')
         ]);
 
         return redirect()->action('MasterData\ItemGroupController@index')->with('success' , trans('global.item_group_updated'));
