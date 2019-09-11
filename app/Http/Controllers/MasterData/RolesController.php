@@ -51,7 +51,7 @@ class RolesController extends Controller
         $this->authorized('roles.edit');
         $this->validate($request  , [
             'name'      =>  'required|unique:roles,name,'.$id,
-            'permissions'   =>  'required|array'
+           // 'permissions'   =>  'required|array'
         ]);
 
         $role   =   Role::query()->findOrFail($id);
