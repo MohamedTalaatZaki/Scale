@@ -1,6 +1,8 @@
 describe('List users', function () {
   before(function(){
-    cy.exec("php artisan user:faker");
+    cy.exec("php artisan user:faker_ahmed");
+    cy.exec("php artisan user:faker_test");
+    cy.exec("php artisan user:faker_admin");
     cy.exec("php artisan user:add_permission users.index");
   });
   beforeEach(function(){

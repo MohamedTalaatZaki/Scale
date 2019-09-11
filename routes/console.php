@@ -2,6 +2,8 @@
 
 use App\User;
 use App\Models\Roles\Permission;
+use Illuminate\Support\Str;
+use Faker\Generator as Faker;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -77,7 +79,16 @@ Artisan::command('user:remove_permission {permission}', function ($permission) {
     }
 })->describe('remove permission to test role');
 
-
-Artisan::command('user:faker', function () {
-    $users = factory(App\User::class, 200)->create();
+Artisan::command('user:faker_ahmed', function () {
+    $users = factory(App\User::class, 'ahmed',100)->create();
 })->describe('Generate fake users');
+
+
+Artisan::command('user:faker_test', function () {
+    $users = factory(App\User::class, 'admin',100)->create();
+})->describe('Generate fake test users');
+
+
+Artisan::command('user:faker_admin', function () {
+    $users = factory(App\User::class, 'test',100)->create();
+})->describe('Generate fake admin users');
