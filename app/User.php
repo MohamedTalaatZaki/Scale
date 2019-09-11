@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Traits\HasFilter;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -10,7 +11,7 @@ use Zizaco\Entrust\Traits\EntrustUserTrait;
 
 class User extends Authenticatable
 {
-    use Notifiable , EntrustUserTrait;
+    use Notifiable , EntrustUserTrait,HasFilter;
 
     /**
      * The attributes that are mass assignable.
@@ -18,7 +19,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'full_name', 'email', 'password' ,'user_name' ,'employee_number' ,'lang' ,'theme' , 'avatar' , 'is_active'
+        'full_name', 'email', 'password' ,'user_name' ,'employee_code' ,'lang' ,'theme' , 'avatar' , 'is_active'
     ];
 
     /**

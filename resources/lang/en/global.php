@@ -69,6 +69,26 @@ return [
     'user_updated_without_role' =>  'User Updated Successfully But User Has No Role.',
     'center_created'=>'Center created successfully',
     'center_updated'=>'Center updated successfully',
-    'edit_role'=>'Edit Role'
+    'edit_role'=>'Edit Role',
+    'item_group'    =>  'Item Group',
+    'create_item_group' =>  'Create Item Group',
+    'edit_item_group' =>  'Edit Item Group',
+    'item_group_created'    =>  'Item Group Created',
+    'item_group_updated'    =>  'Item Group Updated',
+    'item_types'    =>  'Item Types',
+    'create_item_type' =>  'Create Item Type',
+    'edit_item_type' =>  'Edit Item Type',
+    'item_types_created'    =>  'Item Type Created',
+    'item_types_updated'    =>  'Item Type Updated',
+    'create_item_types'    =>  'Create Item Type',
+    'edit_item_types'   =>  'Edit Item Types',
+    'is_testable'   =>  'Is Testable',
+    'search'=>'Search',
+    'role'=>'Roles',
+    'not_active'=>'Not Active',
+    'clear_filters'=>'Reset',
+    'not_testable'  =>  'Not Testable',
+    'yes_testable'  =>  'Yes Is Testable',
+
 
 ];
