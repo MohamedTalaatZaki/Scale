@@ -66,7 +66,7 @@ describe('create roles test', function () {
         cy.exec('php artisan test:delete_user_radwa');
     })
 
-    it.only('ensure that the permission assigned to roles are working as expected', function () {
+    it('ensure that the permission assigned to roles are working as expected', function () {
         cy.contains('Master Data').click();
         cy.get('.sidebar-sub.sidebar-sub-roles').click();
         cy.contains('Create').click();
@@ -75,7 +75,6 @@ describe('create roles test', function () {
         cy.contains('Role Created').should('be.visible');
         cy.exec('php artisan user:add_permission_to_new roles.index');
         cy.exec('php artisan user:add_permission_to_new roles.create');
-        cy.exec('php artisan test:delete_user_radwa');
         cy.exec('php artisan test:create_user_radwa');
         cy.exec('php artisan test:create_user_with_role');
         cy.get('.user > button').click();
@@ -88,7 +87,7 @@ describe('create roles test', function () {
         cy.url().should('eq', 'http://127.0.0.1:8000/');
         cy.contains('Master Data').click();
         cy.contains('Roles').should('be.visible');
-        cy.contains('Master Data').should('be.visible');
+        cy.contains('البيانات الاساسية').should('be.visible');
         cy.visit('http://127.0.0.1:8000/master-data/roles');
         cy.contains('Create').should('be.visible');
         cy.exec('php artisan test:delete_user_with_role');

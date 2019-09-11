@@ -86,7 +86,7 @@ Artisan::command('test:create_user', function () {
         'id'=> 1003,
         'full_name'         =>  'testing',
         'user_name'         =>  'testing',
-        'employee_number'   =>  10000,
+        'employee_code'   =>  10000,
         'email'             =>  'testing@test.com',
         'password'          =>  Hash::make(123456),
         'is_active'         => 0
@@ -102,6 +102,9 @@ Artisan::command('test:delete_role', function () {
 })->describe('delete role new');
 
 
+
+
+
 Artisan::command('test:create_user_with_role', function () {
     $role = App\Models\Roles\Role::where('name','new')->first();
     DB::table('role_user')->insert([
@@ -115,7 +118,7 @@ Artisan::command('test:create_user_radwa', function () {
         'id'=> 1004,
         'full_name'         =>  'radwa',
         'user_name'         =>  'radwa',
-        'employee_number'   =>  10004,
+        'employee_code'   =>  10004,
         'email'             =>  'radwa@test.com',
         'password'          =>  Hash::make(123456),
         'is_active'         => 1
@@ -125,6 +128,11 @@ Artisan::command('test:create_user_radwa', function () {
 Artisan::command('test:delete_user_radwa', function () {
     optional(App\User::find(1004))->delete();
 })->describe('Display an inspiring quote');
+
+
+
+
+
 
 
 Artisan::command('test:delete_user_with_role', function () {
