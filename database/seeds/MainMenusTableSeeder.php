@@ -144,8 +144,17 @@ class MainMenusTableSeeder extends Seeder
                 'route' => 'item-types.index',
                 'a_class' => 'sidebar-sub sidebar-sub-item-types',
                 'i_class' => 'simple-icon-user-follow',
-                'order' => 1,
+                'order' => 2,
                 'code'=>7
+            ],
+            [
+                'en_name' => 'Items',
+                'ar_name' => 'الاصناف',
+                'route' => 'items.index',
+                'a_class' => 'sidebar-sub sidebar-sub-items',
+                'i_class' => 'simple-icon-user-follow',
+                'order' => 3,
+                'code'=>8
             ]
         ]);
 
