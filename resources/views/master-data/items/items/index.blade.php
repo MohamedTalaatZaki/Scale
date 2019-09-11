@@ -15,7 +15,7 @@
             <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
                 <ol class="breadcrumb pt-0">
                     <li class="breadcrumb-item">
-                        <a href="#" class="default-cursor">@lang('global.master_data')</a>
+                        <span class="default-cursor">@lang('global.master_data')</span>
                     </li>
                     <li class="breadcrumb-item">
                         <a href="{{ route('items.index') }}">@lang('global.items')</a>

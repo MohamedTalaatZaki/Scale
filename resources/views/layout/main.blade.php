@@ -78,7 +78,7 @@
     </div>
 
 
-    <a class="navbar-logo" href="#">
+    <a class="navbar-logo" href="{{route('home')}}">
         <span class="logo d-none d-xs-block"></span>
         <span class="logo-mobile d-block d-xs-none"></span>
     </a>
