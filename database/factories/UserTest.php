@@ -17,7 +17,7 @@ $factory->defineAs(App\User::class, 'ahmed',function (Faker $faker) {
       'remember_token' => Str::random(10),
       'lang' => 'ar',
       'is_active' => 1,
-      'employee_number' => $faker->unique()->numberBetween(1, 100),
+      'employee_code' => $faker->unique()->numberBetween(1, 100),
       'theme' => 'dark',
     ];
 });
@@ -33,7 +33,7 @@ $factory->defineAs(App\User::class, 'test',function (Faker $faker) {
       'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
       'remember_token' => Str::random(10),
       'lang' => 'ar',
-      'employee_number' => $faker->unique()->numberBetween(1, 200),
+      'employee_code' => $faker->unique()->numberBetween(1, 200),
       'theme' => 'light',
     ];
 });
@@ -51,6 +51,6 @@ $factory->defineAs(App\User::class, 'admin',function (Faker $faker) {
       'lang' => 'en',
       'is_active' => 1,
       'theme' => 'dark',
-      'employee_number' => $faker->unique()->numberBetween(1, 300),
+      'employee_code' => $faker->unique()->numberBetween(1, 300),
     ];
 });
