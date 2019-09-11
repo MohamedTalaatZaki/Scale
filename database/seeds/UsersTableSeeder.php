@@ -18,7 +18,7 @@ class UsersTableSeeder extends Seeder
             DB::table('users')->insert([
                 'full_name'         =>  'Admin',
                 'user_name'         =>  'admin',
-                'employee_number'   =>  1,
+                'employee_code'   =>  1,
                 'email'             =>  'admin@admin.com',
                 'password'          =>  Hash::make(123456),
                 'is_active'         => 1,
@@ -30,7 +30,7 @@ class UsersTableSeeder extends Seeder
             DB::table('users')->insert([
                 'full_name'         =>  'test',
                 'user_name'         =>  'test',
-                'employee_number'   =>  2,
+                'employee_code'   =>  2,
                 'email'             =>  'test@test.com',
                 'password'          =>  Hash::make(123456),
                 'is_active'         => 1,
