@@ -76,3 +76,8 @@ Artisan::command('user:remove_permission {permission}', function ($permission) {
         optional($role)->detachPermission($permission);
     }
 })->describe('remove permission to test role');
+
+
+Artisan::command('user:faker', function () {
+    $users = factory(App\User::class, 200)->create();
+})->describe('Generate fake users');
