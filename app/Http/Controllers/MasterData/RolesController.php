@@ -51,14 +51,14 @@ class RolesController extends Controller
         $this->authorized('roles.edit');
         $this->validate($request  , [
             'name'      =>  'required|unique:roles,name,'.$id,
-            'permissions'   =>  'required|array'
+           // 'permissions'   =>  'required|array'
         ]);
 
         $role   =   Role::query()->findOrFail($id);
         if(!$role->is_admin){
             $role->update(['name' => $request->get('name')]);
             $role->perms()->sync([]);
-            $role->attachPermissions($request->get('permissions'));
+            $role->attachPermissions($request->get('permissions',[]));
         }
 
         return redirect()->action('MasterData\RolesController@index')->with('success' , trans('global.role_updated'));

@@ -15,7 +15,7 @@
             <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
                 <ol class="breadcrumb pt-0">
                     <li class="breadcrumb-item">
-                        <a href="#" class="default-cursor">@lang('global.master_data')</a>
+                        <span class="default-cursor">@lang('global.master_data')</span>
                     </li>
                     <li class="breadcrumb-item">
                         <a href="{{ route('item-types.index') }}">@lang('global.item_types')</a>
@@ -38,7 +38,6 @@
                     <th>#</th>
                     <th>@lang('global.en_name')</th>
                     <th>@lang('global.ar_name')</th>
-                    <th>@lang('global.is_testable')</th>
                     <th>@lang('global.actions')</th>
                 </tr>
                 </thead>
@@ -48,7 +47,6 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $item_type->en_name }}</td>
                         <td>{{ $item_type->ar_name }}</td>
-                        <td><i class="simple-icon-{{ $item_type->testable == 1 ? 'check' : 'close' }}" ></i></td>
                         <td>
                             @permission('item-types.edit')
                             <a href="{{ route('item-types.edit' , ['id' => $item_type->id]) }}" class="btn btn-primary btn-sm mb-1">@lang('global.edit')</a>

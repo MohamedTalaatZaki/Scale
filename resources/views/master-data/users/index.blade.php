@@ -15,12 +15,11 @@
             <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
                 <ol class="breadcrumb pt-0">
                     <li class="breadcrumb-item">
-                        <a href="#" class="default-cursor">@lang('global.master_data')</a>
+                        <span class="default-cursor">@lang('global.master_data')</span>
                     </li>
                     <li class="breadcrumb-item">
                         <a href="{{ route('users.index') }}">@lang('global.users')</a>
                     </li>
-                    <li class="breadcrumb-item " aria-current="page">@lang('global.index')</li>
                 </ol>
             </nav>
             <div class="separator mb-5"></div>
@@ -138,7 +137,7 @@
                                 <td>{{ $user->full_name }}</td>
                                 <td>{{ $user->user_name }}</td>
                                 <td>{{ $user->email }}</td>
-                                <td>{{ $user->employee_number }}</td>
+                                <td>{{ $user->employee_code }}</td>
                                 <td>{{ optional($user->roles()->first())->name }}</td>
                                 <td><i class="simple-icon-{{ $user->is_active == 1 ? 'check' : 'close' }}"></i></td>
                                 <td>
@@ -164,7 +163,7 @@
 
     <div class="row">
         <div class="col-12 list">
-            {{ $users->links() }}
+            {{ $users->appends(request()->query())->links() }}
         </div>
     </div>
 @endsection

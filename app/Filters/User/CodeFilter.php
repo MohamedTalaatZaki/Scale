@@ -15,7 +15,7 @@ class CodeFilter extends AbstractBasicFilter
 {
     public function filter($value)
     {
-        return $this->builder->where('employee_number','like',"%{$value}%");
+        return $this->builder->where('employee_code','like',"%{$value}%");
     }
 
 }

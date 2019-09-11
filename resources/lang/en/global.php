@@ -86,7 +86,16 @@ return [
     'search'=>'Search',
     'role'=>'Roles',
     'not_active'=>'Not Active',
-    'clear_filters'=>'Reset'
-
+    'clear_filters'=>'Reset',
+    'not_testable'  =>  'Not Testable',
+    'yes_testable'  =>  'Yes Is Testable',
+    'create_item'   =>  'Create Item',
+    'items'   =>  'Items',
+    'item_type' =>  'Item Type ',
+    'sap_code' =>  'Sap Code',
+    'description'  =>  'Description',
+    'item_created_success'  =>  'Item Created Success',
+    'item_updated_success'  =>  'Item Updated Success',
+    'edit_item' =>  'Edit Item',
 
 ];
