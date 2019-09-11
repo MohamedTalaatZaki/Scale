@@ -23,7 +23,7 @@ class Item extends Model
 
     public function suppliers()
     {
-        $this->belongsToMany(Supplier::class , 'suppliers_items' , 'supplier_id' , 'item_id');
+        return $this->belongsToMany(Supplier::class , 'suppliers_items'  , 'item_id' , 'supplier_id');
     }
 
     public function getNameAttribute() {

@@ -12,6 +12,6 @@ class Supplier extends Model
 
     public function items()
     {
-        $this->belongsToMany(Item::class , 'suppliers_items' , 'item_id' , 'supplier_id');
+        return $this->belongsToMany(Item::class , 'suppliers_items' , 'supplier_id','item_id' );
     }
 }

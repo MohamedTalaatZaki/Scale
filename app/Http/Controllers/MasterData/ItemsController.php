@@ -37,7 +37,7 @@ class ItemsController extends Controller
             'item_type_id'  =>  'required|exists:item_types,id',
             'item_group_id' =>  'required|exists:item_group,id',
         ]);
-
+        $request->offsetSet('is_active' , $request->get('is_active' , 0));
         Item::query()->create($request->input());
 
         return redirect()

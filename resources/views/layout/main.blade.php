@@ -28,6 +28,7 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('css/dore.dark.orange.min.css') }}">
     @endif
     <link rel="stylesheet" href="{{ asset('css/main.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('js/multi-select/css/multi-select.css') }}"/>
 
     <style>
         body, .table {
@@ -101,8 +102,8 @@
                     <i class="simple-icon-bubbles"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right mt-3">
-                    <a class="dropdown-item" href="#">Arabic</a>
-                    <a class="dropdown-item" href="#">English</a>
+                    <a class="dropdown-item" href="{{ route('change-lang' , ['lang' => 'ar']) }}">@lang('global.arabic')</a>
+                    <a class="dropdown-item" href="{{ route('change-lang' , ['lang' => 'en']) }}">@lang('global.english')</a>
                 </div>
             </div>
 
@@ -353,6 +354,8 @@
 <script src="{{ asset('js/dore.script.js') }}"></script>
 <script src="{{ asset('js/scripts'.$page_dir.'.js') }}"></script>
 <script src="{{ asset('js/notify.min.js') }}"></script>
+<script src="{{ asset('js/multi-select/js/jquery.quicksearch.js') }}"></script>
+<script src="{{ asset('js/multi-select/js/jquery.multi-select.js') }}"></script>
 
 <script>
     $().ready(function () {

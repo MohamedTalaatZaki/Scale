@@ -158,5 +158,24 @@ class MainMenusTableSeeder extends Seeder
             ]
         ]);
 
+        $group = $main->menuGroups()->create([
+            'en_name' => 'Suppliers',
+            'ar_name' => 'الموردين',
+            'aria_controls' => 'collapseSuppliers',
+            'order' => 4,
+        ]);
+
+        $group->subMenus()->createMany([
+            [
+                'en_name' => 'Suppliers',
+                'ar_name' => 'الموردين',
+                'route' => 'suppliers.index',
+                'a_class' => 'sidebar-sub sidebar-sub-suppliers',
+                'i_class' => 'simple-icon-user-follow',
+                'order' => 1,
+                'code'=>9
+            ]
+        ]);
+
     }
 }
