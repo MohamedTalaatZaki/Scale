@@ -86,7 +86,9 @@ return [
     'search'=>'Search',
     'role'=>'Roles',
     'not_active'=>'Not Active',
-    'clear_filters'=>'Reset'
+    'clear_filters'=>'Reset',
+    'not_testable'  =>  'Not Testable',
+    'yes_testable'  =>  'Yes Is Testable',
 
 
 ];
