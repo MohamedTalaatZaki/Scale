@@ -20,7 +20,6 @@
                     <li class="breadcrumb-item">
                         <a href="{{ route('roles.index') }}">@lang('global.roles')</a>
                     </li>
-                    <li class="breadcrumb-item " aria-current="page">@lang('global.index')</li>
                 </ol>
             </nav>
             <div class="separator mb-5"></div>
@@ -30,38 +29,40 @@
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-body"></div>
-                @include('components._validation')
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>@lang('global.name')</th>
-                        <th>@lang('global.permissions_count')</th>
-                        <th>@lang('global.users_count')</th>
-                        <th>@lang('global.actions')</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($roles as $role)
+                <div class="card-body">
+                    @include('components._validation')
+                    <table class="table">
+                        <thead>
                         <tr>
-                            <td>{{ $loop->iteration }}</td>
-                            <td>{{ $role->name }}</td>
-                            <td>{{ $role->perms->count() }}</td>
-                            <td>{{ $role->users->count() }}</td>
-                            <td>
-                                @permission('roles.edit')
-                                @unless($role->is_admin)
-                                    <a href="{{ route('roles.edit' , ['id' => $role->id]) }}"
-                                       class="btn btn-primary btn-sm mb-1">@lang('global.edit')</a>
-                                @endunless
-                                @endpermission
-
-                            </td>
+                            <th>#</th>
+                            <th>@lang('global.name')</th>
+                            <th>@lang('global.permissions_count')</th>
+                            <th>@lang('global.users_count')</th>
+                            <th>@lang('global.actions')</th>
                         </tr>
-                    @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        @foreach($roles as $role)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $role->name }}</td>
+                                <td>{{ $role->perms->count() }}</td>
+                                <td>{{ $role->users->count() }}</td>
+                                <td>
+                                    @permission('roles.edit')
+                                    @unless($role->is_admin)
+                                        <a href="{{ route('roles.edit' , ['id' => $role->id]) }}"
+                                           class="btn btn-primary btn-sm mb-1">@lang('global.edit')</a>
+                                    @endunless
+                                    @endpermission
+
+                                </td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
         </div>
     </div>
