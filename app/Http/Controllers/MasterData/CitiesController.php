@@ -25,7 +25,7 @@ class CitiesController extends Controller
     }
 
     public function store(Request $request) {
-        $this->authorized('cities.createس');
+        $this->authorized('cities.create');
         $this->validate($request , [
             'gov_id'    =>  'required',
             'en_name'   =>  'required|unique:cities,en_name',

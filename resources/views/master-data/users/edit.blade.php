@@ -72,10 +72,10 @@
                         <div class="form-row">
                             <div class="form-group col-md-4">
                                 <label>@lang('global.employee_code')</label>
-                                <input type="number" class="form-control" name="employee_code" value="{{ old('employee_code' , $user->employee_code) }}"
+                                <input type="number" class="form-control" name="employee_number" value="{{ old('employee_number' , $user->employee_number) }}"
                                        placeholder="@lang('global.employee_code')" >
-                                @if($errors->has('employee_code'))
-                                    <div id="jQueryName-error" class="error" style="">{{ $errors->first('employee_code') }}</div>
+                                @if($errors->has('employee_number'))
+                                    <div id="jQueryName-error" class="error" style="">{{ $errors->first('employee_number') }}</div>
                                 @endif
                             </div>
                             <div class="form-group col-md-4">

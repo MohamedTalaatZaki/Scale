@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\MasterData;
 
+use App\Filters\UsersIndexFilter;
 use App\Models\Roles\Role;
 use App\Traits\AuthorizeTrait;
 use App\User;
@@ -14,72 +15,77 @@ use Illuminate\Support\Facades\Hash;
 class UsersController extends Controller
 {
     use AuthorizeTrait;
+
     public function index()
     {
         $this->authorized('users.index');
-        return view('master-data.users.index' , [
-            'users' =>  User::query()->paginate(15),
+        $roles = Role::all();
+        $users = User::query()
+            ->filter(new UsersIndexFilter(request()))
+            ->paginate(25);
+        return view('master-data.users.index', [
+            'users' => $users,
+            'roles' => $roles
         ]);
     }
 
     public function create()
     {
         $this->authorized('users.create');
-        $roles  =   Role::all();
-        return view('master-data.users.create' , ['roles' => $roles]);
+        $roles = Role::all();
+        return view('master-data.users.create', ['roles' => $roles]);
     }
 
     public function store(Request $request)
     {
         $this->authorized('users.create');
-        $this->validate($request , [
-            'full_name' =>  'required',
-            'user_name' =>  'required|unique:users|min:4',
-            'password'  =>  'required|confirmed|min:6',
-            'email'     =>  'nullable|email|unique:users',
-            'role_id'   =>  'nullable|exists:roles,id',
-            'lang'      =>  'in:ar,en',
-            'theme'     =>  'in:light,dark',
+        $this->validate($request, [
+            'full_name' => 'required',
+            'user_name' => 'required|unique:users|min:4',
+            'password' => 'required|confirmed|min:6',
+            'email' => 'nullable|email|unique:users',
+            'role_id' => 'nullable|exists:roles,id',
+            'lang' => 'in:ar,en',
+            'theme' => 'in:light,dark',
         ]);
-
         $user = User::query()->create($request->input());
 
-        if($request->hasFile('avatar')) {
-            $path   =   $request->file('avatar')->store("/users/avatars/{$user->id}"  , 'public');
-            $user->update(['avatar' =>  $path]);
+        if ($request->hasFile('avatar')) {
+            $path = $request->file('avatar')->store("/users/avatars/{$user->id}", 'public');
+            $user->update(['avatar' => $path]);
         }
 
-        if($request->get('role_id') != null) {
+        if ($request->get('role_id') != null) {
             $user->attachRole($request->get('role_id'));
-            $user->update(['is_active' => $request->input('is_active' , 0)]);
+            $user->update(['is_active' => $request->input('is_active', 0)]);
         } else {
             $user->update(['is_active' => false]);
         }
 
         return redirect()
             ->action('MasterData\UsersController@index')
-            ->with('success' , is_null($request->get('role_id')) ? trans("global.user_created_without_role") : trans("global.user_created"));
+            ->with('success', is_null($request->get('role_id')) ? trans("global.user_created_without_role") : trans("global.user_created"));
     }
 
     public function edit($id)
     {
         $this->authorized('users.edit');
-        $user   =   User::query()->findOrFail($id);
-        $roles  =   Role::all();
-        return view('master-data.users.edit' , ['user'  =>  $user , 'roles' => $roles]);
+        $user = User::query()->findOrFail($id);
+        $roles = Role::all();
+        return view('master-data.users.edit', ['user' => $user, 'roles' => $roles]);
     }
 
-    public function update(Request $request , $id)
+    public function update(Request $request, $id)
     {
         $this->authorized('users.edit');
-        $this->validate($request , [
-            'full_name' =>  'required',
-            'user_name' =>  'required|min:4|unique:users,user_name,'.$id,
-            'password'  =>  'nullable|confirmed|min:6',
-            'email'     =>  'nullable|email|unique:users,email,'.$id,
-            'role_id'   =>  'nullable|exists:roles,id',
-            'lang'      =>  'in:ar,en',
-            'theme'     =>  'in:light,dark',
+        $this->validate($request, [
+            'full_name' => 'required',
+            'user_name' => 'required|min:4|unique:users,user_name,' . $id,
+            'password' => 'nullable|confirmed|min:6',
+            'email' => 'nullable|email|unique:users,email,' . $id,
+            'role_id' => 'nullable|exists:roles,id',
+            'lang' => 'in:ar,en',
+            'theme' => 'in:light,dark',
         ]);
 
         $user = User::query()->findOrFail($id);
@@ -87,25 +93,25 @@ class UsersController extends Controller
             is_null($request->get('password')) ? $request->except('password') : $request->input()
         );
 
-        if($request->hasFile('avatar')) {
-            $path   =   $request->file('avatar')->store("/users/avatars/{$user->id}"  , 'public');
-            $user->update(['avatar' =>  $path]);
+        if ($request->hasFile('avatar')) {
+            $path = $request->file('avatar')->store("/users/avatars/{$user->id}", 'public');
+            $user->update(['avatar' => $path]);
         }
 
-        if($request->get('role_id') != null) {
+        if ($request->get('role_id') != null) {
             $user->roles()->sync([]);
             $user->attachRole($request->get('role_id'));
-            $user->update(['is_active' => $request->input('is_active' , 0)]);
+            $user->update(['is_active' => $request->input('is_active', 0)]);
         } else {
             $user->roles()->sync([]);
-            $user->update(['is_active' =>!!$user->is_admin]);
+            $user->update(['is_active' => !!$user->is_admin]);
         }
-
         return redirect()->action('MasterData\UsersController@index')
-            ->with('success' , is_null($request->get('role_id')) ? trans("global.user_updated_without_role") : trans("global.user_updated"));
+            ->with('success', is_null($request->get('role_id')) ? trans("global.user_updated_without_role") : trans("global.user_updated"));
     }
 
-    public function show($id) {
+    public function show($id)
+    {
 
     }
 
@@ -117,35 +123,36 @@ class UsersController extends Controller
 
     public function theme()
     {
-        $user   =   Auth::user();
+        $user = Auth::user();
 
         $user->update([
-            'theme' =>  $user->theme == "light" ? 'dark': 'light',
+            'theme' => $user->theme == "light" ? 'dark' : 'light',
         ]);
         return "done";
     }
 
-    public function changeAccInfo(Request $request) {
-        $validate   =   \Validator::make($request->all(),[
-            'password'  =>  'nullable|confirmed|min:6',
-            'lang'      =>  'in:ar,en',
-            'theme'     =>  'in:light,dark',
+    public function changeAccInfo(Request $request)
+    {
+        $validate = \Validator::make($request->all(), [
+            'password' => 'nullable|confirmed|min:6',
+            'lang' => 'in:ar,en',
+            'theme' => 'in:light,dark',
         ]);
 
-        if($validate->fails()) {
-            return redirect()->back()->with('openAccountInfo' , '')->withErrors($validate->errors());
+        if ($validate->fails()) {
+            return redirect()->back()->with('openAccountInfo', '')->withErrors($validate->errors());
         }
 
         $user = Auth::user();
         $user->update([
-            'lang'  =>  $request->get('lang'),
-            'theme'  =>  $request->get('theme'),
+            'lang' => $request->get('lang'),
+            'theme' => $request->get('theme'),
         ]);
 
-        if(!is_null($request->get('password'))) {
+        if (!is_null($request->get('password'))) {
             $user->update(['password' => $request->get('password')]);
         }
 
-        return redirect()->back()->with('notify' , trans('global.change_acc_info_success'));
+        return redirect()->back()->with('notify', trans('global.change_acc_info_success'));
     }
 }
