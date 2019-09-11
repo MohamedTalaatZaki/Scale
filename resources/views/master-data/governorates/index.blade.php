@@ -5,10 +5,12 @@
         <div class="col-12">
             <h1>@lang('global.governorates')</h1>
             <div class="text-zero top-right-button-container">
+                @permission('governorates.create')
                 <a href="{{ route('governorates.create') }}">
                 <button type="button"
                         class="btn btn-primary btn-sm top-right-button mr-1">@lang('global.create')</button>
                 </a>
+                @endpermission
             </div>
             <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
                 <ol class="breadcrumb pt-0">
@@ -46,7 +48,9 @@
                         <td>{{ $governorate->en_name }}</td>
                         <td>{{ $governorate->ar_name }}</td>
                         <td>
+                            @permission('governorates.edit')
                             <a href="{{ route('governorates.edit' , ['id' => $governorate->id]) }}" class="btn btn-primary btn-sm mb-1">@lang('global.edit')</a>
+                            @endpermission
                         </td>
                     </tr>
                 @endforeach

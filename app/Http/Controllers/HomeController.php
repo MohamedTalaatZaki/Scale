@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Traits\AuthorizeTrait;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    use AuthorizeTrait;
     /**
      * Create a new controller instance.
      *
@@ -23,6 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+       // $this->authorized('home');
         return view('dashboard.index');
     }
 }

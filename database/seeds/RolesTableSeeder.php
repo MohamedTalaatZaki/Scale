@@ -1,6 +1,10 @@
 <?php
 
+use App\Models\Roles\Permission;
+use App\Models\Roles\Role;
+use App\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class RolesTableSeeder extends Seeder
 {
@@ -14,21 +18,33 @@ class RolesTableSeeder extends Seeder
     {
         
 
-        \DB::table('roles')->delete();
-        
-        \DB::table('roles')->insert(array (
-            0 => 
-            array (
-                'id' => 1,
-                'name' => 'Admin',
-                'display_name' => NULL,
-                'description' => NULL,
-                'is_active' => 1,
-                'created_at' => '2019-09-05 09:52:29',
-                'updated_at' => '2019-09-05 09:52:29',
-            ),
-        ));
-        
-        
+        DB::table('roles')->delete();
+        DB::table('role_user')->delete();
+        DB::table('permission_role')->delete();
+
+        $roleAdmin = Role::create([
+            'name' => 'Admin',
+            'display_name' => NULL,
+            'description' => NULL,
+            'is_active' => 1,
+            'is_admin'=>1
+        ]);
+
+
+        $adminUser = User::where('is_admin',1)->pluck('id');
+        $roleAdmin->users()->sync($adminUser->all());
+        $permissions = Permission::pluck('id')->all();
+        $roleAdmin->perms()->sync($permissions);
+
+
+        $roleAdmin = Role::create([
+            'name' => 'test',
+            'display_name' => NULL,
+            'description' => NULL,
+            'is_active' => 1,
+            'is_admin'=>0
+        ]);
+        $adminUser = User::where('user_name','test')->pluck('id');
+        $roleAdmin->users()->sync($adminUser->all());
     }
 }

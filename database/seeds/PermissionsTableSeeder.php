@@ -1,6 +1,9 @@
 <?php
 
+use App\Models\Roles\Permission;
+use App\Models\Roles\SubMenu;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class PermissionsTableSeeder extends Seeder
 {
@@ -12,205 +15,226 @@ class PermissionsTableSeeder extends Seeder
      */
     public function run()
     {
-        
 
-        \DB::table('permissions')->delete();
-        
-        \DB::table('permissions')->insert(array (
-            0 => 
-            array (
-                'id' => 1,
-                'sub_menu_id' => 1,
-                'name' => 'home',
-                'en_display_name' => 'Home',
-                'ar_display_name' => 'لوحة التحكم',
-                'en_description' => NULL,
-                'ar_description' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            1 => 
-            array (
-                'id' => 2,
-                'sub_menu_id' => 2,
-                'name' => 'roles.index',
-                'en_display_name' => 'Roles Index',
-                'ar_display_name' => 'عرض الصلاحيات',
-                'en_description' => NULL,
-                'ar_description' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            2 => 
-            array (
-                'id' => 3,
-                'sub_menu_id' => 2,
-                'name' => 'roles.create',
-                'en_display_name' => 'Roles',
-                'ar_display_name' => 'عرض الصلاحيات',
-                'en_description' => NULL,
-                'ar_description' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            3 => 
-            array (
-                'id' => 4,
-                'sub_menu_id' => 2,
-                'name' => 'roles.edit',
-                'en_display_name' => 'Roles',
-                'ar_display_name' => 'عرض الصلاحيات',
-                'en_description' => NULL,
-                'ar_description' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            4 => 
-            array (
-                'id' => 5,
-                'sub_menu_id' => 3,
-                'name' => 'users.index',
-                'en_display_name' => 'Users',
-                'ar_display_name' => 'عرض الصلاحيات',
-                'en_description' => NULL,
-                'ar_description' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            5 => 
-            array (
-                'id' => 6,
-                'sub_menu_id' => 3,
-                'name' => 'users.create',
-                'en_display_name' => 'Users',
-                'ar_display_name' => 'عرض الصلاحيات',
-                'en_description' => NULL,
-                'ar_description' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            6 => 
-            array (
-                'id' => 7,
-                'sub_menu_id' => 3,
-                'name' => 'users.edit',
-                'en_display_name' => 'Users',
-                'ar_display_name' => 'عرض الصلاحيات',
-                'en_description' => NULL,
-                'ar_description' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            7 => 
-            array (
-                'id' => 8,
-                'sub_menu_id' => 4,
-                'name' => 'governorates.index',
-                'en_display_name' => 'Governorate Index',
-                'ar_display_name' => 'المحافظات',
-                'en_description' => NULL,
-                'ar_description' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            8 => 
-            array (
-                'id' => 9,
-                'sub_menu_id' => 4,
-                'name' => 'governorates.create',
-                'en_display_name' => 'Governorate Create',
-                'ar_display_name' => 'المحافظات',
-                'en_description' => NULL,
-                'ar_description' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            9 => 
-            array (
-                'id' => 10,
-                'sub_menu_id' => 4,
-                'name' => 'governorates.edit',
-                'en_display_name' => 'Governorate Edit',
-                'ar_display_name' => 'المحافظات',
-                'en_description' => NULL,
-                'ar_description' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            10 => 
-            array (
-                'id' => 11,
-                'sub_menu_id' => 5,
-                'name' => 'cities.index',
-                'en_display_name' => 'Cities Index',
-                'ar_display_name' => 'المدن',
-                'en_description' => NULL,
-                'ar_description' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            11 => 
-            array (
-                'id' => 12,
-                'sub_menu_id' => 5,
-                'name' => 'cities.create',
-                'en_display_name' => 'Cities Create',
-                'ar_display_name' => 'المدن',
-                'en_description' => NULL,
-                'ar_description' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            12 => 
-            array (
-                'id' => 13,
-                'sub_menu_id' => 5,
-                'name' => 'cities.edit',
-                'en_display_name' => 'Cities Edit',
-                'ar_display_name' => 'المدن',
-                'en_description' => NULL,
-                'ar_description' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            13 => 
-            array (
-                'id' => 14,
-                'sub_menu_id' => 6,
-                'name' => 'centers.index',
-                'en_display_name' => 'Centers Index',
-                'ar_display_name' => 'المراكز',
-                'en_description' => NULL,
-                'ar_description' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            14 => 
-            array (
-                'id' => 15,
-                'sub_menu_id' => 6,
-                'name' => 'centers.create',
-                'en_display_name' => 'Centers Create',
-                'ar_display_name' => 'المراكز',
-                'en_description' => NULL,
-                'ar_description' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-            15 => 
-            array (
-                'id' => 16,
-                'sub_menu_id' => 6,
-                'name' => 'centers.edit',
-                'en_display_name' => 'Centers Edit',
-                'ar_display_name' => 'المراكز',
-                'en_description' => NULL,
-                'ar_description' => NULL,
-                'created_at' => NULL,
-                'updated_at' => NULL,
-            ),
-        ));
-        
-        
+
+        DB::table('permissions')->delete();
+        $subMenu = SubMenu::where('code', 0)->first();
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'home',
+            'en_display_name' => 'Home',
+            'ar_display_name' => 'لوحة التحكم',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+
+        $subMenu = SubMenu::where('code', 2)->first();
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'roles.index',
+            'en_display_name' => 'List Roles',
+            'ar_display_name' => 'عرض الصلاحيات',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'roles.create',
+            'en_display_name' => 'Add Roles',
+            'ar_display_name' => 'إضافة الصلاحيات',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'roles.edit',
+            'en_display_name' => 'Edit Roles',
+            'ar_display_name' => 'تعديل الصلاحيات',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+
+        $subMenu = SubMenu::where('code', 1)->first();
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'users.index',
+            'en_display_name' => 'List Users',
+            'ar_display_name' => 'عرض المستخدمين',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'users.create',
+            'en_display_name' => 'Add Users',
+            'ar_display_name' => 'إضافة المستخدمين',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'users.edit',
+            'en_display_name' => 'Edit Users',
+            'ar_display_name' => 'تعديل المستخدمين',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+
+        $subMenu = SubMenu::where('code', 3)->first();
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'governorates.index',
+            'en_display_name' => 'List Governorate',
+            'ar_display_name' => 'عرض المحافظات',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+        Permission::create([
+            'sub_menu_id' =>  $subMenu->id,
+
+            'name' => 'governorates.create',
+            'en_display_name' => 'Create Governorate',
+            'ar_display_name' => 'إضافة المحافظات',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+        Permission::create([
+            'sub_menu_id' =>  $subMenu->id,
+            'name' => 'governorates.edit',
+            'en_display_name' => 'Edit Governorate',
+            'ar_display_name' => 'تعديل المحافظات',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+
+        $subMenu = SubMenu::where('code', 4)->first();
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'cities.index',
+            'en_display_name' => 'List Cities',
+            'ar_display_name' => 'عرض المدن',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'cities.create',
+            'en_display_name' => 'Create Cities',
+            'ar_display_name' => 'إضافة المدن',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'cities.edit',
+            'en_display_name' => 'Edit Cities',
+            'ar_display_name' => 'تعديل المدن',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+        $subMenu = SubMenu::where('code', 5)->first();
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'centers.index',
+            'en_display_name' => 'List Centers',
+            'ar_display_name' => 'عرض المراكز',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'centers.create',
+            'en_display_name' => 'Create Centers',
+            'ar_display_name' => 'إضافة المراكز',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'centers.edit',
+            'en_display_name' => 'Edit Centers',
+            'ar_display_name' => 'تعديل المراكز',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+
+
+        $subMenu = SubMenu::where('code', 6)->first();
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'item-group.index',
+            'en_display_name' => 'List Item Groups',
+            'ar_display_name' => 'عرض مجموعات الاصناف',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'item-group.create',
+            'en_display_name' => 'Create Item Groups',
+            'ar_display_name' => 'إضافة مجموعات الاصناف',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'item-group.edit',
+            'en_display_name' => 'Edit Item Groups',
+            'ar_display_name' => 'تعديل مجموعات الاصناف',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'item-group.destroy',
+            'en_display_name' => 'Edit Item Groups',
+            'ar_display_name' => 'تعديل مجموعات الاصناف',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+
+        $subMenu = SubMenu::where('code', 7)->first();
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'item-types.index',
+            'en_display_name' => 'List Item Types',
+            'ar_display_name' => 'عرض أنواع الاصناف',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'item-types.create',
+            'en_display_name' => 'Create Item Types',
+            'ar_display_name' => 'إضافة أنواع الاصناف',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'item-types.edit',
+            'en_display_name' => 'Edit Item Types',
+            'ar_display_name' => 'تعديل أنواع الاصناف',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'item-types.destroy',
+            'en_display_name' => 'Edit Item Types',
+            'ar_display_name' => 'تعديل أنواع الاصناف',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+
     }
 }
