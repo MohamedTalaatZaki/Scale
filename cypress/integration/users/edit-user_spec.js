@@ -89,10 +89,10 @@ describe('Edit Users test', function () {
         cy.get('.sidebar-sub.sidebar-sub-users').click();
         cy.url().should('contain', '/master-data/users');
         cy.get("a[href|='http://127.0.0.1:8000/master-data/users/1001/edit']").click();
-        cy.get('.card-body input[name=user_name]').clear().type('test');
+        cy.get('.card-body input[name=user_name]').clear().type('testing');
         cy.contains('Save').click();
         cy.contains('The user name has already been taken.').should('be.visible');
-        cy.get('.card-body input[name=email]').clear().type('test@test.com');
+        cy.get('.card-body input[name=email]').clear().type('test@testing.com');
         cy.contains('Save').click();
         cy.contains('The email has already been taken.').should('be.visible');
         cy.exec('php artisan test:delete_user2');
@@ -107,5 +107,10 @@ describe('Edit Users test', function () {
         cy.get('.sidebar-sub-users').should('not.exist');
         cy.visit('http://127.0.0.1:8000/master-data/users',{ failOnStatusCode: false});
         cy.get('.code').should('contain','403');
+        cy.visit('http://127.0.0.1:8000');
+        cy.get('.user > button').click();
+        cy.get('[href="javascript:void(0);"]').click();
+        cy.url().should('contain', '/login');
+        cy.exec('php artisan test:delete_user');
     })
 })

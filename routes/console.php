@@ -27,7 +27,7 @@ Artisan::command('test:create_user', function () {
         'full_name'         =>  'test',
         'user_name'         =>  'testing',
         'employee_number'   =>  10000,
-        'email'             =>  'test@test.com',
+        'email'             =>  'test@testing.com',
         'password'          =>  Hash::make(123456),
         'is_active'         => 0
     ]);
