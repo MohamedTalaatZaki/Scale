@@ -83,6 +83,10 @@ return [
     'create_item_types'    =>  'Create Item Type',
     'edit_item_types'   =>  'Edit Item Types',
     'is_testable'   =>  'Is Testable',
+    'search'=>'Search',
+    'role'=>'Roles',
+    'not_active'=>'Not Active',
+    'clear_filters'=>'Reset'
 
 
 ];
