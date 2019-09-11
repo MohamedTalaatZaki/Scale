@@ -191,14 +191,6 @@ class PermissionsTableSeeder extends Seeder
             'ar_description' => NULL,
         ]);
 
-        Permission::create([
-            'sub_menu_id' => $subMenu->id,
-            'name' => 'item-group.destroy',
-            'en_display_name' => 'Edit Item Groups',
-            'ar_display_name' => 'تعديل مجموعات الاصناف',
-            'en_description' => NULL,
-            'ar_description' => NULL,
-        ]);
 
         $subMenu = SubMenu::where('code', 7)->first();
 
@@ -227,14 +219,6 @@ class PermissionsTableSeeder extends Seeder
             'ar_description' => NULL,
         ]);
 
-        Permission::create([
-            'sub_menu_id' => $subMenu->id,
-            'name' => 'item-types.destroy',
-            'en_display_name' => 'Edit Item Types',
-            'ar_display_name' => 'تعديل أنواع الاصناف',
-            'en_description' => NULL,
-            'ar_description' => NULL,
-        ]);
 
     }
 }
