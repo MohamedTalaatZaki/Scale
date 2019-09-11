@@ -20,7 +20,6 @@
                     <li class="breadcrumb-item">
                         <a href="{{ route('users.index') }}">@lang('global.users')</a>
                     </li>
-                    <li class="breadcrumb-item " aria-current="page">@lang('global.index')</li>
                 </ol>
             </nav>
             <div class="separator mb-5"></div>

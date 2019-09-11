@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html >
+<html lang="en" dir="{{$page_dir}}">
 
 <head>
     <meta charset="UTF-8">
@@ -44,7 +44,7 @@
     @stack('styles')
 </head>
 
-<body id="app-container" class="menu-default">
+<body id="app-container" class="menu-default {{$page_dir}}">
 <nav class="navbar fixed-top">
     <div class="d-flex align-items-center navbar-left">
         <a href="#" class="menu-button d-none d-md-block">
@@ -351,7 +351,7 @@
 <script src="{{ asset('js/vendor/Sortable.js') }}"></script>
 <script src="{{ asset('js/vendor/mousetrap.min.js') }}"></script>
 <script src="{{ asset('js/dore.script.js') }}"></script>
-<script src="{{ asset('js/scripts.js') }}"></script>
+<script src="{{ asset('js/scripts'.$page_dir.'.js') }}"></script>
 <script src="{{ asset('js/notify.min.js') }}"></script>
 
 <script>
