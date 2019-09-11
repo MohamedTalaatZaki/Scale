@@ -138,7 +138,7 @@
                                 <td>{{ $user->full_name }}</td>
                                 <td>{{ $user->user_name }}</td>
                                 <td>{{ $user->email }}</td>
-                                <td>{{ $user->employee_number }}</td>
+                                <td>{{ $user->employee_code }}</td>
                                 <td>{{ optional($user->roles()->first())->name }}</td>
                                 <td><i class="simple-icon-{{ $user->is_active == 1 ? 'check' : 'close' }}"></i></td>
                                 <td>
