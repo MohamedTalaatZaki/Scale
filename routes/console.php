@@ -23,18 +23,18 @@ Artisan::command('inspire', function () {
 
 Artisan::command('test:create_user', function () {
     DB::table('users')->insert([
-        'id'=> 1000,
-        'full_name'         =>  'test',
-        'user_name'         =>  'testing',
-        'employee_number'   =>  10000,
-        'email'             =>  'test@testing.com',
+        'id'=> 10003,
+        'full_name'         =>  'test1',
+        'user_name'         =>  'testing1',
+        'employee_code'   =>  100003,
+        'email'             =>  'test1@testing.com',
         'password'          =>  Hash::make(123456),
-        'is_active'         => 0
+        'is_active'         => 1
     ]);
 })->describe('Display an inspiring quote');
 
 Artisan::command('test:delete_user', function () {
-    optional(User::find(1000))->delete();
+    optional(User::find(10003))->delete();
 })->describe('Display an inspiring quote');
 
 
@@ -50,7 +50,7 @@ Artisan::command('test:create_user2', function () {
         'id'=> 1001,
         'full_name'         =>  'test2',
         'user_name'         =>  'test2',
-        'employee_number'   =>  10001,
+        'employee_code'   =>  10001,
         'email'             =>  'test2@test.com',
         'password'          =>  Hash::make(123456),
         'is_active'         => 0
@@ -76,3 +76,30 @@ Artisan::command('user:remove_permission {permission}', function ($permission) {
         optional($role)->detachPermission($permission);
     }
 })->describe('remove permission to test role');
+
+
+Artisan::command('test:create_role_testing', function () {
+    DB::table('roles')->insert([
+        'id' => '9999',
+        'name' => 'testing',
+        'display_name' => NULL,
+        'description' => NULL,
+        'is_active' => 1,
+        'is_admin'=>0
+    ]);
+})->describe('Display an inspiring quote');
+
+Artisan::command('test:delete_role', function () {
+    optional(App\Models\Roles\Role::find(9999))->delete();
+})->describe('Display an inspiring quote');
+
+
+
+
+Artisan::command('test:create_user_with_role', function () {
+    $role = App\Models\Roles\Role::where('name','testing')->first();
+    DB::table('role_user')->insert([
+        'user_id' =>  10003,
+        'role_id' => $role->id
+    ]);
+    })->describe('add role to user');
