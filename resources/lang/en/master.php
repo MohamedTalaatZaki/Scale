@@ -31,5 +31,6 @@ return [
         'sap_code_unique'=>'SAP code is duplicated',
         'item_type_id_required'=>'Item Type is required',
         'item_group_id_required'=>'Item group is required',
+        'role_name_alpha'=>'Role name can not contain any special characters',
     ]
 ];

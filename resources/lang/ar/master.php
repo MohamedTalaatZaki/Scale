@@ -31,5 +31,6 @@ return [
         'sap_code_unique'=>'كود الساب مكرر',
         'item_type_id_required'=>'يجب إختيار نوع الصنف',
         'item_group_id_required'=>'يجب إختيار مجموعة الصنف',
+        'role_name_alpha'=>'اسم المسئولية يجب ان لا يحتوى على احرف خاصة',
     ]
 ];
