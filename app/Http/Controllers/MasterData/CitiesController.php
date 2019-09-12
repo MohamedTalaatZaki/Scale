@@ -28,8 +28,10 @@ class CitiesController extends Controller
         $this->authorized('cities.create');
         $this->validate($request , [
             'gov_id'    =>  'required',
-            'en_name'   =>  'required|unique:cities,en_name',
-            'ar_name'   =>  'required|unique:cities,ar_name'
+            'en_name'   =>  'required',
+           // 'en_name'   =>  'required|unique:cities,en_name',
+            'ar_name'   =>  'required'
+           // 'ar_name'   =>  'required|unique:cities,ar_name'
         ],
         [
             'gov_id.required'=>trans('master.errors.gov_required'),
@@ -59,8 +61,10 @@ class CitiesController extends Controller
         $this->authorized('cities.edit');
         $this->validate($request , [
             'gov_id'    =>  'required',
-            'en_name'   =>  'required|unique:cities,en_name,'.$id,
-            'ar_name'   =>  'required|unique:cities,ar_name,'.$id
+            'en_name'   =>  'required',
+            //'en_name'   =>  'required|unique:cities,en_name,'.$id,
+            'ar_name'   =>  'required'
+            //'ar_name'   =>  'required|unique:cities,ar_name,'.$id
         ],
             [
                 'gov_id.required'=>trans('master.errors.gov_required'),
