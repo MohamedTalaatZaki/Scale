@@ -29,8 +29,10 @@ class CentersController extends Controller
         $this->authorized('centers.create');
         $this->validate($request , [
             'city_id'   =>  'required|exists:cities,id',
-            'en_name'   =>  'required|unique:centers,en_name',
-            'ar_name'   =>  'required|unique:centers,ar_name'
+           // 'en_name'   =>  'required|unique:centers,en_name',
+            'en_name'   =>  'required',
+           // 'ar_name'   =>  'required|unique:centers,ar_name'
+            'ar_name'   =>  'required'
         ],
             [
                 'city_id.required'=>trans('master.errors.city_required'),
@@ -60,8 +62,10 @@ class CentersController extends Controller
         $this->authorized('centers.edit');
         $this->validate($request , [
             'city_id'   =>  'required|exists:cities,id',
-            'en_name'   =>  'required|unique:centers,en_name,'.$id,
-            'ar_name'   =>  'required|unique:centers,ar_name,'.$id
+            //'en_name'   =>  'required|unique:centers,en_name,'.$id,
+            'en_name'   =>  'required',
+           // 'ar_name'   =>  'required|unique:centers,ar_name,'.$id
+            'ar_name'   =>  'required'
         ],
             [
                 'city_id.required'=>trans('master.errors.city_required'),
