@@ -64,7 +64,7 @@ class ItemTypesController extends Controller
                 'en_name.required' => trans('master.errors.en_name_required'),
                 'ar_name.required' => trans('master.errors.ar_name_required'),
                 'en_name.unique' => trans('master.errors.item_types_en_name_exist'),
-                'ar_name.unique' => trans('master.errors.item_types_name_exist'),
+                'ar_name.unique' => trans('master.errors.item_types_ar_name_exist'),
             ]);
         $item_types = ItemType::query()->findOrFail($id);
         $item_types->update([
