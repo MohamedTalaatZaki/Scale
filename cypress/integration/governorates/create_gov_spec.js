@@ -27,7 +27,7 @@ describe('Create Governorate', function () {
     cy.contains('Arabic Name is required').should('be.visible');
   })
 
-  it('checks unique email',function(){
+  it('checks unique fields',function(){
     cy.exec('php artisan governorate:create_faker');
     cy.get('.card-body input[name="en_name"]').type('Alexandria');
     cy.get('.card-body input[name="ar_name"]').type('الإسكندرية');

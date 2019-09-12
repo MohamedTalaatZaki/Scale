@@ -98,6 +98,13 @@ Artisan::command('governorate:create_faker', function () {
     $gov = factory(App\Models\Governorate::class)->create();
 })->describe('Generate fake single governorate');
 
+Artisan::command('governorate:demo_faker', function () {
+    $gov = factory(App\Models\Governorate::class,'demo_faker')->create();
+})->describe('Generate fake single governorate');
+
+Artisan::command('governorate:edit_faker', function () {
+    $gov = factory(App\Models\Governorate::class,'gov_edit')->create();
+})->describe('Generate fake governorate for edit');
 
 Artisan::command('user:setLocale {lang}',function($lang){
     App\User::where('user_name','test')->update([
