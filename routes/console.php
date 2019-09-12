@@ -165,3 +165,12 @@ Artisan::command('user:add_permission_to_new {permission}', function ($permissio
         optional($role)->attachPermission($permission);
     }
 })->describe('Add permission to new role');
+
+
+Artisan::command('user:revoke_permission_to_new {permission}', function ($permission) {
+    $permission = Permission::where('name',$permission)->first();
+    if(!is_null($permission)){
+        $role = \App\Models\Roles\Role::where('name','new')->first();
+        optional($role)->detachPermission($permission);
+    }
+})->describe('Revoke permission to new role');
