@@ -2,6 +2,7 @@ describe('create roles test', function () {
 
 
     beforeEach(function () {
+        cy.exec('php artisan user:setLocale en');
         cy.exec('php artisan user:add_permission roles.index');
         cy.exec('php artisan user:add_permission roles.create');
         cy.visit('http://127.0.0.1:8000');

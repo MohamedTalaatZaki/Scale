@@ -40,11 +40,14 @@
         .default-cursor {
             cursor: default;
         }
+        .rtl .custom-control-label::after, .rtl .custom-control-label::before{
+            right: -25px;
+        }
     </style>
     @stack('styles')
 </head>
 
-<body id="app-container" class="menu-default {{$page_dir}}">
+<body id="app-container" class="menu-default {{$page_dir}}  {{Route::currentRouteName() == 'home' ? 'menu-sub-hidden sub-hidden' : ''}}">
 <nav class="navbar fixed-top">
     <div class="d-flex align-items-center navbar-left">
         <a href="#" class="menu-button d-none d-md-block">
@@ -78,7 +81,7 @@
     </div>
 
 
-    <a class="navbar-logo" href="#">
+    <a class="navbar-logo" href="{{route('home')}}">
         <span class="logo d-none d-xs-block"></span>
         <span class="logo-mobile d-block d-xs-none"></span>
     </a>

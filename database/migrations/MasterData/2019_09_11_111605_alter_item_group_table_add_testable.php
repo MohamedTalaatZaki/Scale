@@ -14,7 +14,7 @@ class AlterItemGroupTableAddTestable extends Migration
     public function up()
     {
         Schema::table('item_group', function (Blueprint $table) {
-            $table->integer('testable')->default(0)->after('en_name');
+            $table->integer('testable')->after('en_name');
         });
     }
 

@@ -17,7 +17,7 @@ class CreateItemTypesTable extends Migration
             $table->bigIncrements('id');
             $table->string('ar_name');
             $table->string('en_name');
-            $table->integer('testable')->default(0);
+            $table->integer('testable');
             $table->timestamps();
         });
     }

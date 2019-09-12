@@ -26,7 +26,7 @@ class AlterItemTypesRemoveTestable extends Migration
     public function down()
     {
         Schema::table('item_types', function (Blueprint $table) {
-            $table->integer('testable')->default(0)->after('en_name');
+            $table->integer('testable')->after('en_name');
         });
     }
 }
