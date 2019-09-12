@@ -30,7 +30,11 @@ class RolesController extends Controller
         $this->validate($request  , [
             'name'      =>  'required|unique:roles,name',
            // 'permissions'   =>  'required|array'
-        ]);
+        ],
+            [
+                'name.required'=>trans('master.errors.role_name_required'),
+                'name.unique'=>trans('master.errors.role_name_duplicated'),
+            ]);
         $role   =   Role::query()->create([
             'name'     =>   $request->get('name'),
         ]);
@@ -52,6 +56,9 @@ class RolesController extends Controller
         $this->validate($request  , [
             'name'      =>  'required|unique:roles,name,'.$id,
            // 'permissions'   =>  'required|array'
+        ],[
+            'name.required'=>trans('master.errors.role_name_required'),
+            'name.unique'=>trans('master.errors.role_name_duplicated'),
         ]);
 
         $role   =   Role::query()->findOrFail($id);

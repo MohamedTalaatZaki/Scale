@@ -8,7 +8,7 @@
             <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
                 <ol class="breadcrumb pt-0">
                     <li class="breadcrumb-item">
-                        <a href="#" class="default-cursor">@lang('global.master_data')</a>
+                        <span class="default-cursor">@lang('global.master_data')</span>
                     </li>
                     <li class="breadcrumb-item">
                         <a href="{{ route('centers.index') }}">@lang('global.centers')</a>
@@ -37,9 +37,9 @@
                         <div class="form-row">
 
                             <div class="form-group col-md-12">
-                                <label>@lang('global.select_city')</label>
+                                <label>@lang('global.select_city')*</label>
                                 <select class="form-control select2-single" name="city_id" required>
-                                    <option label="&nbsp;" value="&nbsp;">&nbsp; @lang('global.select_city') *</option>
+                                    <option label="&nbsp;" value="">&nbsp; @lang('global.select_city') </option>
                                     @foreach($governorates as $gov)
                                         <optgroup label="{{ $gov->name }}">
                                             @foreach($gov->cities as $city)

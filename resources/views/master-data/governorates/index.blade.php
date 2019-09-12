@@ -18,7 +18,7 @@
                         <span class="default-cursor">@lang('global.master_data')</span>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="{{ route('governorates.index') }}">@lang('global.governorates')</a>
+                        <span>@lang('global.governorates')</span>
                     </li>
                 </ol>
             </nav>

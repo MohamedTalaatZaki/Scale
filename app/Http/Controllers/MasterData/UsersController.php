@@ -47,6 +47,14 @@ class UsersController extends Controller
             'role_id' => 'nullable|exists:roles,id',
             'lang' => 'in:ar,en',
             'theme' => 'in:light,dark',
+        ],[
+            'full_name.required'=>trans('master.errors.full_name_required'),
+            'user_name.required'=>trans('master.errors.user_name_required'),
+            'user_name.unique'=>trans('master.errors.user_name_unique'),
+            'user_name.min'=>trans('master.errors.user_name_min'),
+            'password.required'=>trans('master.errors.password_required'),
+            'password.confirmed'=>trans('master.errors.password_confirmed'),
+            'password.min'=>trans('master.errors.password_min'),
         ]);
         $user = User::query()->create($request->input());
 

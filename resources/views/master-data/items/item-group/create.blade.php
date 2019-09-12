@@ -8,7 +8,7 @@
             <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
                 <ol class="breadcrumb pt-0">
                     <li class="breadcrumb-item">
-                        <a href="#" class="default-cursor">@lang('global.master_data')</a>
+                        <span class="default-cursor">@lang('global.master_data')</span>
                     </li>
                     <li class="breadcrumb-item">
                         <a href="{{ route('item-group.index') }}">@lang('global.item_group')</a>
@@ -55,9 +55,9 @@
                             <div class="form-group col-md-12">
                                 <label for="testable">@lang('global.is_testable')</label>
                                 <select id="testable" class="form-control select2-single" name="testable">
-                                    <option label="&nbsp;" value="&nbsp;">&nbsp; @lang('global.is_testable')</option>
-                                    <option value="0" >@lang('global.not_testable')</option>
-                                    <option value="1" >@lang('global.yes_testable')</option>
+                                    <option label="&nbsp;" value="">&nbsp;</option>
+                                    <option value="0" {{old('testable') == '0' ? 'selected' : ''}}>@lang('global.not_testable')</option>
+                                    <option value="1" {{old('testable') == '1' ? 'selected' : ''}}>@lang('global.yes_testable')</option>
                                 </select>
                                 @if($errors->has('testable'))
                                     <div id="jQueryName-error" class="error" style="">{{ $errors->first('testable') }}</div>
