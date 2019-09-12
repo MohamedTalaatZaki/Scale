@@ -15,6 +15,9 @@ beforeEach(function () {
     cy.url().should('contain', '/master-data/users/create');
     cy.get('div.card-body > form').invoke('attr', 'noValidate','true');
 })
+before(function(){
+  cy.exec('php artisan user:setLocale en');
+});
 describe('Create user', function () {
   it('checks required fields', function () {
     cy.get('div.card-body > form').should('have.attr', 'noValidate','true');

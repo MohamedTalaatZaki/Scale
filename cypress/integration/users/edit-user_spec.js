@@ -1,6 +1,7 @@
 describe('Edit Users test', function () {
-
-
+    before(function(){
+      cy.exec('php artisan user:setLocale en');
+    });
     beforeEach(function () {
         cy.exec('php artisan user:add_permission users.index');
         cy.exec('php artisan user:add_permission users.edit');
@@ -16,13 +17,11 @@ describe('Edit Users test', function () {
         cy.exec('php artisan test:create_user');
         cy.exec('php artisan test:delete_user2');
     })
-
-
     it('check nullable values', function () {
         cy.contains('Master Data').click()
         cy.get('.sidebar-sub.sidebar-sub-users').click();
         cy.url().should('contain', '/master-data/users');
-        cy.get("a[href|='http://127.0.0.1:8000/master-data/users/1000/edit']").click();
+        cy.get("a[href='http://127.0.0.1:8000/master-data/users/1000/edit']").click();
         cy.get('input[name="employee_code"]').clear();
         cy.get('input[name="email"]').clear();
         cy.get('select[name=role_id]').select('Select Role');
@@ -34,7 +33,7 @@ describe('Edit Users test', function () {
         cy.contains('Master Data').click()
         cy.get('.sidebar-sub.sidebar-sub-users').click();
         cy.url().should('contain', '/master-data/users');
-        cy.get("a[href|='http://127.0.0.1:8000/master-data/users/1000/edit']").click();
+        cy.get("a[href='http://127.0.0.1:8000/master-data/users/1000/edit']").click();
         cy.get('.custom-switch-btn').should('have.css', 'border', '1px solid rgb(215, 215, 215)');
     })
 
@@ -42,7 +41,7 @@ describe('Edit Users test', function () {
         cy.contains('Master Data').click()
         cy.get('.sidebar-sub.sidebar-sub-users').click();
         cy.url().should('contain', '/master-data/users');
-        cy.get("a[href|='http://127.0.0.1:8000/master-data/users/1000/edit']").click();
+        cy.get("a[href='http://127.0.0.1:8000/master-data/users/1000/edit']").click();
         cy.get('.card-body input[name=password]').type('123456');
         cy.get('.card-body input[name=password_confirmation]').type('123459');
         cy.contains('Save').click();
@@ -52,7 +51,7 @@ describe('Edit Users test', function () {
         cy.contains('Master Data').click()
         cy.get('.sidebar-sub.sidebar-sub-users').click();
         cy.url().should('contain', '/master-data/users');
-        cy.get("a[href|='http://127.0.0.1:8000/master-data/users/1000/edit']").click();
+        cy.get("a[href='http://127.0.0.1:8000/master-data/users/1000/edit']").click();
         cy.get('.card-body input[name=password]').type('12345');
         cy.get('.card-body input[name=password_confirmation]').type('12345');
         cy.contains('Save').click();
@@ -62,7 +61,7 @@ describe('Edit Users test', function () {
         cy.contains('Master Data').click()
         cy.get('.sidebar-sub.sidebar-sub-users').click();
         cy.url().should('contain', '/master-data/users');
-        cy.get("a[href|='http://127.0.0.1:8000/master-data/users/1000/edit']").click();
+        cy.get("a[href='http://127.0.0.1:8000/master-data/users/1000/edit']").click();
         cy.get('input[name="full_name"]').should('have.attr', 'required');
         cy.get('input[name="user_name"]').should('have.attr', 'required');
     })
@@ -70,14 +69,14 @@ describe('Edit Users test', function () {
         cy.contains('Master Data').click()
         cy.get('.sidebar-sub.sidebar-sub-users').click();
         cy.url().should('contain', '/master-data/users');
-        cy.get("a[href|='http://127.0.0.1:8000/master-data/users/1000/edit']").click();
+        cy.get("a[href='http://127.0.0.1:8000/master-data/users/1000/edit']").click();
         cy.get('select[name="lang"]').should('have.value', 'ar');
     })
     it('check user name length', function () {
         cy.contains('Master Data').click()
         cy.get('.sidebar-sub.sidebar-sub-users').click();
         cy.url().should('contain', '/master-data/users');
-        cy.get("a[href|='http://127.0.0.1:8000/master-data/users/1000/edit']").click();
+        cy.get("a[href='http://127.0.0.1:8000/master-data/users/1000/edit']").click();
         cy.get('.card-body input[name=user_name]').clear().type('t');
         cy.contains('Save').click();
         console.log(cy.url())
@@ -88,7 +87,7 @@ describe('Edit Users test', function () {
         cy.contains('Master Data').click();
         cy.get('.sidebar-sub.sidebar-sub-users').click();
         cy.url().should('contain', '/master-data/users');
-        cy.get("a[href|='http://127.0.0.1:8000/master-data/users/1001/edit']").click();
+        cy.get("a[href='http://127.0.0.1:8000/master-data/users/1001/edit']").click();
         cy.get('.card-body input[name=user_name]').clear().type('testing');
         cy.contains('Save').click();
         cy.contains('The user name has already been taken.').should('be.visible');
@@ -102,7 +101,7 @@ describe('Edit Users test', function () {
       cy.contains('Master Data').click()
       cy.get('.sidebar-sub.sidebar-sub-users').click();
       cy.url().should('contain', '/master-data/users');
-      cy.get("a[href|='http://127.0.0.1:8000/master-data/users/1000/edit']").click();
+      cy.get("a[href='http://127.0.0.1:8000/master-data/users/1000/edit']").click();
       cy.get('.card-body input[name="full_name"]').clear().type('Tonaguy');
       cy.get('.card-body input[name="user_name"]').clear().type('tonaguy');
       cy.get('.card-body input[name="password"]').clear().type('123456');
@@ -125,7 +124,7 @@ describe('Edit Users test', function () {
       cy.contains('Master Data').click()
       cy.get('.sidebar-sub.sidebar-sub-users').click();
       cy.url().should('contain', '/master-data/users');
-      cy.get("a[href|='http://127.0.0.1:8000/master-data/users/1000/edit']").click();
+      cy.get("a[href='http://127.0.0.1:8000/master-data/users/1000/edit']").click();
       cy.get('.card-body input[name="full_name"]').clear().type('Tonaguy');
       cy.get('.card-body input[name="user_name"]').clear().type('tonagyy');
       cy.get('.card-body input[name="password"]').clear().type('123456');
@@ -154,7 +153,7 @@ describe('Edit Users test', function () {
     after(function () {
         cy.exec('php artisan user:remove_permission users.edit');
         cy.visit('http://127.0.0.1:8000/master-data/users');
-        cy.get("a[href|='http://127.0.0.1:8000/master-data/users/1001/edit']").should('not.exist');
+        cy.get("a[href='http://127.0.0.1:8000/master-data/users/1001/edit']").should('not.exist');
         cy.visit('http://127.0.0.1:8000/master-data/users/1001/edit',{ failOnStatusCode: false});
         cy.get('.code').should('contain','403');
         cy.exec('php artisan user:remove_permission users.index');
