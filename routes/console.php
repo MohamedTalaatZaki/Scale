@@ -93,6 +93,12 @@ Artisan::command('role:faker', function () {
     $roles = factory(App\Models\Roles\Role::class,'fake_roles',300)->create();
 })->describe('Generate fake roles');
 
+
+Artisan::command('governorate:create_faker', function () {
+    $gov = factory(App\Models\Governorate::class)->create();
+})->describe('Generate fake single governorate');
+
+
 Artisan::command('user:setLocale {lang}',function($lang){
     App\User::where('user_name','test')->update([
         'lang' => $lang,

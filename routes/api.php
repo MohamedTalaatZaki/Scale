@@ -19,3 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('user/{username}',function($username){
   return App\User::where('user_name',$username)->with('roles')->first();
 });
+
+Route::get('governorate/{en_name}',function($en_name){
+  return App\Models\Governorate::where('en_name',$en_name)->first();
+});
