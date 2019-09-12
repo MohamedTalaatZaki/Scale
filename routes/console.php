@@ -89,6 +89,10 @@ Artisan::command('user:faker_admin', function () {
     $users = factory(App\User::class, 'test',100)->create();
 })->describe('Generate fake admin users');
 
+Artisan::command('role:faker', function () {
+    $roles = factory(App\Models\Roles\Role::class,'fake_roles',300)->create();
+})->describe('Generate fake roles');
+
 Artisan::command('user:setLocale {lang}',function($lang){
     App\User::where('user_name','test')->update([
         'lang' => $lang,
