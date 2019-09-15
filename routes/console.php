@@ -130,9 +130,33 @@ Artisan::command('item_type:faker', function () {
     $item_types = factory(App\Models\Items\ItemType::class,'fake_item_types',300)->create();
 })->describe('Generate fake Item Types');
 
+Artisan::command('item:faker', function () {
+    $cities = factory(App\Models\Items\Item::class,'fake_items',300)->create();
+})->describe('Generate fake items');
+
+Artisan::command('supplier:edit_faker', function () {
+    $item_type = factory(App\Models\Supplier\Supplier::class,'supplier_edit')->create();
+})->describe('Generate fake Supplier for edit');
+
+Artisan::command('supplier:fake_many', function () {
+    $suppliers = factory(App\Models\Supplier\Supplier::class,'fake_suppliers',300)->create();
+})->describe('Generate fake suppliers');
+
 Artisan::command('item_type:edit_faker', function () {
     $item_type = factory(App\Models\Items\ItemType::class,'item_type_edit')->create();
 })->describe('Generate fake Item Type for edit');
+
+Artisan::command('item_group:demo_faker', function () {
+    $item_groups = factory(App\Models\Items\ItemGroup::class,'demo_faker')->create();
+})->describe('Generate fake single item group');
+
+Artisan::command('item:demo_faker', function () {
+    $items = factory(App\Models\Items\Item::class,'demo_faker')->create();
+})->describe('Generate fake single item');
+
+Artisan::command('item:edit_faker', function () {
+    $item = factory(App\Models\Items\Item::class,'item_edit')->create();
+})->describe('Generate fake item for edit');
 
 Artisan::command('user:setLocale {lang}',function($lang){
     App\User::where('user_name','test')->update([
