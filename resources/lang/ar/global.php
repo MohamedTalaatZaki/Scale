@@ -48,8 +48,8 @@ return [
     'create_city'           =>  'إضافة مدينة',
     'select_gov'            =>  'إختار المحافظة',
     'edit_city'             =>  'تعديل المحافظة',
-    'city_created'          =>  'تم إضافة المحافظة',
-    'city_updated'          =>  'تم تعديل المحافظة',
+    'city_created'          =>  'تم إضافة المدينة',
+    'city_updated'          =>  'تم تعديل المدينة',
     'create_center'         =>  'إضافة مركز',
     'edit_center'           =>  'تعديل مركز',
     'select_city'           =>  'إضافة مدينة',
@@ -97,5 +97,4 @@ return [
     'item_created_success'=>'تم إضافة الصنف بنجاح',
     'item_updated_success'=>'تم تعديل الصنف بنجاح',
     'edit_item'=>'تعديل الصنف'
-
 ];
