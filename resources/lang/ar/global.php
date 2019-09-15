@@ -25,7 +25,7 @@ return [
     'cancel'            =>  'إلغاء',
     'select_lang'       =>  'اللغة الافتراضية',
     'arabic'            =>  'العربية',
-    'english'           =>  'الإلنجليزية',
+    'english'           =>  'الإنجليزية',
     'select_theme'      =>  'إختر النمط',
     'light'             =>  'الوضع النهارى',
     'dark'              =>  'وضع الظلام',
@@ -106,6 +106,6 @@ return [
     'deselect_all'    =>  'الغاء اختيار الكل',
     'no_data'=>'لا توجد بيانات',
     'create_suppler'    =>  'انشاء مورد',
-    'Edit_suppler'    =>  'تعديل مورد',
+    'edit_supplier'    =>  'تعديل مورد',
 
 ];
