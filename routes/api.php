@@ -27,3 +27,7 @@ Route::get('governorate/{en_name}',function($en_name){
 Route::get('city/{en_name}',function($en_name){
   return App\Models\City::where('en_name',$en_name)->first();
 });
+
+Route::get('item_type/{en_name}',function($en_name){
+  return App\Models\Items\ItemType::where('en_name',$en_name)->first();
+});
