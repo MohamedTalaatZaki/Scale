@@ -146,6 +146,10 @@ Artisan::command('item_type:edit_faker', function () {
     $item_type = factory(App\Models\Items\ItemType::class,'item_type_edit')->create();
 })->describe('Generate fake Item Type for edit');
 
+Artisan::command('item_group:fake_item_groups', function () {
+    $item_groups = factory(App\Models\Items\ItemGroup::class,'fake_item_groups',300)->create();
+})->describe('Generate fake item groups');
+
 Artisan::command('item_group:demo_faker', function () {
     $item_groups = factory(App\Models\Items\ItemGroup::class,'demo_faker')->create();
 })->describe('Generate fake single item group');
