@@ -56,6 +56,10 @@
                                     <i class="simple-icon-{{ $supplier->is_active == 1 ? 'check' : 'close' }}"></i>
                                 </td>
                                 <td>
+                                    @permission('items.index')
+                                    <a href="{{ route('suppliers.items' , ['id' => $supplier->id]) }}"
+                                       class="btn btn-info btn-sm mb-1">@lang('global.supplier_items')</a>
+                                    @endpermission
                                     @permission('suppliers.edit')
                                     <a href="{{ route('suppliers.edit' , ['id' => $supplier->id]) }}"
                                        class="btn btn-primary btn-sm mb-1">@lang('global.edit')</a>

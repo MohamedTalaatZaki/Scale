@@ -107,5 +107,6 @@ return [
     'no_data'=>'لا توجد بيانات',
     'create_suppler'    =>  'انشاء مورد',
     'edit_supplier'    =>  'تعديل مورد',
+    'supplier_items'    =>  'اصناف المورد',
 
 ];

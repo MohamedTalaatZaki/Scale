@@ -63,7 +63,7 @@
                                 <label class="col-12 col-form-label">@lang('global.is_active')</label>
                                 <div class="col-12">
                                     <div class="custom-switch custom-switch-primary-inverse mb-2" style="padding-left: 0">
-                                        <input class="custom-switch-input" id="is_active" type="checkbox" value="1" name="is_active" {{ old('is_active') == '1' ? 'checked' : '' }}>
+                                        <input class="custom-switch-input" id="is_active" type="checkbox" value="1" name="is_active" {{ old('is_active') == '1' || is_null(old('is_active')) ? 'checked' : '' }}>
                                         <label class="custom-switch-btn" for="is_active"></label>
                                     </div>
                                     @if($errors->has('is_active'))
