@@ -96,5 +96,14 @@ return [
     'sap_code'=>'كود الساب',
     'item_created_success'=>'تم إضافة الصنف بنجاح',
     'item_updated_success'=>'تم تعديل الصنف بنجاح',
-    'edit_item'=>'تعديل الصنف'
+    'edit_item'=>'تعديل الصنف',
+    'items_search'  =>  'البحث عن صنف',
+    'suppliers' =>  'الموردين',
+    'supplier_created_success'  =>  'تم انشاء المورد بنجاح',
+    'supplier_updated_success'  =>  'تم تعديل المورد بنجاح',
+    'items_count'   =>  'عدد الاصناف',
+    'select_all'    =>  'اختار الكل',
+    'deselect_all'    =>  'الغاء اختيار الكل',
+    'no_data'=>'لا توجد بيانات'
+
 ];

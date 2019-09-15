@@ -43,7 +43,7 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputPassword1">@lang('global.ar_name') *</label>
-                                <input type="text" class="form-control" id="inputPassword1" name="ar_name" value="{{ old('ar_name' , $item_group->ar_name) }}"
+                                <input type="text" class="form-control onlyAr" id="inputPassword1" name="ar_name" value="{{ old('ar_name' , $item_group->ar_name) }}"
                                        placeholder="@lang('global.ar_name')" autocomplete="off" required>
                                 @if($errors->has('ar_name'))
                                     <div id="jQueryName-error" class="error" style="">{{ $errors->first('ar_name') }}</div>

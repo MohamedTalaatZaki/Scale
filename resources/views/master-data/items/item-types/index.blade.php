@@ -41,7 +41,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($item_types as $item_type)
+                @forelse($item_types as $item_type)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $item_type->en_name }}</td>
@@ -52,7 +52,11 @@
                             @endpermission
                         </td>
                     </tr>
-                @endforeach
+                @empty
+                    <tr>
+                        <td colspan="4" class="text-center text-warning font-weight-bold">@lang('global.no_data')</td>
+                    </tr>
+                @endforelse
                 </tbody>
             </table>
         </div>

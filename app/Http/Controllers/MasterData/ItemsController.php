@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\MasterData;
 
+use App\Filters\ItemsIndexFilter;
 use App\Models\items\Item;
 use App\Models\Items\ItemGroup;
 use App\Models\Items\ItemType;
@@ -13,25 +14,25 @@ class ItemsController extends Controller
 {
     use AuthorizeTrait;
 
-    public function index()
-    {
+    public function index() {
         $this->authorized('items.index');
-        return view('master-data.items.items.index', [
-            'items' => Item::query()->paginate(25),
+        $items  =   Item::query()
+            ->filter(new ItemsIndexFilter(request()))
+            ->paginate(25);
+        return view('master-data.items.items.index' , [
+            'items' =>  $items,
         ]);
     }
 
-    public function create()
-    {
+    public function create() {
         $this->authorized('items.create');
-        return view('master-data.items.items.create', [
-            'types' => ItemType::all(),
-            'groups' => ItemGroup::all(),
+        return view('master-data.items.items.create' , [
+            'types'     =>  ItemType::all(),
+            'groups'    =>  ItemGroup::all(),
         ]);
     }
 
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
         $this->authorized('items.create');
         $this->validate($request, [
             'ar_name' => 'required|unique:items,ar_name',
