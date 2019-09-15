@@ -28,6 +28,7 @@
                 <div class="card-body">
                     <div>
                         <h5 class="mb-4">@lang('global.edit_supplier')</h5>
+
                     </div>
 
                     <form action="{{ route('suppliers.update' , ['id' => $supplier->id]) }}" method="post">

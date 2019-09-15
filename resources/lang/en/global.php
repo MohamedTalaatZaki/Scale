@@ -105,6 +105,8 @@ return [
     'select_all'    =>  'Select All',
     'deselect_all'    =>  'Deselect All',
     'no_data'=>'No data found.',
-    'edit_supplier'=>'Edit Supplier'
+
+    'create_suppler'    =>  'Create Suppler',
+    'edit_supplier'    =>  'Edit supplier',
 
 ];

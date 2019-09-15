@@ -105,6 +105,7 @@ return [
     'select_all'    =>  'اختار الكل',
     'deselect_all'    =>  'الغاء اختيار الكل',
     'no_data'=>'لا توجد بيانات',
-    'edit_supplier'=>'تعديل المورد'
+    'create_suppler'    =>  'انشاء مورد',
+    'edit_supplier'    =>  'تعديل مورد',
 
 ];
