@@ -40,7 +40,7 @@
                             <div class="col-md-4">
                                 <div class="form-group ">
                                     <label class="col-md-12 control-label">@lang('global.ar_name')</label>
-                                    <input type="text" class="form-control" placeholder="{{trans('global.ar_name')}}"
+                                    <input type="text" class="form-control onlyAr" placeholder="{{trans('global.ar_name')}}"
                                            name="ar_name" value="{{request()->input('ar_name')}}"
                                            autocomplete="off">
                                 </div>
@@ -48,7 +48,7 @@
                             <div class="col-md-4">
                                 <div class="form-group ">
                                     <label class="col-md-12 control-label">@lang('global.en_name')</label>
-                                    <input type="text" class="form-control" placeholder="{{trans('global.en_name')}}"
+                                    <input type="text" class="form-control onlyEn" placeholder="{{trans('global.en_name')}}"
                                            name="en_name" value="{{request()->input('en_name')}}"
                                            autocomplete="off">
                                 </div>
@@ -101,7 +101,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($items as $item)
+                        @forelse($items as $item)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->en_name }}</td>
@@ -119,7 +119,11 @@
                                     @endpermission
                                 </td>
                             </tr>
-                        @endforeach
+                            @empty
+                                <tr>
+                                    <td colspan="8" class="text-center text-warning font-weight-bold">@lang('global.no_data')</td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
