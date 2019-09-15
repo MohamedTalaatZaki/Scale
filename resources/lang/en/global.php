@@ -107,5 +107,6 @@ return [
     'no_data'=>'No data found.',
     'create_suppler'    =>  'Create Suppler',
     'edit_suppler'    =>  'Edit Suppler',
+    'supplier_items'    =>  'Supplier Items',
 
 ];
