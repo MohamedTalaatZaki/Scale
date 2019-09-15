@@ -211,3 +211,17 @@ Artisan::command('user:revoke_permission_to_new {permission}', function ($permis
         optional($role)->detachPermission($permission);
     }
 })->describe('Revoke permission to new role');
+
+
+Artisan::command('test:create_item_group', function () {
+    DB::table('item_group')->insert([
+        'id'=> 123456,
+        'ar_name'         =>  'رتقال',
+        'en_name'         =>  'orange',
+        'testable'   =>  0,
+    ]);
+})->describe('create item type');
+
+Artisan::command('test:delete_item_group', function () {
+    optional(App\Models\items\itemGroup::find(123456))->delete();
+})->describe('delete item group');
