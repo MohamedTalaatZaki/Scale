@@ -42,7 +42,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($cities as $city)
+                        @forelse($cities as $city)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $city->governorate->name }}</td>
@@ -56,7 +56,11 @@
                                     @endpermission
                                 </td>
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td colspan="5" class="text-center text-warning font-weight-bold">@lang('global.no_data')</td>
+                            </tr>
+                        @endforelse
                         </tbody>
                     </table>
                 </div>

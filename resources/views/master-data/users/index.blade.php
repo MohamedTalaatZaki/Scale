@@ -128,7 +128,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($users as $user)
+                        @forelse()$users as $user)
                             <tr>
                                 <td>
                                     <img src="{{ $user->avatar_url }}" class="rounded"
@@ -153,7 +153,11 @@
                                     @endpermission
                                 </td>
                             </tr>
-                        @endforeach
+                            @empty
+                                <tr>
+                                    <td colspan="8" class="text-center text-warning font-weight-bold">@lang('global.no_data')</td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

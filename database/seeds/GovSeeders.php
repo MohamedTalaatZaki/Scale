@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Center;
 use App\Models\City;
 use App\Models\Governorate;
 use Illuminate\Database\Seeder;
@@ -16,6 +17,7 @@ class GovSeeders extends Seeder
     {
         Governorate::truncate();
         City::truncate();
+        Center::truncate();
 
         $gov = Governorate::create([
             'en_name'=>'Alexandria',

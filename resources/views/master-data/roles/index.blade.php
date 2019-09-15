@@ -42,7 +42,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($roles as $role)
+                        @forelse($roles as $role)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $role->name }}</td>
@@ -58,7 +58,11 @@
 
                                 </td>
                             </tr>
-                        @endforeach
+                            @empty
+                                <tr>
+                                    <td colspan="5" class="text-center text-warning font-weight-bold">@lang('global.no_data')</td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

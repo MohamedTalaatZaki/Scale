@@ -41,7 +41,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($governorates as $governorate)
+                        @forelse ($governorates as $governorate)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $governorate->en_name }}</td>
@@ -53,7 +53,12 @@
                                     @endpermission
                                 </td>
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td colspan="4"
+                                    class="text-center text-warning font-weight-bold">@lang('global.no_data')</td>
+                            </tr>
+                        @endforelse
                         </tbody>
                     </table>
                 </div>
