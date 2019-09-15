@@ -128,7 +128,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @forelse()$users as $user)
+                        @forelse($users as $user)
                             <tr>
                                 <td>
                                     <img src="{{ $user->avatar_url }}" class="rounded"

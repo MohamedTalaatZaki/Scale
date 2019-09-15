@@ -33,6 +33,10 @@ class SuppliersController extends Controller
             'en_name'   =>  'required',
             'sap_code'  =>  'required|unique:suppliers,sap_code',
             'items'     =>  'nullable|array',
+        ],[
+            'en_name.required'=>trans('master.errors.en_name_required'),
+            'ar_name.required'=>trans('master.errors.ar_name_required'),
+            'sap_code' => 'required|unique:items,sap_code',
         ]);
 
         $request->offsetSet('is_active' , $request->get('is_active' , 0));
@@ -55,7 +59,12 @@ class SuppliersController extends Controller
             'en_name'   =>  'required',
             'sap_code'  =>  'required|unique:suppliers,sap_code,'.$id,
             'items'     =>  'nullable|array',
-        ]);
+        ],
+            [
+                'en_name.required'=>trans('master.errors.en_name_required'),
+                'ar_name.required'=>trans('master.errors.ar_name_required'),
+                'sap_code' => 'required|unique:items,sap_code',
+            ]);
         $request->offsetSet('is_active' , $request->get('is_active' , 0));
         $supplier   =   Supplier::query()->findOrFail($id);
         $supplier->update($request->except('items'));

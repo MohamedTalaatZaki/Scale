@@ -22,7 +22,7 @@ class MainMenusTableSeeder extends Seeder
 
         $main = MainMenu::create([
             'en_name' => 'Dashboard',
-            'ar_name' => 'لوحة التحكم',
+            'ar_name' => 'اللوحة الرئيسية',
             'class' => 'sidebar sidebar-dashboard',
             'href' => 'home',
             'sub_class' => 'iconsminds-shop-4',
@@ -30,14 +30,14 @@ class MainMenusTableSeeder extends Seeder
         ]);
         $group = $main->menuGroups()->create([
             'en_name' => 'Dashboard',
-            'ar_name' => 'لوحة التحكم',
+            'ar_name' => 'اللوحة الرئيسية',
             'aria_controls' => 'collapseAdministration',
             'order' => 1,
         ]);
         $group->subMenus()->createMany([
             [
                 'en_name' => 'Dashboard',
-                'ar_name' => 'لوحة التحكم',
+                'ar_name' => 'اللوحة الرئيسية',
                 'route' => 'home',
                 'a_class' => 'sidebar-sub sidebar-sub-roles',
                 'i_class' => 'simple-icon-user-following',

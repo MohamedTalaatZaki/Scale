@@ -76,10 +76,10 @@
         </a>
 
         <div class="search" data-search-path="Pages.Search.html?q=">
-            <input placeholder="Search...">
-            <span class="search-icon">
-                    <i class="simple-icon-magnifier"></i>
-                </span>
+            {{--<input placeholder="Search...">--}}
+            {{--<span class="search-icon">--}}
+                    {{--<i class="simple-icon-magnifier"></i>--}}
+                {{--</span>--}}
         </div>
 
     </div>
@@ -95,7 +95,7 @@
             <div class="d-none d-md-inline-block align-text-bottom mr-3">
                 <div class="custom-switch custom-switch-primary-inverse custom-switch-small pl-1"
                      data-toggle="tooltip" data-placement="left"
-                     title="{{ Auth::user()->theme == 'light' ? 'Dark Mode' : 'Light Mode' }}">
+                     title="{{ Auth::user()->theme == 'light' ? trans('global.dark') : trans('global.light') }}">
                     <input class="custom-switch-input" id="switchDark"
                            type="checkbox" {{ Auth::user()->theme == 'light' ? "" : "checked" }}>
                     <label class="custom-switch-btn" for="switchDark"></label>
@@ -372,7 +372,11 @@
 
         let notify = parseInt('{{ Session::has('notify') }}');
         let openAccountInfo = parseInt('{{ Session::has('openAccountInfo') }}');
-
+        var isHome = !!'{{Route::currentRouteName() == 'home'}}';
+        if(isHome){
+            console.log(isHome);
+            localStorage.setItem('sidebar','sidebar-dashboard');
+        }
         $('.' + localStorage.getItem('sidebar')).closest('li').addClass('active');
 
         if (localStorage.getItem('hasSub') == '1') {
@@ -439,6 +443,7 @@
             e.preventDefault();
             return false;
         });
+
     });
 </script>
 @stack('scripts')
