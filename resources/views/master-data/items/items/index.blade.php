@@ -101,7 +101,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($items as $item)
+                        @forelse($items as $item)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->en_name }}</td>
@@ -119,7 +119,11 @@
                                     @endpermission
                                 </td>
                             </tr>
-                        @endforeach
+                            @empty
+                                <tr>
+                                    <td colspan="8" class="text-center text-warning font-weight-bold">@lang('global.no_data')</td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>

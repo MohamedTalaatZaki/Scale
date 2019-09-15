@@ -27,3 +27,7 @@ Route::get('governorate/{en_name}',function($en_name){
 Route::get('city/{en_name}',function($en_name){
   return App\Models\City::where('en_name',$en_name)->first();
 });
+
+Route::get('center/{en_name}',function($en_name){
+  return App\Models\Center::where('en_name',$en_name)->with('city')->first();
+});

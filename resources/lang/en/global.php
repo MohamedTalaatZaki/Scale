@@ -104,5 +104,6 @@ return [
     'items_count'   =>  'Items Count',
     'select_all'    =>  'Select All',
     'deselect_all'    =>  'Deselect All',
+    'no_data'=>'No data found.'
 
 ];
