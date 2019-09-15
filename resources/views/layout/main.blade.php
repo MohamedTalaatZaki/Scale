@@ -38,17 +38,20 @@
         .form-control:disabled {
             background-color: transparent;
         }
+
         .default-cursor {
             cursor: default;
         }
-        .rtl .custom-control-label::after, .rtl .custom-control-label::before{
+
+        .rtl .custom-control-label::after, .rtl .custom-control-label::before {
             right: -25px;
         }
     </style>
     @stack('styles')
 </head>
 
-<body id="app-container" class="menu-default {{$page_dir}}  {{Route::currentRouteName() == 'home' ? 'menu-sub-hidden sub-hidden' : ''}}">
+<body id="app-container"
+      class="menu-default {{$page_dir}}  {{Route::currentRouteName() == 'home' ? 'menu-sub-hidden sub-hidden' : ''}}">
 <nav class="navbar fixed-top">
     <div class="d-flex align-items-center navbar-left">
         <a href="#" class="menu-button d-none d-md-block">
@@ -105,8 +108,10 @@
                     <i class="simple-icon-bubbles"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right mt-3">
-                    <a class="dropdown-item" href="{{ route('change-lang' , ['lang' => 'ar']) }}">@lang('global.arabic')</a>
-                    <a class="dropdown-item" href="{{ route('change-lang' , ['lang' => 'en']) }}">@lang('global.english')</a>
+                    <a class="dropdown-item"
+                       href="{{ route('change-lang' , ['lang' => 'ar']) }}">@lang('global.arabic')</a>
+                    <a class="dropdown-item"
+                       href="{{ route('change-lang' , ['lang' => 'en']) }}">@lang('global.english')</a>
                 </div>
             </div>
 
@@ -302,10 +307,12 @@
                         <div class="form-group col-md-6">
                             <label for="inputState1">@lang('global.select_theme')</label>
                             <select id="inputState1" class="form-control" name="theme">
-                                <option value="light" {{ old('theme' , Auth::user()->theme) == 'light' ? 'selected' : '' }}>
+                                <option
+                                    value="light" {{ old('theme' , Auth::user()->theme) == 'light' ? 'selected' : '' }}>
                                     @lang('global.light')
                                 </option>
-                                <option value="dark" {{ old('theme' , Auth::user()->theme) == 'dark' ? 'selected' : '' }}>
+                                <option
+                                    value="dark" {{ old('theme' , Auth::user()->theme) == 'dark' ? 'selected' : '' }}>
                                     @lang('global.dark')
                                 </option>
                             </select>
@@ -372,12 +379,16 @@
             $('.' + localStorage.getItem('sidebar-sub')).closest('li').addClass('active');
         }
 
-        if(openAccountInfo) {
+        if (openAccountInfo) {
             $('#account-info').modal('show');
         }
 
-        if(notify) {
-            $.notify('{{ Session::get('notify') }}' , {position: "right bottom" , className:'success' , autoHideDelay: 9000});
+        if (notify) {
+            $.notify('{{ Session::get('notify') }}', {
+                position: "right bottom",
+                className: 'success',
+                autoHideDelay: 9000
+            });
         }
         $('.sidebar,.sidebar-sub').on('click', function (event) {
             let target, classes;
@@ -406,6 +417,28 @@
             });
         });
 
+
+        $('.onlyEn').keypress(function (e) {
+            var regex = new RegExp("^[a-zA-Z0-9 ]+$");
+            var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+            if (regex.test(str)) {
+                return true;
+            }
+
+            e.preventDefault();
+            return false;
+        });
+
+        $('.onlyAr').keypress(function (e) {
+            var regex = /^([\u0600-\u06ff]|[\u0750-\u077f]|[\ufb50-\ufbc1]|[\ufbd3-\ufd3f]|[\ufd50-\ufd8f]|[\ufd92-\ufdc7]|[\ufe70-\ufefc]|[\ufdf0-\ufdfd]|[ ]|[0-9])*$/g;
+            var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+            if (regex.test(str)) {
+                return true;
+            }
+
+            e.preventDefault();
+            return false;
+        });
     });
 </script>
 @stack('scripts')
