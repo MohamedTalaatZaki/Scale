@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\items;
+namespace App\Models\Items;
 
 use App\Models\Supplier\Supplier;
 use App\Traits\HasFilter;
