@@ -104,6 +104,8 @@ return [
     'items_count'   =>  'Items Count',
     'select_all'    =>  'Select All',
     'deselect_all'    =>  'Deselect All',
-    'no_data'=>'No data found.'
+    'no_data'=>'No data found.',
+    'create_suppler'    =>  'Create Suppler',
+    'edit_suppler'    =>  'Edit Suppler',
 
 ];

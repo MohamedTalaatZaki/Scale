@@ -126,6 +126,14 @@ Artisan::command('governorate:faker', function () {
     $governorates = factory(App\Models\Governorate::class,'fake_gov',300)->create();
 })->describe('Generate fake governorates');
 
+Artisan::command('item_type:faker', function () {
+    $item_types = factory(App\Models\Items\ItemType::class,'fake_item_types',300)->create();
+})->describe('Generate fake Item Types');
+
+Artisan::command('item_type:edit_faker', function () {
+    $item_type = factory(App\Models\Items\ItemType::class,'item_type_edit')->create();
+})->describe('Generate fake Item Type for edit');
+
 Artisan::command('user:setLocale {lang}',function($lang){
     App\User::where('user_name','test')->update([
         'lang' => $lang,

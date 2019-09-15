@@ -104,6 +104,8 @@ return [
     'items_count'   =>  'عدد الاصناف',
     'select_all'    =>  'اختار الكل',
     'deselect_all'    =>  'الغاء اختيار الكل',
-    'no_data'=>'لا توجد بيانات'
+    'no_data'=>'لا توجد بيانات',
+    'create_suppler'    =>  'انشاء مورد',
+    'Edit_suppler'    =>  'تعديل مورد',
 
 ];

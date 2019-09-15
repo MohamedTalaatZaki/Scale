@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\items;
+namespace App\Models\Items;
 
 use App\Models\Supplier\Supplier;
 use App\Traits\HasFilter;
@@ -15,7 +15,7 @@ class Item extends Model
 
     public function group()
     {
-        return $this->belongsTo(ItemGroup::class , 'item_type_id' , 'id');
+        return $this->belongsTo(ItemGroup::class , 'item_group_id' , 'id');
     }
 
     public function type()
