@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\MasterData;
 
+use App\Filters\ItemsIndexFilter;
 use App\Models\items\Item;
 use App\Models\Items\ItemGroup;
 use App\Models\Items\ItemType;
@@ -15,8 +16,11 @@ class ItemsController extends Controller
 
     public function index() {
         $this->authorized('items.index');
+        $items  =   Item::query()
+            ->filter(new ItemsIndexFilter(request()))
+            ->paginate(25);
         return view('master-data.items.items.index' , [
-            'items' =>  Item::query()->paginate(25),
+            'items' =>  $items,
         ]);
     }
 
