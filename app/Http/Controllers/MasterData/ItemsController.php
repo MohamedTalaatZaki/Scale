@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\MasterData;
 
 use App\Filters\ItemsIndexFilter;
-use App\Models\items\Item;
+use App\Models\Items\Item;
 use App\Models\Items\ItemGroup;
 use App\Models\Items\ItemType;
 use App\Traits\AuthorizeTrait;
