@@ -3,10 +3,12 @@
 namespace App\Models\items;
 
 use App\Models\Supplier\Supplier;
+use App\Traits\HasFilter;
 use Illuminate\Database\Eloquent\Model;
 
 class Item extends Model
 {
+    use HasFilter;
     protected $table    =   'items';
     protected $guarded  =   ['id'];
     protected $appends  =   ['name'];
