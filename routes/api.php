@@ -30,6 +30,7 @@ Route::get('city/{en_name}',function($en_name){
 
 Route::get('center/{en_name}',function($en_name){
   return App\Models\Center::where('en_name',$en_name)->with('city')->first();
+});
 Route::get('item_type/{en_name}',function($en_name){
   return App\Models\Items\ItemType::where('en_name',$en_name)->first();
 });
