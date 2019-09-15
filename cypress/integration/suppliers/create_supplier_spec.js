@@ -25,12 +25,12 @@ describe('Create Supplier', function () {
     cy.get('.float-right > .btn-primary').click();
     cy.wait(2000);
     cy.url().should('contain','/master-data/suppliers/create');
-    cy.get('.error').should('contain','The en name field is required.')
-    cy.contains('The ar name field is required.').should('be.visible');
+    cy.get('.error').should('contain','English Name is required')
+    cy.contains('Arabic Name is required').should('be.visible');
     cy.contains('The sap code field is required.').should('be.visible');
   })
   it('checks Nullable fields',function(){
-    cy.get('.card-body input[name="sap_code"]').type('123456');
+    cy.get('.card-body input[name="sap_code"]').type('wwwwww');
     cy.get('.card-body input[name="en_name"]').type('Cairo');
     cy.get('.card-body input[name="ar_name"]').type('القاهره');
     cy.get('.float-right > .btn-primary').click();
@@ -39,13 +39,13 @@ describe('Create Supplier', function () {
     cy.request('get','/api/supplier/cairo').then((response)=>{
       console.log(response);
       expect(response.body).to.have.property('en_name', 'Cairo')
-      expect(response.body).to.have.property('sap_code', '123456')
+      expect(response.body).to.have.property('sap_code', 'wwwwww')
       expect(response.body).to.have.property('is_active', 1)
       expect(response.body).to.have.property('ar_name', 'القاهره')
     });
   })
   it('checks All fields',function(){
-    cy.get('.card-body input[name="sap_code"]').type('1234');
+    cy.get('.card-body input[name="sap_code"]').type('qqqqqq');
     cy.get('.card-body input[name="en_name"]').type('Alex');
     cy.get('.card-body input[name="ar_name"]').type('الاسكندريه');
     cy.get('#items option[value="1000"]').invoke('attr', 'selected',true);
@@ -55,7 +55,7 @@ describe('Create Supplier', function () {
     cy.request('get','/api/supplier/Alex').then((response)=>{
       console.log(response);
       expect(response.body).to.have.property('en_name', 'Alex')
-      expect(response.body).to.have.property('sap_code', '1234')
+      expect(response.body).to.have.property('sap_code', 'qqqqqq')
       expect(response.body).to.have.property('is_active', 1)
       expect(response.body.items[0]).to.have.property('id', 1000)
       expect(response.body).to.have.property('ar_name', 'الاسكندريه')

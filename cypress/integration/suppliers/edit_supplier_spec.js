@@ -25,9 +25,9 @@ describe('Edit Supplier test', function () {
     cy.get('.card-body input[name="sap_code"]').clear();
     cy.get('.float-right > .btn-primary').click();
     cy.url().should('contain','/master-data/suppliers/1000/edit');
-    cy.get('.error').should('contain','The en name field is required.')
-    cy.contains('The ar name field is required.').should('be.visible');
-    cy.contains('he sap code field is required.').should('be.visible');
+    cy.get('.error').should('contain','English Name is required')
+    cy.contains('Arabic Name is required').should('be.visible');
+    cy.contains('The sap code field is required.').should('be.visible');
   })
   it('checks all fields',function(){
     cy.get('.card-body input[name="en_name"]').clear().type('Alex');
@@ -44,7 +44,7 @@ describe('Edit Supplier test', function () {
       expect(response.body).to.have.property('sap_code', '7897')
       expect(response.body).to.have.property('ar_name','الاسكريه')
       expect(response.body).to.have.property('is_active', 0)
-      expect(response.body.items[1]).to.have.property('id', 10001)
+      expect(response.body.items[0]).to.have.property('id', 10001)
     });
   })
   it('checks edit permissions',function(){

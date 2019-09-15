@@ -14,7 +14,7 @@ describe('List suppliers', function () {
     cy.visit('/master-data/suppliers');
   });
   it('visits suppliers lists',function(){
-    cy.get(':nth-child(3) > :nth-child(8) > .btn').should('not.exist')
+    cy.get(':nth-child(1) > :nth-child(7) > .btn').should('not.exist')
     cy.get('.pagination').should('be.visible');
   })
   after(function(){

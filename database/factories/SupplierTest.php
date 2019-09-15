@@ -10,6 +10,7 @@ $factory->defineAs(App\Models\Supplier\Supplier::class, 'fake_suppliers',functio
       'en_name' => $faker->unique()->regexify('[A-Za-z]{5}'),
       'ar_name' => $faker->unique()->regexify('[A-Za-z]{10}'),
       'sap_code'=> $faker->regexify('[A-Za-z]{5}'),
+      'is_active' => 1,
     ];
 });
 $factory->defineAs(App\Models\Supplier\Supplier::class, 'supplier_edit',function (Faker $faker) {
@@ -18,5 +19,6 @@ $factory->defineAs(App\Models\Supplier\Supplier::class, 'supplier_edit',function
         'en_name'=>'Alexandria',
         'ar_name'=>'الإسكندرية',
         'sap_code' => 555,
+        'is_active' => 1,
     ];
 });
