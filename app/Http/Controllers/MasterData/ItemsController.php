@@ -51,11 +51,13 @@ class ItemsController extends Controller
                 'item_group_id.required' => trans('master.errors.item_group_id_required'),
             ]);
 
+        $request->offsetSet('is_active' , $request->get('is_active' , 0));
+
         Item::query()->create($request->input());
 
         return redirect()
             ->action('MasterData\ItemsController@index')
-            ->with('success', trans('global.item_created_success'));
+            ->with('success' , trans('global.item_created_success'));
     }
 
     public function edit($id)

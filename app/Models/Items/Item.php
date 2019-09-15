@@ -2,6 +2,7 @@
 
 namespace App\Models\items;
 
+use App\Models\Supplier\Supplier;
 use Illuminate\Database\Eloquent\Model;
 
 class Item extends Model
@@ -18,6 +19,11 @@ class Item extends Model
     public function type()
     {
         return $this->belongsTo(ItemType::class , 'item_type_id' , 'id');
+    }
+
+    public function suppliers()
+    {
+        return $this->belongsToMany(Supplier::class , 'suppliers_items'  , 'item_id' , 'supplier_id');
     }
 
     public function getNameAttribute() {

@@ -8,7 +8,7 @@ return [
     'administration'    =>  'ادارة الصلاحيات والاعضاء',
     'roles'             =>  'المسئوليات',
     'users'             =>  'المستخدمين',
-    'index'             =>  'Index',
+    'index'             =>  'الرئيسيه',
     'create'            =>  'إضافة',
     'full_name'         =>  'اسم الموظف',
     'user_name'         =>  'إسم المستخدم',

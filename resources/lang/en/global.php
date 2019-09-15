@@ -97,5 +97,10 @@ return [
     'item_created_success'  =>  'Item Created Success',
     'item_updated_success'  =>  'Item Updated Success',
     'edit_item' =>  'Edit Item',
+    'items_search'  =>  'Search For Item',
+    'suppliers' =>  'Suppliers',
+    'supplier_created_success'  =>  'Supplier Created Success',
+    'supplier_updated_success'  =>  'Supplier Updated Success',
+    'items_count'   =>  'Items Count',
 
 ];

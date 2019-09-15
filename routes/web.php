@@ -28,8 +28,10 @@ Route::middleware(['auth'])->group(function (){
     Route::resource('master-data/items/item-group' , 'MasterData\ItemGroupController');
     Route::resource('master-data/items/item-types' , 'MasterData\ItemTypesController');
     Route::resource('master-data/items/items' , 'MasterData\ItemsController');
+    Route::resource('master-data/suppliers' , 'MasterData\SuppliersController');
 
     Route::get('change-theme' , 'MasterData\UsersController@theme')->name('change-theme');
+    Route::get('change-lang' , 'MasterData\UsersController@lang')->name('change-lang');
     Route::post('change-acc-info' , 'MasterData\UsersController@changeAccInfo')->name('users.change-acc-info');
 
 });

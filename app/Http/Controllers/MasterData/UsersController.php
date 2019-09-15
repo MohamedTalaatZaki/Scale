@@ -175,4 +175,11 @@ class UsersController extends Controller
 
         return redirect()->back()->with('notify', trans('global.change_acc_info_success'));
     }
+
+    public function lang(Request $request) {
+        Auth::user()->update([
+            'lang'  =>  $request->get('lang' , 'ar'),
+        ]);
+        return redirect()->back();
+    }
 }
