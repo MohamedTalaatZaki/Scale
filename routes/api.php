@@ -34,3 +34,7 @@ Route::get('center/{en_name}',function($en_name){
 Route::get('item_type/{en_name}',function($en_name){
   return App\Models\Items\ItemType::where('en_name',$en_name)->first();
 });
+
+Route::get('supplier/{en_name}',function($en_name){
+  return App\Models\Supplier\Supplier::where('en_name',$en_name)->with('items')->first();
+});
