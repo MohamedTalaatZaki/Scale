@@ -102,5 +102,7 @@ return [
     'supplier_created_success'  =>  'Supplier Created Success',
     'supplier_updated_success'  =>  'Supplier Updated Success',
     'items_count'   =>  'Items Count',
+    'select_all'    =>  'Select All',
+    'deselect_all'    =>  'Deselect All',
 
 ];

@@ -78,7 +78,7 @@
                                 <label for="items">@lang('global.items')</label>
                                 <select id='items' class="items" multiple='multiple' name="items[]">
                                     @foreach($items as $item)
-                                        <option value="{{ $item->id }}" {{ in_array($item->id , old('items')) ? 'selected' : '' }}> {{ $item->name }}</option>
+                                        <option value="{{ $item->id }}" {{ !is_null(old('items')) && in_array($item->id , old('items')) ? 'selected' : '' }}> {{ $item->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -110,12 +110,20 @@
 @push('scripts')
     <script>
         $().ready(function(){
+            $('body').on('click' , '#select-all' , function(){
+                $('.items').multiSelect('select_all');
+                return false;
+            });
+            $('body').on('click' , '#deselect-all' ,function(){
+                $('.items').multiSelect('deselect_all');
+                return false;
+            });
             $('.items').multiSelect({
                 keepOrder: true,
                 selectableHeader: "<input type='text' class='form-control search-input' autocomplete='off' placeholder='@lang('global.items_search')'>",
                 selectionHeader: "<input type='text' class='form-control search-input' autocomplete='off' placeholder='@lang('global.items_search')'>",
-                selectableFooter: "<button type='button' class='btn default btn-primary btn-block' ><b>select all</b> </button>",
-                selectionFooter: "<button type='button' class='btn default btn-primary btn-block' > <b>Deselect all</b> </button>",
+                selectableFooter: "<button type='button' id='select-all' class='btn default btn-primary btn-block' ><b>@lang('global.select_all')</b> </button>",
+                selectionFooter: "<button type='button' id='deselect-all' class='btn default btn-primary btn-block' > <b>@lang('global.deselect_all')</b> </button>",
                 afterInit: function(ms){
                     var that = this,
                         $selectableSearch = that.$selectableUl.prev(),
