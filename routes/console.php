@@ -110,9 +110,17 @@ Artisan::command('city:edit_faker', function () {
     $city = factory(App\Models\City::class,'city_edit')->create();
 })->describe('Generate fake city for edit');
 
+Artisan::command('center:edit_faker', function () {
+    $center = factory(App\Models\Center::class,'center_edit')->create();
+})->describe('Generate fake center for edit');
+
 Artisan::command('city:faker', function () {
     $cities = factory(App\Models\City::class,'fake_cities',300)->create();
 })->describe('Generate fake cities');
+
+Artisan::command('center:faker', function () {
+    $centers = factory(App\Models\Center::class,'fake_centers',300)->create();
+})->describe('Generate fake centers');
 
 Artisan::command('governorate:faker', function () {
     $governorates = factory(App\Models\Governorate::class,'fake_gov',300)->create();
