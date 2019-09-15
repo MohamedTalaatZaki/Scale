@@ -8,7 +8,7 @@
             <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
                 <ol class="breadcrumb pt-0">
                     <li class="breadcrumb-item">
-                        <a href="#" class="default-cursor">@lang('global.master_data')</a>
+                        <span class="default-cursor">@lang('global.master_data')</span>
                     </li>
                     <li class="breadcrumb-item">
                         <a href="{{ route('suppliers.index') }}">@lang('global.suppliers')</a>
@@ -27,7 +27,7 @@
             <div class="card">
                 <div class="card-body">
                     <div>
-                        <h5 class="mb-4">@lang('global.create_item')</h5>
+                        <h5 class="mb-4">@lang('global.edit_supplier')</h5>
                     </div>
 
                     <form action="{{ route('suppliers.update' , ['id' => $supplier->id]) }}" method="post">
