@@ -48,7 +48,7 @@
                                 <input type="text" class="form-control onlyAr" id="inputPassword1" name="ar_name" value="{{ old('ar_name' , $supplier->ar_name) }}"
                                        placeholder="@lang('global.ar_name')" autocomplete="off" required>
                                 @if($errors->has('ar_name'))
-                                    <div id="jQueryName-error" class="error" style="">{{ $errors->first('ar_name' , $supplier->ar_name) }}</div>
+                                    <div id="jQueryName-error" class="error" style="">{{ $errors->first('ar_name') }}</div>
                                 @endif
                             </div>
                         </div>

@@ -13,21 +13,21 @@ class SuppliersController extends Controller
     use AuthorizeTrait;
 
     public function index() {
-//        $this->authorized('suppliers.index');
+        $this->authorized('suppliers.index');
         return view('master-data.suppliers.index' , [
             'suppliers' =>  Supplier::query()->paginate(25),
         ]);
     }
 
     public function create() {
-//        $this->authorized('suppliers.create');
+        $this->authorized('suppliers.create');
         return view('master-data.suppliers.create' , [
             'items' =>  Item::query()->where('is_active' , 1)->get(),
         ]);
     }
 
     public function store(Request $request) {
-        //        $this->authorized('suppliers.create');
+        $this->authorized('suppliers.create');
         $this->validate($request , [
             'ar_name'   =>  'required',
             'en_name'   =>  'required',
@@ -45,7 +45,7 @@ class SuppliersController extends Controller
         return redirect()->action('MasterData\SuppliersController@index')->with('success' , trans('global.supplier_created_success'));
     }
     public function edit($id) {
-//        $this->authorized('suppliers.edit');
+        $this->authorized('suppliers.edit');
         return view('master-data.suppliers.edit' , [
             'supplier'  =>  Supplier::query()->findOrFail($id),
             'items'     =>  Item::query()->where('is_active' , 1)->get(),
@@ -53,7 +53,7 @@ class SuppliersController extends Controller
     }
 
     public function update(Request $request , $id) {
-        //        $this->authorized('suppliers.create');
+        $this->authorized('suppliers.create');
         $this->validate($request , [
             'ar_name'   =>  'required',
             'en_name'   =>  'required',

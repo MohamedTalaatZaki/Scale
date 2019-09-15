@@ -6,6 +6,7 @@ use App\Filters\ItemsIndexFilter;
 use App\Models\Items\Item;
 use App\Models\Items\ItemGroup;
 use App\Models\Items\ItemType;
+use App\Models\Supplier\Supplier;
 use App\Traits\AuthorizeTrait;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -102,5 +103,12 @@ class ItemsController extends Controller
             ->with('success', trans('global.item_updated_success'));
     }
 
+    public function supplierItems($id){
+        $this->authorized('items.index');
+        $items  =   Supplier::query()->findOrFail($id)->items()->paginate(25);
+        return view('master-data.items.items.index' , [
+            'items' =>  $items,
+        ]);
+    }
 
 }
