@@ -53,7 +53,7 @@ class SuppliersController extends Controller
     }
 
     public function update(Request $request , $id) {
-        $this->authorized('suppliers.create');
+        $this->authorized('suppliers.edit');
         $this->validate($request , [
             'ar_name'   =>  'required',
             'en_name'   =>  'required',
