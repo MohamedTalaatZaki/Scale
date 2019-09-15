@@ -372,7 +372,11 @@
 
         let notify = parseInt('{{ Session::has('notify') }}');
         let openAccountInfo = parseInt('{{ Session::has('openAccountInfo') }}');
-
+        var isHome = !!'{{Route::currentRouteName() == 'home'}}';
+        if(isHome){
+            console.log(isHome);
+            localStorage.setItem('sidebar','sidebar-dashboard');
+        }
         $('.' + localStorage.getItem('sidebar')).closest('li').addClass('active');
 
         if (localStorage.getItem('hasSub') == '1') {
@@ -439,6 +443,7 @@
             e.preventDefault();
             return false;
         });
+
     });
 </script>
 @stack('scripts')

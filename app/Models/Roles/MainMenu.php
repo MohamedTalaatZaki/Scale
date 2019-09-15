@@ -24,6 +24,9 @@ class MainMenu extends Model
         return $this->attributes['name'] = app()->getLocale() == 'ar' ? $this->ar_name : $this->en_name;
     }
 
+    public function getHref(){
+        return $this->attributes['href'];
+    }
     public function getHrefAttribute($value)
     {
         return $this->attributes['href'] = substr($value, 0, 1) === "#" ? $value : route($value);
