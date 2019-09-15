@@ -75,7 +75,7 @@
                                     @foreach($types as $type)
                                         <option
                                             value="{{ $type->id }}"
-                                            {{ old('item_type_id') == $group->id ? 'selected' : '' }}>
+                                            {{ old('item_type_id') == $type->id ? 'selected' : '' }}>
                                             {{ $type->name }}
                                         </option>
                                     @endforeach
