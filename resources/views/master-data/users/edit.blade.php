@@ -31,7 +31,7 @@
                         <div>
                             <a href="#" class="user-img">
                                 <img id="user-img" src="{{ $user->avatar_url }}"
-                                     style="left: 95%!important;top: -55px!important;max-height: 114px;max-width: 114px;object-fit: contain"
+                                     style="{{$page_dir == 'rtl' ? 'right: 85%!important':'left: 95%!important' }};top: -55px!important;max-height: 114px;max-width: 114px;object-fit: contain"
                                      class="img-thumbnail card-img social-profile-img" />
                             </a>
                         </div>

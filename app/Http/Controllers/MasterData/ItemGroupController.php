@@ -36,6 +36,7 @@ class ItemGroupController extends Controller
                 'ar_name.required'=>trans('master.errors.ar_name_required'),
                 'en_name.unique'=>trans('master.errors.item_group_en_name_exist'),
                 'ar_name.unique'=>trans('master.errors.item_group_ar_name_exist'),
+                'testable.required'=>trans('master.errors.testable_required'),
             ]);
 
         $item_group    =   ItemGroup::query()->create([
@@ -64,7 +65,7 @@ class ItemGroupController extends Controller
                 'en_name.required'=>trans('master.errors.en_name_required'),
                 'ar_name.required'=>trans('master.errors.ar_name_required'),
                 'en_name.unique'=>trans('master.errors.item_group_en_name_exist'),
-                'ar_name.unique'=>trans('master.errors.item_group_name_exist'),
+                'ar_name.unique'=>trans('master.errors.item_group_ar_name_exist'),
             ]);
         $item_group    =   ItemGroup::query()->findOrFail($id);
         $item_group->update([

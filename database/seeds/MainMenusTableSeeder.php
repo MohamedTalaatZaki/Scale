@@ -56,7 +56,7 @@ class MainMenusTableSeeder extends Seeder
         ]);
         $group = $main->menuGroups()->create([
             'en_name' => 'Administration',
-            'ar_name' => 'ادارة الصلاحيات والاعضاء',
+            'ar_name' => 'ادارة الصلاحيات و المستخدمين',
             'aria_controls' => 'collapseAdministration',
             'order' => 1,
         ]);

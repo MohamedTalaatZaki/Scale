@@ -8,7 +8,7 @@
             <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
                 <ol class="breadcrumb pt-0">
                     <li class="breadcrumb-item">
-                        <a href="#" class="default-cursor">@lang('global.master_data')</a>
+                        <span class="default-cursor">@lang('global.master_data')</span>
                     </li>
                     <li class="breadcrumb-item">
                         <a href="{{ route('items.index') }}">@lang('global.items')</a>
@@ -55,7 +55,7 @@
                             <div class="form-group col-md-6">
                                 <label for="item_group_id">@lang('global.item_group') *</label>
                                 <select id="item_group_id" class="form-control select2-single" name="item_group_id">
-                                    <option label="&nbsp;" value="&nbsp;">&nbsp; @lang('global.item_group')</option>
+                                    <option label="&nbsp;" value="">&nbsp; @lang('global.item_group')</option>
                                     @foreach($groups as $group)
                                         <option
                                             value="{{ $group->id }}"
@@ -64,14 +64,14 @@
                                         </option>
                                     @endforeach
                                 </select>
-                                @if($errors->has('item_group'))
-                                    <div id="jQueryName-error" class="error" style="">{{ $errors->first('item_group') }}</div>
+                                @if($errors->has('item_group_id'))
+                                    <div id="jQueryName-error" class="error" style="">{{ $errors->first('item_group_id') }}</div>
                                 @endif
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="item_type_id">@lang('global.item_type') *</label>
                                 <select id="item_type_id" class="form-control select2-single" name="item_type_id">
-                                    <option label="&nbsp;" value="&nbsp;">&nbsp; @lang('global.item_type')</option>
+                                    <option label="&nbsp;" value="">&nbsp; @lang('global.item_type')</option>
                                     @foreach($types as $type)
                                         <option
                                             value="{{ $type->id }}"
@@ -80,8 +80,8 @@
                                         </option>
                                     @endforeach
                                 </select>
-                                @if($errors->has('item_type'))
-                                    <div id="jQueryName-error" class="error" style="">{{ $errors->first('item_type') }}</div>
+                                @if($errors->has('item_type_id'))
+                                    <div id="jQueryName-error" class="error" style="">{{ $errors->first('item_type_id') }}</div>
                                 @endif
                             </div>
                         </div>

@@ -28,9 +28,14 @@ class RolesController extends Controller
     public function store(Request $request) {
         $this->authorized('roles.create');
         $this->validate($request  , [
-            'name'      =>  'required|unique:roles,name',
+            'name'      =>  'required|alpha_dash|unique:roles,name',
            // 'permissions'   =>  'required|array'
-        ]);
+        ],
+            [
+                'name.required'=>trans('master.errors.role_name_required'),
+                'name.unique'=>trans('master.errors.role_name_duplicated'),
+                'name.alpha_dash'=>trans('master.errors.role_name_alpha'),
+            ]);
         $role   =   Role::query()->create([
             'name'     =>   $request->get('name'),
         ]);
@@ -50,15 +55,19 @@ class RolesController extends Controller
     public function update(Request $request , $id) {
         $this->authorized('roles.edit');
         $this->validate($request  , [
-            'name'      =>  'required|unique:roles,name,'.$id,
+            'name'      =>  'required|alpha_dash|unique:roles,name,'.$id,
            // 'permissions'   =>  'required|array'
+        ],[
+            'name.required'=>trans('master.errors.role_name_required'),
+            'name.unique'=>trans('master.errors.role_name_duplicated'),
+            'name.alpha_dash'=>trans('master.errors.role_name_alpha'),
         ]);
 
         $role   =   Role::query()->findOrFail($id);
         if(!$role->is_admin){
             $role->update(['name' => $request->get('name')]);
             $role->perms()->sync([]);
-            $role->attachPermissions($request->get('permissions'));
+            $role->attachPermissions($request->get('permissions',[]));
         }
 
         return redirect()->action('MasterData\RolesController@index')->with('success' , trans('global.role_updated'));
