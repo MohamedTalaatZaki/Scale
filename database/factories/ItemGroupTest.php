@@ -13,3 +13,11 @@ $factory->defineAs(App\Models\Items\ItemGroup::class, 'demo_faker',function (Fak
         'testable' => 1
     ];
 });
+
+$factory->defineAs(App\Models\Items\ItemGroup::class, 'fake_item_groups',function (Faker $faker) {
+    return [
+      'en_name' => $faker->unique()->regexify('[A-Za-z]{5}'),
+      'ar_name' => $faker->unique()->regexify('[A-Za-z]{10}'),
+      'testable' => 1,
+    ];
+});
