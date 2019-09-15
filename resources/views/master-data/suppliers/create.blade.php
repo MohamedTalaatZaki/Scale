@@ -27,7 +27,7 @@
             <div class="card">
                 <div class="card-body">
                     <div>
-                        <h5 class="mb-4">@lang('global.create_item')</h5>
+                        <h5 class="mb-4">@lang('global.create_suppler')</h5>
                     </div>
 
                     <form action="{{ route('suppliers.store') }}" method="post">
