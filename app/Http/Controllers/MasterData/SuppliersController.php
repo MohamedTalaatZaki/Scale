@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\MasterData;
 
-use App\Models\items\Item;
+use App\Models\Items\Item;
 use App\Models\Supplier\Supplier;
 use App\Traits\AuthorizeTrait;
 use Illuminate\Http\Request;

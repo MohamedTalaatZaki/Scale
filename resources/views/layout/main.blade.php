@@ -76,10 +76,10 @@
         </a>
 
         <div class="search" data-search-path="Pages.Search.html?q=">
-            <input placeholder="Search...">
-            <span class="search-icon">
-                    <i class="simple-icon-magnifier"></i>
-                </span>
+            {{--<input placeholder="Search...">--}}
+            {{--<span class="search-icon">--}}
+                    {{--<i class="simple-icon-magnifier"></i>--}}
+                {{--</span>--}}
         </div>
 
     </div>
@@ -95,7 +95,7 @@
             <div class="d-none d-md-inline-block align-text-bottom mr-3">
                 <div class="custom-switch custom-switch-primary-inverse custom-switch-small pl-1"
                      data-toggle="tooltip" data-placement="left"
-                     title="{{ Auth::user()->theme == 'light' ? 'Dark Mode' : 'Light Mode' }}">
+                     title="{{ Auth::user()->theme == 'light' ? trans('global.dark') : trans('global.light') }}">
                     <input class="custom-switch-input" id="switchDark"
                            type="checkbox" {{ Auth::user()->theme == 'light' ? "" : "checked" }}>
                     <label class="custom-switch-btn" for="switchDark"></label>
@@ -121,35 +121,35 @@
                     <i class="simple-icon-grid"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right mt-3  position-absolute" id="iconMenuDropdown">
-                    <a href="#" class="icon-menu-item">
-                        <i class="iconsminds-equalizer d-block"></i>
-                        <span>Settings</span>
-                    </a>
+{{--                    <a href="#" class="icon-menu-item">--}}
+{{--                        <i class="iconsminds-equalizer d-block"></i>--}}
+{{--                        <span>Settings</span>--}}
+{{--                    </a>--}}
 
-                    <a href="#" class="icon-menu-item">
-                        <i class="iconsminds-male-female d-block"></i>
-                        <span>Users</span>
-                    </a>
+{{--                    <a href="#" class="icon-menu-item">--}}
+{{--                        <i class="iconsminds-male-female d-block"></i>--}}
+{{--                        <span>Users</span>--}}
+{{--                    </a>--}}
 
-                    <a href="#" class="icon-menu-item">
-                        <i class="iconsminds-puzzle d-block"></i>
-                        <span>Components</span>
-                    </a>
+{{--                    <a href="#" class="icon-menu-item">--}}
+{{--                        <i class="iconsminds-puzzle d-block"></i>--}}
+{{--                        <span>Components</span>--}}
+{{--                    </a>--}}
 
-                    <a href="#" class="icon-menu-item">
-                        <i class="iconsminds-bar-chart-4 d-block"></i>
-                        <span>Profits</span>
-                    </a>
+{{--                    <a href="#" class="icon-menu-item">--}}
+{{--                        <i class="iconsminds-bar-chart-4 d-block"></i>--}}
+{{--                        <span>Profits</span>--}}
+{{--                    </a>--}}
 
-                    <a href="#" class="icon-menu-item">
-                        <i class="iconsminds-file d-block"></i>
-                        <span>Surveys</span>
-                    </a>
+{{--                    <a href="#" class="icon-menu-item">--}}
+{{--                        <i class="iconsminds-file d-block"></i>--}}
+{{--                        <span>Surveys</span>--}}
+{{--                    </a>--}}
 
-                    <a href="#" class="icon-menu-item">
-                        <i class="iconsminds-suitcase d-block"></i>
-                        <span>Tasks</span>
-                    </a>
+{{--                    <a href="#" class="icon-menu-item">--}}
+{{--                        <i class="iconsminds-suitcase d-block"></i>--}}
+{{--                        <span>Tasks</span>--}}
+{{--                    </a>--}}
 
                 </div>
             </div>
@@ -158,59 +158,59 @@
                 <button class="header-icon btn btn-empty" type="button" id="notificationButton"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="simple-icon-bell"></i>
-                    <span class="count">3</span>
+                    <span class="count">0</span>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right mt-3 position-absolute" id="notificationDropdown">
                     <div class="scroll">
-                        <div class="d-flex flex-row mb-3 pb-3 border-bottom">
-                            <a href="#">
-                                <img src="{{ asset('img/profile-pic-l-2.jpg') }}" alt="Notification Image"
-                                     class="img-thumbnail list-thumbnail xsmall border-0 rounded-circle"/>
-                            </a>
-                            <div class="pl-3">
-                                <a href="#">
-                                    <p class="font-weight-medium mb-1">Joisse Kaycee just sent a new comment!</p>
-                                    <p class="text-muted mb-0 text-small">09.04.2018 - 12:45</p>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="d-flex flex-row mb-3 pb-3 border-bottom">
-                            <a href="#">
-                                <img src="{{ asset('img/notification-thumb.jpg') }}" alt="Notification Image"
-                                     class="img-thumbnail list-thumbnail xsmall border-0 rounded-circle"/>
-                            </a>
-                            <div class="pl-3">
-                                <a href="#">
-                                    <p class="font-weight-medium mb-1">1 item is out of stock!</p>
-                                    <p class="text-muted mb-0 text-small">09.04.2018 - 12:45</p>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="d-flex flex-row mb-3 pb-3 border-bottom">
-                            <a href="#">
-                                <img src="{{ asset('img/notification-thumb-2.jpg') }}" alt="Notification Image"
-                                     class="img-thumbnail list-thumbnail xsmall border-0 rounded-circle"/>
-                            </a>
-                            <div class="pl-3">
-                                <a href="#">
-                                    <p class="font-weight-medium mb-1">New order received! It is total $147,20.</p>
-                                    <p class="text-muted mb-0 text-small">09.04.2018 - 12:45</p>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="d-flex flex-row mb-3 pb-3 ">
-                            <a href="#">
-                                <img src="{{ asset('img/notification-thumb-3.jpg') }}" alt="Notification Image"
-                                     class="img-thumbnail list-thumbnail xsmall border-0 rounded-circle"/>
-                            </a>
-                            <div class="pl-3">
-                                <a href="#">
-                                    <p class="font-weight-medium mb-1">3 items just added to wish list by a user!
-                                    </p>
-                                    <p class="text-muted mb-0 text-small">09.04.2018 - 12:45</p>
-                                </a>
-                            </div>
-                        </div>
+{{--                        <div class="d-flex flex-row mb-3 pb-3 border-bottom">--}}
+{{--                            <a href="#">--}}
+{{--                                <img src="{{ asset('img/profile-pic-l-2.jpg') }}" alt="Notification Image"--}}
+{{--                                     class="img-thumbnail list-thumbnail xsmall border-0 rounded-circle"/>--}}
+{{--                            </a>--}}
+{{--                            <div class="pl-3">--}}
+{{--                                <a href="#">--}}
+{{--                                    <p class="font-weight-medium mb-1">Joisse Kaycee just sent a new comment!</p>--}}
+{{--                                    <p class="text-muted mb-0 text-small">09.04.2018 - 12:45</p>--}}
+{{--                                </a>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="d-flex flex-row mb-3 pb-3 border-bottom">--}}
+{{--                            <a href="#">--}}
+{{--                                <img src="{{ asset('img/notification-thumb.jpg') }}" alt="Notification Image"--}}
+{{--                                     class="img-thumbnail list-thumbnail xsmall border-0 rounded-circle"/>--}}
+{{--                            </a>--}}
+{{--                            <div class="pl-3">--}}
+{{--                                <a href="#">--}}
+{{--                                    <p class="font-weight-medium mb-1">1 item is out of stock!</p>--}}
+{{--                                    <p class="text-muted mb-0 text-small">09.04.2018 - 12:45</p>--}}
+{{--                                </a>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="d-flex flex-row mb-3 pb-3 border-bottom">--}}
+{{--                            <a href="#">--}}
+{{--                                <img src="{{ asset('img/notification-thumb-2.jpg') }}" alt="Notification Image"--}}
+{{--                                     class="img-thumbnail list-thumbnail xsmall border-0 rounded-circle"/>--}}
+{{--                            </a>--}}
+{{--                            <div class="pl-3">--}}
+{{--                                <a href="#">--}}
+{{--                                    <p class="font-weight-medium mb-1">New order received! It is total $147,20.</p>--}}
+{{--                                    <p class="text-muted mb-0 text-small">09.04.2018 - 12:45</p>--}}
+{{--                                </a>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="d-flex flex-row mb-3 pb-3 ">--}}
+{{--                            <a href="#">--}}
+{{--                                <img src="{{ asset('img/notification-thumb-3.jpg') }}" alt="Notification Image"--}}
+{{--                                     class="img-thumbnail list-thumbnail xsmall border-0 rounded-circle"/>--}}
+{{--                            </a>--}}
+{{--                            <div class="pl-3">--}}
+{{--                                <a href="#">--}}
+{{--                                    <p class="font-weight-medium mb-1">3 items just added to wish list by a user!--}}
+{{--                                    </p>--}}
+{{--                                    <p class="text-muted mb-0 text-small">09.04.2018 - 12:45</p>--}}
+{{--                                </a>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
                     </div>
                 </div>
             </div>

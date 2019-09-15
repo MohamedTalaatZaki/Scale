@@ -52,7 +52,7 @@
                             {{ $item_group->testable == 1 ? trans('global.yes_testable') : trans('global.not_testable') }}
                         </td>
                         <td>
-                            @permission('governorates.edit')
+                            @permission('item-group.edit')
                             <a href="{{ route('item-group.edit' , ['id' => $item_group->id]) }}" class="btn btn-primary btn-sm mb-1">@lang('global.edit')</a>
                             @endpermission
                         </td>
