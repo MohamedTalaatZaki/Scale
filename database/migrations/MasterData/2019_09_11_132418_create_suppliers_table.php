@@ -18,6 +18,7 @@ class CreateSuppliersTable extends Migration
             $table->string('ar_name');
             $table->string('en_name');
             $table->string('sap_code')->unique();
+            $table->integer('is_active')->default(1);
             $table->timestamps();
         });
     }

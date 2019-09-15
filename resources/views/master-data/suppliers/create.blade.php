@@ -3,15 +3,15 @@
 
     <div class="row">
         <div class="col-12">
-            <h1>@lang('global.items')</h1>
+            <h1>@lang('global.suppliers')</h1>
 
             <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
                 <ol class="breadcrumb pt-0">
                     <li class="breadcrumb-item">
-                        <span class="default-cursor">@lang('global.master_data')</span>
+                        <a href="#" class="default-cursor">@lang('global.master_data')</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="{{ route('items.index') }}">@lang('global.items')</a>
+                        <a href="{{ route('suppliers.index') }}">@lang('global.suppliers')</a>
                     </li>
                     <li class="breadcrumb-item " aria-current="page">@lang('global.create')</li>
                 </ol>
@@ -30,8 +30,7 @@
                         <h5 class="mb-4">@lang('global.create_item')</h5>
                     </div>
 
-
-                    <form action="{{ route('items.store') }}" method="post">
+                    <form action="{{ route('suppliers.store') }}" method="post">
                         @csrf
 
                         <div class="form-row">
@@ -51,40 +50,7 @@
                                 @endif
                             </div>
                         </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label for="item_group_id">@lang('global.item_group') *</label>
-                                <select id="item_group_id" class="form-control select2-single" name="item_group_id">
-                                    <option label="&nbsp;" value="">&nbsp; @lang('global.item_group')</option>
-                                    @foreach($groups as $group)
-                                        <option
-                                            value="{{ $group->id }}"
-                                            {{ old('item_group_id') == $group->id ? 'selected' : '' }}>
-                                            {{ $group->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @if($errors->has('item_group_id'))
-                                    <div id="jQueryName-error" class="error" style="">{{ $errors->first('item_group_id') }}</div>
-                                @endif
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="item_type_id">@lang('global.item_type') *</label>
-                                <select id="item_type_id" class="form-control select2-single" name="item_type_id">
-                                    <option label="&nbsp;" value="">&nbsp; @lang('global.item_type')</option>
-                                    @foreach($types as $type)
-                                        <option
-                                            value="{{ $type->id }}"
-                                            {{ old('item_type_id') == $group->id ? 'selected' : '' }}>
-                                            {{ $type->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @if($errors->has('item_type_id'))
-                                    <div id="jQueryName-error" class="error" style="">{{ $errors->first('item_type_id') }}</div>
-                                @endif
-                            </div>
-                        </div>
+
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label>@lang('global.sap_code') *</label>
@@ -97,7 +63,7 @@
                                 <label class="col-12 col-form-label">@lang('global.is_active')</label>
                                 <div class="col-12">
                                     <div class="custom-switch custom-switch-primary-inverse mb-2" style="padding-left: 0">
-                                        <input class="custom-switch-input" id="is_active" type="checkbox" value="1" name="is_active" {{ old('is_active') == '0' ? '' : 'checked' }}>
+                                        <input class="custom-switch-input" id="is_active" type="checkbox" value="1" name="is_active" {{ old('is_active') == '1' ? 'checked' : '' }}>
                                         <label class="custom-switch-btn" for="is_active"></label>
                                     </div>
                                     @if($errors->has('is_active'))
@@ -109,17 +75,18 @@
 
                         <div class="form-row">
                             <div class="form-group col-md-12">
-                                <label for="description">@lang('global.description')</label>
-                                <textarea id="description" rows="6" name="description" class="form-control">{{ old('description') }}</textarea>
-                                @if($errors->has('description'))
-                                    <div id="jQueryName-error" class="error" style="">{{ $errors->first('description') }}</div>
-                                @endif
+                                <label for="items">@lang('global.items')</label>
+                                <select id='items' class="items" multiple='multiple' name="items[]">
+                                    @foreach($items as $item)
+                                        <option value="{{ $item->id }}" {{ !is_null(old('items')) && in_array($item->id , old('items')) ? 'selected' : '' }}> {{ $item->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
 
                         <div class="form-group col-md-12">
                             <div class="float-right">
-                                <a href="{{ route('items.index') }}">
+                                <a href="{{ route('suppliers.index') }}">
                                     <button type="button" class="btn btn-danger btn-sm mt-3">@lang('global.cancel')</button>
                                 </a>
                                 <button type="submit" class="btn btn-primary btn-sm mt-3">@lang('global.save')</button>
@@ -133,3 +100,62 @@
     </div>
 
 @endsection
+@push('styles')
+    <style>
+        .ms-container{
+            width: 100%;
+        }
+    </style>
+@endpush
+@push('scripts')
+    <script>
+        $().ready(function(){
+            $('body').on('click' , '#select-all' , function(){
+                $('.items').multiSelect('select_all');
+                return false;
+            });
+            $('body').on('click' , '#deselect-all' ,function(){
+                $('.items').multiSelect('deselect_all');
+                return false;
+            });
+            $('.items').multiSelect({
+                keepOrder: true,
+                selectableHeader: "<input type='text' class='form-control search-input' autocomplete='off' placeholder='@lang('global.items_search')'>",
+                selectionHeader: "<input type='text' class='form-control search-input' autocomplete='off' placeholder='@lang('global.items_search')'>",
+                selectableFooter: "<button type='button' id='select-all' class='btn default btn-primary btn-block' ><b>@lang('global.select_all')</b> </button>",
+                selectionFooter: "<button type='button' id='deselect-all' class='btn default btn-primary btn-block' > <b>@lang('global.deselect_all')</b> </button>",
+                afterInit: function(ms){
+                    var that = this,
+                        $selectableSearch = that.$selectableUl.prev(),
+                        $selectionSearch = that.$selectionUl.prev(),
+                        selectableSearchString = '#'+that.$container.attr('id')+' .ms-elem-selectable:not(.ms-selected)',
+                        selectionSearchString = '#'+that.$container.attr('id')+' .ms-elem-selection.ms-selected';
+
+                    that.qs1 = $selectableSearch.quicksearch(selectableSearchString)
+                        .on('keydown', function(e){
+                            if (e.which === 40){
+                                that.$selectableUl.focus();
+                                return false;
+                            }
+                        });
+
+                    that.qs2 = $selectionSearch.quicksearch(selectionSearchString)
+                        .on('keydown', function(e){
+                            if (e.which == 40){
+                                that.$selectionUl.focus();
+                                return false;
+                            }
+                        });
+                },
+                afterSelect: function(){
+                    this.qs1.cache();
+                    this.qs2.cache();
+                },
+                afterDeselect: function(){
+                    this.qs1.cache();
+                    this.qs2.cache();
+                }
+            });
+        })
+    </script>
+@endpush
