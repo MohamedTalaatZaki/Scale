@@ -10,7 +10,7 @@ $factory->defineAs(App\Models\Items\Item::class, 'fake_items',function (Faker $f
       'en_name' => $faker->regexify('[A-Za-z]{5}'),
       'ar_name' => Str::random(5),
       'item_group_id' => 10001,
-      'sap_code' => 555,
+      'sap_code' => $faker->regexify('[A-Za-z]{5}'),
       'item_type_id' => 2,
     ];
 });
