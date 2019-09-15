@@ -17,7 +17,7 @@ describe('Edit item group test', function () {
 
     })
 
-    it.only('check that non permitted pages is not accessible via URL', function () {
+    it('check that non permitted pages is not accessible via URL', function () {
         cy.exec('php artisan user:remove_permission item-group.edit');
         cy.exec('php artisan user:remove_permission item-group.index');
         cy.visit('http://127.0.0.1:8000/');
@@ -38,10 +38,9 @@ describe('Edit item group test', function () {
         cy.get('input[name="en_name"]').clear().type(' ');
         cy.get('input[name="ar_name"]').clear().type(' ');
         cy.contains('Save').click();
-        cy.url().should('contain', 'item-group/edit');
+        cy.url().should('contain', 'http://127.0.0.1:8000/master-data/items/item-group/123456/edit');
         cy.contains('English Name is required').should('be.visible');
         cy.contains('Arabic Name is required').should('be.visible');
-        cy.contains('Is testable is required').should('be.visible');
     })
 
 
@@ -52,9 +51,9 @@ describe('Edit item group test', function () {
         cy.get('input[name="en_name"]').clear().type('orange orange');
         cy.get('input[name="ar_name"]').clear().type('رتقال رتقال');
         cy.get('.select2-selection.select2-selection--single.form-control').click({ force: true });
-        cy.contains('Save').click();
+        cy.contains('Save').click({force: true});
         cy.url().should('contain', '/item-group');
-        cy.contains('Create').should('be.visible');
+        cy.contains('Item Group Updated').should('be.visible');
 
     })
 
@@ -67,7 +66,7 @@ describe('Edit item group test', function () {
         cy.get('.select2-selection.select2-selection--single.form-control').click({ force: true });
         cy.contains('Cancel').click({force:true});
         cy.url().should('contain', '/items/item-group');
-        cy.contains('Create').should('be.visible');
+        cy.contains('Edit').should('be.visible');
     })
 
 
