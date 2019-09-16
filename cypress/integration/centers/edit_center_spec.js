@@ -20,13 +20,11 @@ describe('Edit City test', function () {
   })
   it('checks required fields', function () {
     cy.get('.card-body input[name="en_name"]').clear();
-    cy.get('form > :nth-child(3) > .form-group > .form-control :nth-child(1)').invoke('attr', 'selected',true);
     cy.get('.card-body input[name="ar_name"]').clear();
     cy.get('.card-body .btn-primary').click();
     cy.url().should('contain','/master-data/centers/1000/edit');
     cy.get('.error').should('contain','English Name is required')
     cy.contains('Arabic Name is required').should('be.visible');
-    cy.contains('City is Required').should('be.visible');
   })
   it('checks all fields',function(){
     cy.get('form > :nth-child(3) > .form-group > .form-control option[value=1000]').invoke('attr', 'selected',true);

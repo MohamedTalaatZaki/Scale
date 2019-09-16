@@ -2,6 +2,7 @@ describe('Edit item group test', function () {
 
 
     beforeEach(function () {
+        cy.exec('php artisan user:setLocale en');
         cy.exec('php artisan user:add_permission item-group.index');
         cy.exec('php artisan user:add_permission item-group.edit');
         cy.visit('http://127.0.0.1:8000/');
@@ -76,6 +77,3 @@ describe('Edit item group test', function () {
         cy.exec('php artisan test:delete_item_group');
     })
     })
-
-
-
