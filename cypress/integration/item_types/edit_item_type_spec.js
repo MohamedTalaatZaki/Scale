@@ -12,7 +12,7 @@ describe('Edit Item Type test', function () {
         cy.get(':nth-child(3) > .form-control').type('123456');
         cy.contains('Sign In').click();
         cy.visit('/master-data/items/item-types/');
-        cy.get('tbody > :nth-child(1) > :nth-child(4) > .btn').click();
+        cy.get(':nth-child(4) > :nth-child(4) > .btn').click();
         cy.url().should('contain','/master-data/items/item-types/1000/edit');
         cy.get('div.card-body > form').invoke('attr', 'noValidate','true');
   })
