@@ -21,7 +21,7 @@ describe('Edit Users test', function () {
         cy.contains('Master Data').click()
         cy.get('.sidebar-sub.sidebar-sub-users').click();
         cy.url().should('contain', '/master-data/users');
-        cy.get("a[href='http://127.0.0.1:8000/master-data/users/1000/edit']").click();
+        cy.get("a[href='http://127.0.0.1:8000/master-data/users/1003/edit']").click();
         cy.get('input[name="employee_code"]').clear();
         cy.get('input[name="email"]').clear();
         cy.get('select[name=role_id]').select('Select Role');
@@ -33,7 +33,7 @@ describe('Edit Users test', function () {
         cy.contains('Master Data').click()
         cy.get('.sidebar-sub.sidebar-sub-users').click();
         cy.url().should('contain', '/master-data/users');
-        cy.get("a[href='http://127.0.0.1:8000/master-data/users/1000/edit']").click();
+        cy.get("a[href='http://127.0.0.1:8000/master-data/users/1003/edit']").click();
         cy.get('.custom-switch-btn').should('have.css', 'border', '1px solid rgb(215, 215, 215)');
     })
 
@@ -41,27 +41,27 @@ describe('Edit Users test', function () {
         cy.contains('Master Data').click()
         cy.get('.sidebar-sub.sidebar-sub-users').click();
         cy.url().should('contain', '/master-data/users');
-        cy.get("a[href='http://127.0.0.1:8000/master-data/users/1000/edit']").click();
+        cy.get("a[href='http://127.0.0.1:8000/master-data/users/1003/edit']").click();
         cy.get('.card-body input[name=password]').type('123456');
         cy.get('.card-body input[name=password_confirmation]').type('123459');
         cy.contains('Save').click();
-        cy.contains('The password confirmation does not match.').should('be.visible');
+        cy.contains('password not matched').should('be.visible');
     })
     it('check password lenghth', function () {
         cy.contains('Master Data').click()
         cy.get('.sidebar-sub.sidebar-sub-users').click();
         cy.url().should('contain', '/master-data/users');
-        cy.get("a[href='http://127.0.0.1:8000/master-data/users/1000/edit']").click();
+        cy.get("a[href='http://127.0.0.1:8000/master-data/users/1003/edit']").click();
         cy.get('.card-body input[name=password]').type('12345');
         cy.get('.card-body input[name=password_confirmation]').type('12345');
         cy.contains('Save').click();
-        cy.contains('The password must be at least 6 characters.').should('be.visible');
+        cy.contains('Password min length is 6').should('be.visible');
     })
     it('required fields check', function () {
         cy.contains('Master Data').click()
         cy.get('.sidebar-sub.sidebar-sub-users').click();
         cy.url().should('contain', '/master-data/users');
-        cy.get("a[href='http://127.0.0.1:8000/master-data/users/1000/edit']").click();
+        cy.get("a[href='http://127.0.0.1:8000/master-data/users/1003/edit']").click();
         cy.get('input[name="full_name"]').should('have.attr', 'required');
         cy.get('input[name="user_name"]').should('have.attr', 'required');
     })
@@ -69,18 +69,18 @@ describe('Edit Users test', function () {
         cy.contains('Master Data').click()
         cy.get('.sidebar-sub.sidebar-sub-users').click();
         cy.url().should('contain', '/master-data/users');
-        cy.get("a[href='http://127.0.0.1:8000/master-data/users/1000/edit']").click();
+        cy.get("a[href='http://127.0.0.1:8000/master-data/users/1003/edit']").click();
         cy.get('select[name="lang"]').should('have.value', 'ar');
     })
     it('check user name length', function () {
         cy.contains('Master Data').click()
         cy.get('.sidebar-sub.sidebar-sub-users').click();
         cy.url().should('contain', '/master-data/users');
-        cy.get("a[href='http://127.0.0.1:8000/master-data/users/1000/edit']").click();
+        cy.get("a[href='http://127.0.0.1:8000/master-data/users/1003/edit']").click();
         cy.get('.card-body input[name=user_name]').clear().type('t');
         cy.contains('Save').click();
         console.log(cy.url())
-        cy.contains('The user name must be at least 4 characters.').should('be.visible');
+        cy.contains('user name min length is 4').should('be.visible');
     })
     it('unique fields check', function () {
         cy.exec('php artisan test:create_user2');
@@ -90,8 +90,8 @@ describe('Edit Users test', function () {
         cy.get("a[href='http://127.0.0.1:8000/master-data/users/1001/edit']").click();
         cy.get('.card-body input[name=user_name]').clear().type('testing');
         cy.contains('Save').click();
-        cy.contains('The user name has already been taken.').should('be.visible');
-        cy.get('.card-body input[name=email]').clear().type('test@testing.com');
+        cy.contains('user name is duplicted').should('be.visible');
+        cy.get('.card-body input[name=email]').clear().type('testing@test.com');
         cy.contains('Save').click();
         cy.contains('The email has already been taken.').should('be.visible');
         cy.exec('php artisan test:delete_user2');
@@ -101,7 +101,7 @@ describe('Edit Users test', function () {
       cy.contains('Master Data').click()
       cy.get('.sidebar-sub.sidebar-sub-users').click();
       cy.url().should('contain', '/master-data/users');
-      cy.get("a[href='http://127.0.0.1:8000/master-data/users/1000/edit']").click();
+      cy.get("a[href='http://127.0.0.1:8000/master-data/users/1003/edit']").click();
       cy.get('.card-body input[name="full_name"]').clear().type('Tonaguy');
       cy.get('.card-body input[name="user_name"]').clear().type('tonaguy');
       cy.get('.card-body input[name="password"]').clear().type('123456');
@@ -124,7 +124,7 @@ describe('Edit Users test', function () {
       cy.contains('Master Data').click()
       cy.get('.sidebar-sub.sidebar-sub-users').click();
       cy.url().should('contain', '/master-data/users');
-      cy.get("a[href='http://127.0.0.1:8000/master-data/users/1000/edit']").click();
+      cy.get("a[href='http://127.0.0.1:8000/master-data/users/1003/edit']").click();
       cy.get('.card-body input[name="full_name"]').clear().type('Tonaguy');
       cy.get('.card-body input[name="user_name"]').clear().type('tonagyy');
       cy.get('.card-body input[name="password"]').clear().type('123456');

@@ -37,13 +37,13 @@ describe('update profile settings',function(){
     cy.get('#password').clear().type('123');
     cy.get('#password_confirmation').clear().type('123');
     cy.get('.modal-footer > .btn-primary').click();
-    cy.get('.error').should('contain','The password must be at least 6 characters.');
+    cy.get('.error').should('contain','Password min length is 6');
   })
   it('checks password confirmation',function(){
     cy.get('#password').clear().type('123456');
     cy.get('#password_confirmation').clear().type('12345');
     cy.get('.modal-footer > .btn-primary').click();
-    cy.get('.error').should('contain','The password confirmation does not match.');
+    cy.get('.error').should('contain','password not matched');
   })
   it('checks cancel button',function(){
     cy.get('#inputState1> option[value="light"]').invoke('attr', 'selected',true);
