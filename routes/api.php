@@ -38,3 +38,7 @@ Route::get('item_type/{en_name}',function($en_name){
 Route::get('supplier/{en_name}',function($en_name){
   return App\Models\Supplier\Supplier::where('en_name',$en_name)->with('items')->first();
 });
+
+Route::get('item/{en_name}',function($sap_code){
+  return App\Models\Items\Item::where('sap_code',$sap_code)->first();
+});

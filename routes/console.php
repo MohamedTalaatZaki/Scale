@@ -142,6 +142,10 @@ Artisan::command('supplier:fake_many', function () {
     $suppliers = factory(App\Models\Supplier\Supplier::class,'fake_suppliers',300)->create();
 })->describe('Generate fake suppliers');
 
+Artisan::command('item:fake_items', function () {
+    $suppliers = factory(App\Models\Items\Item::class,'fake_items',300)->create();
+})->describe('Generate fake items');
+
 Artisan::command('item_type:edit_faker', function () {
     $item_type = factory(App\Models\Items\ItemType::class,'item_type_edit')->create();
 })->describe('Generate fake Item Type for edit');
