@@ -22,7 +22,7 @@ class MainMenusTableSeeder extends Seeder
 
         $main = MainMenu::create([
             'en_name' => 'Dashboard',
-            'ar_name' => 'لوحة التحكم',
+            'ar_name' => 'اللوحة الرئيسية',
             'class' => 'sidebar sidebar-dashboard',
             'href' => 'home',
             'sub_class' => 'iconsminds-shop-4',
@@ -30,14 +30,14 @@ class MainMenusTableSeeder extends Seeder
         ]);
         $group = $main->menuGroups()->create([
             'en_name' => 'Dashboard',
-            'ar_name' => 'لوحة التحكم',
+            'ar_name' => 'اللوحة الرئيسية',
             'aria_controls' => 'collapseAdministration',
             'order' => 1,
         ]);
         $group->subMenus()->createMany([
             [
                 'en_name' => 'Dashboard',
-                'ar_name' => 'لوحة التحكم',
+                'ar_name' => 'اللوحة الرئيسية',
                 'route' => 'home',
                 'a_class' => 'sidebar-sub sidebar-sub-roles',
                 'i_class' => 'simple-icon-user-following',
@@ -56,7 +56,7 @@ class MainMenusTableSeeder extends Seeder
         ]);
         $group = $main->menuGroups()->create([
             'en_name' => 'Administration',
-            'ar_name' => 'ادارة الصلاحيات والاعضاء',
+            'ar_name' => 'ادارة الصلاحيات و المستخدمين',
             'aria_controls' => 'collapseAdministration',
             'order' => 1,
         ]);
@@ -155,6 +155,25 @@ class MainMenusTableSeeder extends Seeder
                 'i_class' => 'simple-icon-user-follow',
                 'order' => 3,
                 'code'=>8
+            ]
+        ]);
+
+        $group = $main->menuGroups()->create([
+            'en_name' => 'Suppliers',
+            'ar_name' => 'الموردين',
+            'aria_controls' => 'collapseSuppliers',
+            'order' => 4,
+        ]);
+
+        $group->subMenus()->createMany([
+            [
+                'en_name' => 'Suppliers',
+                'ar_name' => 'الموردين',
+                'route' => 'suppliers.index',
+                'a_class' => 'sidebar-sub sidebar-sub-suppliers',
+                'i_class' => 'simple-icon-user-follow',
+                'order' => 1,
+                'code'=>9
             ]
         ]);
 

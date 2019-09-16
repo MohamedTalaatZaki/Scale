@@ -8,7 +8,7 @@
             <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
                 <ol class="breadcrumb pt-0">
                     <li class="breadcrumb-item">
-                        <a href="#" class="default-cursor">@lang('global.master_data')</a>
+                        <span class="default-cursor">@lang('global.master_data')</span>
                     </li>
                     <li class="breadcrumb-item">
                         <a href="{{ route('items.index') }}">@lang('global.items')</a>
@@ -37,14 +37,14 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label>@lang('global.en_name') *</label>
-                                <input type="text" class="form-control" name="en_name" value="{{ old('en_name') }}" placeholder="@lang('global.en_name')" autocomplete="off" required>
+                                <input type="text" class="form-control onlyEn" name="en_name" value="{{ old('en_name') }}" placeholder="@lang('global.en_name')" autocomplete="off" required>
                                 @if($errors->has('en_name'))
                                     <div id="jQueryName-error" class="error" style="">{{ $errors->first('en_name') }}</div>
                                 @endif
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputPassword1">@lang('global.ar_name') *</label>
-                                <input type="text" class="form-control" id="inputPassword1" name="ar_name" value="{{ old('ar_name') }}"
+                                <input type="text" class="form-control onlyAr" id="inputPassword1" name="ar_name" value="{{ old('ar_name') }}"
                                        placeholder="@lang('global.ar_name')" autocomplete="off" required>
                                 @if($errors->has('ar_name'))
                                     <div id="jQueryName-error" class="error" style="">{{ $errors->first('ar_name') }}</div>
@@ -55,7 +55,7 @@
                             <div class="form-group col-md-6">
                                 <label for="item_group_id">@lang('global.item_group') *</label>
                                 <select id="item_group_id" class="form-control select2-single" name="item_group_id">
-                                    <option label="&nbsp;" value="&nbsp;">&nbsp; @lang('global.item_group')</option>
+                                    <option label="&nbsp;" value="">&nbsp; @lang('global.item_group')</option>
                                     @foreach($groups as $group)
                                         <option
                                             value="{{ $group->id }}"
@@ -64,24 +64,24 @@
                                         </option>
                                     @endforeach
                                 </select>
-                                @if($errors->has('item_group'))
-                                    <div id="jQueryName-error" class="error" style="">{{ $errors->first('item_group') }}</div>
+                                @if($errors->has('item_group_id'))
+                                    <div id="jQueryName-error" class="error" style="">{{ $errors->first('item_group_id') }}</div>
                                 @endif
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="item_type_id">@lang('global.item_type') *</label>
                                 <select id="item_type_id" class="form-control select2-single" name="item_type_id">
-                                    <option label="&nbsp;" value="&nbsp;">&nbsp; @lang('global.item_type')</option>
+                                    <option label="&nbsp;" value="">&nbsp; @lang('global.item_type')</option>
                                     @foreach($types as $type)
                                         <option
                                             value="{{ $type->id }}"
-                                            {{ old('item_type_id') == $group->id ? 'selected' : '' }}>
+                                            {{ old('item_type_id') == $type->id ? 'selected' : '' }}>
                                             {{ $type->name }}
                                         </option>
                                     @endforeach
                                 </select>
-                                @if($errors->has('item_type'))
-                                    <div id="jQueryName-error" class="error" style="">{{ $errors->first('item_type') }}</div>
+                                @if($errors->has('item_type_id'))
+                                    <div id="jQueryName-error" class="error" style="">{{ $errors->first('item_type_id') }}</div>
                                 @endif
                             </div>
                         </div>
@@ -97,7 +97,7 @@
                                 <label class="col-12 col-form-label">@lang('global.is_active')</label>
                                 <div class="col-12">
                                     <div class="custom-switch custom-switch-primary-inverse mb-2" style="padding-left: 0">
-                                        <input class="custom-switch-input" id="is_active" type="checkbox" value="1" name="is_active" {{ old('is_active') == '1' ? 'checked' : '' }}>
+                                        <input class="custom-switch-input" id="is_active" type="checkbox" value="1" name="is_active" {{ old('is_active') == '0' ? '' : 'checked' }}>
                                         <label class="custom-switch-btn" for="is_active"></label>
                                     </div>
                                     @if($errors->has('is_active'))

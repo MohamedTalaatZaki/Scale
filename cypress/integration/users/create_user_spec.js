@@ -11,12 +11,15 @@ beforeEach(function () {
     cy.get('a[href="#masterData"]').click();
     cy.get('.sidebar-sub-users').click({ force: true });
     cy.url().should('contain','/master-data/users');
-    cy.get('a > .btn').click();
+    cy.get('.text-zero > a > .btn').click();
     cy.url().should('contain', '/master-data/users/create');
+    cy.get('div.card-body > form').invoke('attr', 'noValidate','true');
 })
+before(function(){
+  cy.exec('php artisan user:setLocale en');
+});
 describe('Create user', function () {
   it('checks required fields', function () {
-    cy.get('div.card-body > form').invoke('attr', 'noValidate','true');
     cy.get('div.card-body > form').should('have.attr', 'noValidate','true');
     cy.get('.card-body .btn-primary').click();
     cy.wait(2000);
@@ -98,27 +101,44 @@ describe('Create user', function () {
     cy.get('.card-body input[name="user_name"]').type('tonaguy');
     cy.get('.card-body input[name="password"]').type('123456');
     cy.get('.card-body input[name="password_confirmation"]').type('123456');
-    cy.get('.card-body .btn-primary').click();
-    cy.url().should('contain','/master-data/users');
-    cy.get('.text-center').should('contain','User Created Successfully But User Has No Role.')
-    cy.server();
-    cy.request('get','/api/user/tonagy').then((response)=>{
-      console.log(response);
-    });
-  })
-  it('checks all fields',function(){
-    cy.get('.card-body input[name="full_name"]').type('Tonaguy');
-    cy.get('.card-body input[name="user_name"]').type('tonagy');
-    cy.get('.card-body input[name="password"]').type('123456');
-    cy.get('.card-body input[name="password_confirmation"]').type('123456');
-    cy.get('.card-body #role > option[value=1]').invoke('attr', 'selected',true);
-    cy.get('.card-body input[name="employee_code"]').type(123);
+    cy.get('.card-body #role > option[value="2"]').invoke('attr', 'selected',true);
     cy.get('.card-body .btn-primary').click();
     cy.url().should('contain','/master-data/users');
     cy.get('.text-center').should('contain','User Created Success')
     cy.server();
-    cy.request('get','/api/user/tonagy').then((response)=>{
-      console.log(response);
+    cy.request('get','/api/user/tonaguy').then((response)=>{
+      expect(response.body).to.have.property('full_name', 'Tonaguy')
+      expect(response.body).to.have.property('user_name', 'tonaguy')
+      expect(response.body).to.have.property('is_active', false)
+      expect(response.body).to.have.property('theme', 'light')
+      expect(response.body).to.have.property('lang', 'ar')
+      expect(response.body.roles[0]).to.have.property('id', 2)
+    });
+  })
+  it('checks all fields',function(){
+    cy.get('.card-body input[name="full_name"]').type('Tonaguy');
+    cy.get('.card-body input[name="user_name"]').type('tonagyy');
+    cy.get('.card-body input[name="password"]').type('123456');
+    cy.get('.card-body input[name="password_confirmation"]').type('123456');
+    cy.get('.card-body input[name="email"]').type('tonaguy@test.com');
+    cy.get('.card-body #role > option[value=""]').invoke('attr', 'selected',true);
+    cy.get('.card-body #inputState1 > option[value="dark"]').invoke('attr', 'selected',true);
+    cy.get('.card-body #inputState2 > option[value="en"]').invoke('attr', 'selected',true);
+    cy.get('.card-body #is_active').invoke('attr', 'value','1');
+    cy.get('.card-body input[name="employee_code"]').type(123);
+    cy.get('.card-body .btn-primary').click();
+    cy.url().should('contain','/master-data/users');
+    cy.get('.text-center').should('contain','User Created Successfully But User Has No Role.')
+    cy.server();
+    cy.request('get','/api/user/tonagyy').then((response)=>{
+      console.log(response.body);
+      expect(response.body).to.have.property('full_name', 'Tonaguy')
+      expect(response.body).to.have.property('user_name', 'tonagyy')
+      expect(response.body).to.have.property('employee_code', '123')
+      expect(response.body).to.have.property('email', 'tonaguy@test.com')
+      expect(response.body).to.have.property('is_active', false)
+      expect(response.body).to.have.property('theme', 'dark')
+      expect(response.body).to.have.property('lang', 'en')
     });
   })
   it('checks create permissions',function(){

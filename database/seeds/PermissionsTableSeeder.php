@@ -246,6 +246,41 @@ class PermissionsTableSeeder extends Seeder
             'ar_description' => NULL,
         ]);
 
+        $subMenu = SubMenu::where('code', 9)->first();
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'suppliers.index',
+            'en_display_name' => 'List Suppliers',
+            'ar_display_name' => 'عرض الموردين',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'suppliers.create',
+            'en_display_name' => 'Create Supplier',
+            'ar_display_name' => 'إضافة مورد',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'suppliers.edit',
+            'en_display_name' => 'Edit Supplier',
+            'ar_display_name' => 'تعديل مورد',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'suppliers.delete',
+            'en_display_name' => 'Delete Supplier',
+            'ar_display_name' => 'حذف مورد',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+
 
     }
 }

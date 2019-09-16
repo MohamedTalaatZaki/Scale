@@ -97,5 +97,16 @@ return [
     'item_created_success'  =>  'Item Created Success',
     'item_updated_success'  =>  'Item Updated Success',
     'edit_item' =>  'Edit Item',
+    'items_search'  =>  'Search For Item',
+    'suppliers' =>  'Suppliers',
+    'supplier_created_success'  =>  'Supplier Created Success',
+    'supplier_updated_success'  =>  'Supplier Updated Success',
+    'items_count'   =>  'Items Count',
+    'select_all'    =>  'Select All',
+    'deselect_all'    =>  'Deselect All',
+    'no_data'=>'No data found.',
+    'create_suppler'    =>  'Create Suppler',
+    'edit_supplier'    =>  'Edit supplier',
+    'supplier_items'    =>  'Supplier Items',
 
 ];

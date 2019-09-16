@@ -28,6 +28,7 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('css/dore.dark.orange.min.css') }}">
     @endif
     <link rel="stylesheet" href="{{ asset('css/main.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('js/multi-select/css/multi-select.css') }}"/>
 
     <style>
         body, .table {
@@ -37,14 +38,20 @@
         .form-control:disabled {
             background-color: transparent;
         }
+
         .default-cursor {
             cursor: default;
+        }
+
+        .rtl .custom-control-label::after, .rtl .custom-control-label::before {
+            right: -25px;
         }
     </style>
     @stack('styles')
 </head>
 
-<body id="app-container" class="menu-default {{$page_dir}}">
+<body id="app-container"
+      class="menu-default {{$page_dir}}  {{Route::currentRouteName() == 'home' ? 'menu-sub-hidden sub-hidden' : ''}}">
 <nav class="navbar fixed-top">
     <div class="d-flex align-items-center navbar-left">
         <a href="#" class="menu-button d-none d-md-block">
@@ -69,10 +76,10 @@
         </a>
 
         <div class="search" data-search-path="Pages.Search.html?q=">
-            <input placeholder="Search...">
-            <span class="search-icon">
-                    <i class="simple-icon-magnifier"></i>
-                </span>
+            {{--<input placeholder="Search...">--}}
+            {{--<span class="search-icon">--}}
+                    {{--<i class="simple-icon-magnifier"></i>--}}
+                {{--</span>--}}
         </div>
 
     </div>
@@ -88,7 +95,7 @@
             <div class="d-none d-md-inline-block align-text-bottom mr-3">
                 <div class="custom-switch custom-switch-primary-inverse custom-switch-small pl-1"
                      data-toggle="tooltip" data-placement="left"
-                     title="{{ Auth::user()->theme == 'light' ? 'Dark Mode' : 'Light Mode' }}">
+                     title="{{ Auth::user()->theme == 'light' ? trans('global.dark') : trans('global.light') }}">
                     <input class="custom-switch-input" id="switchDark"
                            type="checkbox" {{ Auth::user()->theme == 'light' ? "" : "checked" }}>
                     <label class="custom-switch-btn" for="switchDark"></label>
@@ -101,8 +108,10 @@
                     <i class="simple-icon-bubbles"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right mt-3">
-                    <a class="dropdown-item" href="#">Arabic</a>
-                    <a class="dropdown-item" href="#">English</a>
+                    <a class="dropdown-item"
+                       href="{{ route('change-lang' , ['lang' => 'ar']) }}">@lang('global.arabic')</a>
+                    <a class="dropdown-item"
+                       href="{{ route('change-lang' , ['lang' => 'en']) }}">@lang('global.english')</a>
                 </div>
             </div>
 
@@ -112,35 +121,35 @@
                     <i class="simple-icon-grid"></i>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right mt-3  position-absolute" id="iconMenuDropdown">
-                    <a href="#" class="icon-menu-item">
-                        <i class="iconsminds-equalizer d-block"></i>
-                        <span>Settings</span>
-                    </a>
+{{--                    <a href="#" class="icon-menu-item">--}}
+{{--                        <i class="iconsminds-equalizer d-block"></i>--}}
+{{--                        <span>Settings</span>--}}
+{{--                    </a>--}}
 
-                    <a href="#" class="icon-menu-item">
-                        <i class="iconsminds-male-female d-block"></i>
-                        <span>Users</span>
-                    </a>
+{{--                    <a href="#" class="icon-menu-item">--}}
+{{--                        <i class="iconsminds-male-female d-block"></i>--}}
+{{--                        <span>Users</span>--}}
+{{--                    </a>--}}
 
-                    <a href="#" class="icon-menu-item">
-                        <i class="iconsminds-puzzle d-block"></i>
-                        <span>Components</span>
-                    </a>
+{{--                    <a href="#" class="icon-menu-item">--}}
+{{--                        <i class="iconsminds-puzzle d-block"></i>--}}
+{{--                        <span>Components</span>--}}
+{{--                    </a>--}}
 
-                    <a href="#" class="icon-menu-item">
-                        <i class="iconsminds-bar-chart-4 d-block"></i>
-                        <span>Profits</span>
-                    </a>
+{{--                    <a href="#" class="icon-menu-item">--}}
+{{--                        <i class="iconsminds-bar-chart-4 d-block"></i>--}}
+{{--                        <span>Profits</span>--}}
+{{--                    </a>--}}
 
-                    <a href="#" class="icon-menu-item">
-                        <i class="iconsminds-file d-block"></i>
-                        <span>Surveys</span>
-                    </a>
+{{--                    <a href="#" class="icon-menu-item">--}}
+{{--                        <i class="iconsminds-file d-block"></i>--}}
+{{--                        <span>Surveys</span>--}}
+{{--                    </a>--}}
 
-                    <a href="#" class="icon-menu-item">
-                        <i class="iconsminds-suitcase d-block"></i>
-                        <span>Tasks</span>
-                    </a>
+{{--                    <a href="#" class="icon-menu-item">--}}
+{{--                        <i class="iconsminds-suitcase d-block"></i>--}}
+{{--                        <span>Tasks</span>--}}
+{{--                    </a>--}}
 
                 </div>
             </div>
@@ -149,59 +158,59 @@
                 <button class="header-icon btn btn-empty" type="button" id="notificationButton"
                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <i class="simple-icon-bell"></i>
-                    <span class="count">3</span>
+                    <span class="count">0</span>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right mt-3 position-absolute" id="notificationDropdown">
                     <div class="scroll">
-                        <div class="d-flex flex-row mb-3 pb-3 border-bottom">
-                            <a href="#">
-                                <img src="{{ asset('img/profile-pic-l-2.jpg') }}" alt="Notification Image"
-                                     class="img-thumbnail list-thumbnail xsmall border-0 rounded-circle"/>
-                            </a>
-                            <div class="pl-3">
-                                <a href="#">
-                                    <p class="font-weight-medium mb-1">Joisse Kaycee just sent a new comment!</p>
-                                    <p class="text-muted mb-0 text-small">09.04.2018 - 12:45</p>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="d-flex flex-row mb-3 pb-3 border-bottom">
-                            <a href="#">
-                                <img src="{{ asset('img/notification-thumb.jpg') }}" alt="Notification Image"
-                                     class="img-thumbnail list-thumbnail xsmall border-0 rounded-circle"/>
-                            </a>
-                            <div class="pl-3">
-                                <a href="#">
-                                    <p class="font-weight-medium mb-1">1 item is out of stock!</p>
-                                    <p class="text-muted mb-0 text-small">09.04.2018 - 12:45</p>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="d-flex flex-row mb-3 pb-3 border-bottom">
-                            <a href="#">
-                                <img src="{{ asset('img/notification-thumb-2.jpg') }}" alt="Notification Image"
-                                     class="img-thumbnail list-thumbnail xsmall border-0 rounded-circle"/>
-                            </a>
-                            <div class="pl-3">
-                                <a href="#">
-                                    <p class="font-weight-medium mb-1">New order received! It is total $147,20.</p>
-                                    <p class="text-muted mb-0 text-small">09.04.2018 - 12:45</p>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="d-flex flex-row mb-3 pb-3 ">
-                            <a href="#">
-                                <img src="{{ asset('img/notification-thumb-3.jpg') }}" alt="Notification Image"
-                                     class="img-thumbnail list-thumbnail xsmall border-0 rounded-circle"/>
-                            </a>
-                            <div class="pl-3">
-                                <a href="#">
-                                    <p class="font-weight-medium mb-1">3 items just added to wish list by a user!
-                                    </p>
-                                    <p class="text-muted mb-0 text-small">09.04.2018 - 12:45</p>
-                                </a>
-                            </div>
-                        </div>
+{{--                        <div class="d-flex flex-row mb-3 pb-3 border-bottom">--}}
+{{--                            <a href="#">--}}
+{{--                                <img src="{{ asset('img/profile-pic-l-2.jpg') }}" alt="Notification Image"--}}
+{{--                                     class="img-thumbnail list-thumbnail xsmall border-0 rounded-circle"/>--}}
+{{--                            </a>--}}
+{{--                            <div class="pl-3">--}}
+{{--                                <a href="#">--}}
+{{--                                    <p class="font-weight-medium mb-1">Joisse Kaycee just sent a new comment!</p>--}}
+{{--                                    <p class="text-muted mb-0 text-small">09.04.2018 - 12:45</p>--}}
+{{--                                </a>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="d-flex flex-row mb-3 pb-3 border-bottom">--}}
+{{--                            <a href="#">--}}
+{{--                                <img src="{{ asset('img/notification-thumb.jpg') }}" alt="Notification Image"--}}
+{{--                                     class="img-thumbnail list-thumbnail xsmall border-0 rounded-circle"/>--}}
+{{--                            </a>--}}
+{{--                            <div class="pl-3">--}}
+{{--                                <a href="#">--}}
+{{--                                    <p class="font-weight-medium mb-1">1 item is out of stock!</p>--}}
+{{--                                    <p class="text-muted mb-0 text-small">09.04.2018 - 12:45</p>--}}
+{{--                                </a>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="d-flex flex-row mb-3 pb-3 border-bottom">--}}
+{{--                            <a href="#">--}}
+{{--                                <img src="{{ asset('img/notification-thumb-2.jpg') }}" alt="Notification Image"--}}
+{{--                                     class="img-thumbnail list-thumbnail xsmall border-0 rounded-circle"/>--}}
+{{--                            </a>--}}
+{{--                            <div class="pl-3">--}}
+{{--                                <a href="#">--}}
+{{--                                    <p class="font-weight-medium mb-1">New order received! It is total $147,20.</p>--}}
+{{--                                    <p class="text-muted mb-0 text-small">09.04.2018 - 12:45</p>--}}
+{{--                                </a>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                        <div class="d-flex flex-row mb-3 pb-3 ">--}}
+{{--                            <a href="#">--}}
+{{--                                <img src="{{ asset('img/notification-thumb-3.jpg') }}" alt="Notification Image"--}}
+{{--                                     class="img-thumbnail list-thumbnail xsmall border-0 rounded-circle"/>--}}
+{{--                            </a>--}}
+{{--                            <div class="pl-3">--}}
+{{--                                <a href="#">--}}
+{{--                                    <p class="font-weight-medium mb-1">3 items just added to wish list by a user!--}}
+{{--                                    </p>--}}
+{{--                                    <p class="text-muted mb-0 text-small">09.04.2018 - 12:45</p>--}}
+{{--                                </a>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
                     </div>
                 </div>
             </div>
@@ -298,10 +307,12 @@
                         <div class="form-group col-md-6">
                             <label for="inputState1">@lang('global.select_theme')</label>
                             <select id="inputState1" class="form-control" name="theme">
-                                <option value="light" {{ old('theme' , Auth::user()->theme) == 'light' ? 'selected' : '' }}>
+                                <option
+                                    value="light" {{ old('theme' , Auth::user()->theme) == 'light' ? 'selected' : '' }}>
                                     @lang('global.light')
                                 </option>
-                                <option value="dark" {{ old('theme' , Auth::user()->theme) == 'dark' ? 'selected' : '' }}>
+                                <option
+                                    value="dark" {{ old('theme' , Auth::user()->theme) == 'dark' ? 'selected' : '' }}>
                                     @lang('global.dark')
                                 </option>
                             </select>
@@ -353,25 +364,35 @@
 <script src="{{ asset('js/dore.script.js') }}"></script>
 <script src="{{ asset('js/scripts'.$page_dir.'.js') }}"></script>
 <script src="{{ asset('js/notify.min.js') }}"></script>
+<script src="{{ asset('js/multi-select/js/jquery.quicksearch.js') }}"></script>
+<script src="{{ asset('js/multi-select/js/jquery.multi-select.js') }}"></script>
 
 <script>
     $().ready(function () {
 
         let notify = parseInt('{{ Session::has('notify') }}');
         let openAccountInfo = parseInt('{{ Session::has('openAccountInfo') }}');
-
+        var isHome = !!'{{Route::currentRouteName() == 'home'}}';
+        if(isHome){
+            console.log(isHome);
+            localStorage.setItem('sidebar','sidebar-dashboard');
+        }
         $('.' + localStorage.getItem('sidebar')).closest('li').addClass('active');
 
         if (localStorage.getItem('hasSub') == '1') {
             $('.' + localStorage.getItem('sidebar-sub')).closest('li').addClass('active');
         }
 
-        if(openAccountInfo) {
+        if (openAccountInfo) {
             $('#account-info').modal('show');
         }
 
-        if(notify) {
-            $.notify('{{ Session::get('notify') }}' , {position: "right bottom" , className:'success' , autoHideDelay: 9000});
+        if (notify) {
+            $.notify('{{ Session::get('notify') }}', {
+                position: "right bottom",
+                className: 'success',
+                autoHideDelay: 9000
+            });
         }
         $('.sidebar,.sidebar-sub').on('click', function (event) {
             let target, classes;
@@ -398,6 +419,29 @@
                     window.location.reload();
                 }
             });
+        });
+
+
+        $('.onlyEn').keypress(function (e) {
+            var regex = new RegExp("^[a-zA-Z0-9 ]+$");
+            var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+            if (regex.test(str)) {
+                return true;
+            }
+
+            e.preventDefault();
+            return false;
+        });
+
+        $('.onlyAr').keypress(function (e) {
+            var regex = /^([\u0600-\u06ff]|[\u0750-\u077f]|[\ufb50-\ufbc1]|[\ufbd3-\ufd3f]|[\ufd50-\ufd8f]|[\ufd92-\ufdc7]|[\ufe70-\ufefc]|[\ufdf0-\ufdfd]|[ ]|[0-9])*$/g;
+            var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+            if (regex.test(str)) {
+                return true;
+            }
+
+            e.preventDefault();
+            return false;
         });
 
     });

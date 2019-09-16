@@ -29,10 +29,19 @@ class CentersController extends Controller
         $this->authorized('centers.create');
         $this->validate($request , [
             'city_id'   =>  'required|exists:cities,id',
-            'en_name'   =>  'required|unique:centers,en_name',
-            'ar_name'   =>  'required|unique:centers,ar_name'
-        ]);
-        $center    =   Center::query()->create([
+           // 'en_name'   =>  'required|unique:centers,en_name',
+            'en_name'   =>  'required',
+           // 'ar_name'   =>  'required|unique:centers,ar_name'
+            'ar_name'   =>  'required'
+        ],
+            [
+                'city_id.required'=>trans('master.errors.city_required'),
+                'en_name.required'=>trans('master.errors.en_name_required'),
+                'ar_name.required'=>trans('master.errors.ar_name_required'),
+                'en_name.unique'=>trans('master.errors.center_en_name_exist'),
+                'ar_name.unique'=>trans('master.errors.center_ar_name_exist'),
+            ]);
+        Center::query()->create([
             'city_id'   =>  $request->get('city_id'),
             'en_name'   =>  $request->get('en_name'),
             'ar_name'   =>  $request->get('ar_name'),
@@ -53,9 +62,18 @@ class CentersController extends Controller
         $this->authorized('centers.edit');
         $this->validate($request , [
             'city_id'   =>  'required|exists:cities,id',
-            'en_name'   =>  'required|unique:centers,en_name,'.$id,
-            'ar_name'   =>  'required|unique:centers,ar_name,'.$id
-        ]);
+            //'en_name'   =>  'required|unique:centers,en_name,'.$id,
+            'en_name'   =>  'required',
+           // 'ar_name'   =>  'required|unique:centers,ar_name,'.$id
+            'ar_name'   =>  'required'
+        ],
+            [
+                'city_id.required'=>trans('master.errors.city_required'),
+                'en_name.required'=>trans('master.errors.en_name_required'),
+                'ar_name.required'=>trans('master.errors.ar_name_required'),
+                'en_name.unique'=>trans('master.errors.center_en_name_exist'),
+                'ar_name.unique'=>trans('master.errors.center_ar_name_exist'),
+            ]);
         $center    =   Center::query()->findOrFail($id);
 
         $center->update([

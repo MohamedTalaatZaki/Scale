@@ -18,7 +18,7 @@
                         <span class="default-cursor">@lang('global.master_data')</span>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="{{ route('governorates.index') }}">@lang('global.governorates')</a>
+                        <span>@lang('global.governorates')</span>
                     </li>
                 </ol>
             </nav>
@@ -41,7 +41,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($governorates as $governorate)
+                        @forelse ($governorates as $governorate)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $governorate->en_name }}</td>
@@ -53,7 +53,12 @@
                                     @endpermission
                                 </td>
                             </tr>
-                        @endforeach
+                        @empty
+                            <tr>
+                                <td colspan="4"
+                                    class="text-center text-warning font-weight-bold">@lang('global.no_data')</td>
+                            </tr>
+                        @endforelse
                         </tbody>
                     </table>
                 </div>

@@ -20,7 +20,6 @@
                     <li class="breadcrumb-item">
                         <a href="{{ route('item-group.index') }}">@lang('global.item_group')</a>
                     </li>
-                    <li class="breadcrumb-item " aria-current="page">@lang('global.index')</li>
                 </ol>
             </nav>
             <div class="separator mb-5"></div>
@@ -43,7 +42,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($item_groups as $item_group)
+                @forelse($item_groups as $item_group)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $item_group->en_name }}</td>
@@ -53,12 +52,17 @@
                             {{ $item_group->testable == 1 ? trans('global.yes_testable') : trans('global.not_testable') }}
                         </td>
                         <td>
-                            @permission('governorates.edit')
+                            @permission('item-group.edit')
                             <a href="{{ route('item-group.edit' , ['id' => $item_group->id]) }}" class="btn btn-primary btn-sm mb-1">@lang('global.edit')</a>
                             @endpermission
                         </td>
                     </tr>
-                @endforeach
+                    @empty
+                        <tr>
+                            <td colspan="5"
+                                class="text-center text-warning font-weight-bold">@lang('global.no_data')</td>
+                        </tr>
+                    @endforelse
                 </tbody>
             </table>
         </div>

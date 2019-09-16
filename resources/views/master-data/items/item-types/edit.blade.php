@@ -8,7 +8,7 @@
             <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
                 <ol class="breadcrumb pt-0">
                     <li class="breadcrumb-item">
-                        <a href="#" class="default-cursor">@lang('global.master_data')</a>
+                        <span class="default-cursor">@lang('global.master_data')</span>
                     </li>
                     <li class="breadcrumb-item">
                         <a href="{{ route('item-types.index') }}">@lang('global.item_types')</a>
@@ -36,14 +36,14 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label>@lang('global.en_name') *</label>
-                                <input type="text" class="form-control" name="en_name" value="{{ old('en_name' , $item_type->en_name) }}" placeholder="@lang('global.en_name')" autocomplete="off" required>
+                                <input type="text" class="form-control onlyEn" name="en_name" value="{{ old('en_name' , $item_type->en_name) }}" placeholder="@lang('global.en_name')" autocomplete="off" required>
                                 @if($errors->has('en_name'))
                                     <div id="jQueryName-error" class="error" style="">{{ $errors->first('en_name') }}</div>
                                 @endif
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="inputPassword1">@lang('global.ar_name') *</label>
-                                <input type="text" class="form-control" id="inputPassword1" name="ar_name" value="{{ old('ar_name' , $item_type->ar_name) }}"
+                                <input type="text" class="form-control onlyAr" id="inputPassword1" name="ar_name" value="{{ old('ar_name' , $item_type->ar_name) }}"
                                        placeholder="@lang('global.ar_name')" autocomplete="off" required>
                                 @if($errors->has('ar_name'))
                                     <div id="jQueryName-error" class="error" style="">{{ $errors->first('ar_name') }}</div>
