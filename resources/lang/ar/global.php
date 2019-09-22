@@ -109,4 +109,10 @@ return [
     'edit_supplier'    =>  'تعديل مورد',
     'supplier_items'    =>  'اصناف المورد',
 
+    'scales'    =>  'الموازين',
+    'code'  =>  'الكود',
+    'brand' =>  'الماركة',
+    'model' =>  'الموديل',
+    'ip_address' =>  'عنوان الشبكة',
+
 ];

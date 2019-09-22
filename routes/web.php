@@ -29,6 +29,7 @@ Route::middleware(['auth'])->group(function (){
     Route::resource('master-data/items/item-types' , 'MasterData\ItemTypesController');
     Route::resource('master-data/items/items' , 'MasterData\ItemsController');
     Route::resource('master-data/suppliers' , 'MasterData\SuppliersController');
+    Route::resource('master-data/scales' , 'MasterData\ScalesController');
 
     Route::get('change-theme' , 'MasterData\UsersController@theme')->name('change-theme');
     Route::get('change-lang' , 'MasterData\UsersController@lang')->name('change-lang');

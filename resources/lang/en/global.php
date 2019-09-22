@@ -108,5 +108,10 @@ return [
     'create_suppler'    =>  'Create Suppler',
     'edit_supplier'    =>  'Edit supplier',
     'supplier_items'    =>  'Supplier Items',
+    'scales'    =>  'Scales',
+    'code'  =>  'Code',
+    'brand' =>  'Brand',
+    'model' =>  'Model',
+    'ip_address' =>  'IP Address',
 
 ];
