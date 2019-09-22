@@ -61,7 +61,7 @@ class ScalesController extends Controller
             'code'  =>  'required|unique:scales,code,'.$id,
             'limit'  =>  'required',
             'scale_error'  =>  'required',
-            'ip_address'  =>  ['required' , new ScaleUniqueIpAddress()],
+            'ip_address'  =>  ['required' , new ScaleUniqueIpAddress($id)],
             'brand'  =>  'required',
             'com_port'  =>  'required',
             'baud_rate'  =>  'required',

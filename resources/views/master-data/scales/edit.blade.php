@@ -32,7 +32,7 @@
 
                     <form action="{{ route('scales.update' , ['id' => $scale->id]) }}" method="post">
                         @csrf
-                        @method('PUT')
+                        @method('put')
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label>@lang('global.code') *</label>
@@ -53,7 +53,7 @@
 
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label>@lang('global.limit') *</label>
+                                <label>@lang('global.limit')</label>
                                 <input type="number"
                                        class="form-control"
                                        name="limit"
@@ -67,7 +67,7 @@
                             </div>
 
                             <div class="form-group col-md-6">
-                                <label>@lang('global.scale_error') *</label>
+                                <label>@lang('global.scale_error')</label>
                                 <input type="number"
                                        class="form-control"
                                        name="scale_error"
@@ -101,7 +101,7 @@
 
 
                             <div class="form-group col-md-4">
-                                <label>@lang('global.tolerance') *</label>
+                                <label>@lang('global.tolerance')</label>
                                 <input type="number" class="form-control" name="tolerance" value="{{ old('tolerance' , $scale->tolerance) }}" placeholder="@lang('global.tolerance')" autocomplete="off" required>
                                 @if($errors->has('tolerance'))
                                     <div id="jQueryName-error" class="error" style="">{{ $errors->first('tolerance') }}</div>

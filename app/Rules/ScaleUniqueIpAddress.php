@@ -7,14 +7,15 @@ use Illuminate\Contracts\Validation\Rule;
 
 class ScaleUniqueIpAddress implements Rule
 {
+    protected $id   =   0;
     /**
      * Create a new rule instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($id)
     {
-        //
+        $this->id   =   $id;
     }
 
     /**
@@ -22,12 +23,14 @@ class ScaleUniqueIpAddress implements Rule
      *
      * @param  string  $attribute
      * @param  mixed  $value
+     * @param  integer  $id
      * @return bool
      */
     public function passes($attribute, $value)
     {
         if( request()->has('is_active')) {
             $scale = Scale::query()
+                ->where('id' , '!=' , $this->id)
                 ->where('is_active' , 1)
                 ->where('ip_address' , $value)
                 ->first();
