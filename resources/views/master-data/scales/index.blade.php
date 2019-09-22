@@ -47,7 +47,7 @@
                         <tbody>
                         @forelse($scales as $scale)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ ( ( $scales->currentPage() - 1) * $scales->perPage() ) + $loop->iteration }}</td>
                                 <td>{{ $scale->code }}</td>
                                 <td>{{ $scale->brand }}</td>
                                 <td>{{ $scale->model }}</td>
