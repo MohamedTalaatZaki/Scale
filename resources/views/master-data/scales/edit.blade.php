@@ -193,7 +193,7 @@
                             </div>
 
                             <div class="form-group col-md-4">
-                                <label>@lang('global.time_out') *</label>
+                                <label>@lang('global.time_out')</label>
                                 <input type="text" class="form-control" name="timeout" value="{{ old('time_out' , 0) }}" placeholder="@lang('global.time_out')" autocomplete="off" required>
                                 @if($errors->has('time_out'))
                                     <div id="jQueryName-error" class="error" style="">{{ $errors->first('time_out') }}</div>
