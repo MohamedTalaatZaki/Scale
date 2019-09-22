@@ -29,8 +29,6 @@ class ScalesController extends Controller
 
         $this->validate($request , [
             'code'  =>  'required|unique:scales,code',
-            'limit'  =>  'required',
-            'scale_error'  =>  'required',
             'ip_address'  =>  ['required' , new ScaleUniqueIpAddress()],
             'brand'  =>  'required',
             'com_port'  =>  'required',
@@ -39,7 +37,6 @@ class ScalesController extends Controller
             'stop_bits'  =>  'required',
             'parity'  =>  'required',
             'timeout'  =>  'required',
-            'tolerance'  =>  'required',
         ]);
 
         Scale::query()->create($request->input());
@@ -59,8 +56,6 @@ class ScalesController extends Controller
 
         $this->validate($request , [
             'code'  =>  'required|unique:scales,code,'.$id,
-            'limit'  =>  'required',
-            'scale_error'  =>  'required',
             'ip_address'  =>  ['required' , new ScaleUniqueIpAddress($id)],
             'brand'  =>  'required',
             'com_port'  =>  'required',
@@ -69,7 +64,6 @@ class ScalesController extends Controller
             'stop_bits'  =>  'required',
             'parity'  =>  'required',
             'timeout'  =>  'required',
-            'tolerance'  =>  'required',
         ]);
 
         $request->offsetSet('is_active' , $request->input('is_active' , 0));
