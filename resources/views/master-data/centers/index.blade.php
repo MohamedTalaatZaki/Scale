@@ -46,7 +46,7 @@
                         <tbody>
                         @forelse($centers as $center)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ ( ( $centers->currentPage() - 1) * $centers->perPage() ) + $loop->iteration }}</td>
                                 <td>{{ $center->city->governorate->name }}</td>
                                 <td>{{ $center->city->name }}</td>
                                 <td>{{ $center->en_name }}</td>

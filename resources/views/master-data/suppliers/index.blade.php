@@ -47,7 +47,7 @@
                         <tbody>
                         @forelse($suppliers as $supplier)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ ( ( $suppliers->currentPage() - 1) * $suppliers->perPage() ) + $loop->iteration }}</td>
                                 <td>{{ $supplier->en_name }}</td>
                                 <td>{{ $supplier->ar_name }}</td>
                                 <td>{{ $supplier->sap_code }}</td>
