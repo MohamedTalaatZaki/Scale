@@ -126,5 +126,6 @@ return [
     'time_out'  =>  'TimeOut',
     'scale_ip_address_error'    =>  'عنوان الشبكة مستخدم بالفعل في ميزان اخر',
     'scale_created' =>  'تم اضافة الميزان بنجاح',
+    'scale_updated' =>  'تم تعديل الميزان بنجاح',
 
 ];

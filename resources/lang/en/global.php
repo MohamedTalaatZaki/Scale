@@ -125,5 +125,6 @@ return [
     'time_out'  =>  'TimeOut',
     'scale_ip_address_error'    =>  'This Ip Address Already Exist',
     'scale_created' =>  'Scale Created Successful',
+    'scale_updated' =>  'Scale Updated Successful',
 
 ];
