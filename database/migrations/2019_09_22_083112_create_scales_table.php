@@ -18,16 +18,17 @@ class CreateScalesTable extends Migration
             $table->string('code')->unique();
             $table->double('limit')->default(100000.00);
             $table->double('scale_error')->default(0.0);
-            $table->string('ip_address')->unique();
+            $table->string('ip_address')->nullable();
             $table->string('brand');
             $table->string('model')->nullable();
             $table->string('com_port');
             $table->string('baud_rate');
-            $table->string('bit_size');
+            $table->string('byte_size');
+            $table->string('stop_bits');
             $table->string('parity');
             $table->double('timeout')->default(0.0);
             $table->double('tolerance')->default(0);
-            $table->integer('is_active')->default(1);
+            $table->integer('is_active')->default(0);
             $table->timestamps();
         });
     }
