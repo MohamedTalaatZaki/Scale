@@ -29,7 +29,6 @@
                     <div>
                         <h5 class="mb-4">@lang('global.create_scale')</h5>
                     </div>
-                    @include('components._validation')
                     <form action="{{ route('scales.store') }}" method="post">
                         @csrf
 

@@ -29,7 +29,7 @@
                     <div>
                         <h5 class="mb-4">@lang('global.edit_scale')</h5>
                     </div>
-                    @include('components._validation')
+
                     <form action="{{ route('scales.update' , ['id' => $scale->id]) }}" method="post">
                         @csrf
                         @method('PUT')
