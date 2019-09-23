@@ -24,7 +24,7 @@ describe('Create user', function () {
     cy.get('.card-body .btn-primary').click();
     cy.wait(2000);
     cy.url().should('contain','/master-data/users/create');
-    cy.get('.error').should('contain','The full name field is required.')
+    cy.get('.error').should('contain','Full name is required')
   })
   it('checks username minimum length',function(){
     cy.get('.card-body input[name="full_name"]').type('Tonaguy');
@@ -34,7 +34,7 @@ describe('Create user', function () {
     cy.get('.card-body .btn-primary').click();
     cy.wait(2000);
     cy.url().should('contain','/master-data/users/create');
-    cy.get('.error').should('contain','The user name must be at least 4 characters.')
+    cy.get('.error').should('contain','user name min length is 4')
   })
   it('checks password length',function(){
     cy.get('.card-body input[name="full_name"]').type('Tonaguy');
@@ -42,7 +42,7 @@ describe('Create user', function () {
     cy.get('.card-body input[name="password"]').type('123');
     cy.get('.card-body input[name="password_confirmation"]').type('123');
     cy.get('.card-body .btn-primary').click();
-    cy.get('.error').should('contain','The password must be at least 6 characters.')
+    cy.get('.error').should('contain','Password min length is 6')
   })
   it('checks password match',function(){
     cy.get('.card-body input[name="full_name"]').type('Tonaguy');
@@ -50,7 +50,7 @@ describe('Create user', function () {
     cy.get('.card-body input[name="password"]').type('123');
     cy.get('.card-body input[name="password_confirmation"]').type('1234');
     cy.get('.card-body .btn-primary').click();
-    cy.get('.error').should('contain','The password confirmation does not match.')
+    cy.get('.error').should('contain','password not matched')
   })
   it('checks default theme',function(){
     cy.get('.card-body #inputState1 :selected').invoke('attr', 'value').should('contain', 'light')
@@ -70,7 +70,7 @@ describe('Create user', function () {
     cy.get('.card-body input[name="password"]').type('123456');
     cy.get('.card-body input[name="password_confirmation"]').type('123456');
     cy.get('.card-body .btn-primary').click();
-    cy.get('.error').should('contain','The user name has already been taken.')
+    cy.get('.error').should('contain','user name is duplicted')
   })
   it('checks default language',function(){
     cy.get('#inputState2 :selected').invoke('attr', 'value').should('contain', 'ar')

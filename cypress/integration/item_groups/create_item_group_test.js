@@ -2,6 +2,7 @@ describe('create item group test', function () {
 
 
     beforeEach(function () {
+        cy.exec('php artisan user:setLocale en');
         cy.exec('php artisan user:add_permission item-group.index');
         cy.exec('php artisan user:add_permission item-group.create');
         cy.visit('http://127.0.0.1:8000/');
@@ -32,6 +33,7 @@ describe('create item group test', function () {
         cy.contains('Master Data').click({force:true});
        cy.get('a[href="http://127.0.0.1:8000/master-data/items/item-group"]').click({force:true});
         cy.contains('Create').click();
+        cy.get('div.card-body > form').invoke('attr', 'noValidate','true');
         cy.get('input[name="en_name"]').type(' ');
         cy.get('input[name="ar_name"]').type(' ');
         cy.contains('Save').click();
@@ -46,6 +48,7 @@ describe('create item group test', function () {
         cy.contains('Master Data').click({force:true});
         cy.get('a[href="http://127.0.0.1:8000/master-data/items/item-group"]').click({force:true});
         cy.contains('Create').click();
+        cy.get('div.card-body > form').invoke('attr', 'noValidate','true');
         cy.get('input[name="en_name"]').type('orange orange');
         cy.get('input[name="ar_name"]').type('رتقال رتقال');
         cy.contains('Save').click();
@@ -57,6 +60,7 @@ describe('create item group test', function () {
         cy.contains('Master Data').click({force:true});
         cy.get('a[href="http://127.0.0.1:8000/master-data/items/item-group"]').click({force:true});
         cy.contains('Create').click();
+        cy.get('div.card-body > form').invoke('attr', 'noValidate','true');
         cy.get('input[name="en_name"]').type('​orange orange');
         cy.get('input[name="ar_name"]').type('رتقال رتقال');
         cy.get('.select2-selection.select2-selection--single.form-control').click({ force: true });
@@ -69,18 +73,18 @@ describe('create item group test', function () {
         cy.contains('Master Data').click({force:true});
         cy.get('a[href="http://127.0.0.1:8000/master-data/items/item-group"]').click({force:true});
         cy.contains('Create').click();
+        cy.get('div.card-body > form').invoke('attr', 'noValidate','true');
         cy.get('input[name="en_name"]').type('​برتقال 8**');
-        cy.get('input[name="ar_name"]').type('orange @66');
+        cy.get('input[name="ar_name"]').type('orange');
+        cy.get('#testable option[value="1"]').invoke('attr', 'selected',true);
         cy.contains('Save').click();
         cy.url().should('contain', 'item-group/create');
-        cy.contains('invalid data type').should('be.visible');
+        cy.contains('Arabic Name is required').should('be.visible');
     })
 
     afterEach(function () {
         cy.exec('php artisan user:remove_permission item-group.create');
         cy.exec('php artisan user:remove_permission item-group.index');
+        cy.exec("php artisan migrate:refresh && php artisan db:seed");
     })
-
-
 })
-

@@ -14,8 +14,8 @@ $factory->defineAs(App\Models\Governorate::class, 'fake_gov',function (Faker $fa
 $factory->defineAs(App\Models\Governorate::class, 'gov_edit',function (Faker $faker) {
     return [
         'id' => 1000,
-        'en_name'=>'Alexandria',
-        'ar_name'=>'الإسكندرية'
+        'en_name'=>'Ale',
+        'ar_name'=>'اسكندرية'
     ];
 });
 $factory->defineAs(App\Models\Governorate::class, 'demo_faker',function (Faker $faker) {

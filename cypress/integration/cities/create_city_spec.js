@@ -30,15 +30,15 @@ describe('Create City', function () {
   })
   it('checks all fields',function(){
     cy.get('form > :nth-child(2) > .form-group > .form-control > option[value="10001"]').invoke('attr', 'selected',true);
-    cy.get('.card-body input[name="en_name"]').type('Cairo');
-    cy.get('.card-body input[name="ar_name"]').type('القاهره');
+    cy.get('.card-body input[name="en_name"]').type('Beheira');
+    cy.get('.card-body input[name="ar_name"]').type('البحيره');
     cy.get('.card-body .btn-primary').click();
     cy.get('.text-center').should('contain','City Created')
     cy.server();
-    cy.request('get','/api/city/cairo').then((response)=>{
+    cy.request('get','/api/city/Beheira').then((response)=>{
       console.log(response);
-      expect(response.body).to.have.property('en_name', 'Cairo')
-      expect(response.body).to.have.property('ar_name', 'القاهره')
+      expect(response.body).to.have.property('en_name', 'Beheira')
+      expect(response.body).to.have.property('ar_name', 'البحيره')
       expect(response.body).to.have.property('gov_id', 10001)
     });
   })

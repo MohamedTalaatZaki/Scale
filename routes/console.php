@@ -263,7 +263,7 @@ Artisan::command('test:create_item_group', function () {
 })->describe('create item type');
 
 Artisan::command('test:delete_item_group', function () {
-    optional(App\Models\items\itemGroup::find(123456))->delete();
+    optional(App\Models\Items\ItemGroup::find(123456))->delete();
 })->describe('delete item group');
 
 

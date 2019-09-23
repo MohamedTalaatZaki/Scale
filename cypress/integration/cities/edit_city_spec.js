@@ -12,8 +12,8 @@ describe('Edit City test', function () {
         cy.get(':nth-child(2) > .form-control').type('test');
         cy.get(':nth-child(3) > .form-control').type('123456');
         cy.contains('Sign In').click();
-        cy.visit('/master-data/cities');
-        cy.get(':nth-child(5) > .btn').click();
+        cy.visit('/master-data/cities?page=10');
+        cy.get(':nth-child(25) > :nth-child(5) > .btn').click();
         cy.url().should('contain','/master-data/cities/1000/edit');
         cy.get('div.card-body > form').invoke('attr', 'noValidate','true');
   })
