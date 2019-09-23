@@ -265,3 +265,37 @@ Artisan::command('test:create_item_group', function () {
 Artisan::command('test:delete_item_group', function () {
     optional(App\Models\items\itemGroup::find(123456))->delete();
 })->describe('delete item group');
+
+
+
+Artisan::command('test:delete_scale', function () {
+    optional(App\Models\Scales\Scale::where('ip_address','888'))->delete();
+})->describe('delete scale');
+
+Artisan::command('test:delete_scale2', function () {
+    optional(App\Models\Scales\Scale::where('ip_address','8888'))->delete();
+})->describe('delete scale2');
+
+Artisan::command('test:create_scale_test', function () {
+    DB::table('scales')->insert([
+        'id'=> 1234,
+        'code'         =>  '9999',
+        'ip_address'         =>  '9999',
+        'is_active'   =>  0,
+        'com_port'=> '1234',
+        'baud_rate'         =>  '75',
+        'byte_size'         =>  'FIVE BITS',
+        'brand'         =>  '9999',
+        'stop_bits'   =>  'STOP BITS ONE',
+        'parity'   =>  'PARITY EVEN',
+
+    ]);
+})->describe('create scale test');
+
+Artisan::command('test:delete_scale_test', function () {
+    optional(App\Models\Scales\Scale::where('ip_address','9999'))->delete();
+})->describe('delete scale2');
+
+Artisan::command('test:delete_scale3', function () {
+    optional(App\Models\Scales\Scale::where('code','12345'))->delete();
+})->describe('delete scale2');
