@@ -1,4 +1,4 @@
-describe('Edit Supplier test', function () {
+describe('Edit Scale test', function () {
     before(function(){
       cy.exec('php artisan scale:demo_faker');
       cy.exec('php artisan scale:edit_faker');
