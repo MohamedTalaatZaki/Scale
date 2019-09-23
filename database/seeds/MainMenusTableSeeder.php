@@ -177,5 +177,24 @@ class MainMenusTableSeeder extends Seeder
             ]
         ]);
 
+        $group = $main->menuGroups()->create([
+            'en_name' => 'Scales',
+            'ar_name' => 'الموازين',
+            'aria_controls' => 'collapseScales',
+            'order' => 5,
+        ]);
+
+        $group->subMenus()->createMany([
+            [
+                'en_name' => 'Scales',
+                'ar_name' => 'الموازين',
+                'route' => 'scales.index',
+                'a_class' => 'sidebar-sub sidebar-sub-scales',
+                'i_class' => 'simple-icon-user-follow',
+                'order' => 1,
+                'code'=>10
+            ]
+        ]);
+
     }
 }

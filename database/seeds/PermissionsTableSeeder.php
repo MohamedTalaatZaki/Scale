@@ -281,6 +281,41 @@ class PermissionsTableSeeder extends Seeder
             'ar_description' => NULL,
         ]);
 
+        $subMenu = SubMenu::where('code', 10)->first();
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'scales.index',
+            'en_display_name' => 'List Scales',
+            'ar_display_name' => 'عرض الموازين',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'scales.create',
+            'en_display_name' => 'Create Scales',
+            'ar_display_name' => 'إضافة ميزان',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'scales.edit',
+            'en_display_name' => 'Edit Scales',
+            'ar_display_name' => 'تعديل ميزان',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'scales.delete',
+            'en_display_name' => 'Delete Scales',
+            'ar_display_name' => 'حذف ميزان',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+
 
     }
 }
