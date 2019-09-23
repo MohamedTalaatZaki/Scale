@@ -265,3 +265,8 @@ Artisan::command('test:create_item_group', function () {
 Artisan::command('test:delete_item_group', function () {
     optional(App\Models\items\itemGroup::find(123456))->delete();
 })->describe('delete item group');
+
+
+Artisan::command('scale:fake_scales', function () {
+    $suppliers = factory(App\Models\Scales\Scale::class,'fake_scales',300)->create();
+})->describe('Generate fake scales');
