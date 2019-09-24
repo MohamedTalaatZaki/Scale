@@ -46,6 +46,16 @@
         .rtl .custom-control-label::after, .rtl .custom-control-label::before {
             right: -25px;
         }
+        .logo.ar{
+           background:  url(../img/Picture2.png) no-repeat;
+            background-size: contain;
+            background-position: center center;
+        }
+        .logo.en{
+            background: url(../img/logo_en.png) no-repeat;
+            background-size: contain;
+            background-position: center center;
+        }
     </style>
     @stack('styles')
 </head>
@@ -86,7 +96,7 @@
 
 
     <a class="navbar-logo" href="{{route('home')}}">
-        <span class="logo d-none d-xs-block"></span>
+        <span class="logo {{App::getLocale()}} d-none d-xs-block"></span>
         <span class="logo-mobile d-block d-xs-none"></span>
     </a>
 
