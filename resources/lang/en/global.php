@@ -146,5 +146,4 @@ return [
     'min_max_error' =>  'The Min Input Must Be Lower Than Max Input',
     'created_success'   =>  'Created Successful',
     'edit_success'   =>  'Updated Successful',
-
 ];
