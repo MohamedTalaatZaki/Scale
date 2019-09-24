@@ -127,5 +127,7 @@ return [
     'scale_created' =>  'Scale Created Successful',
     'scale_updated' =>  'Scale Updated Successful',
     'edit_scale'    =>  'Edit Scale',
+    'element_count' =>  'Element Count',
+    'qc_test_headers'   =>  'QC Test',
 
 ];

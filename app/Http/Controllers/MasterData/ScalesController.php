@@ -37,7 +37,7 @@ class ScalesController extends Controller
             'stop_bits'  =>  'required',
             'parity'  =>  'required',
         ]);
-
+        dd($request->input());
         Scale::query()->create($request->input());
 
         return redirect()->action('MasterData\ScalesController@index')->with('success' , trans('global.scale_created'));
