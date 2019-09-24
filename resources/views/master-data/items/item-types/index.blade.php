@@ -43,7 +43,7 @@
                 <tbody>
                 @forelse($item_types as $item_type)
                     <tr>
-                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ ( ( $item_types->currentPage() - 1) * $item_types->perPage() ) + $loop->iteration }}</td>
                         <td>{{ $item_type->en_name }}</td>
                         <td>{{ $item_type->ar_name }}</td>
                         <td>

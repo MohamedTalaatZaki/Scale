@@ -44,7 +44,7 @@
                         <tbody>
                         @forelse($cities as $city)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ ( ( $cities->currentPage() - 1) * $cities->perPage() ) + $loop->iteration }}</td>
                                 <td>{{ $city->governorate->name }}</td>
                                 <td>{{ $city->en_name }}</td>
                                 <td>{{ $city->ar_name }}</td>

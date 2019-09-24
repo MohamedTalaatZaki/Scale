@@ -43,7 +43,7 @@
                         <tbody>
                         @forelse ($governorates as $governorate)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ ( ( $governorates->currentPage() - 1) * $governorates->perPage() ) + $loop->iteration }}</td>
                                 <td>{{ $governorate->en_name }}</td>
                                 <td>{{ $governorate->ar_name }}</td>
                                 <td>

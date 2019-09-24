@@ -44,7 +44,7 @@
                         <tbody>
                         @forelse($roles as $role)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ ( ( $roles->currentPage() - 1) * $roles->perPage() ) + $loop->iteration }}</td>
                                 <td>{{ $role->name }}</td>
                                 <td>{{ $role->perms->count() }}</td>
                                 <td>{{ $role->users->count() }}</td>
