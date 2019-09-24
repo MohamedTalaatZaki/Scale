@@ -128,5 +128,7 @@ return [
     'scale_created' =>  'تم اضافة الميزان بنجاح',
     'scale_updated' =>  'تم تعديل الميزان بنجاح',
     'edit_scale'    =>  'تعديل الميزان',
+    'element_count' =>  'عدد العناصر',
+    'qc_test_headers'   =>  'أختبارات مراقبة الجودة',
 
 ];
