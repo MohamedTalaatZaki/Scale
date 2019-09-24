@@ -376,6 +376,7 @@
 <script src="{{ asset('js/notify.min.js') }}"></script>
 <script src="{{ asset('js/multi-select/js/jquery.quicksearch.js') }}"></script>
 <script src="{{ asset('js/multi-select/js/jquery.multi-select.js') }}"></script>
+<script src="{{ asset('js/jquery.repeater.js') }}"></script>
 
 <script>
     $().ready(function () {

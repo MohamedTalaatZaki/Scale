@@ -5,8 +5,8 @@
         <div class="col-12">
             <h1>@lang('global.qc_test_headers')</h1>
             <div class="text-zero top-right-button-container">
-                @permission('qc_test_headers.create')
-                <a href="{{ route('qc_test_headers.create') }}">
+                @permission('qc-test-headers.create')
+                <a href="{{ route('qc-test-headers.create') }}">
                     <button type="button"
                             class="btn btn-primary btn-sm top-right-button mr-1">@lang('global.create')</button>
                 </a>
@@ -46,7 +46,7 @@
                         <tbody>
                         @forelse($qc_test_headers as $qc_test_header)
                             <tr>
-                                <td>{{ ( ( $cities->currentPage() - 1) * $cities->perPage() ) + $loop->iteration }}</td>
+                                <td>{{ ( ( $qc_test_headers->currentPage() - 1) * $qc_test_headers->perPage() ) + $loop->iteration }}</td>
                                 <td>{{ $qc_test_header->en_name }}</td>
                                 <td>{{ $qc_test_header->ar_name }}</td>
                                 <td>{{ optional($qc_test_header->itemGroup)->name }}</td>
@@ -55,8 +55,8 @@
                                     <i class="simple-icon-{{ $qc_test_header->is_active == 1 ? 'check' : 'close' }}"></i>
                                 </td>
                                 <td>
-                                    @permission('qc_test_headers.edit')
-                                    <a href="{{ route('qc_test_headers.edit' , ['id' => $item->id]) }}"
+                                    @permission('qc-test-headers.edit')
+                                    <a href="{{ route('qc-test-headers.edit' , ['id' => $qc_test_header->id]) }}"
                                        class="btn btn-primary btn-sm mb-1">@lang('global.edit')</a>
                                     @endpermission
                                 </td>
