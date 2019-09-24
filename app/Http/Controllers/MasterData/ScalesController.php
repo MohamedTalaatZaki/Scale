@@ -36,7 +36,6 @@ class ScalesController extends Controller
             'byte_size'  =>  'required',
             'stop_bits'  =>  'required',
             'parity'  =>  'required',
-            'timeout'  =>  'required',
         ]);
 
         Scale::query()->create($request->input());
@@ -63,12 +62,11 @@ class ScalesController extends Controller
             'byte_size'  =>  'required',
             'stop_bits'  =>  'required',
             'parity'  =>  'required',
-            'timeout'  =>  'required',
         ]);
-
         $request->offsetSet('is_active' , $request->input('is_active' , 0));
+        $inputs = array_filter($request->input() , function ($elem){ return !is_null($elem);});
         $scale  =   Scale::query()->findOrFail($id);
-        $scale->update($request->input());
+        $scale->update($inputs);
 
         return redirect()->action('MasterData\ScalesController@index')->with('success' , trans('global.scale_updated'));
     }
