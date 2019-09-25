@@ -11,8 +11,8 @@ describe('Edit Governorate test', function () {
         cy.get(':nth-child(2) > .form-control').type('test');
         cy.get(':nth-child(3) > .form-control').type('123456');
         cy.contains('Sign In').click();
-        cy.visit('/master-data/governorates');
-        cy.get('tbody > :nth-child(1) > :nth-child(4) > .btn').click();
+        cy.visit('/master-data/governorates?page=2');
+        cy.get('tbody > :nth-child(3) > :nth-child(4) > .btn').click();
         cy.url().should('contain','/master-data/governorates/1000/edit');
         cy.get('div.card-body > form').invoke('attr', 'noValidate','true');
   })
@@ -34,14 +34,14 @@ describe('Edit Governorate test', function () {
     cy.contains('Governorate Arabic Name is duplicated').should('be.visible');
   })
   it('checks all fields',function(){
-    cy.get('.card-body input[name="en_name"]').clear().type('Cairo');
-    cy.get('.card-body input[name="ar_name"]').clear().type('القاهره');
+    cy.get('.card-body input[name="en_name"]').clear().type('Assiut');
+    cy.get('.card-body input[name="ar_name"]').clear().type('اسيوط');
     cy.get('.card-body .btn-primary').click();
     cy.get('.text-center').should('contain','Governorate Updated')
     cy.server();
-    cy.request('get','/api/governorate/cairo').then((response)=>{
-      expect(response.body).to.have.property('en_name', 'Cairo')
-      expect(response.body).to.have.property('ar_name', 'القاهره')
+    cy.request('get','/api/governorate/Assiut').then((response)=>{
+      expect(response.body).to.have.property('en_name', 'Assiut')
+      expect(response.body).to.have.property('ar_name', 'اسيوط')
     });
   })
   it('checks edit permissions',function(){

@@ -44,7 +44,7 @@
                 <tbody>
                 @forelse($item_groups as $item_group)
                     <tr>
-                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ ( ( $item_groups->currentPage() - 1) * $item_groups->perPage() ) + $loop->iteration }}</td>
                         <td>{{ $item_group->en_name }}</td>
                         <td>{{ $item_group->ar_name }}</td>
                         <td>

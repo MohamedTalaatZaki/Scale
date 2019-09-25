@@ -32,7 +32,7 @@
                         <form action="{{ route('login') }}" method="post">
                             @csrf
                             <label class="form-group has-float-label mb-4">
-                                <input class="form-control" name="user_name" required/>
+                                <input class="form-control" name="user_name" required autofocus/>
                                 <span>@lang('login.name')</span>
                             </label>
 

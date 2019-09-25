@@ -47,13 +47,11 @@ describe('Edit Scale test', function () {
   })
   it('checks datatype', function () {
     cy.get('.card-body input[name="limit"]').clear().type('wqwq');
-    cy.get('.card-body input[name="ip_address"]').clear().type('asas');
     cy.get('.card-body input[name="scale_error"]').clear().type('wqwq');
     cy.get('.card-body input[name="tolerance"]').clear().type('wqwq');
     cy.get('.card-body input[name="timeout"]').clear().type('wqwq');
     cy.get('.float-right > .btn-primary').click();
     cy.url().should('contain','/master-data/scales/1000/edit');
-    cy.contains('The ip address field is validate.').should('be.visible');
     cy.contains('The limit field validate.').should('be.visible');
     cy.contains('The error field validate.').should('be.visible');
     cy.contains('The timeout field validate.').should('be.visible');
@@ -82,7 +80,7 @@ describe('Edit Scale test', function () {
     cy.server();
     cy.request('get','/api/scale/789789').then((response)=>{
       console.log(response.body);
-      expect(response.body).to.have.property('timeout', 100000)
+      expect(response.body).to.have.property('timeout', 2)
       expect(response.body).to.have.property('tolerance', 0)
       expect(response.body).to.have.property('scale_error', 0)
       expect(response.body).not.to.have.property('model')

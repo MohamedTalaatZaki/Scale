@@ -36,14 +36,14 @@ describe('Create Governorate', function () {
     cy.contains('Governorate Arabic Name is duplicated').should('be.visible');
   })
   it('checks all fields',function(){
-    cy.get('.card-body input[name="en_name"]').type('Cairo');
-    cy.get('.card-body input[name="ar_name"]').type('القاهره');
+    cy.get('.card-body input[name="en_name"]').type('Assiut');
+    cy.get('.card-body input[name="ar_name"]').type('اسيوط');
     cy.get('.card-body .btn-primary').click();
     cy.get('.text-center').should('contain','Governorate Created')
     cy.server();
-    cy.request('get','/api/governorate/cairo').then((response)=>{
-      expect(response.body).to.have.property('en_name', 'Cairo')
-      expect(response.body).to.have.property('ar_name', 'القاهره')
+    cy.request('get','/api/governorate/Assiut').then((response)=>{
+      expect(response.body).to.have.property('en_name', 'Assiut')
+      expect(response.body).to.have.property('ar_name', 'اسيوط')
     });
   })
   it('checks create permissions',function(){

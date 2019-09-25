@@ -103,7 +103,7 @@
                         <tbody>
                         @forelse($items as $item)
                             <tr>
-                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ ( ( $items->currentPage() - 1) * $items->perPage() ) + $loop->iteration }}</td>
                                 <td>{{ $item->en_name }}</td>
                                 <td>{{ $item->ar_name }}</td>
                                 <td>{{ $item->sap_code }}</td>
