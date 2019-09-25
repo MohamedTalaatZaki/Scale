@@ -29,7 +29,6 @@
                     <div>
                         <h5 class="mb-4">@lang('global.edit_scale')</h5>
                     </div>
-
                     <form action="{{ route('scales.update' , ['id' => $scale->id]) }}" method="post">
                         @csrf
                         @method('put')
