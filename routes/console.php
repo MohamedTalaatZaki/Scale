@@ -289,3 +289,24 @@ Artisan::command('test:delete_item_group', function () {
 Artisan::command('scale:fake_scales', function () {
     $suppliers = factory(App\Models\Scales\Scale::class,'fake_scales',300)->create();
 })->describe('Generate fake scales');
+<<<<<<< HEAD
+=======
+Artisan::command('scale:demo_faker', function () {
+    $gov = factory(App\Models\Scales\Scale::class,'demo_faker')->create();
+})->describe('Generate fake single scale');
+
+Artisan::command('scale:edit_faker', function () {
+    $gov = factory(App\Models\Scales\Scale::class,'edit_faker')->create();
+})->describe('Generate fake scale for edit');
+
+
+Artisan::command('qc_test:fake_qc_tests', function () {
+    $qc_tests = factory(App\Models\QC\QcTestHeader::class, 'fake_qc_tests', 300)->create()->each(function ($qc_test) {
+        $qc_test->details()->createMany(
+            factory(App\Models\QC\QcTestDetail::class, 3)->make([
+                'qc_test_header_id' => $qc_test->id
+            ])->toArray()
+        );
+    });
+})->describe('Generate fake qc tests');
+>>>>>>> a8cef1e... qc-index-test
