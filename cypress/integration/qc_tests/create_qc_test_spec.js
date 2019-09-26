@@ -24,42 +24,66 @@ describe('Create QC Item', function () {
     cy.get('.float-right > .btn-primary').click();
     cy.wait(2000);
     cy.url().should('contain','/master-data/qc-test-headers/create');
-    cy.get('.error').should('contain','English Name is required')
-    cy.get('.error').should('contain','Arabic Name is required')
-    cy.contains('Arabic Name is required').should('be.visible');
-    cy.contains('Item group is required').should('be.visible');
-    cy.contains('SAP code is required').should('be.visible');
-    cy.contains('Item Type is required').should('be.visible');
+    cy.get('.error').should('contain','The en name field is required.')
+    cy.contains('The ar name field is required.').should('be.visible');
+    cy.contains('The item group id field is required.').should('be.visible');
+    cy.contains('The English Name field is required.').should('be.visible');
+    cy.contains('The Arabic Name field is required.').should('be.visible');
+    cy.contains('The Element Type field is required.').should('be.visible');
+    cy.contains('The Test Type field is required.').should('be.visible');
   })
-  it('checks unique fields', function () {
-    cy.get('.card-body input[name="sap_code"]').type('666');
-    cy.get('.card-body input[name="en_name"]').type('Alex');
-    cy.get('.card-body input[name="ar_name"]').type('الاسكندريه');
+  it('checks datatype fields', function () {
+    cy.get('.card-body input[name="en_name"]').type('اسم');
+    cy.get('.card-body input[name="ar_name"]').type('eng');
     cy.get('#item_group_id option[value="10001"]').invoke('attr', 'selected',true);
-    cy.get('#item_type_id option[value="2"]').invoke('attr', 'selected',true);
+    cy.get('.card-body input[name="details[0][en_name]"]').type('اسم');
+    cy.get('.card-body input[name="details[0][ar_name]"]').type('eng');
+    cy.get('select[name="details[0][test_type]"] option[value="visual"]').invoke('attr', 'selected',true);
+    cy.get('select[name="details[0][element_type]"] option[value="range"]').invoke('attr', 'selected',true);
+    cy.get('input[name="details[0][min_range]"]').should('be.visible');
+    cy.get('input[name="details[0][element_unit]"]').should('be.visible');
+    cy.get('#expected_result').should('not.exist');
+    cy.get('.card-body input[name="details[0][min_range]"]').type('Alex');
+    cy.get('.card-body input[name="details[0][min_range]"]').type('Alex');
+    cy.get('.card-body input[name="details[0][element_unit]"]').type('Alex');
     cy.get('.float-right > .btn-primary').click();
     cy.wait(2000);
     cy.url().should('contain','/master-data/qc-test-headers/create');
     cy.get('.error').should('contain','SAP code is duplicated')
-  })
-  it('checks all fields',function(){
-    cy.get('.card-body input[name="sap_code"]').type('wwwwww');
-    cy.get('.card-body input[name="en_name"]').type('Cairo');
-    cy.get('.card-body input[name="ar_name"]').type('القاهره');
-    cy.get('#item_group_id option[value="10001"]').invoke('attr', 'selected',true);
-    cy.get('#item_type_id option[value="2"]').invoke('attr', 'selected',true);
     cy.get('.float-right > .btn-primary').click();
-    cy.get('.text-center').should('contain','Item Created Success')
-    cy.server();
-    cy.request('get','/api/qc-test-headers/wwwwww').then((response)=>{
-      console.log(response);
-      expect(response.body).to.have.property('en_name', 'Cairo')
-      expect(response.body).to.have.property('sap_code', 'wwwwww')
-      expect(response.body).to.have.property('is_active', 1)
-      expect(response.body).to.have.property('item_type_id', 2)
-      expect(response.body).to.have.property('item_group_id', 10001)
-      expect(response.body).to.have.property('ar_name', 'القاهره')
-    });
+    cy.wait(2000);
+    cy.url().should('contain','/master-data/qc-test-headers/create');
+    cy.get('.error').should('contain','The en name field is required.')
+    cy.contains('The ar name field is required.').should('be.visible');
+    cy.contains('The English Name field is required.').should('be.visible');
+    cy.contains('The Arabic Name field is required.').should('be.visible');
+    cy.contains('The Element Unit field is required when Element Type is range.').should('be.visible');
+  })
+  it('checks questions fields', function () {
+    cy.get('.card-body input[name="en_name"]').type('اسم');
+    cy.get('.card-body input[name="ar_name"]').type('eng');
+    cy.get('#item_group_id option[value="10001"]').invoke('attr', 'selected',true);
+    cy.get('.card-body input[name="details[0][en_name]"]').type('اسم');
+    cy.get('.card-body input[name="details[0][ar_name]"]').type('eng');
+    cy.get('select[name="details[0][test_type]"] option[value="visual"]').invoke('attr', 'selected',true);
+    cy.get('select[name="details[0][element_type]"] option[value="question"]').invoke('attr', 'selected',true);
+    cy.get('input[name="details[0][min_range]"]').should('not.exist');
+    cy.get('input[name="details[0][element_unit]"]').should('not.exist');
+    cy.get('#expected_result').should('be.visible');
+
+    cy.get('#expected_result option[value="1"]').invoke('attr', 'selected',true);
+    cy.get('.float-right > .btn-primary').click();
+    cy.wait(2000);
+    cy.url().should('contain','/master-data/qc-test-headers/create');
+    cy.get('.error').should('contain','SAP code is duplicated')
+    cy.get('.float-right > .btn-primary').click();
+    cy.wait(2000);
+    cy.url().should('contain','/master-data/qc-test-headers/create');
+    cy.get('.error').should('contain','The en name field is required.')
+    cy.contains('The ar name field is required.').should('be.visible');
+    cy.contains('The English Name field is required.').should('be.visible');
+    cy.contains('The Arabic Name field is required.').should('be.visible');
+    cy.contains('The Expected Result field is required when Element Type is question.').should('be.visible');
   })
   it('checks create permissions',function(){
     cy.exec("php artisan user:remove_permission qc-test-headers.create");
