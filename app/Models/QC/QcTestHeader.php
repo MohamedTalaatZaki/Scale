@@ -2,6 +2,7 @@
 
 namespace App\Models\QC;
 
+use App\Models\Items\ItemGroup;
 use Illuminate\Database\Eloquent\Model;
 
 class QcTestHeader extends Model
@@ -18,5 +19,10 @@ class QcTestHeader extends Model
     public function getNameAttribute()
     {
         return $this->attributes['name']    =   app()->getLocale() == 'ar' ? $this->ar_name : $this->en_name;
+    }
+
+    public function itemGroup()
+    {
+        return $this->belongsTo(ItemGroup::class , 'item_group_id' , 'id');
     }
 }

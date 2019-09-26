@@ -381,6 +381,7 @@
 <script>
     $().ready(function () {
 
+        let body    =   $('body');
         let notify = parseInt('{{ Session::has('notify') }}');
         let openAccountInfo = parseInt('{{ Session::has('openAccountInfo') }}');
         var isHome = !!'{{Route::currentRouteName() == 'home'}}';
@@ -433,7 +434,7 @@
         });
 
 
-        $('.onlyEn').keypress(function (e) {
+        body.on( 'keypress' , '.onlyEn' ,function (e) {
             var regex = new RegExp("^[a-zA-Z0-9 ]+$");
             var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
             if (regex.test(str)) {
@@ -444,7 +445,7 @@
             return false;
         });
 
-        $('.onlyAr').keypress(function (e) {
+        body.on( 'keypress' , '.onlyAr' ,function (e) {
             var regex = /^([\u0600-\u06ff]|[\u0750-\u077f]|[\ufb50-\ufbc1]|[\ufbd3-\ufd3f]|[\ufd50-\ufd8f]|[\ufd92-\ufdc7]|[\ufe70-\ufefc]|[\ufdf0-\ufdfd]|[ ]|[0-9])*$/g;
             var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
             if (regex.test(str)) {

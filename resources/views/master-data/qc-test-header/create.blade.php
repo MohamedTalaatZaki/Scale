@@ -98,77 +98,159 @@
                             </tr>
                             </thead>
                             <tbody data-repeater-list="details">
-                                <tr data-repeater-item>
-                                    <td>
-                                        <input type="text" class="form-control onlyEn form-control-sm" name="details[0][en_name]" value="{{ old('en_name') }}"
-                                               placeholder="@lang('global.en_name')" autocomplete="off" required>
-                                        @if($errors->has('en_name'))
-                                            <div id="jQueryName-error" class="error" style="">{{ $errors->first('en_name') }}</div>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        <input type="text" class="form-control onlyAr form-control-sm"  name="details[0][ar_name]" value="{{ old('ar_name') }}"
-                                               placeholder="@lang('global.ar_name')" autocomplete="off" required>
-                                        @if($errors->has('ar_name'))
-                                            <div id="jQueryName-error" class="error" style="">{{ $errors->first('ar_name') }}</div>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        <select  class="form-control form-control-sm" name="details[0][test_type]" required>
-                                            <option value="">@lang('global.test_type')</option>
-                                            <option value="visual">@lang('global.visual')</option>
-                                            <option value="chimerical">@lang('global.chimerical')</option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <select  class="form-control form-control-sm element_type" name="details[0][element_type]" required>
-                                            <option value="">@lang('global.element_type')</option>
-                                            <option value="range">@lang('global.range')</option>
-                                            <option value="question">@lang('global.question')</option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        <select id="expected_result" class="form-control form-control-sm expected_result" name="details[0][expected_result]" style="display: none">
-                                            <option value="">@lang('global.expected_result')</option>
-                                            <option value="1">@lang('global.yes')</option>
-                                            <option value="0">@lang('global.no')</option>
-                                        </select>
-                                        @if($errors->has('expected_result'))
-                                            <div id="jQueryName-error" class="error" style="">{{ $errors->first('expected_result') }}</div>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        <input type="number" class="form-control form-control-sm min_range range" name="details[0][min_range]" style="display: none"
-                                               value="{{ old('min_range') }}" placeholder="@lang('global.min_range')" autocomplete="off">
-                                        @if($errors->has('min_range'))
-                                            <div id="jQueryName-error" class="error" style="">{{ $errors->first('min_range') }}</div>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        <input type="number" class="form-control form-control-sm max_range range" name="details[0][max_range]" style="display: none"
-                                               value="{{ old('max_range') }}" placeholder="@lang('global.max_range')" autocomplete="off">
-                                        @if($errors->has('max_range'))
-                                            <div id="jQueryName-error" class="error" style="">{{ $errors->first('max_range') }}</div>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        <input type="text" class="form-control form-control-sm element_unit"  name="details[0][element_unit]" style="display: none"
-                                               value="{{ old('element_unit') }}" placeholder="@lang('global.element_unit')" autocomplete="off">
-                                        @if($errors->has('element_unit'))
-                                            <div id="jQueryName-error" class="error" style="">{{ $errors->first('element_unit') }}</div>
-                                        @endif
-                                    </td>
-                                    <td>
-                                        <div class="btn-group btn-group-sm" role="group">
-                                            <button type="button" class="btn btn-info btn-xs new-row" data-repeater-create>
-                                                <i class="simple-icon-plus" style="font-size: 16px ; font-weight: bolder"></i>
-                                            </button>
-                                            <button type="button" class="btn btn-dark btn-xs" data-repeater-delete>
-                                                <i class="simple-icon-minus" style="font-size: 16px ; font-weight: bolder"></i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
+                                @if(!is_null(old('details')))
+                                    @foreach(old('details') as $key => $row)
+                                        <tr data-repeater-item>
+                                            <td>
+                                                <input type="text" class="form-control onlyEn form-control-sm" name="details[{{$key}}][en_name]" value="{{ old("details.$key.en_name") }}"
+                                                       placeholder="@lang('global.en_name')" autocomplete="off" required>
+                                                @if($errors->has("details.$key.en_name"))
+                                                    <div id="jQueryName-error" class="error" style="">{{ $errors->first("details.$key.en_name") }}</div>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <input type="text" class="form-control onlyAr form-control-sm"  name="details[{{$key}}][ar_name]" value="{{ old("details.$key.ar_name") }}"
+                                                       placeholder="@lang('global.ar_name')" autocomplete="off" required>
+                                                @if($errors->has("details.$key.en_name"))
+                                                    <div id="jQueryName-error" class="error" style="">{{ $errors->first("details.$key.en_name") }}</div>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <select  class="form-control form-control-sm" name="details[{{$key}}][test_type]" required>
+                                                    <option value="">@lang('global.test_type')</option>
+                                                    <option value="visual" {{ old("details.$key.test_type") == 'visual' ? "selected" : '' }}>@lang('global.visual')</option>
+                                                    <option value="chimerical" {{ old("details.$key.test_type") == 'chimerical' ? "selected" : '' }}>@lang('global.chimerical')</option>
+                                                </select>
+                                                @if($errors->has("details.$key.test_type"))
+                                                    <div id="jQueryName-error" class="error" style="">{{ $errors->first("details.$key.test_type") }}</div>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <select  class="form-control form-control-sm element_type" name="details[{{$key}}][element_type]" required>
+                                                    <option value="">@lang('global.element_type')</option>
+                                                    <option value="range" {{ old("details.$key.element_type") == 'range' ? "selected" : '' }}>@lang('global.range')</option>
+                                                    <option value="question" {{ old("details.$key.element_type") == 'question' ? "selected" : '' }}>@lang('global.question')</option>
+                                                </select>
+                                                @if($errors->has("details.$key.element_type"))
+                                                    <div id="jQueryName-error" class="error" style="">{{ $errors->first("details.$key.element_type") }}</div>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <select id="expected_result" class="form-control form-control-sm expected_result" name="details[{{$key}}][expected_result]" style="display: {{$row['element_type'] == 'range' ? 'none' : 'block'}}" {{$row['element_type'] == 'range' ? '' : 'required'}}>
+                                                    <option value="">@lang('global.expected_result')</option>
+                                                    <option value="1" {{ old("details.$key.expected_result") == '1' ? "selected" : '' }}>@lang('global.yes')</option>
+                                                    <option value="0" {{ old("details.$key.expected_result") == '0' ? "selected" : '' }}>@lang('global.no')</option>
+                                                </select>
+                                                @if($errors->has("details.$key.expected_result"))
+                                                    <div id="jQueryName-error" class="error" style="">{{ $errors->first("details.$key.expected_result") }}</div>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <input type="number" class="form-control form-control-sm min_range range" name="details[{{$key}}][min_range]" style="display: {{$row['element_type'] == 'range' ? 'block' : 'none'}}" {{$row['element_type'] == 'range' ? 'required' : ''}}
+                                                       value="{{ old("details.$key.min_range") }}" placeholder="@lang('global.min_range')" autocomplete="off">
+                                                @if($errors->has("details.$key.min_range"))
+                                                    <div id="jQueryName-error" class="error" style="">{{ $errors->first("details.$key.min_range") }}</div>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <input type="number" class="form-control form-control-sm max_range range" name="details[{{$key}}][max_range]" style="display: {{$row['element_type'] == 'range' ? 'block' : 'none'}}" {{$row['element_type'] == 'range' ? 'required' : ''}}
+                                                       value="{{ old("details.$key.max_range") }}" placeholder="@lang('global.max_range')" autocomplete="off">
+                                                @if($errors->has("details.$key.max_range"))
+                                                    <div id="jQueryName-error" class="error" style="">{{ $errors->first("details.$key.max_range") }}</div>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <input type="text" class="form-control form-control-sm element_unit"  name="details[{{$key}}][element_unit]" style="display: {{$row['element_type'] == 'range' ? 'block' : 'none'}}" {{$row['element_type'] == 'range' ? 'required' : ''}}
+                                                       value="{{ old("details.$key.element_unit") }}" placeholder="@lang('global.element_unit')" autocomplete="off">
+                                                @if($errors->has("details.$key.element_unit"))
+                                                    <div id="jQueryName-error" class="error" style="">{{ $errors->first("details.$key.element_unit") }}</div>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <div class="btn-group btn-group-sm" role="group">
+                                                    <button type="button" class="btn btn-info btn-xs new-row" data-repeater-create>
+                                                        <i class="simple-icon-plus" style="font-size: 16px ; font-weight: bolder"></i>
+                                                    </button>
+                                                    <button type="button" class="btn btn-dark btn-xs" data-repeater-delete>
+                                                        <i class="simple-icon-minus" style="font-size: 16px ; font-weight: bolder"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                    </tr>
+                                    @endforeach
+                                    @else
+                                        <tr data-repeater-item>
+                                        <td>
+                                            <input type="text" class="form-control onlyEn form-control-sm" name="details[0][en_name]" value="{{ old('en_name') }}"
+                                                   placeholder="@lang('global.en_name')" autocomplete="off" required>
+                                            @if($errors->has('en_name'))
+                                                <div id="jQueryName-error" class="error" style="">{{ $errors->first('en_name') }}</div>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control onlyAr form-control-sm"  name="details[0][ar_name]" value="{{ old('ar_name') }}"
+                                                   placeholder="@lang('global.ar_name')" autocomplete="off" required>
+                                            @if($errors->has('ar_name'))
+                                                <div id="jQueryName-error" class="error" style="">{{ $errors->first('ar_name') }}</div>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <select  class="form-control form-control-sm" name="details[0][test_type]" required>
+                                                <option value="">@lang('global.test_type')</option>
+                                                <option value="visual">@lang('global.visual')</option>
+                                                <option value="chimerical">@lang('global.chimerical')</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select  class="form-control form-control-sm element_type" name="details[0][element_type]" required>
+                                                <option value="">@lang('global.element_type')</option>
+                                                <option value="range">@lang('global.range')</option>
+                                                <option value="question">@lang('global.question')</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <select id="expected_result" class="form-control form-control-sm expected_result" name="details[0][expected_result]" style="display: none">
+                                                <option value="">@lang('global.expected_result')</option>
+                                                <option value="1">@lang('global.yes')</option>
+                                                <option value="0">@lang('global.no')</option>
+                                            </select>
+                                            @if($errors->has('expected_result'))
+                                                <div id="jQueryName-error" class="error" style="">{{ $errors->first('expected_result') }}</div>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-control form-control-sm min_range range" name="details[0][min_range]" style="display: none"
+                                                   value="{{ old('min_range') }}" placeholder="@lang('global.min_range')" autocomplete="off">
+                                            @if($errors->has('min_range'))
+                                                <div id="jQueryName-error" class="error" style="">{{ $errors->first('min_range') }}</div>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-control form-control-sm max_range range" name="details[0][max_range]" style="display: none"
+                                                   value="{{ old('max_range') }}" placeholder="@lang('global.max_range')" autocomplete="off">
+                                            @if($errors->has('max_range'))
+                                                <div id="jQueryName-error" class="error" style="">{{ $errors->first('max_range') }}</div>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <input type="text" class="form-control form-control-sm element_unit"  name="details[0][element_unit]" style="display: none"
+                                                   value="{{ old('element_unit') }}" placeholder="@lang('global.element_unit')" autocomplete="off">
+                                            @if($errors->has('element_unit'))
+                                                <div id="jQueryName-error" class="error" style="">{{ $errors->first('element_unit') }}</div>
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <div class="btn-group btn-group-sm" role="group">
+                                                <button type="button" class="btn btn-info btn-xs new-row" data-repeater-create>
+                                                    <i class="simple-icon-plus" style="font-size: 16px ; font-weight: bolder"></i>
+                                                </button>
+                                                <button type="button" class="btn btn-dark btn-xs" data-repeater-delete>
+                                                    <i class="simple-icon-minus" style="font-size: 16px ; font-weight: bolder"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endif
                             </tbody>
                         </table>
 
