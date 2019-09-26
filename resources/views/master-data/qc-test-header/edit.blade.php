@@ -87,15 +87,17 @@
                         <table class="table">
                             <thead>
                             <tr>
-                                <th>@lang('global.en_name')</th>
-                                <th>@lang('global.ar_name')</th>
-                                <th>@lang('global.test_type')</th>
-                                <th>@lang('global.element_type')</th>
-                                <th>@lang('global.expected_result')</th>
-                                <th>@lang('global.min_range')</th>
-                                <th>@lang('global.max_range')</th>
-                                <th>@lang('global.element_unit')</th>
-                                <th>@lang('global.actions')</th>
+                            <tr>
+                                <th style="width: 16%">@lang('global.en_name')</th>
+                                <th style="width: 16%">@lang('global.ar_name')</th>
+                                <th style="width: 11%">@lang('global.test_type')</th>
+                                <th style="width: 10%">@lang('global.element_type')</th>
+                                <th style="width: 12%">@lang('global.expected_result')</th>
+                                <th style="width: 10%">@lang('global.min_range')</th>
+                                <th style="width: 10%">@lang('global.max_range')</th>
+                                <th style="width: 10%">@lang('global.element_unit')</th>
+                                <th style="width: 5%">@lang('global.actions')</th>
+                            </tr>
                             </tr>
                             </thead>
                             <tbody data-repeater-list="details">
@@ -113,15 +115,15 @@
                                         <td>
                                             <input type="text" class="form-control onlyAr form-control-sm"  name="details[{{$key}}][ar_name]" value="{{ old("details.$key.ar_name" , $row['ar_name']) }}"
                                                    placeholder="@lang('global.ar_name')" autocomplete="off" required>
-                                            @if($errors->has("details.$key.en_name"))
-                                                <div id="jQueryName-error" class="error" style="">{{ $errors->first("details.$key.en_name") }}</div>
+                                            @if($errors->has("details.$key.ar_name"))
+                                                <div id="jQueryName-error" class="error" style="">{{ $errors->first("details.$key.ar_name") }}</div>
                                             @endif
                                         </td>
                                         <td>
                                             <select  class="form-control form-control-sm" name="details[{{$key}}][test_type]" required>
                                                 <option value="">@lang('global.test_type')</option>
                                                 <option value="visual" {{ old("details.$key.test_type" , $row['test_type']) == 'visual' ? "selected" : '' }}>@lang('global.visual')</option>
-                                                <option value="chimerical" {{ old("details.$key.test_type" , $row['test_type']) == 'chimerical' ? "selected" : '' }}>@lang('global.chimerical')</option>
+                                                <option value="chemical" {{ old("details.$key.test_type" , $row['test_type']) == 'chemical' ? "selected" : '' }}>@lang('global.chemical')</option>
                                             </select>
                                             @if($errors->has("details.$key.test_type"))
                                                 <div id="jQueryName-error" class="error" style="">{{ $errors->first("details.$key.test_type") }}</div>
@@ -200,7 +202,7 @@
                                         <select  class="form-control form-control-sm" name="details[0][test_type]" required>
                                             <option value="">@lang('global.test_type')</option>
                                             <option value="visual">@lang('global.visual')</option>
-                                            <option value="chimerical">@lang('global.chimerical')</option>
+                                            <option value="chemical">@lang('global.chemical')</option>
                                         </select>
                                     </td>
                                     <td>

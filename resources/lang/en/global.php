@@ -136,7 +136,7 @@ return [
     'range'  =>  'Range',
     'element_type'  =>  'Element Type',
     'visual'    =>  'Visual',
-    'chimerical'    =>  'Chimerical',
+    'chemical'    =>  'Chemical',
     'expected_result'   =>  'Expected Result',
     'min_range' =>  'Min Range',
     'max_range' =>  'Max Range',
