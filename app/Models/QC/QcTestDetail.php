@@ -8,7 +8,7 @@ class QcTestDetail extends Model
 {
     protected $table    =   'qc_test_details';
     protected $guarded  =   ['id'];
-    protected $appends  =   ['name'];
+  //  protected $appends  =   ['name'];
 
     public function header()
     {

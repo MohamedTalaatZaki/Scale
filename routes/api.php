@@ -42,9 +42,6 @@ Route::get('supplier/{en_name}',function($en_name){
 Route::get('item/{en_name}',function($sap_code){
   return App\Models\Items\Item::where('sap_code',$sap_code)->first();
 });
-<<<<<<< HEAD
-=======
-
 Route::get('scale/{code}',function($code){
   return App\Models\Scales\Scale::where('code',$code)->first();
 });
@@ -52,4 +49,3 @@ Route::get('scale/{code}',function($code){
 Route::get('qc-test/{id}',function($id){
   return App\Models\QC\QcTestHeader::with('details')->find($id);
 });
->>>>>>> a8cef1e... qc-index-test
