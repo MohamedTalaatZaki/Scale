@@ -84,6 +84,8 @@ class QcTestHeaderController extends Controller
 
         $header =   QcTestHeader::query()->findOrFail($id);
         $header->update($request->only('ar_name' , 'en_name' , 'item_group_id' , 'is_active'));
+        $deleted_ids    =   array_filter(array_column($request->input('details') , 'id') , function ($id){return !is_null($id);});
+        $header->details()->whereNotIn('id' , $deleted_ids)->delete();
         foreach ($request->input('details') as $detail) {
             $detail['id']   =  $detail['id'] > 0 ? $detail['id'] : 0;
             $header->details()->updateOrCreate(['id' => $detail['id']] , $detail);
