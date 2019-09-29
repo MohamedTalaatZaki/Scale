@@ -204,6 +204,9 @@
                                             <option value="visual">@lang('global.visual')</option>
                                             <option value="chemical">@lang('global.chemical')</option>
                                         </select>
+                                        @if($errors->has('test_type'))
+                                            <div id="jQueryName-error" class="error" style="">{{ $errors->first('test_type') }}</div>
+                                        @endif
                                     </td>
                                     <td>
                                         <select  class="form-control form-control-sm element_type" name="details[0][element_type]" required>
@@ -211,6 +214,9 @@
                                             <option value="range">@lang('global.range')</option>
                                             <option value="question">@lang('global.question')</option>
                                         </select>
+                                        @if($errors->has('element_type'))
+                                            <div id="jQueryName-error" class="error" style="">{{ $errors->first('element_type') }}</div>
+                                        @endif
                                     </td>
                                     <td>
                                         <select id="expected_result" class="form-control form-control-sm expected_result" name="details[0][expected_result]" style="display: none">
