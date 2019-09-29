@@ -52,28 +52,28 @@
 
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label>@lang('global.limit')*</label>
+                                <label>@lang('global.limit')</label>
                                 <input type="number"
                                        class="form-control"
                                        name="limit"
                                        value="{{ old('limit' , 100000.00) }}"
                                        placeholder="@lang('global.limit')"
                                        autocomplete="off"
-                                       required>
+                                       >
                                 @if($errors->has('limit'))
                                     <div id="jQueryName-error" class="error" style="">{{ $errors->first('limit') }}</div>
                                 @endif
                             </div>
 
                             <div class="form-group col-md-6">
-                                <label>@lang('global.scale_error')*</label>
+                                <label>@lang('global.scale_error')</label>
                                 <input type="number"
                                        class="form-control"
                                        name="scale_error"
                                        value="{{ old('scale_error' , 0.00) }}"
                                        placeholder="@lang('global.scale_error')"
                                        autocomplete="off"
-                                       required>
+                                       >
                                 @if($errors->has('scale_error'))
                                     <div id="jQueryName-error" class="error" style="">{{ $errors->first('scale_error') }}</div>
                                 @endif
@@ -193,9 +193,13 @@
 
                             <div class="form-group col-md-4">
                                 <label>@lang('global.time_out')</label>
-                                <input type="text" class="form-control" name="timeout" value="{{ old('time_out' , 0) }}" placeholder="@lang('global.time_out')" autocomplete="off" required>
-                                @if($errors->has('time_out'))
-                                    <div id="jQueryName-error" class="error" style="">{{ $errors->first('time_out') }}</div>
+                                <input type="number" class="form-control"
+                                       name="timeout"
+                                       value="{{ old('timeout' , 0) }}"
+                                       placeholder="@lang('global.time_out')"
+                                       autocomplete="off" required>
+                                @if($errors->has('timeout'))
+                                    <div id="jQueryName-error" class="error" style="">{{ $errors->first('timeout') }}</div>
                                 @endif
                             </div>
 
