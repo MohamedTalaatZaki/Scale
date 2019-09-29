@@ -316,6 +316,41 @@ class PermissionsTableSeeder extends Seeder
             'ar_description' => NULL,
         ]);
 
+        $subMenu = SubMenu::where('code', 11)->first();
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'qc-test-headers.index',
+            'en_display_name' => 'List Qc Test',
+            'ar_display_name' => 'عرض أختبارات مراقبة الجودة',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'qc-test-headers.create',
+            'en_display_name' => 'Create Qc Test',
+            'ar_display_name' => 'إضافة اختبار مراقبة الجودة',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'qc-test-headers.edit',
+            'en_display_name' => 'Edit Qc Test',
+            'ar_display_name' => 'تعديل اختبار مراقبة الجودة',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'qc-test-headers.delete',
+            'en_display_name' => 'Delete Qc Test',
+            'ar_display_name' => 'حذف اختبار مراقبة الجودة',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+
 
     }
 }
