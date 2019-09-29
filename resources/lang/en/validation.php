@@ -178,6 +178,8 @@ return [
         'code'                  =>  'Code',
         'brand'                 =>  'Brand',
         'ip_address'            =>  'Ip Address',
+        'ar_name'               =>  'Arabic Name',
+        'en_name'               =>  'English Name',
         'details.*.en_name'           =>  'English Name',
         'details.*.ar_name'           =>  'English Name',
         'details.*.test_type'         =>  'Test Type',

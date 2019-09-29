@@ -177,6 +177,8 @@ return [
         'code'                  =>  'الكود',
         'brand'                 =>  'الماركة',
         'ip_address'            =>  'عنوان الشبكة',
+        'ar_name'               =>  'الاسم العربي',
+        'en_name'               =>  'الاسم الانجليزي',
         'details.*.en_name'           =>  'الاسم الانجليزي',
         'details.*.ar_name'           =>  'الاسم العربي',
         'details.*.test_type'         =>  'نوع الاختبار',
