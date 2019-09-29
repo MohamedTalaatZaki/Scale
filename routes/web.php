@@ -38,7 +38,7 @@ Route::middleware(['auth'])->group(function (){
     Route::get('master-data/supplier/items/{id}' , 'MasterData\ItemsController@supplierItems')->name('suppliers.items');
 });
 
-
+Route::get('master-data/truck-arrival' , function (){ return view('master-data.truck-arrival.index');});
 Auth::routes();
 
 
