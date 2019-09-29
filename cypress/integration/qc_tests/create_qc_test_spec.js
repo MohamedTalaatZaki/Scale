@@ -24,11 +24,11 @@ describe('Create QC Item', function () {
     cy.get('.float-right > .btn-primary').click();
     cy.wait(2000);
     cy.url().should('contain','/master-data/qc-test-headers/create');
-    cy.get('.error').should('contain','The en name field is required.')
-    cy.contains('The ar name field is required.').should('be.visible');
+    cy.get('.error').should('contain','The English Name field is required.')
+    cy.contains('The Arabic Name field is required.').should('be.visible');
     cy.contains('The item group id field is required.').should('be.visible');
     cy.contains('The English Name field is required.').should('be.visible');
-    //cy.contains('The Arabic Name field is required.').should('be.visible');
+    cy.contains('The Arabic Name field is required.').should('be.visible');
     cy.contains('The Element Type field is required.').should('be.visible');
     cy.contains('The Test Type field is required.').should('be.visible');
   })
@@ -52,10 +52,10 @@ describe('Create QC Item', function () {
     cy.get('.float-right > .btn-primary').click();
     cy.wait(2000);
     cy.url().should('contain','/master-data/qc-test-headers/create');
-    cy.get('.error').should('contain','The en name field is required.')
-    cy.contains('The ar name field is required.').should('be.visible');
+    cy.get('.error').should('contain','The English Name field is required.')
+    cy.contains('The Arabic Name field is required.').should('be.visible');
     cy.contains('The English Name field is required.').should('be.visible');
-    //cy.contains('The Arabic Name field is required.').should('be.visible');
+    cy.contains('The Arabic Name field is required.').should('be.visible');
     cy.contains('The Max Range field is required when Element Type is range.').should('be.visible');
 
     cy.get('.card-body input[name="details[0][min_range]"]').type('10');
@@ -64,10 +64,10 @@ describe('Create QC Item', function () {
     cy.get('.float-right > .btn-primary').click();
     cy.wait(2000);
     cy.url().should('contain','/master-data/qc-test-headers/create');
-    cy.get('.error').should('contain','The en name field is required.')
-    cy.contains('The ar name field is required.').should('be.visible');
+    cy.get('.error').should('contain','The English Name field is required.')
+    cy.contains('The Arabic Name field is required.').should('be.visible');
     cy.contains('The English Name field is required.').should('be.visible');
-    //cy.contains('The Arabic Name field is required.').should('be.visible');
+    cy.contains('The Arabic Name field is required.').should('be.visible');
     cy.contains('The Max Range field is required when Element Type is range.').should('be.visible');
 
   })
@@ -90,10 +90,10 @@ describe('Create QC Item', function () {
     cy.get('.float-right > .btn-primary').click();
     cy.wait(2000);
     cy.url().should('contain','/master-data/qc-test-headers/create');
-    cy.get('.error').should('contain','The en name field is required.')
-    cy.contains('The ar name field is required.').should('be.visible');
+    cy.get('.error').should('contain','The English Name field is required.')
+    cy.contains('The Arabic Name field is required.').should('be.visible');
     cy.contains('The English Name field is required.').should('be.visible');
-    //cy.contains('The Arabic Name field is required.').should('be.visible');
+    cy.contains('The Arabic Name field is required.').should('be.visible');
     cy.contains('The Expected Result field is required when Element Type is question.').should('be.visible');
   })
   it('checks enabled default values / add-remove item button',function(){
