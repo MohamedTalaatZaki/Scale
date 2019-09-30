@@ -28,13 +28,14 @@ describe('Edit Scale test', function () {
     cy.get('select[name="stop_bits"] :nth-child(1)').invoke('attr', 'selected',true);
     cy.get('.float-right > .btn-primary').click();
     cy.url().should('contain','/master-data/scales/1000/edit');
-    cy.contains('The code field is required.').should('be.visible');
-    cy.contains('The ip address field is required.').should('be.visible');
-    cy.contains('The brand field is required.').should('be.visible');
+    cy.contains('The Code field is required.').should('be.visible');
+    cy.contains('The Ip Address field is required.').should('be.visible');
+    cy.contains('The Brand field is required.').should('be.visible');
     cy.contains('The com port field is required.').should('be.visible');
-    cy.contains('The byte size field is required.').should('be.visible');
     cy.contains('The parity field is required.').should('be.visible');
     cy.contains('The stop bits field is required.').should('be.visible');
+    cy.contains('The byte size field is required.').should('be.visible');
+    cy.contains('The timeout must be a number.').should('be.visible');
   })
   it('checks unique fields', function () {
     cy.get('.card-body input[name="code"]').clear().type('666');
@@ -42,7 +43,7 @@ describe('Edit Scale test', function () {
     cy.get('.float-right > .btn-primary').click();
     cy.wait(2000);
     cy.url().should('contain','/master-data/scales/1000/edit');
-    cy.contains('The code has already been taken.').should('be.visible');
+    cy.contains('The Code has already been taken.').should('be.visible');
     cy.contains('This Ip Address Already Exist').should('be.visible');
   })
   it('checks datatype', function () {
@@ -52,9 +53,10 @@ describe('Edit Scale test', function () {
     cy.get('.card-body input[name="timeout"]').clear().type('wqwq');
     cy.get('.float-right > .btn-primary').click();
     cy.url().should('contain','/master-data/scales/1000/edit');
-    cy.contains('The limit field validate.').should('be.visible');
-    cy.contains('The error field validate.').should('be.visible');
-    cy.contains('The timeout field validate.').should('be.visible');
+    cy.contains('The limit must be a number.').should('be.visible');
+    cy.contains('The scale error must be a number.').should('be.visible');
+    cy.contains('The tolerance must be a number.').should('be.visible');
+    cy.contains('The timeout must be a number.').should('be.visible');
   })
   it('checks ip redundant value if scale disabled',function(){
     cy.get('input[name="is_active"]').invoke('attr', 'checked',false);
