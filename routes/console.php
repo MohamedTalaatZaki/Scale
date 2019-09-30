@@ -307,3 +307,14 @@ Artisan::command('qc_test:fake_qc_tests', function () {
         );
     });
 })->describe('Generate fake qc tests');
+
+
+Artisan::command('qc_test:demo_faker', function () {
+    $qc_test = factory(App\Models\QC\QcTestHeader::class,'demo_faker')->create();
+})->describe('Generate fake single qc test header');
+
+
+Artisan::command('qc_test_details:demo_faker', function () {
+    $qc_test_1 = factory(App\Models\QC\QcTestDetail::class,'demo_faker')->create();
+    $qc_test_2 = factory(App\Models\QC\QcTestDetail::class,'demo_fake1')->create();
+})->describe('Generate fake details for qc test');
