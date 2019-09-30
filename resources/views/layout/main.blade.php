@@ -56,6 +56,7 @@
             background-size: contain;
             background-position: center center;
         }
+
     </style>
     @stack('styles')
 </head>

@@ -56,6 +56,7 @@
                                 <input type="number"
                                        class="form-control"
                                        name="limit"
+                                       min="0"
                                        value="{{ old('limit' , $scale->limit) }}"
                                        placeholder="@lang('global.limit')"
                                        autocomplete="off"
@@ -71,6 +72,7 @@
                                        class="form-control"
                                        name="scale_error"
                                        value="{{ old('scale_error' , $scale->scale_error) }}"
+                                       min="0"
                                        placeholder="@lang('global.scale_error')"
                                        autocomplete="off"
                                        >
@@ -101,7 +103,7 @@
 
                             <div class="form-group col-md-4">
                                 <label>@lang('global.tolerance')</label>
-                                <input type="number" class="form-control" name="tolerance" value="{{ old('tolerance' , $scale->tolerance) }}" placeholder="@lang('global.tolerance')" autocomplete="off" required>
+                                <input type="number" class="form-control" min="0" name="tolerance" value="{{ old('tolerance' , $scale->tolerance) }}" placeholder="@lang('global.tolerance')" autocomplete="off" required>
                                 @if($errors->has('tolerance'))
                                     <div id="jQueryName-error" class="error" style="">{{ $errors->first('tolerance') }}</div>
                                 @endif
@@ -193,8 +195,8 @@
 
                             <div class="form-group col-md-4">
                                 <label>@lang('global.time_out')</label>
-                                <input type="number" class="form-control" name="timeout" value="{{ old('timeout' , 0) }}" placeholder="@lang('global.time_out')" autocomplete="off" required>
-                                @if($errors->has('time_out'))
+                                <input type="number" class="form-control" min="0" name="timeout" value="{{ old('timeout' , $scale->timeout) }}" placeholder="@lang('global.time_out')" autocomplete="off" required>
+                                @if($errors->has('timeout'))
                                     <div id="jQueryName-error" class="error" style="">{{ $errors->first('timeout') }}</div>
                                 @endif
                             </div>

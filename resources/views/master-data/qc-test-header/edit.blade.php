@@ -13,7 +13,7 @@
                     <li class="breadcrumb-item">
                         <a href="{{ route('qc-test-headers.index') }}">@lang('global.qc_test_headers')</a>
                     </li>
-                    <li class="breadcrumb-item " aria-current="page">@lang('global.create')</li>
+                    <li class="breadcrumb-item " aria-current="page">@lang('global.edit')</li>
                 </ol>
             </nav>
             <div class="separator mb-5"></div>
@@ -27,7 +27,7 @@
             <div class="card">
                 <div class="card-body">
                     <div>
-                        <h5 class="mb-4">@lang('global.create_qc_test')</h5>
+                        <h5 class="mb-4">@lang('global.edit_qc_test')</h5>
                     </div>
 
 
@@ -204,6 +204,9 @@
                                             <option value="visual">@lang('global.visual')</option>
                                             <option value="chemical">@lang('global.chemical')</option>
                                         </select>
+                                        @if($errors->has('test_type'))
+                                            <div id="jQueryName-error" class="error" style="">{{ $errors->first('test_type') }}</div>
+                                        @endif
                                     </td>
                                     <td>
                                         <select  class="form-control form-control-sm element_type" name="details[0][element_type]" required>
@@ -211,6 +214,9 @@
                                             <option value="range">@lang('global.range')</option>
                                             <option value="question">@lang('global.question')</option>
                                         </select>
+                                        @if($errors->has('element_type'))
+                                            <div id="jQueryName-error" class="error" style="">{{ $errors->first('element_type') }}</div>
+                                        @endif
                                     </td>
                                     <td>
                                         <select id="expected_result" class="form-control form-control-sm expected_result" name="details[0][expected_result]" style="display: none">

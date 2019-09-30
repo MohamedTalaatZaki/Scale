@@ -141,5 +141,9 @@ return [
     'min_max_error' =>  'الحد الادني للحقل يجب ان يكون اقل من الحد الاكبر',
     'created_success'   =>  'تم الانشاء بنجاح',
     'updated_success'   =>  'تم التعديل بنجاح',
+    'expected_result'   =>  'النتيجة المتوقعة',
+    'min_range' =>  'الحد الادني',
+    'max_range' =>  'الحد الاقصي',
+    'element_unit' =>  'وحدة القياس',
 
 ];
