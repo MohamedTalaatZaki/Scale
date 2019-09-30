@@ -197,5 +197,6 @@ return [
         'test_type'                     =>  'نوع الاختبار',
         'question'                      =>  'سؤال',
         'range'                         =>  'النطاق',
+        'item_group_id'                 =>  'مجموعات الاصناف'
     ]
 ];
