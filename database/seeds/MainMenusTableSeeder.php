@@ -196,5 +196,24 @@ class MainMenusTableSeeder extends Seeder
             ]
         ]);
 
+        $group = $main->menuGroups()->create([
+            'en_name' => 'QC Test',
+            'ar_name' => 'أختبارات مراقبة الجودة',
+            'aria_controls' => 'collapseQcTest',
+            'order' => 6,
+        ]);
+
+        $group->subMenus()->createMany([
+            [
+                'en_name' => 'QC Test',
+                'ar_name' => 'أختبارات مراقبة الجودة',
+                'route' => 'qc-test-headers.index',
+                'a_class' => 'sidebar-sub sidebar-sub-qc-test-headers',
+                'i_class' => 'simple-icon-user-follow',
+                'order' => 1,
+                'code'=>11
+            ]
+        ]);
+
     }
 }

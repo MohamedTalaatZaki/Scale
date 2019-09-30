@@ -36,6 +36,10 @@ class ScalesController extends Controller
             'byte_size'  =>  'required',
             'stop_bits'  =>  'required',
             'parity'  =>  'required',
+            'limit' =>  'numeric|min:0',
+            'scale_error' =>  'numeric|min:0',
+            'tolerance' =>  'numeric|min:0',
+            'timeout' =>  'numeric|min:0',
         ]);
 
         Scale::query()->create($request->input());
@@ -62,8 +66,18 @@ class ScalesController extends Controller
             'byte_size'  =>  'required',
             'stop_bits'  =>  'required',
             'parity'  =>  'required',
+            'limit' =>  'numeric|min:0',
+            'scale_error' =>  'numeric|min:0',
+            'tolerance' =>  'numeric|min:0',
+            'timeout' =>  'numeric|min:0',
         ]);
+
+        $request->offsetSet('limit' , $request->input('limit') != null ?$request->input('limit'): 10000);
+        $request->offsetSet('scale_error' , $request->input('scale_error') != null ?$request->input('scale_error'): 0);
+        $request->offsetSet('tolerance' , $request->input('tolerance') != null ?$request->input('tolerance'): 0);
+        $request->offsetSet('timeout' , $request->input('timeout') != null ?$request->input('timeout'): 0);
         $request->offsetSet('is_active' , $request->input('is_active' , 0));
+
         $inputs = array_filter($request->input() , function ($elem){ return !is_null($elem);});
         $scale  =   Scale::query()->findOrFail($id);
         $scale->update($inputs);

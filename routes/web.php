@@ -30,6 +30,7 @@ Route::middleware(['auth'])->group(function (){
     Route::resource('master-data/items/items' , 'MasterData\ItemsController');
     Route::resource('master-data/suppliers' , 'MasterData\SuppliersController');
     Route::resource('master-data/scales' , 'MasterData\ScalesController');
+    Route::resource('master-data/qc-test-headers' , 'MasterData\QcTestHeaderController');
 
     Route::get('change-theme' , 'MasterData\UsersController@theme')->name('change-theme');
     Route::get('change-lang' , 'MasterData\UsersController@lang')->name('change-lang');
@@ -37,7 +38,7 @@ Route::middleware(['auth'])->group(function (){
     Route::get('master-data/supplier/items/{id}' , 'MasterData\ItemsController@supplierItems')->name('suppliers.items');
 });
 
-
+Route::get('master-data/truck-arrival' , function (){ return view('master-data.truck-arrival.index');});
 Auth::routes();
 
 

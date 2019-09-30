@@ -52,28 +52,30 @@
 
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label>@lang('global.limit')*</label>
+                                <label>@lang('global.limit')</label>
                                 <input type="number"
                                        class="form-control"
                                        name="limit"
+                                       min="0"
                                        value="{{ old('limit' , $scale->limit) }}"
                                        placeholder="@lang('global.limit')"
                                        autocomplete="off"
-                                       required>
+                                       >
                                 @if($errors->has('limit'))
                                     <div id="jQueryName-error" class="error" style="">{{ $errors->first('limit') }}</div>
                                 @endif
                             </div>
 
                             <div class="form-group col-md-6">
-                                <label>@lang('global.scale_error')*</label>
+                                <label>@lang('global.scale_error')</label>
                                 <input type="number"
                                        class="form-control"
                                        name="scale_error"
                                        value="{{ old('scale_error' , $scale->scale_error) }}"
+                                       min="0"
                                        placeholder="@lang('global.scale_error')"
                                        autocomplete="off"
-                                       required>
+                                       >
                                 @if($errors->has('scale_error'))
                                     <div id="jQueryName-error" class="error" style="">{{ $errors->first('scale_error') }}</div>
                                 @endif
@@ -101,7 +103,7 @@
 
                             <div class="form-group col-md-4">
                                 <label>@lang('global.tolerance')</label>
-                                <input type="number" class="form-control" name="tolerance" value="{{ old('tolerance' , $scale->tolerance) }}" placeholder="@lang('global.tolerance')" autocomplete="off" required>
+                                <input type="number" class="form-control" min="0" name="tolerance" value="{{ old('tolerance' , $scale->tolerance) }}" placeholder="@lang('global.tolerance')" autocomplete="off" required>
                                 @if($errors->has('tolerance'))
                                     <div id="jQueryName-error" class="error" style="">{{ $errors->first('tolerance') }}</div>
                                 @endif
@@ -193,9 +195,9 @@
 
                             <div class="form-group col-md-4">
                                 <label>@lang('global.time_out')</label>
-                                <input type="text" class="form-control" name="timeout" value="{{ old('time_out' , 0) }}" placeholder="@lang('global.time_out')" autocomplete="off" required>
-                                @if($errors->has('time_out'))
-                                    <div id="jQueryName-error" class="error" style="">{{ $errors->first('time_out') }}</div>
+                                <input type="number" class="form-control" min="0" name="timeout" value="{{ old('timeout' , $scale->timeout) }}" placeholder="@lang('global.time_out')" autocomplete="off" required>
+                                @if($errors->has('timeout'))
+                                    <div id="jQueryName-error" class="error" style="">{{ $errors->first('timeout') }}</div>
                                 @endif
                             </div>
 
