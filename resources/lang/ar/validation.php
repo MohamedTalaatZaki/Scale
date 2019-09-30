@@ -187,5 +187,16 @@ return [
         'details.*.min_range'         =>  'الحد الادني',
         'details.*.max_range'         =>  'الحد الاقصي',
         'details.*.element_unit'      =>  'وحدة القياس',
+        'limit'                         =>    'اقصي وزن',
+        'scale_error'                   =>  'نسبة التقريب',
+        'tolerance'                     =>  'نسبة السماح',
+        'timeout'                       =>  'وقت الانتهاء',
+        'min_range'                     =>  'الحد الادني',
+        'max_range'                     =>  'الحد الاقصي',
+        'element_unit'                  =>  'وحدة القياس',
+        'test_type'                     =>  'نوع الاختبار',
+        'question'                      =>  'سؤال',
+        'range'                         =>  'النطاق',
+        'item_group_id'                 =>  'مجموعات الاصناف'
     ]
 ];
