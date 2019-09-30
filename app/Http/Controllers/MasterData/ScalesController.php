@@ -36,10 +36,10 @@ class ScalesController extends Controller
             'byte_size'  =>  'required',
             'stop_bits'  =>  'required',
             'parity'  =>  'required',
-            'limit' =>  'numeric|min:0',
-            'scale_error' =>  'numeric|min:0',
-            'tolerance' =>  'numeric|min:0',
-            'timeout' =>  'numeric|min:0',
+            'limit' =>  'nullable|numeric|min:0',
+            'scale_error' =>  'nullable|numeric|min:0',
+            'tolerance' =>  'nullable|numeric|min:0',
+            'timeout' =>  'nullable|numeric|min:0',
         ]);
 
         Scale::query()->create($request->input());
@@ -66,10 +66,10 @@ class ScalesController extends Controller
             'byte_size'  =>  'required',
             'stop_bits'  =>  'required',
             'parity'  =>  'required',
-            'limit' =>  'numeric|min:0',
-            'scale_error' =>  'numeric|min:0',
-            'tolerance' =>  'numeric|min:0',
-            'timeout' =>  'numeric|min:0',
+            'limit' =>  'nullable|numeric|min:0',
+            'scale_error' =>  'nullable|numeric|min:0',
+            'tolerance' =>  'nullable|numeric|min:0',
+            'timeout' =>  'nullable|numeric|min:0',
         ]);
 
         $request->offsetSet('limit' , $request->input('limit') != null ?$request->input('limit'): 10000);
