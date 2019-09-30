@@ -198,5 +198,9 @@ return [
         'question'                      =>  'سؤال',
         'range'                         =>  'النطاق',
         'item_group_id'                 =>  'مجموعات الاصناف'
-    ]
+    ] ,
+
+    'values'    =>  [
+        'range' =>  'النطاق'
+    ],
 ];
