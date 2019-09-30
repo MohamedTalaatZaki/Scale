@@ -289,3 +289,10 @@ Artisan::command('test:delete_item_group', function () {
 Artisan::command('scale:fake_scales', function () {
     $suppliers = factory(App\Models\Scales\Scale::class,'fake_scales',300)->create();
 })->describe('Generate fake scales');
+Artisan::command('scale:demo_faker', function () {
+    $gov = factory(App\Models\Scales\Scale::class,'demo_faker')->create();
+})->describe('Generate fake single scale');
+
+Artisan::command('scale:edit_faker', function () {
+    $gov = factory(App\Models\Scales\Scale::class,'edit_faker')->create();
+})->describe('Generate fake scale for edit');
