@@ -116,6 +116,7 @@ return [
     'url'                  => 'صيغة الرابط :attribute غير صحيحة.',
     'uuid'                 => ':attribute يجب أن يكون بصيغة UUID سليمة.',
 
+
     /*
     |--------------------------------------------------------------------------
     | Custom Validation Language Lines
@@ -130,6 +131,18 @@ return [
     'custom' => [
         'attribute-name' => [
             'rule-name' => 'custom-message',
+        ],
+        'details.*.expected_result' =>  [
+            'required_if'   =>  ':attribute مطلوب'
+        ],
+        'details.*.min_range' =>  [
+            'required_if'   =>  ':attribute مطلوب'
+        ],
+        'details.*.max_range' =>  [
+            'required_if'   =>  ':attribute مطلوب'
+        ],
+        'details.*.element_unit' =>  [
+            'required_if'   =>  ':attribute مطلوب'
         ],
     ],
 
@@ -197,10 +210,7 @@ return [
         'test_type'                     =>  'نوع الاختبار',
         'question'                      =>  'سؤال',
         'range'                         =>  'النطاق',
-        'item_group_id'                 =>  'مجموعات الاصناف'
-    ] ,
-
-    'values'    =>  [
-        'range' =>  'النطاق'
+        'item_group_id'                 =>  'مجموعات الاصناف',
     ],
+
 ];

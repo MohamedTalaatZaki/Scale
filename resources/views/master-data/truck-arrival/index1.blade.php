@@ -5,12 +5,12 @@
         <div class="col-12">
             <h1>@lang('global.truck_arrival')</h1>
             <div class="text-zero top-right-button-container">
-                @permission('truck_arrival.create')
-                <a href="{{ route('truck_arrival.create') }}">
+{{--                @permission('truck_arrival.create')--}}
+                <a href="javascript:void(0)" class="show-create-div">
                     <button type="button"
                             class="btn btn-primary btn-sm top-right-button mr-1">@lang('global.create')</button>
                 </a>
-                @endpermission
+{{--                @endpermission--}}
             </div>
             <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
                 <ol class="breadcrumb pt-0">
@@ -18,7 +18,7 @@
                         <span class="default-cursor">@lang('global.master_data')</span>
                     </li>
                     <li class="breadcrumb-item">
-{{--                        <a href="{{ route('truck_arrival.index') }}">@lang('global.truck_arrival')</a>--}}
+                        <a href="javascript:void(0)" class="show-create-div">@lang('global.truck_arrival')</a>
                     </li>
                     <li class="breadcrumb-item " aria-current="page">@lang('global.index')</li>
                 </ol>
@@ -27,7 +27,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div style="display: none" class="row create-arrival-truck">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
@@ -127,7 +127,7 @@
                                        id="truck_plates_trailer"
                                        placeholder="@lang('global.truck_plates_trailer')"
                                        name="truck_plates_trailer"
-                                       >
+                                >
                             </div>
                             <div class="form-group col-md-3">
                                 <label for="item_type">@lang('global.item_type')</label>
@@ -143,6 +143,20 @@
                         </div>
                     </form>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row search-trucks">
+        <div class="col-md-12">
+            <div class="input-group">
+                <input class="form-control" placeholder="Search...">
+
+                <span class="input-group-btn">
+                    <button class="btn btn-primary default" type="submit">
+                        <i class="simple-icon-magnifier"></i>
+                    </button>
+                </span>
             </div>
         </div>
     </div>
@@ -195,10 +209,10 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td colspan="7"
-                                            class="text-center text-warning font-weight-bold">@lang('global.no_data')</td>
-                                    </tr>
+                                <tr>
+                                    <td colspan="7"
+                                        class="text-center text-warning font-weight-bold">@lang('global.no_data')</td>
+                                </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -280,3 +294,13 @@
         </div>
     </div>
 @endsection
+@push('scripts')
+    <script>
+        $().ready(function(){
+            $('.show-create-div').on('click' , function () {
+                $('.create-arrival-truck').toggle();
+                $('.search-trucks').toggle();
+            })
+        });
+    </script>
+@endpush
