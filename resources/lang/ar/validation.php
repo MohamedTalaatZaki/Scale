@@ -133,7 +133,7 @@ return [
             'rule-name' => 'custom-message',
         ],
         'details.*.expected_result' =>  [
-            'required_if'   =>  ':attribute مطلوب'
+            'required_if'   =>  ':attribute مطلوبه'
         ],
         'details.*.min_range' =>  [
             'required_if'   =>  ':attribute مطلوب'
@@ -142,7 +142,7 @@ return [
             'required_if'   =>  ':attribute مطلوب'
         ],
         'details.*.element_unit' =>  [
-            'required_if'   =>  ':attribute مطلوب'
+            'required_if'   =>  ':attribute مطلوبه'
         ],
     ],
 
