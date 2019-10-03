@@ -172,11 +172,11 @@
                                         </td>
                                         <td>
                                             <div class="btn-group btn-group-sm" role="group">
-                                                <button type="button" class="btn btn-info btn-xs new-row" data-repeater-create>
-                                                    <i class="simple-icon-plus" style="font-size: 16px ; font-weight: bolder"></i>
+                                                <button type="button" class="btn btn-xs new-row" style="background: none ; border: 0 ; margin-right: -20px" data-repeater-create>
+                                                    <i class="fas fa-plus-circle text-primary" style="font-size: 25px ; font-weight: bolder"></i>
                                                 </button>
-                                                <button type="button" class="btn btn-dark btn-xs" data-repeater-delete>
-                                                    <i class="simple-icon-minus" style="font-size: 16px ; font-weight: bolder"></i>
+                                                <button type="button" class="btn btn-xs" style="background: none ; border: 0" data-repeater-delete>
+                                                    <i class="fas fa-minus-circle text-danger" style="font-size: 25px ; font-weight: bolder"></i>
                                                 </button>
                                             </div>
                                         </td>
@@ -251,11 +251,11 @@
                                     </td>
                                     <td>
                                         <div class="btn-group btn-group-sm" role="group">
-                                            <button type="button" class="btn btn-info btn-xs new-row" data-repeater-create>
-                                                <i class="simple-icon-plus" style="font-size: 16px ; font-weight: bolder"></i>
+                                            <button type="button" class="btn btn-xs new-row" style="background: none ; border: 0 ; margin-right: -20px" data-repeater-create>
+                                                <i class="fas fa-plus-circle text-primary" style="font-size: 25px ; font-weight: bolder"></i>
                                             </button>
-                                            <button type="button" class="btn btn-dark btn-xs" data-repeater-delete>
-                                                <i class="simple-icon-minus" style="font-size: 16px ; font-weight: bolder"></i>
+                                            <button type="button" class="btn btn-xs" style="background: none ; border: 0" data-repeater-delete>
+                                                <i class="fas fa-minus-circle text-danger" style="font-size: 25px ; font-weight: bolder"></i>
                                             </button>
                                         </div>
                                     </td>

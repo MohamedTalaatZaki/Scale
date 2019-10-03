@@ -10,9 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('test' , function(){
-    dd('test');
-});
+
 Route::get('/', function () {
     return view('layout.main');
 });
@@ -32,19 +30,21 @@ Route::middleware(['auth'])->group(function (){
     Route::resource('master-data/scales' , 'MasterData\ScalesController');
     Route::resource('master-data/qc-test-headers' , 'MasterData\QcTestHeaderController');
 
+
+    Route::resource('security/trucks-arrival' , 'Security\TrucksArrivalController');
+
     Route::get('change-theme' , 'MasterData\UsersController@theme')->name('change-theme');
     Route::get('change-lang' , 'MasterData\UsersController@lang')->name('change-lang');
     Route::post('change-acc-info' , 'MasterData\UsersController@changeAccInfo')->name('users.change-acc-info');
     Route::get('master-data/supplier/items/{id}' , 'MasterData\ItemsController@supplierItems')->name('suppliers.items');
+
+    /*
+     * AJAX Routes
+     */
+    Route::get('cities' , 'MasterData\CitiesController@getGovernorateCities')->name('getGovernorateCities');
+    Route::get('centers' , 'MasterData\CentersController@getCityCenters')->name('getCityCenters');
 });
 
-Route::get('master-data/truck-arrival' , function (){ return view('master-data.truck-arrival.index1');});
-Route::get('test' , function () {
-    $v = \Validator::make(request()->input() , [
-        'range' =>  'required_if:test,1,2'
-    ]);
-    dd($v->errors());
-});
 Auth::routes();
 
 

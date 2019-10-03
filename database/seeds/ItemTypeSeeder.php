@@ -15,15 +15,18 @@ class ItemTypeSeeder extends Seeder
         ItemType::truncate();
         ItemType::create([
             'en_name'=>'Raw',
-            'ar_name'=>'مواد خام'
+            'ar_name'=>'مواد خام',
+            'prefix'=>'raw'
         ]);
         ItemType::create([
             'en_name'=>'Scrap',
-            'ar_name'=>'مخلفات'
+            'ar_name'=>'مخلفات',
+            'prefix'=>'scrap'
         ]);
         ItemType::create([
             'en_name'=>'Finish',
-            'ar_name'=>'منتجات نهائية'
+            'ar_name'=>'منتجات نهائية',
+            'prefix'=>'finish'
         ]);
     }
 }
