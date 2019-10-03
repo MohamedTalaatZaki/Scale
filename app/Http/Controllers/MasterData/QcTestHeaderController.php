@@ -43,6 +43,8 @@ class QcTestHeaderController extends Controller
             'details.*.min_range'       =>  'required_if:details.*.element_type,=,range',
             'details.*.max_range'       =>  'required_if:details.*.element_type,=,range',
             'details.*.element_unit'    =>  'required_if:details.*.element_type,=,range',
+        ],[
+            "item_group_id.required"=>trans("master.errors.item_group_id_required")
         ]);
 
         $request->offsetSet('is_active' , $request->input('is_active' , 0));
@@ -78,6 +80,8 @@ class QcTestHeaderController extends Controller
             'details.*.min_range'       =>  'required_if:details.*.element_type,=,range',
             'details.*.max_range'       =>  'required_if:details.*.element_type,=,range',
             'details.*.element_unit'    =>  'required_if:details.*.element_type,=,range',
+        ],[
+            "item_group_id.required"=>trans("master.errors.item_group_id_required")
         ]);
 
         $request->offsetSet('is_active' , $request->input('is_active' , 0));
