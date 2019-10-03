@@ -296,3 +296,25 @@ Artisan::command('scale:demo_faker', function () {
 Artisan::command('scale:edit_faker', function () {
     $gov = factory(App\Models\Scales\Scale::class,'edit_faker')->create();
 })->describe('Generate fake scale for edit');
+
+
+Artisan::command('qc_test:fake_qc_tests', function () {
+    $qc_tests = factory(App\Models\QC\QcTestHeader::class, 'fake_qc_tests', 300)->create()->each(function ($qc_test) {
+        $qc_test->details()->createMany(
+            factory(App\Models\QC\QcTestDetail::class, 3)->make([
+                'qc_test_header_id' => $qc_test->id
+            ])->toArray()
+        );
+    });
+})->describe('Generate fake qc tests');
+
+
+Artisan::command('qc_test:demo_faker', function () {
+    $qc_test = factory(App\Models\QC\QcTestHeader::class,'demo_faker')->create();
+})->describe('Generate fake single qc test header');
+
+
+Artisan::command('qc_test_details:demo_faker', function () {
+    $qc_test_1 = factory(App\Models\QC\QcTestDetail::class,'demo_faker')->create();
+    $qc_test_2 = factory(App\Models\QC\QcTestDetail::class,'demo_fake1')->create();
+})->describe('Generate fake details for qc test');

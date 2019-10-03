@@ -109,14 +109,14 @@
                                             <input type="text" class="form-control onlyEn form-control-sm" name="details[{{$key}}][en_name]" value="{{ old("details.$key.en_name" , $row['en_name']) }}"
                                                    placeholder="@lang('global.en_name')" autocomplete="off" required>
                                             @if($errors->has("details.$key.en_name"))
-                                                <div id="jQueryName-error" class="error" style="">{{ $errors->first("details.$key.en_name") }}</div>
+                                                <span id="jQueryName-error" class="error" style="">{{ $errors->first("details.$key.en_name") }}</span>
                                             @endif
                                         </td>
                                         <td>
                                             <input type="text" class="form-control onlyAr form-control-sm"  name="details[{{$key}}][ar_name]" value="{{ old("details.$key.ar_name" , $row['ar_name']) }}"
                                                    placeholder="@lang('global.ar_name')" autocomplete="off" required>
                                             @if($errors->has("details.$key.ar_name"))
-                                                <div id="jQueryName-error" class="error" style="">{{ $errors->first("details.$key.ar_name") }}</div>
+                                                <span id="jQueryName-error" class="error" style="">{{ $errors->first("details.$key.ar_name") }}</span>
                                             @endif
                                         </td>
                                         <td>
@@ -126,7 +126,7 @@
                                                 <option value="chemical" {{ old("details.$key.test_type" , $row['test_type']) == 'chemical' ? "selected" : '' }}>@lang('global.chemical')</option>
                                             </select>
                                             @if($errors->has("details.$key.test_type"))
-                                                <div id="jQueryName-error" class="error" style="">{{ $errors->first("details.$key.test_type") }}</div>
+                                                <span id="jQueryName-error" class="error" style="">{{ $errors->first("details.$key.test_type") }}</span>
                                             @endif
                                         </td>
                                         <td>
@@ -136,7 +136,7 @@
                                                 <option value="question" {{ old("details.$key.element_type" , $row['element_type']) == 'question' ? "selected" : '' }}>@lang('global.question')</option>
                                             </select>
                                             @if($errors->has("details.$key.element_type"))
-                                                <div id="jQueryName-error" class="error" style="">{{ $errors->first("details.$key.element_type") }}</div>
+                                                <span id="jQueryName-error" class="error" style="">{{ $errors->first("details.$key.element_type") }}</span>
                                             @endif
                                         </td>
                                         <td>
@@ -146,28 +146,28 @@
                                                 <option value="0" {{ old("details.$key.expected_result" , $row['expected_result']) == '0' ? "selected" : '' }}>@lang('global.no')</option>
                                             </select>
                                             @if($errors->has("details.$key.expected_result"))
-                                                <div id="jQueryName-error" class="error" style="">{{ $errors->first("details.$key.expected_result") }}</div>
+                                                <span id="jQueryName-error" class="error" style="">{{ $errors->first("details.$key.expected_result") }}</span>
                                             @endif
                                         </td>
                                         <td>
                                             <input type="number" class="form-control form-control-sm min_range range" name="details[{{$key}}][min_range]" style="display: {{$row['element_type'] == 'range' ? 'block' : 'none'}}" {{$row['element_type'] == 'range' ? 'required' : ''}}
                                             value="{{ old("details.$key.min_range" , $row['min_range']) }}" placeholder="@lang('global.min_range')" autocomplete="off">
                                             @if($errors->has("details.$key.min_range"))
-                                                <div id="jQueryName-error" class="error" style="">{{ $errors->first("details.$key.min_range") }}</div>
+                                                <span id="jQueryName-error" class="error" style="">{{ $errors->first("details.$key.min_range") }}</span>
                                             @endif
                                         </td>
                                         <td>
                                             <input type="number" class="form-control form-control-sm max_range range" name="details[{{$key}}][max_range]" style="display: {{$row['element_type'] == 'range' ? 'block' : 'none'}}" {{$row['element_type'] == 'range' ? 'required' : ''}}
                                             value="{{ old("details.$key.max_range" , $row['max_range']) }}" placeholder="@lang('global.max_range')" autocomplete="off">
                                             @if($errors->has("details.$key.max_range"))
-                                                <div id="jQueryName-error" class="error" style="">{{ $errors->first("details.$key.max_range") }}</div>
+                                                <span id="jQueryName-error" class="error" style="">{{ $errors->first("details.$key.max_range") }}</span>
                                             @endif
                                         </td>
                                         <td>
                                             <input type="text" class="form-control form-control-sm element_unit"  name="details[{{$key}}][element_unit]" style="display: {{$row['element_type'] == 'range' ? 'block' : 'none'}}" {{$row['element_type'] == 'range' ? 'required' : ''}}
                                             value="{{ old("details.$key.element_unit" , $row['element_unit']) }}" placeholder="@lang('global.element_unit')" autocomplete="off">
                                             @if($errors->has("details.$key.element_unit"))
-                                                <div id="jQueryName-error" class="error" style="">{{ $errors->first("details.$key.element_unit") }}</div>
+                                                <span id="jQueryName-error" class="error" style="">{{ $errors->first("details.$key.element_unit") }}</span>
                                             @endif
                                         </td>
                                         <td>
@@ -188,14 +188,14 @@
                                         <input type="text" class="form-control onlyEn form-control-sm" name="details[0][en_name]" value="{{ old('en_name') }}"
                                                placeholder="@lang('global.en_name')" autocomplete="off" required>
                                         @if($errors->has('en_name'))
-                                            <div id="jQueryName-error" class="error" style="">{{ $errors->first('en_name') }}</div>
+                                            <span id="jQueryName-error" class="error" style="">{{ $errors->first('en_name') }}</span>
                                         @endif
                                     </td>
                                     <td>
                                         <input type="text" class="form-control onlyAr form-control-sm"  name="details[0][ar_name]" value="{{ old('ar_name') }}"
                                                placeholder="@lang('global.ar_name')" autocomplete="off" required>
                                         @if($errors->has('ar_name'))
-                                            <div id="jQueryName-error" class="error" style="">{{ $errors->first('ar_name') }}</div>
+                                            <span id="jQueryName-error" class="error" style="">{{ $errors->first('ar_name') }}</span>
                                         @endif
                                     </td>
                                     <td>
@@ -205,7 +205,7 @@
                                             <option value="chemical">@lang('global.chemical')</option>
                                         </select>
                                         @if($errors->has('test_type'))
-                                            <div id="jQueryName-error" class="error" style="">{{ $errors->first('test_type') }}</div>
+                                            <span id="jQueryName-error" class="error" style="">{{ $errors->first('test_type') }}</span>
                                         @endif
                                     </td>
                                     <td>
@@ -215,7 +215,7 @@
                                             <option value="question">@lang('global.question')</option>
                                         </select>
                                         @if($errors->has('element_type'))
-                                            <div id="jQueryName-error" class="error" style="">{{ $errors->first('element_type') }}</div>
+                                            <span id="jQueryName-error" class="error" style="">{{ $errors->first('element_type') }}</span>
                                         @endif
                                     </td>
                                     <td>
@@ -225,28 +225,28 @@
                                             <option value="0">@lang('global.no')</option>
                                         </select>
                                         @if($errors->has('expected_result'))
-                                            <div id="jQueryName-error" class="error" style="">{{ $errors->first('expected_result') }}</div>
+                                            <span id="jQueryName-error" class="error" style="">{{ $errors->first('expected_result') }}</span>
                                         @endif
                                     </td>
                                     <td>
                                         <input type="number" class="form-control form-control-sm min_range range" name="details[0][min_range]" style="display: none"
                                                value="{{ old('min_range') }}" placeholder="@lang('global.min_range')" autocomplete="off">
                                         @if($errors->has('min_range'))
-                                            <div id="jQueryName-error" class="error" style="">{{ $errors->first('min_range') }}</div>
+                                            <span id="jQueryName-error" class="error" style="">{{ $errors->first('min_range') }}</span>
                                         @endif
                                     </td>
                                     <td>
                                         <input type="number" class="form-control form-control-sm max_range range" name="details[0][max_range]" style="display: none"
                                                value="{{ old('max_range') }}" placeholder="@lang('global.max_range')" autocomplete="off">
                                         @if($errors->has('max_range'))
-                                            <div id="jQueryName-error" class="error" style="">{{ $errors->first('max_range') }}</div>
+                                            <span id="jQueryName-error" class="error" style="">{{ $errors->first('max_range') }}</span>
                                         @endif
                                     </td>
                                     <td>
                                         <input type="text" class="form-control form-control-sm element_unit"  name="details[0][element_unit]" style="display: none"
                                                value="{{ old('element_unit') }}" placeholder="@lang('global.element_unit')" autocomplete="off">
                                         @if($errors->has('element_unit'))
-                                            <div id="jQueryName-error" class="error" style="">{{ $errors->first('element_unit') }}</div>
+                                            <span id="jQueryName-error" class="error" style="">{{ $errors->first('element_unit') }}</span>
                                         @endif
                                     </td>
                                     <td>
@@ -280,6 +280,55 @@
     </div>
 
 @endsection
+@push("styles")
+    <style>
+        .invalid-tooltip::after, .valid-tooltip::after, span.error::after {
+            content: "";
+            position: absolute;
+            top: -4px;
+            left: -2.5px;
+            margin-left: 50%;
+            width: 10px;
+            height: 5px;
+            border-bottom: solid 5px #232223;
+            border-left: solid 5px transparent;
+            border-right: solid 5px transparent;
+        }
+        .invalid-tooltip::before, .valid-tooltip::before, span.error::before {
+            content: "";
+            position: absolute;
+            top: -5px;
+            left: -2.5px;
+            margin-left: 50%;
+            width: 10px;
+            height: 5px;
+            border-bottom: solid 5px #c0702f;
+            border-left: solid 5px transparent;
+            border-right: solid 5px transparent;
+        }
+        .invalid-tooltip, .valid-tooltip, span.error {
+            border-radius: .1rem;
+            padding: .5rem 1rem;
+            font-size: .76rem;
+            color: #969696;
+            background: #232223;
+            border: 1px solid #c0702f;
+            text-align: center;
+            width: unset!important;
+            position: absolute;
+            z-index: 4;
+            margin-top: -.5rem;
+            /*left: 50%;*/
+            /*transform: translateX(-50%);*/
+            transform: translateX(0) translateY(15px);
+            line-height: 1.5;
+            box-shadow: 0 1px 15px rgba(0,0,0,.1), 0 1px 8px rgba(0,0,0,.1);
+        }
+        .rounded .invalid-tooltip, .rounded .valid-tooltip, .rounded span.error {
+            border-radius: 10px;
+        }
+    </style>
+@endpush
 @push('scripts')
     <script>
         $().ready(function() {
