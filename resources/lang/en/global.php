@@ -168,6 +168,7 @@ return [
     'select_truck_type'    =>  'Select Truck Type',
     'select_item_type'    =>  'Select Item Type',
     'save_print'    =>  'Save And Print',
+    'edit_print'    =>  'Edit And Print',
     'reset_close'    =>  'Reset And Close',
     'arrival_trucks' =>  'Arrival Trucks',
     'sampled_trucks' =>  'Sampled Trucks',
@@ -182,5 +183,11 @@ return [
     'select_items_group'    =>  'Select Items Group',
     'required'  =>  'Required',
     'item_group_id' =>  'Item Group',
-
+    'waiting_trucks'    =>  'Waiting Trucks',
+    'raw'   =>  'Raw',
+    'scrap'   =>  'Scrap',
+    'finish'   =>  'Finish',
+    'check_in'  =>  'Check In',
+    'check_out'  =>  'Check Out',
+    'departures_trucks' =>  'Departures Trucks',
 ];

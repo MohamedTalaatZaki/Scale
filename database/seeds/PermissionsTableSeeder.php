@@ -386,5 +386,21 @@ class PermissionsTableSeeder extends Seeder
             'en_description' => NULL,
             'ar_description' => NULL,
         ]);
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'trucks-arrival.check_in',
+            'en_display_name' => 'Check In Truck',
+            'ar_display_name' => 'ادخال الشاحنه',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'trucks-arrival.check_out',
+            'en_display_name' => 'Check Out Truck',
+            'ar_display_name' => 'اخراج الشاحنه',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
     }
 }

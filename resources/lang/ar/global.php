@@ -169,6 +169,7 @@ return [
     'select_truck_type'    =>  'اختار نوع الشاحنة',
     'select_item_type'    =>  'اختار نوع الصنف',
     'save_print'    =>  'حفظ و طباعة',
+    'edit_print'    =>  'تعديل و طباعة',
     'reset_close'    =>  'مسح واغلاق',
     'arrival_trucks' =>  'شاحنات تم تسجيل وصولها',
     'sampled_trucks' =>  'شاحنات تم اختبارها',
@@ -182,4 +183,12 @@ return [
     'theoretical_weight'    =>  'الوزن التقديري',
     'select_items_group'    =>  'اختر مجموعة الاصناف',
     'required'  =>  'مطلوب',
+    'waiting_trucks'    =>  'شاحنات بالانتظار',
+    'raw'   =>  'خامات',
+    'scrap'   =>  'مخلفات',
+    'finish'   =>  'جاهز',
+    'car_in_process'    =>  'العربه بداخل الشركة :truck_plates_tractor',
+    'check_in'  =>  'دخول',
+    'departures_trucks' =>  'شاحنات غادرت',
+
 ];

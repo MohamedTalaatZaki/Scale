@@ -37,6 +37,8 @@ Route::middleware(['auth'])->group(function (){
     Route::get('change-lang' , 'MasterData\UsersController@lang')->name('change-lang');
     Route::post('change-acc-info' , 'MasterData\UsersController@changeAccInfo')->name('users.change-acc-info');
     Route::get('master-data/supplier/items/{id}' , 'MasterData\ItemsController@supplierItems')->name('suppliers.items');
+    Route::get('security/trucks-arrival-in-process' , 'Security\TrucksArrivalController@inProcess')->name('trucks-arrival.inProcess');
+    Route::get('security/trucks-arrival-check-out' , 'Security\TrucksArrivalController@checkOut')->name('trucks-arrival.checkOut');
 
     /*
      * AJAX Routes

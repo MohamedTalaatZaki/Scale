@@ -219,7 +219,7 @@ class MainMenusTableSeeder extends Seeder
             'en_name' => 'Security',
             'ar_name' => 'الأمن',
             'class' => 'sidebar sidebar-security',
-            'href' => '#sercurity',
+            'href' => '#security',
             'sub_class' => 'iconsminds-digital-drawing',
             'data_link' => 'security'
         ]);
