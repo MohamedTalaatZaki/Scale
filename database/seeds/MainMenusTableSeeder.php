@@ -215,5 +215,30 @@ class MainMenusTableSeeder extends Seeder
             ]
         ]);
 
+        $main =  MainMenu::create([
+            'en_name' => 'Security',
+            'ar_name' => 'الأمن',
+            'class' => 'sidebar sidebar-security',
+            'href' => '#sercurity',
+            'sub_class' => 'iconsminds-digital-drawing',
+            'data_link' => 'security'
+        ]);
+        $group = $main->menuGroups()->create([
+            'en_name' => 'Truck Arrival',
+            'ar_name' => 'وصول الشاحنات',
+            'aria_controls' => 'collapseTruckArrival',
+            'order' => 1,
+        ]);
+        $group->subMenus()->createMany([
+            [
+                'en_name' => 'Truck Arrival',
+                'ar_name' => 'وصول الشاحنات',
+                'route' => 'trucks-arrival.index',
+                'a_class' => 'sidebar-sub sidebar-sub-trucks-arrival',
+                'i_class' => 'simple-icon-user-follow',
+                'order' => 1,
+                'code'=>12
+            ]
+        ]);
     }
 }

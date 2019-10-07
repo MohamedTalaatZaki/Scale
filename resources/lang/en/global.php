@@ -181,5 +181,6 @@ return [
     'theoretical_weight'    =>  'Theoretical Weight',
     'select_items_group'    =>  'Select Items Group',
     'required'  =>  'Required',
+    'item_group_id' =>  'Item Group',
 
 ];

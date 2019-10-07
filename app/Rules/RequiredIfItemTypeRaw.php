@@ -7,6 +7,7 @@ use Illuminate\Contracts\Validation\Rule;
 
 class RequiredIfItemTypeRaw implements Rule
 {
+    protected $attribute;
     /**
      * Create a new rule instance.
      *
@@ -25,6 +26,7 @@ class RequiredIfItemTypeRaw implements Rule
      */
     public function passes($attribute, $value)
     {
+        $this->attribute    =   $attribute;
         $itemType   =   ItemType::query()->find(request()->get('item_type_id'));
 
         return optional($itemType)->prefix == 'raw' ? true : false;
@@ -37,6 +39,6 @@ class RequiredIfItemTypeRaw implements Rule
      */
     public function message()
     {
-        return trans('global.required');
+        return trans("global.{$this->attribute}")." ".trans('global.required');
     }
 }

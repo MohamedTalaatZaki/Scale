@@ -31,15 +31,12 @@ class TrucksArrivalController extends Controller
         $item_types     =   ItemType::query()
             ->get();
 
-        $items_groups   =   ItemGroup::query()
-            ->get();
 
         return view('security.truck-arrival.index' , [
             'suppliers'     =>  $suppliers,
             'governorates'  =>  $governorates,
             'truck_types'   =>  $truck_types,
-            'item_types'    =>  $item_types,
-            'items_groups'  =>  $items_groups
+            'item_types'    =>  $item_types
         ]);
     }
 
@@ -54,7 +51,7 @@ class TrucksArrivalController extends Controller
             'supplier_id'  =>  'required|exists:suppliers,id',
             'governorate_id'  =>  'required|exists:governorates,id',
             'city_id'  =>  'required|exists:cities,id',
-            'center_id' =>  'numeric',
+            'center_id' =>  'nullable|numeric',
             'truck_type_id'  =>  'required|exists:trucks_types,id',
             'truck_plates_tractor'  =>  'required',
             'item_type_id'  =>  'required|exists:item_types,id',

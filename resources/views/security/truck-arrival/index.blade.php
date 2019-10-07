@@ -25,8 +25,9 @@
             <div class="separator mb-5"></div>
         </div>
     </div>
-    <form action="{{ route('trucks-arrival.store') }}" method="post">
+    <form action="{{ route('trucks-arrival.store') }}" method="post" novalidate>
         @csrf
+        @include('components._validation')
         <div style="display: {{ $errors->count() > 0 ? 'flex' : 'none' }}" class="row create-arrival-truck">
             <div class="col-md-4">
                 <div class="card">
@@ -43,6 +44,9 @@
                                    value="{{ old('driver_name') }}"
                                    autocomplete="off"
                                    required>
+                            @if($errors->has('driver_name'))
+                                <div class="error" style="">{{ $errors->first('driver_name') }}</div>
+                            @endif
                         </div>
                         <div class="form-group col-md-12">
                             <label for="driver_license">@lang('global.driver_license')</label>
@@ -54,6 +58,9 @@
                                    name="driver_license"
                                    autocomplete="off"
                                    required>
+                            @if($errors->has('driver_license'))
+                                <div class="error" style="">{{ $errors->first('driver_license') }}</div>
+                            @endif
                         </div>
                         <div class="form-group col-md-12">
                             <label for="driver_national_id">@lang('global.driver_national_id')</label>
@@ -65,6 +72,9 @@
                                    name="driver_national_id"
                                    autocomplete="off"
                                    required>
+                            @if($errors->has('driver_national_id'))
+                                <div class="error" style="">{{ $errors->first('driver_national_id') }}</div>
+                            @endif
                         </div>
                         <div class="form-group col-md-12">
                             <label for="driver_mobile">@lang('global.driver_mobile')</label>
@@ -79,6 +89,9 @@
                                    value="{{ old('driver_mobile') }}"
                                    autocomplete="off"
                                    required>
+                            @if($errors->has('driver_mobile'))
+                                <div class="error" style="">{{ $errors->first('driver_mobile') }}</div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -91,35 +104,47 @@
                         <hr>
                         <div class="form-group col-md-12">
                             <label for="supplier_name">@lang('global.supplier_name')</label>
-                            <select id="supplier_name" class="form-control select2-single" name="supplier_id" required>
-                                <option label="&nbsp;"> @lang('global.select_supplier')</option>
+                            <select id="supplierSelect" class="form-control select2-single" data-placeholder="@lang('global.select_supplier')" name="supplier_id" required>
+                                <option value="" selected></option>
                                 @foreach($suppliers as $supplier)
                                     <option value="{{ $supplier->id }}" {{ old('supplier_id') == $supplier->id ? "selected" : '' }}>
                                         {{ $supplier->name }}
                                     </option>
                                 @endforeach
                             </select>
+                            @if($errors->has('supplier_id'))
+                                <div class="error" style="">{{ $errors->first('supplier_id') }}</div>
+                            @endif
                         </div>
                         <div class="form-group col-md-12">
                             <label for="governorate">@lang('global.governorate')</label>
                             <select id="governorate_select" class="form-control select2-single" data-placeholder="@lang('global.select_governorate')" name="governorate_id" required>
+                                <option value="" selected></option>
                                 @foreach($governorates as $governorate)
                                     <option value="{{ $governorate->id }}" {{ old('governorate_id') == $governorate->id ? "selected" : '' }}>
                                         {{ $governorate->name }}
                                     </option>
                                 @endforeach
                             </select>
+                            @if($errors->has('governorate_id'))
+                                <div class="error" style="">{{ $errors->first('governorate_id') }}</div>
+                            @endif
                         </div>
                         <div class="form-group col-md-12">
                             <label for="city">@lang('global.city')</label>
                             <select id="citySelect" class="form-control select2-single" data-placeholder="@lang('global.select_city')" name="city_id" required>
                             </select>
+                            @if($errors->has('city_id'))
+                                <div class="error" style="">{{ $errors->first('city_id') }}</div>
+                            @endif
                         </div>
                         <div class="form-group col-md-12">
                             <label for="center">@lang('global.center')</label>
                             <select id="centerSelect" class="form-control select2-single" data-placeholder="@lang('global.select_center')" name="center_id">
-                                <option value="" label="&nbsp;"> @lang('global.select_center')</option>
                             </select>
+                            @if($errors->has('center_id'))
+                                <div class="error" style="">{{ $errors->first('center_id') }}</div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -132,14 +157,17 @@
                         <hr>
                         <div class="form-group col-md-12">
                             <label for="truck_type">@lang('global.truck_type')</label>
-                            <select id="truck_type" class="form-control select2-single" name="truck_type_id" required>
-                                <option label="&nbsp;"> @lang('global.select_truck_type')</option>
+                            <select id="truck_type" class="form-control select2-single" data-placeholder="@lang('global.select_truck_type')" name="truck_type_id" required>
+                                <option value="" selected></option>
                                 @foreach($truck_types as $truck_type)
                                     <option value="{{ $truck_type->id }}" {{ old('truck_type_id') == $truck_type->id ? "selected" : '' }}>
                                         {{ $truck_type->name }}
                                     </option>
                                 @endforeach
                             </select>
+                            @if($errors->has('truck_type_id'))
+                                <div class="error" style="">{{ $errors->first('truck_type_id') }}</div>
+                            @endif
                         </div>
                         <div class="form-group col-md-12">
                             <label for="truck_plates_tractor">@lang('global.truck_plates_tractor')</label>
@@ -151,6 +179,9 @@
                                    value="{{ old('truck_plates_tractor') }}"
                                    autocomplete="off"
                                    required>
+                            @if($errors->has('truck_plates_tractor'))
+                                <div class="error" style="">{{ $errors->first('truck_plates_tractor') }}</div>
+                            @endif
                         </div>
                         <div class="form-group col-md-12">
                             <label for="truck_plates_trailer">@lang('global.truck_plates_trailer')</label>
@@ -162,11 +193,14 @@
                                    name="truck_plates_trailer"
                                    autocomplete="off"
                             >
+                            @if($errors->has('truck_plates_trailer'))
+                                <div class="error" style="">{{ $errors->first('truck_plates_trailer') }}</div>
+                            @endif
                         </div>
                         <div class="form-group col-md-12">
                             <label for="itemTypeSelect">@lang('global.item_type')</label>
-                            <select id="itemTypeSelect" class="form-control select2-single" name="item_type_id" required>
-                                <option label="&nbsp;"> @lang('global.select_item_type')</option>
+                            <select id="itemTypeSelect" class="form-control select2-single" data-placeholder="@lang('global.select_item_type')" name="item_type_id" required>
+                                <option value="" selected></option>
                                 @foreach($item_types as $item_type)
                                     <option value="{{ $item_type->id }}"
                                             data-prefix="{{$item_type->prefix}}"
@@ -175,18 +209,18 @@
                                     </option>
                                 @endforeach
                             </select>
+                            @if($errors->has('item_type_id'))
+                                <div class="error" style="">{{ $errors->first('item_type_id') }}</div>
+                            @endif
                         </div>
                         <div id="itemTypeExtra" style="display: none">
                             <div class="form-group col-md-12">
                                 <label for="itemsGroupSelect">@lang('global.item_group')</label>
-                                <select id="itemsGroupSelect" class="form-control select2-single" name="item_group_id" required>
-                                    <option label="&nbsp;"> @lang('global.select_items_group')</option>
-                                    @foreach($items_groups as $items_group)
-                                        <option value="{{ $items_group->id }}" {{ old('item_group_id') == $items_group->id ? "selected" : '' }}>
-                                            {{ $items_group->name }}
-                                        </option>
-                                    @endforeach
+                                <select id="itemsGroupSelect" class="form-control select2-single" data-placeholder="@lang('global.select_items_group')" name="item_group_id">
                                 </select>
+                                @if($errors->has('item_group_id'))
+                                    <div class="error" style="">{{ $errors->first('item_group_id') }}</div>
+                                @endif
                             </div>
 
                             <div class="form-group col-md-12">
@@ -201,6 +235,9 @@
                                        name="theoretical_weight"
                                        autocomplete="off"
                                 >
+                                @if($errors->has('theoretical_weight'))
+                                    <div class="error" style="">{{ $errors->first('theoretical_weight') }}</div>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -412,6 +449,26 @@
                         $.each(response.centers , function (index , center) {
                             let option = "<option value='"+index+"'>"+ center +"</option>";
                             centerSelect.append(option);
+                        });
+                    }
+                })
+            });
+
+            $('#supplierSelect').on('change' , function(evt){
+                evt.preventDefault();
+                let itemsGroupSelect  =   $('#itemsGroupSelect');
+                let supplier  =   $(this).val();
+                $.ajax({
+                    method: 'GET',
+                    url:    "{{ route('getSupplierItemGroups') }}",
+                    data:   { _token: "{{ csrf_token() }}" , id : supplier},
+                    success : (response)    =>  {
+                        itemsGroupSelect.empty();
+                        let option = "<option value='' selected></option>";
+                        itemsGroupSelect.append(option);
+                        $.each(response.itemGroups , function (index , itemGroup) {
+                            let option = "<option value='"+index+"'>"+ itemGroup +"</option>";
+                            itemsGroupSelect.append(option);
                         });
                     }
                 })

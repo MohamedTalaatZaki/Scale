@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\MasterData;
 
 use App\Models\Items\Item;
+use App\Models\Items\ItemGroup;
 use App\Models\Supplier\Supplier;
 use App\Traits\AuthorizeTrait;
 use Illuminate\Http\Request;
@@ -70,5 +71,19 @@ class SuppliersController extends Controller
         $supplier->update($request->except('items'));
         $supplier->items()->sync($request->input('items' , []));
         return redirect()->action('MasterData\SuppliersController@index')->with('success' , trans('global.supplier_updated_success'));
+    }
+
+    public function getSupplierItemGroups(Request $request)
+    {
+        $supplier   =   Supplier::query()->find($request->get('id'));
+
+        if($supplier)
+        {
+            $ItemGroupsIds  =   $supplier->items()->distinct()->pluck('item_group_id');
+            $itemGroups =   ItemGroup::query()->find($ItemGroupsIds);
+            return response()->json(['itemGroups'   =>  $itemGroups->pluck( 'name' , 'id')]);
+        } else {
+            return response()->json(['itemGroups' => []]);
+        }
     }
 }
