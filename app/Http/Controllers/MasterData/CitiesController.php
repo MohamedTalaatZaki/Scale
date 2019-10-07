@@ -83,4 +83,16 @@ class CitiesController extends Controller
 
         return redirect()->action('MasterData\CitiesController@index')->with('success' , trans('global.city_updated'));
     }
+
+
+    public function getGovernorateCities(Request $request)
+    {
+        $governorate =   Governorate::query()->find($request->get('id'));
+        if($governorate)
+        {
+            return response()->json(['cities'   =>  $governorate->cities()->get()->pluck( 'name' , 'id')]);
+        } else {
+            return response()->json(['cities' => []]);
+        }
+    }
 }

@@ -4,7 +4,6 @@
     <div class="row">
         <div class="col-12">
             <h1>@lang('global.qc_test_headers')</h1>
-            <h1>@lang('global.items')</h1>
 
             <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
                 <ol class="breadcrumb pt-0">
@@ -103,14 +102,18 @@
                                     @foreach(old('details') as $key => $row)
                                         <tr data-repeater-item>
                                             <td>
-                                                <input type="text" class="form-control onlyEn form-control-sm" name="details[{{$key}}][en_name]" value="{{ old("details.$key.en_name") }}"
+                                                <input type="text" class="form-control onlyEn form-control-sm"
+                                                       name="details[{{$key}}][en_name]"
+                                                       value="{{ old("details.$key.en_name") }}"
                                                        placeholder="@lang('global.en_name')" autocomplete="off" required>
                                                 @if($errors->has("details.$key.en_name"))
                                                     <span id="jQueryName-error" class="error" style="">{{ $errors->first("details.$key.en_name") }}</span>
                                                 @endif
                                             </td>
                                             <td>
-                                                <input type="text" class="form-control onlyAr form-control-sm"  name="details[{{$key}}][ar_name]" value="{{ old("details.$key.ar_name") }}"
+                                                <input type="text" class="form-control onlyAr form-control-sm"
+                                                       name="details[{{$key}}][ar_name]"
+                                                       value="{{ old("details.$key.ar_name") }}"
                                                        placeholder="@lang('global.ar_name')" autocomplete="off" required>
                                                 @if($errors->has("details.$key.en_name"))
                                                     <span id="jQueryName-error" class="error" style="">{{ $errors->first("details.$key.en_name") }}</span>
@@ -137,7 +140,10 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <select id="expected_result" class="form-control form-control-sm expected_result" name="details[{{$key}}][expected_result]" style="display: {{$row['element_type'] == 'range' ? 'none' : 'block'}}" {{$row['element_type'] == 'range' ? '' : 'required'}}>
+                                                <select id="expected_result" class="form-control form-control-sm expected_result"
+                                                        name="details[{{$key}}][expected_result]"
+                                                        style="display: {{ $row['element_type'] == '' || $row['element_type'] == 'range' ? 'none' : 'block'}}"
+                                                        {{$row['element_type'] == 'range' ? '' : 'required'}}>
                                                     <option value="">@lang('global.expected_result')</option>
                                                     <option value="1" {{ old("details.$key.expected_result") == '1' ? "selected" : '' }}>@lang('global.yes')</option>
                                                     <option value="0" {{ old("details.$key.expected_result") == '0' ? "selected" : '' }}>@lang('global.no')</option>
@@ -147,7 +153,10 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <input type="number" class="form-control form-control-sm min_range range" name="details[{{$key}}][min_range]" style="display: {{$row['element_type'] == 'range' ? 'block' : 'none'}}" {{$row['element_type'] == 'range' ? 'required' : ''}}
+                                                <input type="number" class="form-control form-control-sm min_range range" name="details[{{$key}}][min_range]"
+                                                       style="display: {{$row['element_type'] == 'range' ? 'block' : 'none'}}"
+                                                       {{$row['element_type'] == 'range' ? 'required' : ''}}
+
                                                        value="{{ old("details.$key.min_range") }}" placeholder="@lang('global.min_range')" autocomplete="off">
                                                 @if($errors->has("details.$key.min_range"))
                                                     <span id="jQueryName-error" class="error" style="">{{ $errors->first("details.$key.min_range") }}</span>
@@ -169,11 +178,11 @@
                                             </td>
                                             <td>
                                                 <div class="btn-group btn-group-sm" role="group">
-                                                    <button type="button" class="btn btn-info btn-xs new-row" data-repeater-create>
-                                                        <i class="simple-icon-plus" style="font-size: 16px ; font-weight: bolder"></i>
+                                                    <button type="button" class="btn btn-xs new-row" style="background: none ; border: 0 ; margin-right: -20px" data-repeater-create>
+                                                        <i class="fas fa-plus-circle text-primary" style="font-size: 25px ; font-weight: bolder"></i>
                                                     </button>
-                                                    <button type="button" class="btn btn-dark btn-xs" data-repeater-delete>
-                                                        <i class="simple-icon-minus" style="font-size: 16px ; font-weight: bolder"></i>
+                                                    <button type="button" class="btn btn-xs" style="background: none ; border: 0" data-repeater-delete>
+                                                        <i class="fas fa-minus-circle text-danger" style="font-size: 25px ; font-weight: bolder"></i>
                                                     </button>
                                                 </div>
                                             </td>
@@ -242,11 +251,11 @@
                                         </td>
                                         <td>
                                             <div class="btn-group btn-group-sm" role="group">
-                                                <button type="button" class="btn btn-info btn-xs new-row" data-repeater-create>
-                                                    <i class="simple-icon-plus" style="font-size: 16px ; font-weight: bolder"></i>
+                                                <button type="button" class="btn btn-xs new-row" style="background: none ; border: 0 ; margin-right: -20px" data-repeater-create>
+                                                    <i class="fas fa-plus-circle text-primary" style="font-size: 25px ; font-weight: bolder"></i>
                                                 </button>
-                                                <button type="button" class="btn btn-dark btn-xs" data-repeater-delete>
-                                                    <i class="simple-icon-minus" style="font-size: 16px ; font-weight: bolder"></i>
+                                                <button type="button" class="btn btn-xs" style="background: none ; border: 0" data-repeater-delete>
+                                                    <i class="fas fa-minus-circle text-danger" style="font-size: 25px ; font-weight: bolder"></i>
                                                 </button>
                                             </div>
                                         </td>

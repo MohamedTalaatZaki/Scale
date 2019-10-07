@@ -181,7 +181,7 @@ return [
         'ar_name'               =>  'Arabic Name',
         'en_name'               =>  'English Name',
         'details.*.en_name'           =>  'English Name',
-        'details.*.ar_name'           =>  'English Name',
+        'details.*.ar_name'           =>  'Arabic Name',
         'details.*.test_type'         =>  'Test Type',
         'details.*.element_type'      =>  'Element Type',
         'details.*.expected_result'   =>  'Expected Result',

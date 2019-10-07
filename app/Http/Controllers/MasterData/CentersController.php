@@ -85,4 +85,16 @@ class CentersController extends Controller
 
         return redirect()->action('MasterData\CentersController@index')->with('success' , trans('global.center_updated'));
     }
+
+    public function getCityCenters(Request $request)
+    {
+        $city =   City::query()->find($request->get('id'));
+        if($city)
+        {
+            return response()->json(['centers'   =>  $city->centers()->get()->pluck( 'name' , 'id')]);
+        } else {
+            return response()->json(['centers' => []]);
+        }
+    }
+
 }
