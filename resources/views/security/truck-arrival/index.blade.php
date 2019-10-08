@@ -140,6 +140,8 @@
                     data:   { _token: "{{ csrf_token() }}" , id : govId},
                     success : (response)    =>  {
                         centerSelect.empty();
+                        let option = "<option value='' selected></option>";
+                        centerSelect.append(option);
                         $.each(response.centers , function (index , center) {
                             let option = "<option value='"+index+"'>"+ center +"</option>";
                             centerSelect.append(option);

@@ -27,9 +27,8 @@ class RequiredIfItemTypeRaw implements Rule
     public function passes($attribute, $value)
     {
         $this->attribute    =   $attribute;
-        $itemType   =   ItemType::query()->find(request()->get('item_type_id'));
 
-        return optional($itemType)->prefix == 'raw' ? true : false;
+        return !isItemTypeRaw(request()->get('item_type_id'));
     }
 
     /**
