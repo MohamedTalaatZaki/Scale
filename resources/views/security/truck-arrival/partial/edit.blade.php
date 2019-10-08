@@ -121,7 +121,7 @@
                     </div>
                     <div class="form-group col-md-12">
                         <label for="center">@lang('global.center')</label>
-                        <select id="centerSelect" class="form-control select2-single" data-placeholder="@lang('global.select_center')" name="center_id">
+                        <select id="centerSelect" class="form-control select2-single centerSelect" data-placeholder="@lang('global.select_center')" name="center_id">
                             <option value="" selected></option>
                             @if(optional($truckArrival->city)->centers)
                                 @foreach($truckArrival->city->centers as $center)
