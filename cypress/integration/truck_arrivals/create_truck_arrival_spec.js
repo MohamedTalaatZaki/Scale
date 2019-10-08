@@ -24,6 +24,9 @@ before(function(){
 });
   describe('Create truck arrival', function () {
   it('checks required fields', function () {
+    cy.get('#itemTypeSelect option[value=""]').invoke('attr', 'selected',true);
+    cy.get('#itemTypeSelect').trigger('change',{force:true});
+    cy.wait(2000);
     cy.get('.btn-group-sm > .btn-primary').click();
     cy.url().should('contain','/security/trucks-arrival');
     cy.get('.error').should('contain','The Driver Name field is required.')
@@ -36,8 +39,12 @@ before(function(){
     cy.contains('The Truck Type field is required.').should('be.visible');
     cy.contains('The Truck Plates Tractor field is required.').should('be.visible');
     cy.contains('The Item Type field is required.').should('be.visible');
-    cy.get('#itemTypeSelect option[value="1"]').invoke('attr', 'selected',true);
-    cy.get('#itemTypeSelect').trigger('change',{force:true});
+  })
+  it('checks item type nested fields',function(){
+    var x = Cypress.$("#itemTypeSelect");
+    x.val(1);
+    x.trigger("click");
+    cy.get('#itemTypeSelect').select("1",{"force":true});
     cy.wait(2000);
     cy.get('.btn-group-sm > .btn-primary').click();
     cy.url().should('contain','/security/trucks-arrival');
