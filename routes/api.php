@@ -53,3 +53,7 @@ Route::get('qc-test/{id}',function($id){
 Route::get('qc_test/{en_name}',function($en_name){
   return App\Models\QC\QcTestHeader::where('en_name',$en_name)->with('details')->first();
 });
+
+Route::get('truck_arrival/{driver_name}',function($driver_name){
+  return App\Models\Security\TruckArrival::where('driver_name',$driver_name)->first();
+});

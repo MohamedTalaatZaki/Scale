@@ -125,9 +125,10 @@
                             let option = "<option value='"+index+"'>"+ city +"</option>";
                             citySelect.append(option);
                         });
+                        reInitSelect2("#citySelect");
                     }
                 });
-                reInitSelect2();
+
             });
 
             $('.citySelect').on('change' , function(evt){
@@ -146,7 +147,7 @@
                         });
                     }
                 });
-                reInitSelect2();
+                reInitSelect2("#centerSelect");
             });
 
             $('.supplierSelect').on('change' , function(evt){
@@ -167,7 +168,7 @@
                         });
                     }
                 });
-                reInitSelect2();
+                reInitSelect2("#itemTypeSelect");
             });
 
             $('#itemTypeSelect').on('change' , function (evt) {
@@ -184,9 +185,9 @@
                 }
             });
 
-            function reInitSelect2() {
-                $(".select2-single").select2('destroy');
-                $(".select2-single, .select2-multiple").select2({
+            function reInitSelect2(selector) {
+                 $(selector).select2('destroy');
+                $(selector).select2({
                     theme: "bootstrap",
                     maximumSelectionSize: 6,
                     containerCssClass: ":all:"

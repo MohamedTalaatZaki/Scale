@@ -221,6 +221,10 @@ Artisan::command('center:edit_faker', function () {
     $center = factory(App\Models\Center::class, 'center_edit')->create();
 })->describe('Generate fake center for edit');
 
+Artisan::command('center:demo_faker', function () {
+    $center = factory(App\Models\Center::class, 'center_demo')->create();
+})->describe('Generate fake center for edit');
+
 Artisan::command('city:faker', function () {
     $cities = factory(App\Models\City::class, 'fake_cities', 300)->create();
 })->describe('Generate fake cities');
@@ -243,6 +247,14 @@ Artisan::command('item:faker', function () {
 
 Artisan::command('supplier:edit_faker', function () {
     $item_type = factory(App\Models\Supplier\Supplier::class, 'supplier_edit')->create();
+})->describe('Generate fake Supplier for edit');
+
+Artisan::command('supplier:demo_faker', function () {
+    $supplier = factory(App\Models\Supplier\Supplier::class, 'supplier_edit')->create();
+    DB::table('suppliers_items')->insert([
+      'supplier_id' => 1000,
+      'item_id' => 1000
+    ]);
 })->describe('Generate fake Supplier for edit');
 
 Artisan::command('supplier:fake_many', function () {

@@ -15,6 +15,16 @@ $factory->defineAs(App\Models\Center::class, 'center_edit',function (Faker $fake
     ];
 });
 
+$factory->defineAs(App\Models\Center::class, 'center_demo',function (Faker $faker) {
+    return [
+        'id' => 1000,
+        'city_id'=>1,
+        'is_active'=>1,
+        'en_name'=>'Alexandria',
+        'ar_name'=>'الإسكندرية'
+    ];
+});
+
 $factory->defineAs(App\Models\Center::class, 'fake_centers',function (Faker $faker) {
     return [
       'en_name' => $faker->regexify('[A-Za-z]{5}'),
