@@ -1,6 +1,5 @@
 <form action="{{ route('trucks-arrival.store') }}" method="post">
     @csrf
-
     <div style="display: {{ $errors->count() > 0 ? 'flex' : 'none' }}" class="row create-arrival-truck">
         <div class="col-md-4">
             <div class="card">
