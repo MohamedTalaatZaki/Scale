@@ -76,7 +76,8 @@ class TrucksArrivalController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request , [
+//        $this->validate($request , [
+        $validate   =   \Validator::make($request->input() ,[
             'driver_name'  =>  'required',
             'driver_license'  =>  'required',
             'driver_national_id'  =>  'required|digits:14|numeric',
@@ -88,10 +89,10 @@ class TrucksArrivalController extends Controller
             'truck_type_id'  =>  'required|exists:trucks_types,id',
             'truck_plates_tractor'  =>  'required',
             'item_type_id'  =>  'required|exists:item_types,id',
-            'item_group_id'  =>  ['nullable' , new RequiredIfItemTypeRaw()],
-            'theoretical_weight'  =>  ['nullable' , new RequiredIfItemTypeRaw()],
+            'item_group_id'  =>  [new RequiredIfItemTypeRaw()],
+            'theoretical_weight'  =>  [new RequiredIfItemTypeRaw()],
         ]);
-
+        dd($validate->errors() , $request->input());
         $request->offsetSet('arrival_time' , Carbon::now());
         $request->offsetSet('transport_number' , Carbon::now()->timestamp);
         $request->offsetSet('status' , new RequiredIfItemTypeRaw() ? 'arrived' : 'waiting');

@@ -190,5 +190,6 @@ return [
     'car_in_process'    =>  'العربه بداخل الشركة :truck_plates_tractor',
     'check_in'  =>  'دخول',
     'departures_trucks' =>  'شاحنات غادرت',
+    'item_group_id' =>  'مجموعة الاصناف',
 
 ];
