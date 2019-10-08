@@ -1,5 +1,5 @@
 
-<form action="{{ route('trucks-arrival.edit' , ['id' => $truckArrival]) }}" method="post">
+<form action="{{ route('trucks-arrival.update' , ['id' => $truckArrival]) }}" method="post">
     @csrf
     @method('PUT')
     <div class="row edit-arrival-truck">

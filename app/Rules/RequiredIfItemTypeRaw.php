@@ -28,7 +28,7 @@ class RequiredIfItemTypeRaw implements Rule
     {
         $this->attribute    =   $attribute;
 
-        return !isItemTypeRaw(request()->get('item_type_id'));
+        return !isItemTypeRaw(request()->get('item_type_id')) || !is_null($value);
     }
 
     /**
