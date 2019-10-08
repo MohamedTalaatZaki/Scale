@@ -224,7 +224,7 @@
                             <input type="number"
                                    min="0"
                                    step="0.01"
-                                   class="form-control theoreticalWeight"
+                                   class="form-control theoreticalWeight onlyNumbers"
                                    id="theoreticalWeight"
                                    placeholder="@lang('global.theoretical_weight')"
                                    value="{{ old('theoretical_weight' , $truckArrival->theoretical_weight) }}"
