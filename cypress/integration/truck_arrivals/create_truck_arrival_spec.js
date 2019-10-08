@@ -19,55 +19,53 @@ before(function(){
   cy.exec('php artisan item_group:demo_faker');
   cy.exec('php artisan item:demo_faker');
   cy.exec('php artisan supplier:demo_faker');
-  cy.exec('php artisan governorate:demo_faker');
-  cy.exec('php artisan city:edit_faker');
-  cy.exec('php artisan center:edit_faker');
+  cy.exec('php artisan center:demo_faker');
   cy.exec('php artisan user:setLocale en');
 });
   describe('Create truck arrival', function () {
   it('checks required fields', function () {
     cy.get('.btn-group-sm > .btn-primary').click();
     cy.url().should('contain','/security/trucks-arrival');
-    cy.get('.error').should('contain','The driver name field is required.')
-    cy.contains('The driver license field is required.').should('be.visible');
-    cy.contains('The driver national id field is required.').should('be.visible');
-    cy.contains('The driver mobile field is required.').should('be.visible');
-    cy.contains('The supplier id field is required.').should('be.visible');
-    cy.contains('The governorate id field is required.').should('be.visible');
-    cy.contains('The city id field is required.').should('be.visible');
-    cy.contains('The truck type id field is required.').should('be.visible');
-    cy.contains('The truck plates tractor field is required.').should('be.visible');
-    cy.contains('The item type id field is required.').should('be.visible');
-    // cy.get('#itemTypeSelect option[value="1"]').invoke('attr', 'selected',true);
-    // cy.get('#itemTypeSelect').trigger('change',{force:true});
-    // cy.wait(2000);
-    // cy.get('.btn-group-sm > .btn-primary').click();
-    // cy.url().should('contain','/security/trucks-arrival');
-    // cy.contains('Theoretical Weight Required').should('be.visible');
+    cy.get('.error').should('contain','The Driver Name field is required.')
+    cy.contains('The Driver License field is required.').should('be.visible');
+    cy.contains('The Driver National ID field is required.').should('be.visible');
+    cy.contains('The Driver Mobile field is required.').should('be.visible');
+    cy.contains('The Supplier field is required.').should('be.visible');
+    cy.contains('The Governorate field is required.').should('be.visible');
+    cy.contains('The City field is required.').should('be.visible');
+    cy.contains('The Truck Type field is required.').should('be.visible');
+    cy.contains('The Truck Plates Tractor field is required.').should('be.visible');
+    cy.contains('The Item Type field is required.').should('be.visible');
+    cy.get('#itemTypeSelect option[value="1"]').invoke('attr', 'selected',true);
+    cy.get('#itemTypeSelect').trigger('change',{force:true});
+    cy.wait(2000);
+    cy.get('.btn-group-sm > .btn-primary').click();
+    cy.url().should('contain','/security/trucks-arrival');
+    cy.contains('Item Group Required').should('be.visible');
+    cy.contains('Theoretical Weight Required').should('be.visible');
   })
 
   it('checks datatype/length fields', function () {
-     // cy.get('#driver_name').type('666');
+     cy.get('#driver_name').type('666');
      cy.get('#driver_national_id').type('new');
      cy.get('#driver_mobile').type('pppppppp');
      cy.get('#itemTypeSelect option[value="1"]').invoke('attr', 'selected',true);
      cy.get('#itemTypeSelect').trigger('change',{force:true});
      cy.wait(2000);
      cy.get('#theoreticalWeight').type('new name');
-     // cy.get('#theoreticalWeight').type('RWQE');
-
      cy.get('.btn-group-sm > .btn-primary').click();
      cy.url().should('contain','/security/trucks-arrival');
-     // cy.get('.error').should('contain','The driver name field is required.')
-     cy.contains('The driver national id must be 14 digits.').should('be.visible');
-     cy.contains('The driver mobile must be 11 digits.').should('be.visible');
-  // cy.contains('Theoretical Weight must be a number.').should('be.visible');
+     cy.get('.error').should('contain','The Driver Name field is required.')
+     cy.contains('The Driver National ID must be 14 digits.').should('be.visible');
+     cy.contains('The Driver Mobile must be 11 digits.').should('be.visible');
+     cy.contains('The Driver License field is required.').should('be.visible');
+     cy.contains('Theoretical Weight Required').should('be.visible');
   })
   it('checks nullable/nested fields',function(){
     var x = Cypress.$("#governorate_select");
-    x.val(10001);
+    x.val(1);
     x.trigger("click");
-    cy.get('#governorate_select').select("10001",{"force":true});
+    cy.get('#governorate_select').select("1",{"force":true});
 
     cy.get('#driver_name').type('new_name');
     cy.get('#driver_national_id').type('12345678974185');
@@ -75,7 +73,7 @@ before(function(){
     cy.get('#truck_plates_tractor').type('uuq2');
     cy.get('#truck_type option[value="1"]').invoke('attr', 'selected',true);
     cy.wait(2000);
-    cy.get('#citySelect option[value="1000"]').invoke('attr', 'selected',true);
+    cy.get('#citySelect option[value="1"]').invoke('attr', 'selected',true);
     cy.get('#itemTypeSelect option[value="1"]').invoke('attr', 'selected',true);
     cy.get('#itemTypeSelect').trigger('change',{force:true});
     cy.get('#driver_mobile').type('12345678912');
@@ -98,8 +96,8 @@ before(function(){
        expect(response.body).to.have.property('driver_mobile', '12345678912')
 
        expect(response.body).to.have.property('supplier_id', 1000)
-       expect(response.body).to.have.property('governorate_id', 10001)
-       expect(response.body).to.have.property('city_id', 1000)
+       expect(response.body).to.have.property('governorate_id', 1)
+       expect(response.body).to.have.property('city_id', 1)
        expect(response.body).to.have.property('center_id',null)
        expect(response.body).to.have.property('truck_plates_trailer',null)
        expect(response.body).to.have.property('truck_type_id', 1)
@@ -110,11 +108,11 @@ before(function(){
     });
 
   })
-  it.only('checks all fields',function(){
+  it('checks all fields',function(){
     var x = Cypress.$("#governorate_select");
-    x.val(10001);
+    x.val(1);
     x.trigger("click");
-    cy.get('#governorate_select').select("10001",{"force":true});
+    cy.get('#governorate_select').select("1",{"force":true});
 
     cy.get('#driver_name').type('old_name');
     cy.get('#driver_national_id').type('12345678974185');
@@ -124,9 +122,9 @@ before(function(){
     cy.get('#truck_type option[value="1"]').invoke('attr', 'selected',true);
     cy.wait(2000);
     var x = Cypress.$("#citySelect");
-    x.val(1000);
+    x.val(1);
     x.trigger("click");
-    cy.get('#citySelect').select("1000",{"force":true});
+    cy.get('#citySelect').select("1",{"force":true});
     cy.get('#itemTypeSelect option[value="1"]').invoke('attr', 'selected',true);
     cy.get('#centerSelect option[value="1000"]').invoke('attr', 'selected',true);
     cy.get('#itemTypeSelect').trigger('change',{force:true});
@@ -150,8 +148,8 @@ before(function(){
        expect(response.body).to.have.property('driver_mobile', '12345678912')
 
        expect(response.body).to.have.property('supplier_id', 1000)
-       expect(response.body).to.have.property('governorate_id', 10001)
-       expect(response.body).to.have.property('city_id', 1000)
+       expect(response.body).to.have.property('governorate_id', 1)
+       expect(response.body).to.have.property('city_id', 1)
        expect(response.body).to.have.property('center_id',1000)
        expect(response.body).to.have.property('truck_plates_trailer','lo23')
        expect(response.body).to.have.property('truck_type_id', 1)
