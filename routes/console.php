@@ -226,6 +226,8 @@ Artisan::command('center:demo_faker', function () {
     $center = factory(App\Models\Center::class, 'center_demo')->create();
     DB::table('centers')->insert([
         'id' => 1,
+       'en_name' => 'testyyyy',
+        'ar_name' => 'لثلب',
         'city_id' => 1,
         'is_active' => 1
 
@@ -278,6 +280,7 @@ Artisan::command('item_type:edit_faker', function () {
 
 Artisan::command('item_group:fake_item_groups', function () {
     $item_groups = factory(App\Models\Items\ItemGroup::class, 'fake_item_groups', 300)->create();
+
 })->describe('Generate fake item groups');
 
 Artisan::command('item_group:demo_faker', function () {
@@ -388,21 +391,24 @@ Artisan::command('test:delete_scale3', function () {
 
 Artisan::command('test:create_truck_arrival', function () {
     DB::table('trucks_arrival')->insert([
-        'id'=> 0,
+        'id'=>9999,
         'transport_number'         =>  '9999',
         'driver_name'         =>  'test999',
         'status'         =>  'arrived',
         'driver_license'   =>  '123456',
-        'driver_national_id'=> '11111111111111',
-        'driver_mobile'         =>  '11111111111',
+        'driver_national_id'=> '12345678912345',
+        'driver_mobile'         =>  '01234567891',
         'supplier_id'         =>  1000,
         'governorate_id'         =>  1,
         'city_id'   =>  1,
         'center_id'   =>  1,
-        'truck_type_id'   =>  'select2-truck_type-container',
+        'truck_type_id'   =>  1,
         'truck_plates_tractor'   =>  '1000',
         'truck_plates_trailer'   =>  '1000',
-        'item_type_id'   =>  '1',
+        'item_type_id'   => 1,
+        'item_group_id'   =>  10001,
+        'theoretical_weight'   =>  '300000',
+        'arrival_time'  =>  '2019-10-02 00:00:00',
 
     ]);
 })->describe('create truck arrival');
