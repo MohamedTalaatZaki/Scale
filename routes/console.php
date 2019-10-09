@@ -219,10 +219,17 @@ Artisan::command('city:edit_faker', function () {
 
 Artisan::command('center:edit_faker', function () {
     $center = factory(App\Models\Center::class, 'center_edit')->create();
+
 })->describe('Generate fake center for edit');
 
 Artisan::command('center:demo_faker', function () {
     $center = factory(App\Models\Center::class, 'center_demo')->create();
+    DB::table('centers')->insert([
+        'id' => 1,
+        'city_id' => 1,
+        'is_active' => 1
+
+    ]);
 })->describe('Generate fake center for edit');
 
 Artisan::command('city:faker', function () {
@@ -378,3 +385,25 @@ Artisan::command('test:delete_scale_test', function () {
 Artisan::command('test:delete_scale3', function () {
     optional(App\Models\Scales\Scale::where('code','12345'))->delete();
 })->describe('delete scale2');
+
+Artisan::command('test:create_truck_arrival', function () {
+    DB::table('trucks_arrival')->insert([
+        'id'=> 0,
+        'transport_number'         =>  '9999',
+        'driver_name'         =>  'test999',
+        'status'         =>  'arrived',
+        'driver_license'   =>  '123456',
+        'driver_national_id'=> '11111111111111',
+        'driver_mobile'         =>  '11111111111',
+        'supplier_id'         =>  1000,
+        'governorate_id'         =>  1,
+        'city_id'   =>  1,
+        'center_id'   =>  1,
+        'truck_type_id'   =>  'select2-truck_type-container',
+        'truck_plates_tractor'   =>  '1000',
+        'truck_plates_trailer'   =>  '1000',
+        'item_type_id'   =>  '1',
+
+    ]);
+})->describe('create truck arrival');
+
