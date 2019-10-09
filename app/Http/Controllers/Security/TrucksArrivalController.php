@@ -42,12 +42,12 @@ class TrucksArrivalController extends Controller
             ->paginate(15);
 
         $scrapTrucks  =   TruckArrival::query()
-            ->where('status' , 'arrived')
+            ->where('status' , 'waiting')
             ->whereHas('itemType' , function ($q){$q->where('prefix' , 'scrap');})
             ->paginate(15);
 
         $finishTrucks  =   TruckArrival::query()
-            ->where('status' , 'arrived')
+            ->where('status' , 'waiting')
             ->whereHas('itemType' , function ($q){$q->where('prefix' , 'finish');})
             ->paginate(15);
 
