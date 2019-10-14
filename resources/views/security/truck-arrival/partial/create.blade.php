@@ -1,6 +1,5 @@
 <form action="{{ route('trucks-arrival.store') }}" method="post">
     @csrf
-
     <div style="display: {{ $errors->count() > 0 ? 'flex' : 'none' }}" class="row create-arrival-truck">
         <div class="col-md-4">
             <div class="card">
@@ -10,7 +9,7 @@
                     <div class="form-group col-md-12">
                         <label for="driver_name">@lang('global.driver_name')</label>
                         <input type="text"
-                               class="form-control"
+                               class="form-control noNumbers"
                                id="driver_name"
                                placeholder="@lang('global.driver_name')"
                                name="driver_name"
@@ -113,7 +112,7 @@
                     </div>
                     <div class="form-group col-md-12">
                         <label for="center">@lang('global.center')</label>
-                        <select id="centerSelect" class="form-control select2-single" data-placeholder="@lang('global.select_center')" name="center_id">
+                        <select id="centerSelect" class="form-control select2-single centerSelect" data-placeholder="@lang('global.select_center')" name="center_id">
                         </select>
                         @if($errors->has('center_id'))
                             <div class="error" style="">{{ $errors->first('center_id') }}</div>
@@ -186,10 +185,16 @@
                             <div class="error" style="">{{ $errors->first('item_type_id') }}</div>
                         @endif
                     </div>
-                    <div class="itemTypeExtra" style="display: none">
+                    <div class="itemTypeExtra" style="display: {{ isItemTypeRaw(old('item_type_id')) ? 'block' : 'none' }}">
                         <div class="form-group col-md-12">
                             <label for="itemsGroupSelect">@lang('global.item_group')</label>
-                            <select id="itemsGroupSelect" class="form-control select2-single itemsGroupSelect" data-placeholder="@lang('global.select_items_group')" name="item_group_id">
+                            <select id="itemsGroupSelect"
+                                    class="form-control select2-single itemsGroupSelect"
+                                    data-placeholder="@lang('global.select_items_group')"
+                                    name="item_group_id"
+                                    {{ isItemTypeRaw(old('item_type_id')) ? 'required' : '' }}
+                            >
+                                <option value='' selected></option>
                             </select>
                             @if($errors->has('item_group_id'))
                                 <div class="error" style="">{{ $errors->first('item_group_id') }}</div>
@@ -201,12 +206,13 @@
                             <input type="number"
                                    min="0"
                                    step="0.01"
-                                   class="form-control theoreticalWeight"
+                                   class="form-control theoreticalWeight onlyNumbers"
                                    id="theoreticalWeight"
                                    placeholder="@lang('global.theoretical_weight')"
                                    value="{{ old('theoretical_weight') }}"
                                    name="theoretical_weight"
                                    autocomplete="off"
+                                   {{ isItemTypeRaw(old('item_type_id')) ? 'required' : '' }}
                             >
                             @if($errors->has('theoretical_weight'))
                                 <div class="error" style="">{{ $errors->first('theoretical_weight') }}</div>

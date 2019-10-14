@@ -1,5 +1,5 @@
 
-<form action="{{ route('trucks-arrival.edit' , ['id' => $truckArrival]) }}" method="post">
+<form action="{{ route('trucks-arrival.update' , ['id' => $truckArrival]) }}" method="post">
     @csrf
     @method('PUT')
     <div class="row edit-arrival-truck">
@@ -121,7 +121,7 @@
                     </div>
                     <div class="form-group col-md-12">
                         <label for="center">@lang('global.center')</label>
-                        <select id="centerSelect" class="form-control select2-single" data-placeholder="@lang('global.select_center')" name="center_id">
+                        <select id="centerSelect" class="form-control select2-single centerSelect" data-placeholder="@lang('global.select_center')" name="center_id">
                             <option value="" selected></option>
                             @if(optional($truckArrival->city)->centers)
                                 @foreach($truckArrival->city->centers as $center)
@@ -224,7 +224,7 @@
                             <input type="number"
                                    min="0"
                                    step="0.01"
-                                   class="form-control theoreticalWeight"
+                                   class="form-control theoreticalWeight onlyNumbers"
                                    id="theoreticalWeight"
                                    placeholder="@lang('global.theoretical_weight')"
                                    value="{{ old('theoretical_weight' , $truckArrival->theoretical_weight) }}"

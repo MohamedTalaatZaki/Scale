@@ -459,6 +459,28 @@
             return false;
         });
 
+        body.on( 'keypress' , '.onlyNumbers' ,function (e) {
+            var regex = /^([0-9])*$/g;
+            var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+            if (regex.test(str)) {
+                return true;
+            }
+
+            e.preventDefault();
+            return false;
+        });
+
+        body.on( 'keypress' , '.noNumbers' ,function (e) {
+            var regex = /^([0-9])*$/g;
+            var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+            if (!regex.test(str)) {
+                return true;
+            }
+
+            e.preventDefault();
+            return false;
+        });
+
     });
 </script>
 @stack('scripts')

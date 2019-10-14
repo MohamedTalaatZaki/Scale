@@ -4,7 +4,7 @@
             <h6 class="mb-4">@lang('global.waiting_trucks')</h6>
         </div>
         <div class="col-6 mb-4">
-            <div class="btn-group btn-group-toggle float-{{ app()->getLocale() == "ar" ? "left" : "right" }}">
+            <div class="btn-group btn-group-toggle float-right">
                 <a href="{{ route('trucks-arrival.index' , ['itemType' => 'raw']) }}"
                    class="btn btn-primary {{ request()->input('itemType') == 'raw' || !request()->has('itemType') ? 'active' : '' }}"  style="color: white">@lang('global.raw')</a>
 
