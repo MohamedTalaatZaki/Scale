@@ -30,8 +30,9 @@ Route::middleware(['auth'])->group(function (){
     Route::resource('master-data/scales' , 'MasterData\ScalesController');
     Route::resource('master-data/qc-test-headers' , 'MasterData\QcTestHeaderController');
 
-
     Route::resource('security/trucks-arrival' , 'Security\TrucksArrivalController');
+
+    Route::resource('qc/arrived-trucks' , 'QC\ArrivedTrucksController');
 
     Route::get('change-theme' , 'MasterData\UsersController@theme')->name('change-theme');
     Route::get('change-lang' , 'MasterData\UsersController@lang')->name('change-lang');

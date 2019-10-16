@@ -240,5 +240,31 @@ class MainMenusTableSeeder extends Seeder
                 'code'=>12
             ]
         ]);
+
+        $main =  MainMenu::create([
+            'en_name' => 'Quality Control',
+            'ar_name' => 'مراقبة الجودة',
+            'class' => 'sidebar sidebar-qc',
+            'href' => '#qualityControl',
+            'sub_class' => 'iconsminds-digital-drawing',
+            'data_link' => 'qualityControl'
+        ]);
+        $group = $main->menuGroups()->create([
+            'en_name' => 'Arrived Trucks',
+            'ar_name' => 'شاحنات بالانتظار',
+            'aria_controls' => 'collapseArrivedTrucks',
+            'order' => 1,
+        ]);
+        $group->subMenus()->createMany([
+            [
+                'en_name' => 'Arrived Trucks',
+                'ar_name' => 'شاحنات بالانتظار',
+                'route' => 'arrived-trucks.index',
+                'a_class' => 'sidebar-sub sidebar-sub-arrived-trucks',
+                'i_class' => 'simple-icon-user-follow',
+                'order' => 1,
+                'code'=>13
+            ]
+        ]);
     }
 }

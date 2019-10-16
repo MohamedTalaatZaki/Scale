@@ -191,5 +191,10 @@ return [
     'check_in'  =>  'دخول',
     'departures_trucks' =>  'شاحنات غادرت',
     'item_group_id' =>  'مجموعة الاصناف',
-
+    'arrived_trucks'    =>  'شاحنات بالانتظار',
+    'qc'    =>  'مراقبة الجودة',
+    'waiting'   =>  'بالانتظار',
+    'sampled'   =>  'تم سحب عينة',
+    'accepted'  =>  'مقبولة',
+    'rejected'  =>  'مرفوضة',
 ];
