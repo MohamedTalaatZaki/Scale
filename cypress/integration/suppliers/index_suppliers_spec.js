@@ -14,7 +14,12 @@ describe('List suppliers', function () {
     cy.visit('/master-data/suppliers');
   });
   it('visits suppliers lists',function(){
-    cy.get(':nth-child(1) > :nth-child(7) > .btn').should('not.exist')
+    cy.get(':nth-child(1) > :nth-child(7) > .btn-info').should('exist')
+
+    cy.get(':nth-child(1) > :nth-child(7) > .btn-primary').should('not.exist');
+    cy.get(':nth-child(1) > :nth-child(7) > .btn-info').click();
+    cy.url().should('contain','/master-data/supplier/items/1');
+    cy.get(':nth-child(7) > .btn').click();
     cy.get('.pagination').should('be.visible');
   })
   after(function(){
