@@ -196,4 +196,9 @@ return [
     'sampled'   =>  'Sampled',
     'accepted'  =>  'Accepted',
     'rejected'  =>  'Rejected',
+    'transport_#'   =>  'Transport',
+    'truck_#'    =>  'Truck ',
+    'truck_trailer_#'   =>  'Trailer ',
+    'phone' =>  'Mobile',
+
 ];

@@ -115,10 +115,26 @@
 @push('styles')
     <style>
         .blue-background .card{
+            border: 1px solid #0e78c0;
+        }
+        .card-shadow{
             border: 1px solid #c0702f;
+        }
+
+        .card-body {
+            overflow: hidden;
+        }
+
+        .card-custom-padding {
+            padding: 0 1.75rem 5px 1.75rem !important;
+        }
+
+        .card-table {
+            margin-bottom: 0 !important;
         }
     </style>
 @endpush
+
 @push('scripts')
     <script>
         $().ready(function () {

@@ -197,4 +197,8 @@ return [
     'sampled'   =>  'تم سحب عينة',
     'accepted'  =>  'مقبولة',
     'rejected'  =>  'مرفوضة',
+    'transport_#'   =>  'النقلة',
+    'truck_#'    =>  'شاحنة',
+    'truck_trailer_#'   =>  'المقطورة',
+    'phone' =>  'الهاتف',
 ];
