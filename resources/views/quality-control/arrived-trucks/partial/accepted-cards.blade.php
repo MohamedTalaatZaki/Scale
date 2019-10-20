@@ -6,20 +6,20 @@
                 <table class="table card-table">
                     <thead>
                     <tr>
-                        <th><i class="fa fa-barcode"></i> 450125421154</th>
-                        <th>{ Orange }</th>
+                        <th colspan="2"><i class="fa fa-truck-pickup"></i> @lang('global.truck_trailer_#')ف ي ن 1245 </th>
+                        <th> Orange </th>
+
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
-                        <td><i class="fa fa-address-card"></i> Mostafa Mohamed</td>
-                        <td><i class="fa fa-phone"></i> 01113758551</td>
+                        <td colspan="3"><i class="fa fa-address-card"></i> Mostafa Mohamed</td>
                     </tr>
+
                     <tr>
-                    <tr>
-                        <td><i class="fa fa-truck"></i> @lang('global.truck_#')س ص ب 2154 </td>
-                        <td><i class="fa fa-truck-pickup"></i> @lang('global.truck_trailer_#')ف ي ن 1245 </td>
-                    </tr>
+                        <td colspan="2"><i class="fa fa-phone"></i> 01113758551</td>
+                        <td class="lab-btn" style="display: none"><button class="btn btn-warning btn-xs"><i class="fa fa-vials"></i></button></td>
+
                     </tr>
                     </tbody>
                 </table>
