@@ -33,7 +33,7 @@
                         </div>
                     </div>
                     <hr>
-                    <div class="scroll scroll-content nested-sortable">
+                    <div id="waiting" class="cards-container scroll scroll-content nested-sortable">
                         @foreach([1,2,3,4,5] as $id)
                             @include('quality-control.arrived-trucks.partial.waiting-cards' , ['id' => "Waiting-{$id}"] )
                         @endforeach
@@ -53,7 +53,7 @@
                         </div>
                     </div>
                     <hr>
-                    <div class="scroll scroll-content nested-sortable">
+                    <div id="sampled" class="cards-container scroll scroll-content nested-sortable">
                         @foreach([1,2,3] as $id)
                             @include('quality-control.arrived-trucks.partial.sampled-cards' , ['id' => "Sampled-{$id}"] )
                         @endforeach
@@ -76,7 +76,7 @@
                         </div>
                     </div>
                     <hr>
-                    <div class="scroll scroll-content-50 nested-sortable">
+                    <div class="scroll scroll-content-50">
                         @foreach([1,2,3,4,5,6,7,8,9] as $id)
                             @include('quality-control.arrived-trucks.partial.accepted-cards' , ['id' => "accepted-{$id}"] )
                         @endforeach
@@ -98,7 +98,7 @@
                         </div>
                     </div>
                     <hr>
-                    <div class="scroll scroll-content-50 nested-sortable">
+                    <div class="scroll scroll-content-50">
                         @foreach([1] as $id)
                             @include('quality-control.arrived-trucks.partial.rejected-cards' , ['id' => "rejected-{$id}"] )
                         @endforeach
@@ -180,7 +180,14 @@
                     ghostClass: 'blue-background',
                     onEnd: function (evt) {
                         let card        =   $(evt.item);
-                        console.log(card.attr('id'));
+                        let status      =   card.closest('.cards-container').attr('id');
+                        if( status === 'sampled' ){
+                            card.find('.lab-btn').show();
+                            card.find('.card-status').attr( 'class' , 'card-status bg-yellow');
+                        } else if(status === 'waiting') {
+                            card.find('.lab-btn').hide();
+                            card.find('.card-status').attr( 'class' , 'card-status bg-blue');
+                        }
                     },
                 });
             }

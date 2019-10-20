@@ -8,7 +8,7 @@
                     <tr>
                         <th><i class="fa fa-barcode"></i> 450125421154</th>
                         <th colspan="2"> Orange </th>
-                        <th><button class="btn btn-warning btn-xs"><i class="fa fa-vials"></i></button></th>
+                        <th class="lab-btn"><button class="btn btn-warning btn-xs"><i class="fa fa-vials"></i></button></th>
                     </tr>
                     </thead>
                     <tbody>
