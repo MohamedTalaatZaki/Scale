@@ -200,5 +200,7 @@ return [
     'truck_#'    =>  'Truck ',
     'truck_trailer_#'   =>  'Trailer ',
     'phone' =>  'Mobile',
+    'enter_result'  =>  'Test Result',
+    'retest'    =>  'Retest',
 
 ];

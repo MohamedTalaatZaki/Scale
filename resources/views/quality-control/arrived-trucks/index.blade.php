@@ -55,7 +55,7 @@
                     <hr>
                     <div class="scroll scroll-content nested-sortable">
                         @foreach([1,2,3] as $id)
-                            @include('quality-control.arrived-trucks.partial.waiting-cards' , ['id' => "Sampled-{$id}"] )
+                            @include('quality-control.arrived-trucks.partial.sampled-cards' , ['id' => "Sampled-{$id}"] )
                         @endforeach
 
 
@@ -78,10 +78,8 @@
                     <hr>
                     <div class="scroll scroll-content-50 nested-sortable">
                         @foreach([1,2,3,4,5,6,7,8,9] as $id)
-                            @include('quality-control.arrived-trucks.partial.waiting-cards' , ['id' => "accepted-{$id}"] )
+                            @include('quality-control.arrived-trucks.partial.accepted-cards' , ['id' => "accepted-{$id}"] )
                         @endforeach
-
-
                     </div>
 
 
@@ -101,7 +99,9 @@
                     </div>
                     <hr>
                     <div class="scroll scroll-content-50 nested-sortable">
-
+                        @foreach([1] as $id)
+                            @include('quality-control.arrived-trucks.partial.rejected-cards' , ['id' => "rejected-{$id}"] )
+                        @endforeach
                     </div>
 
 
@@ -119,6 +119,7 @@
         }
         .card-shadow{
             border: 1px solid #c0702f;
+            border-radius: 0 !important;
         }
 
         .card-body {
@@ -132,6 +133,29 @@
         .card-table {
             margin-bottom: 0 !important;
         }
+
+        .card-status {
+            height: 100%;
+            width: 10px;
+            position: absolute;
+        }
+
+        .bg-blue {
+            background-color: #007bff;
+        }
+
+        .bg-yellow {
+            background-color: #ffc107;
+        }
+
+        .bg-green {
+            background-color: #28a745;
+        }
+
+        .bg-red {
+            background-color: #dc3545;
+        }
+
     </style>
 @endpush
 
