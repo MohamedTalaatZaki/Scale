@@ -47,6 +47,7 @@ Route::middleware(['auth'])->group(function (){
     Route::get('cities' , 'MasterData\CitiesController@getGovernorateCities')->name('getGovernorateCities');
     Route::get('centers' , 'MasterData\CentersController@getCityCenters')->name('getCityCenters');
     Route::get('getSupplierItemGroups' , 'MasterData\SuppliersController@getSupplierItemGroups')->name('getSupplierItemGroups');
+    Route::get('toggleTruckStatus' , 'QC\ArrivedTrucksController@toggleTruckStatus')->name('toggleTruckStatus');
 });
 
 Auth::routes();

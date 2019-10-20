@@ -33,9 +33,9 @@
                         </div>
                     </div>
                     <hr>
-                    <div id="waiting" class="cards-container scroll scroll-content nested-sortable">
+                    <div id="arrived" class="cards-container scroll scroll-content nested-sortable">
                         @foreach([1,2,3,4,5] as $id)
-                            @include('quality-control.arrived-trucks.partial.waiting-cards' , ['id' => "Waiting-{$id}"] )
+                            @include('quality-control.arrived-trucks.partial.waiting-cards' , ['id' => $id] )
                         @endforeach
                     </div>
                 </div>
@@ -55,7 +55,7 @@
                     <hr>
                     <div id="sampled" class="cards-container scroll scroll-content nested-sortable">
                         @foreach([1,2,3] as $id)
-                            @include('quality-control.arrived-trucks.partial.sampled-cards' , ['id' => "Sampled-{$id}"] )
+                            @include('quality-control.arrived-trucks.partial.sampled-cards' , ['id' => $id] )
                         @endforeach
 
 
@@ -180,14 +180,20 @@
                     ghostClass: 'blue-background',
                     onEnd: function (evt) {
                         let card        =   $(evt.item);
+                        let cardId      =   card.attr('id');
                         let status      =   card.closest('.cards-container').attr('id');
                         if( status === 'sampled' ){
                             card.find('.lab-btn').show();
                             card.find('.card-status').attr( 'class' , 'card-status bg-yellow');
-                        } else if(status === 'waiting') {
+                        } else if(status === 'arrived') {
                             card.find('.lab-btn').hide();
                             card.find('.card-status').attr( 'class' , 'card-status bg-blue');
                         }
+                        $.ajax({
+                            method  :   'get',
+                            url     :   "{{ route('toggleTruckStatus') }}",
+                            data    :   {id : cardId , status : status},
+                        });
                     },
                 });
             }

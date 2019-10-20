@@ -41,6 +41,10 @@ class TruckArrival extends Model
         return $this->belongsTo(Supplier::class ,'supplier_id' , 'id');
     }
 
+    public function testableType()
+    {
+        return $this->belongsTo(ItemGroup::class , 'item_group_id' , 'id')->where('testable' , 1);
+    }
     public function supplierItemGroups() {
         $supplier   =   $this->supplier;
         $ItemGroupsIds  =   $supplier->items()->distinct()->pluck('item_group_id');
