@@ -10,7 +10,33 @@ class ArrivedTrucksController extends Controller
 {
     public function index()
     {
-        return view('quality-control.arrived-trucks.index');
+        $arrived    =   TruckArrival::query()
+            ->where('status' , 'arrived')
+            ->whereHas('testableType')
+            ->get();
+
+        $sampled    =   TruckArrival::query()
+            ->where('status' , 'sampled')
+            ->orWhere('status' , 'retest')
+            ->whereHas('testableType')
+            ->get();
+
+        $accepted   =   TruckArrival::query()
+            ->where('status' , 'accepted')
+            ->whereHas('testableType')
+            ->get();
+
+        $rejected   =   TruckArrival::query()
+            ->where('status' , 'rejected')
+            ->whereHas('testableType')
+            ->get();
+
+        return view('quality-control.arrived-trucks.index' , [
+            'arrived'   =>  $arrived,
+            'sampled'   =>  $sampled,
+            'accepted'  =>  $accepted,
+            'rejected'  =>  $rejected
+        ]);
     }
 
 
@@ -19,7 +45,8 @@ class ArrivedTrucksController extends Controller
         $truck  =   TruckArrival::query()
             ->where(function($q) {
                 $q->where('status' , 'arrived')
-                ->orWhere('status' , 'sampled');
+                    ->orWhere('status' , 'retest')
+                    ->orWhere('status' , 'sampled');
             })
             ->whereHas('testableType')
             ->find($request->input('id'));

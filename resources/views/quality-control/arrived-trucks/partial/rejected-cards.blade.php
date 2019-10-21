@@ -1,4 +1,4 @@
-<div class="col-md-12" id="{{$id}}" style="margin-top: 10px">
+<div class="col-md-12" id="{{$truck->id}}" style="margin-top: 10px">
     <div class="card card-shadow">
         <div class="card-status bg-red"></div>
         <div class="card-body card-custom-padding">

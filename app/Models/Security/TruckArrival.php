@@ -15,6 +15,7 @@ class TruckArrival extends Model
     protected $table    =   'trucks_arrival';
     protected $guarded  =   ['id'];
     protected $dates    =   ['arrival_time'];
+    protected $appends  =   ['card_loop_count'];
 
     public function governorate()
     {
@@ -41,9 +42,18 @@ class TruckArrival extends Model
         return $this->belongsTo(Supplier::class ,'supplier_id' , 'id');
     }
 
+    public function ItemGroup()
+    {
+        return $this->belongsTo(ItemGroup::class , 'item_group_id' , 'id');
+    }
     public function testableType()
     {
         return $this->belongsTo(ItemGroup::class , 'item_group_id' , 'id')->where('testable' , 1);
+    }
+
+    public function getCardLoopCountAttribute()
+    {
+        return is_null($this->truck_plates_trailer) ? 1 : 2;
     }
     public function supplierItemGroups() {
         $supplier   =   $this->supplier;

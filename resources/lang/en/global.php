@@ -197,7 +197,7 @@ return [
     'accepted'  =>  'Accepted',
     'rejected'  =>  'Rejected',
     'transport_#'   =>  'Transport',
-    'truck_#'    =>  'Truck ',
+    'truck_tractor_#'    =>  'Tractor ',
     'truck_trailer_#'   =>  'Trailer ',
     'phone' =>  'Mobile',
     'enter_result'  =>  'Test Result',

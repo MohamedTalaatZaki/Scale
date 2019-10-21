@@ -34,8 +34,8 @@
                     </div>
                     <hr>
                     <div id="arrived" class="cards-container scroll scroll-content nested-sortable">
-                        @foreach([1,2,3,4,5] as $id)
-                            @include('quality-control.arrived-trucks.partial.waiting-cards' , ['id' => $id] )
+                        @foreach($arrived as $truck)
+                            @include('quality-control.arrived-trucks.partial.waiting-cards' , ['truck' => $truck] )
                         @endforeach
                     </div>
                 </div>
@@ -54,8 +54,8 @@
                     </div>
                     <hr>
                     <div id="sampled" class="cards-container scroll scroll-content nested-sortable">
-                        @foreach([1,2,3] as $id)
-                            @include('quality-control.arrived-trucks.partial.sampled-cards' , ['id' => $id] )
+                        @foreach($sampled as $truck)
+                            @include('quality-control.arrived-trucks.partial.sampled-cards' , ['truck' => $truck] )
                         @endforeach
 
 
@@ -77,8 +77,8 @@
                     </div>
                     <hr>
                     <div class="scroll scroll-content-50">
-                        @foreach([1,2,3,4,5,6,7,8,9] as $id)
-                            @include('quality-control.arrived-trucks.partial.accepted-cards' , ['id' => "accepted-{$id}"] )
+                        @foreach($accepted as $truck)
+                            @include('quality-control.arrived-trucks.partial.accepted-cards' , ['truck' => $truck] )
                         @endforeach
                     </div>
 
@@ -99,8 +99,8 @@
                     </div>
                     <hr>
                     <div class="scroll scroll-content-50">
-                        @foreach([1] as $id)
-                            @include('quality-control.arrived-trucks.partial.rejected-cards' , ['id' => "rejected-{$id}"] )
+                        @foreach($rejected as $truck)
+                            @include('quality-control.arrived-trucks.partial.rejected-cards' , ['truck' => $truck] )
                         @endforeach
                     </div>
 
