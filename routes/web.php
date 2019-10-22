@@ -30,7 +30,8 @@ Route::middleware(['auth'])->group(function (){
     Route::resource('master-data/scales' , 'MasterData\ScalesController');
     Route::resource('master-data/qc-test-headers' , 'MasterData\QcTestHeaderController');
 
-    Route::resource('security/trucks-arrival' , 'Security\TrucksArrivalController');
+
+    Route::resource('security/transports' , 'Security\TransportsController');
 
     Route::resource('qc/arrived-trucks' , 'QC\ArrivedTrucksController');
 
@@ -38,8 +39,8 @@ Route::middleware(['auth'])->group(function (){
     Route::get('change-lang' , 'MasterData\UsersController@lang')->name('change-lang');
     Route::post('change-acc-info' , 'MasterData\UsersController@changeAccInfo')->name('users.change-acc-info');
     Route::get('master-data/supplier/items/{id}' , 'MasterData\ItemsController@supplierItems')->name('suppliers.items');
-    Route::get('security/trucks-arrival-in-process' , 'Security\TrucksArrivalController@inProcess')->name('trucks-arrival.inProcess');
-    Route::get('security/trucks-arrival-check-out' , 'Security\TrucksArrivalController@checkOut')->name('trucks-arrival.checkOut');
+    Route::get('security/transports-in-process' , 'Security\TransportsController@inProcess')->name('transports.inProcess');
+    Route::get('security/transports-check-out' , 'Security\TransportsController@checkOut')->name('transports.checkOut');
 
     /*
      * AJAX Routes

@@ -5,26 +5,26 @@
         </div>
         <div class="col-6 mb-4">
             <div class="btn-group btn-group-toggle float-right">
-                <a href="{{ route('trucks-arrival.index' , ['itemType' => 'raw']) }}"
+                <a href="{{ route('transports.index' , ['itemType' => 'raw']) }}"
                    class="btn btn-primary {{ request()->input('itemType') == 'raw' || !request()->has('itemType') ? 'active' : '' }}"  style="color: white">@lang('global.raw')</a>
 
-                <a href="{{ route('trucks-arrival.index' , ['itemType' => 'scrap']) }}"
+                <a href="{{ route('transports.index' , ['itemType' => 'scrap']) }}"
                    class="btn btn-primary {{ request()->input('itemType') == 'scrap' ? 'active' : '' }}" style="color: white">@lang('global.scrap')</a>
 
-                <a href="{{ route('trucks-arrival.index' , ['itemType' => 'finish']) }}"
+                <a href="{{ route('transports.index' , ['itemType' => 'finish']) }}"
                    class="btn btn-primary {{ request()->input('itemType') == 'finish' ? 'active' : '' }}" style="color: white">@lang('global.finish')</a>
             </div>
         </div>
     </div>
 
     @if(request()->input('itemType' , 'raw') == 'raw' )
-        @include("security.truck-arrival.partial.waiting-raw")
+        @include("security.transports.partial.waiting-raw")
     @endif
     @if(request()->input('itemType') == 'scrap' )
-        @include("security.truck-arrival.partial.waiting-scrap")
+        @include("security.transports.partial.waiting-scrap")
     @endif
     @if(request()->input('itemType') == 'finish' )
-        @include('security.truck-arrival.partial.waiting-finish')
+        @include('security.transports.partial.waiting-finish')
     @endif
 
 </div>
