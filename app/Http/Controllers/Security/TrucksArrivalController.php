@@ -94,7 +94,7 @@ class TrucksArrivalController extends Controller
 
         $request->offsetSet('arrival_time' , Carbon::now());
         $request->offsetSet('transport_number' , Carbon::now()->timestamp);
-        $request->offsetSet('status' , new RequiredIfItemTypeRaw() ? 'arrived' : 'waiting');
+        $request->offsetSet('status' , isItemTypeRaw($request->input('item_type_id')) ? 'arrived' : 'waiting');
 
         $arrival    =   TruckArrival::query()->create($request->input());
 
