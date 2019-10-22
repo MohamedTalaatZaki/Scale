@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers\QC;
 
-use App\Models\Security\TruckArrival;
+use App\Models\Security\TransportDetail;
+use App\Models\Security\Transports;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -10,25 +11,24 @@ class ArrivedTrucksController extends Controller
 {
     public function index()
     {
-        $arrived    =   TruckArrival::query()
-            ->where('status' , 'arrived')
+        $arrived    =   Transports::query()
             ->whereHas('testableType')
+            ->whereHas('arrivedDetails' )
             ->get();
 
-        $sampled    =   TruckArrival::query()
-            ->where('status' , 'sampled')
-            ->orWhere('status' , 'retest')
+        $sampled    =   Transports::query()
             ->whereHas('testableType')
+            ->whereHas('sampledDetails' )
             ->get();
 
-        $accepted   =   TruckArrival::query()
-            ->where('status' , 'accepted')
+        $accepted   =   Transports::query()
             ->whereHas('testableType')
+            ->whereHas('acceptedDetails' )
             ->get();
 
-        $rejected   =   TruckArrival::query()
-            ->where('status' , 'rejected')
+        $rejected   =   Transports::query()
             ->whereHas('testableType')
+            ->whereHas('rejectedDetails' )
             ->get();
 
         return view('quality-control.arrived-trucks.index' , [
@@ -42,7 +42,7 @@ class ArrivedTrucksController extends Controller
 
     public function toggleTruckStatus(Request $request)
     {
-        $truck  =   TruckArrival::query()
+        $truck  =   TransportDetail::query()
             ->where(function($q) {
                 $q->where('status' , 'arrived')
                     ->orWhere('status' , 'retest')

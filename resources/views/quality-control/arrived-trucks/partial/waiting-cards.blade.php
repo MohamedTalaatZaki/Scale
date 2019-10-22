@@ -1,8 +1,5 @@
-@for($i = 1 ; $i <= $truck->card_loop_count ; $i++)
-    @php
-        $plateName  =   $i == 1 ? 'tractor' : 'trailer';
-    @endphp
-    <div class="col-md-12" id="{{$truck->id}}" style="margin-top: 10px">
+@foreach($truck->arrivedDetails as $detail)
+    <div class="col-md-12" id="{{$detail->id}}" style="margin-top: 10px">
         <div class="card card-shadow">
             <div class="card-status bg-blue"></div>
             <div class="card-body card-custom-padding">
@@ -10,8 +7,8 @@
                     <table class="table card-table">
                         <thead>
                             <tr>
-                                <th colspan="2"><i class="fa fa-{{ $i == 1 ? 'truck' : 'truck-pickup' }}"></i> @lang("global.truck_{$plateName}_#")
-                                    {{ $i == 1  ? $truck->truck_plates_tractor : $truck->truck_plates_trailer }} </th>
+                                <th colspan="2"><i class="fa fa-{{ $detail->is_trailer ? 'truck-pickup' : 'truck' }}"></i> @lang("global.truck_{$detail->plate_name}_#")
+                                    {{ $detail->truck_plates }} </th>
                                 <th> {{ $truck->itemGroup->name }} </th>
 
                             </tr>
@@ -35,4 +32,4 @@
         </div>
         <hr>
     </div>
-@endfor
+@endforeach

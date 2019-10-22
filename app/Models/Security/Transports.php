@@ -15,11 +15,36 @@ class Transports extends Model
     protected $table    =   'transports';
     protected $guarded  =   ['id'];
     protected $dates    =   ['arrival_time'];
-    protected $appends  =   ['card_loop_count'];
+
 
     public function details()
     {
         return $this->hasMany(TransportDetail::class , 'transport_id' , 'id');
+    }
+
+    public function arrivedDetails()
+    {
+        return $this->details()->where('status' , 'arrived');
+    }
+
+    public function sampledDetails()
+    {
+        return $this->details()->where('status' , 'sampled')->orWhere('status' , 'retest');
+    }
+
+    public function retestDetails()
+    {
+        return $this->details()->where('status' , 'retest');
+    }
+
+    public function acceptedDetails()
+    {
+        return $this->details()->where('status' , 'accepted');
+    }
+
+    public function rejectedDetails()
+    {
+        return $this->details()->where('status' , 'rejected');
     }
 
     public function governorate()
@@ -56,10 +81,6 @@ class Transports extends Model
         return $this->belongsTo(ItemGroup::class , 'item_group_id' , 'id')->where('testable' , 1);
     }
 
-    public function getCardLoopCountAttribute()
-    {
-        return is_null($this->truck_plates_trailer) ? 1 : 2;
-    }
     public function supplierItemGroups() {
         $supplier   =   $this->supplier;
         $ItemGroupsIds  =   $supplier->items()->distinct()->pluck('item_group_id');

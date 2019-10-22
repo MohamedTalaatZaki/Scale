@@ -1,4 +1,5 @@
-<div class="col-md-12" id="{{$truck->id}}" style="margin-top: 10px">
+@foreach($truck->sampledDetails as $detail)
+<div class="col-md-12" id="{{$detail->id}}" style="margin-top: 10px">
     <div class="card card-shadow">
         <div class="card-status bg-yellow"></div>
         <div class="card-body card-custom-padding">
@@ -6,18 +7,23 @@
                 <table class="table card-table">
                     <thead>
                     <tr>
-                        <th><i class="fa fa-truck"></i> @lang('global.truck_#')س ص ب 2154 </th>
-                        <th colspan="2"> Orange </th>
+                        <th colspan="2"><i class="fa fa-{{ $detail->is_trailer ? 'truck-pickup' : 'truck' }}"></i> @lang("global.truck_{$detail->plate_name}_#")
+                            {{ $detail->truck_plates }} </th>
+                        <th> {{ $truck->itemGroup->name }} </th>
+
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
-                        <td colspan="3"><i class="fa fa-address-card"></i> Mostafa Mohamed</td>
+                        <td colspan="3"><i class="fa fa-address-card"></i> {{ $truck->driver_name }}</td>
                     </tr>
+
                     <tr>
-                        <td colspan="2"><i class="fa fa-phone"></i> 01113758551</td>
-                        <td class="lab-btn"><button class="btn btn-warning btn-xs"><i class="fa fa-microscope"></i></button></td>
-{{--                        <td colspan="3"><i class="fa fa-truck-pickup"></i> @lang('global.truck_trailer_#')ف ي ن 1245 </td>--}}
+                        <td colspan="2"><i class="fa fa-phone"></i> {{ $truck->driver_mobile }}</td>
+                        <td class="lab-btn">
+                            <a href="#" class="btn btn-warning btn-xs"><i class="fa fa-vials"></i></a>
+                        </td>
+
                     </tr>
                     </tbody>
                 </table>
@@ -27,4 +33,4 @@
     </div>
     <hr>
 </div>
-
+@endforeach
