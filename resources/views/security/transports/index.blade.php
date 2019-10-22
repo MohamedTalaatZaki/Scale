@@ -33,9 +33,9 @@
     </div>
 
     @isset($truckArrival)
-        @include('security.truck-arrival.partial.edit')
+        @include('security.transports.partial.edit')
     @else
-        @include('security.truck-arrival.partial.create')
+        @include('security.transports.partial.create')
     @endisset
 
 
@@ -89,10 +89,10 @@
                 </div>
                 <div class="card-body">
                     <div class="tab-content">
-                        @include('security.truck-arrival.partial.arrival')
-                        @include('security.truck-arrival.partial.waiting')
-                        @include('security.truck-arrival.partial.in-process')
-                        @include('security.truck-arrival.partial.departures')
+                        @include('security.transports.partial.arrival')
+                        @include('security.transports.partial.waiting')
+                        @include('security.transports.partial.in-process')
+                        @include('security.transports.partial.departures')
 
                     </div>
                 </div>
@@ -168,9 +168,10 @@
                             let option = "<option value='"+index+"'>"+ itemGroup +"</option>";
                             itemsGroupSelect.append(option);
                         });
+                        reInitSelect2("#itemsGroupSelect");
                     }
                 });
-                reInitSelect2("#itemTypeSelect");
+
             });
 
             $('#itemTypeSelect').on('change' , function (evt) {
@@ -188,7 +189,7 @@
             });
 
             function reInitSelect2(selector) {
-                 $(selector).select2('destroy');
+                $(selector).select2('destroy');
                 $(selector).select2({
                     theme: "bootstrap",
                     maximumSelectionSize: 6,

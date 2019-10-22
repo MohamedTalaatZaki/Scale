@@ -13,9 +13,9 @@
     </tr>
     </thead>
     <tbody>
-    @forelse($rawTrucks as $truck)
+    @forelse($scrapTrucks as $truck)
         <tr>
-            <td>{{ ( ( $rawTrucks->currentPage() - 1) * $rawTrucks->perPage() ) + $loop->iteration }}</td>
+            <td>{{ ( ( $scrapTrucks->currentPage() - 1) * $scrapTrucks->perPage() ) + $loop->iteration }}</td>
             <td>{{ $truck->transport_number }}</td>
             <td>{{ $truck->driver_name }}</td>
             <td>{{ $truck->supplier->name }}</td>
@@ -24,8 +24,8 @@
             <td>{{ $truck->arrival_time }}</td>
             <td>{{ $truck->arrival_time->diffForHumans() }}</td>
             <td>
-                @permission('trucks-arrival.check_in')
-                    <a href="{{ route('trucks-arrival.inProcess' , ['id' => $truck->id]) }}"
+                @permission('transports.check_in')
+                    <a href="{{ route('transports.inProcess' , ['id' => $truck->id]) }}"
                        class="btn btn-primary btn-sm mb-1">@lang('global.check_in')</a>
                 @endpermission
             </td>
@@ -37,10 +37,10 @@
         </tr>
     @endforelse
     </tbody>
-
-    <div class="row">
-        <div class="col-12 list">
-            {{ $rawTrucks->appends(request()->query())->links() }}
-        </div>
-    </div>
 </table>
+
+<div class="row">
+    <div class="col-12 list">
+        {{ $scrapTrucks->appends(request()->query())->links() }}
+    </div>
+</div>

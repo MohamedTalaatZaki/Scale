@@ -56,5 +56,5 @@ Route::get('qc_test/{en_name}',function($en_name) {
 });
 
 Route::get('truck_arrival/{driver_name}',function($driver_name){
-  return App\Models\Security\TruckArrival::where('driver_name',$driver_name)->first();
+  return App\Models\Security\Transports::where('driver_name',$driver_name)->first();
 });
