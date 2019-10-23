@@ -48,4 +48,22 @@ class QcElementsController extends Controller
 
         return view('master-data.qc-elements.edit' , ['element' =>  $element]);
     }
+
+    public function update(Request $request , $id)
+    {
+        $this->authorized('qc-elements.create');
+
+        $this->validate($request , [
+            'en_name'   =>  'required|unique:qc_elements,en_name,'.$id,
+            'ar_name'   =>  'required',
+            'test_type' =>  'required|in:visual,chemical',
+            'element_type'  =>  'required|in:range,question',
+            'element_unit'  =>  'required',
+        ]);
+
+        $element    =   QcElement::query()->findOrFail($id);
+        $element->update($request->input());
+
+        return redirect()->action('MasterData\QcElementsController@index')->with('success' , trans('global.updated_success'));
+    }
 }

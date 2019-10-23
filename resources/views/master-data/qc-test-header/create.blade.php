@@ -266,7 +266,7 @@
 
                         <div class="form-group col-md-12">
                             <div class="float-right">
-                                <a href="{{ route('qc-test-headers.index') }}">
+                                <a href="{{ route('qc-elements.index') }}">
                                     <button type="button" class="btn btn-danger btn-sm mt-3">@lang('global.cancel')</button>
                                 </a>
                                 <button type="submit" class="btn btn-primary btn-sm mt-3">@lang('global.save')</button>
@@ -280,104 +280,3 @@
     </div>
 
 @endsection
-@push("styles")
-    <style>
-        .invalid-tooltip::after, .valid-tooltip::after, span.error::after {
-            content: "";
-            position: absolute;
-            top: -4px;
-            left: -2.5px;
-            margin-left: 50%;
-            width: 10px;
-            height: 5px;
-            border-bottom: solid 5px #232223;
-            border-left: solid 5px transparent;
-            border-right: solid 5px transparent;
-        }
-        .invalid-tooltip::before, .valid-tooltip::before, span.error::before {
-            content: "";
-            position: absolute;
-            top: -5px;
-            left: -2.5px;
-            margin-left: 50%;
-            width: 10px;
-            height: 5px;
-            border-bottom: solid 5px #c0702f;
-            border-left: solid 5px transparent;
-            border-right: solid 5px transparent;
-        }
-        .invalid-tooltip, .valid-tooltip, span.error {
-            border-radius: .1rem;
-            padding: .5rem 1rem;
-            font-size: .76rem;
-            color: #969696;
-            background: #232223;
-            border: 1px solid #c0702f;
-            text-align: center;
-            width: unset!important;
-            position: absolute;
-            z-index: 4;
-            margin-top: -.5rem;
-            /*left: 50%;*/
-            /*transform: translateX(-50%);*/
-            transform: translateX(0) translateY(15px);
-            line-height: 1.5;
-            box-shadow: 0 1px 15px rgba(0,0,0,.1), 0 1px 8px rgba(0,0,0,.1);
-        }
-        .rounded .invalid-tooltip, .rounded .valid-tooltip, .rounded span.error {
-            border-radius: 10px;
-        }
-    </style>
-@endpush
-@push('scripts')
-    <script>
-        $().ready(function() {
-            'use strict';
-
-            let body = $('body');
-
-            $('.repeater').repeater({
-                isFirstItemUndeletable: true,
-
-                show: function () {
-                    $(this).find('.new-row').addClass('add-row');
-                    $(this).find('.new-row').removeClass('new-row');
-                    $(this).show();
-                }
-            });
-            body.on('click' , '.add-row' , function (evt) {
-                $('.new-row:first').click();
-            });
-
-            body.on('change' , '.element_type' , function (evt) {
-                evt.preventDefault();
-                let tr = $(this).closest('tr');
-                if ($(this).val() === 'range')
-                {
-                    tr.find('.expected_result').hide().prop('required' , false).val('');
-                    tr.find('.min_range').show().prop('required' , true).val('');
-                    tr.find('.max_range').show().prop('required' , true).val('');
-                    tr.find('.element_unit').show().prop('required' , true).val('');
-                } else {
-                    tr.find('.expected_result').show().prop('required' , true).val('');
-                    tr.find('.min_range').hide().prop('required' , false).val('');
-                    tr.find('.max_range').hide().prop('required' , false).val('');
-                    tr.find('.element_unit').hide().prop('required' , false).val('');
-                }
-            });
-
-            body.on('change' , '.range' , function (evt) {
-                evt.preventDefault();
-                let tr = $(this).closest('tr');
-                let minElem = tr.find('.min_range');
-                let maxElem = tr.find('.max_range');
-                let min = parseFloat(minElem.val());
-                let max = parseFloat(maxElem.val());
-                if(min >= max) {
-                    $.notify("@lang('global.min_max_error')" , {position: 'bottom center'});
-                    $(this).val('');
-                }
-            })
-        });
-    </script>
-@endpush
