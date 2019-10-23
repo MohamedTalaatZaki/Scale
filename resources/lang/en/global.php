@@ -190,4 +190,6 @@ return [
     'check_in'  =>  'Check In',
     'check_out'  =>  'Check Out',
     'departures_trucks' =>  'Departures Trucks',
+    'qc_elements'   =>  'QC Elements',
+    'create_qc_elements'    =>  'Create QC Elements',
 ];
