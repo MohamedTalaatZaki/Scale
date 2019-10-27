@@ -90,7 +90,7 @@
                         </div>
                         <div class="form-group col-md-12">
                             <div class="float-right">
-                                <a href="{{ route('qc-test-headers.index') }}">
+                                <a href="{{ route('qc-elements.index') }}">
                                     <button type="button" class="btn btn-danger btn-sm mt-3">@lang('global.cancel')</button>
                                 </a>
                                 <button type="submit" class="btn btn-primary btn-sm mt-3">@lang('global.save')</button>
