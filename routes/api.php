@@ -58,3 +58,8 @@ Route::get('qc_test/{en_name}',function($en_name) {
 Route::get('truck_arrival/{driver_name}',function($driver_name){
   return App\Models\Security\TruckArrival::where('driver_name',$driver_name)->first();
 });
+
+
+Route::get('qc_element/{em_name}',function($en_name){
+  return App\Models\QC\QcElement::where('en_name',$en_name)->first();
+});
