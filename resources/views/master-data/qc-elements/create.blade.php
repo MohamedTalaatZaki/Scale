@@ -66,7 +66,7 @@
 
                             <div class="form-group col-md-6">
                                 <label for="item_group_id">@lang('global.element_type') *</label>
-                                <select id="item_group_id" class="form-control select2-single" data-placeholder="@lang('global.element_type')" name="element_type" required>
+                                <select id="item_group_id" class="form-control select2-single element_type" data-placeholder="@lang('global.element_type')" name="element_type" required>
                                     <option label="&nbsp;" value="">&nbsp; @lang('global.element_type')</option>
                                     <option value="range" {{ old("element_type") == 'range' ? "selected" : '' }}>@lang('global.range')</option>
                                     <option value="question" {{ old("element_type") == 'question' ? "selected" : '' }}>@lang('global.question')</option>
@@ -80,8 +80,8 @@
 
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="inputPassword1">@lang('global.element_unit') *</label>
-                                <input type="text" class="form-control onlyEn"  name="element_unit" value="{{ old('element_unit') }}"
+                                <label for="inputPassword1" id="element_unit_label">@lang('global.element_unit') *</label>
+                                <input type="text" class="form-control onlyEn element_unit"  name="element_unit" value="{{ old('element_unit') }}"
                                        placeholder="@lang('global.element_unit')" autocomplete="off" required>
                                 @if($errors->has('element_unit'))
                                     <div id="jQueryName-error" class="error" style="">{{ $errors->first('element_unit') }}</div>
@@ -156,52 +156,22 @@
 @push('scripts')
     <script>
         $().ready(function() {
-            'use strict';
-
             let body = $('body');
-
-            $('.repeater').repeater({
-                isFirstItemUndeletable: true,
-
-                show: function () {
-                    $(this).find('.new-row').addClass('add-row');
-                    $(this).find('.new-row').removeClass('new-row');
-                    $(this).show();
-                }
-            });
-            body.on('click' , '.add-row' , function (evt) {
-                $('.new-row:first').click();
-            });
 
             body.on('change' , '.element_type' , function (evt) {
                 evt.preventDefault();
-                let tr = $(this).closest('tr');
-                if ($(this).val() === 'range')
-                {
-                    tr.find('.expected_result').hide().prop('required' , false).val('');
-                    tr.find('.min_range').show().prop('required' , true).val('');
-                    tr.find('.max_range').show().prop('required' , true).val('');
-                    tr.find('.element_unit').show().prop('required' , true).val('');
+                let type    =   $(this).find('option:selected').val();
+                if(type === 'range') {
+                    $('#element_unit_label').html("@lang('global.element_unit') *");
+                    $('.element_unit').attr('required' , true);
+                } else if(type === 'question') {
+                    $('#element_unit_label').html("@lang('global.element_unit')");
+                    $('.element_unit').attr('required' , false);
                 } else {
-                    tr.find('.expected_result').show().prop('required' , true).val('');
-                    tr.find('.min_range').hide().prop('required' , false).val('');
-                    tr.find('.max_range').hide().prop('required' , false).val('');
-                    tr.find('.element_unit').hide().prop('required' , false).val('');
+                    $('#element_unit_label').html("@lang('global.element_unit')");
+                    $('.element_unit').attr('required' , false);
                 }
             });
-
-            body.on('change' , '.range' , function (evt) {
-                evt.preventDefault();
-                let tr = $(this).closest('tr');
-                let minElem = tr.find('.min_range');
-                let maxElem = tr.find('.max_range');
-                let min = parseFloat(minElem.val());
-                let max = parseFloat(maxElem.val());
-                if(min >= max) {
-                    $.notify("@lang('global.min_max_error')" , {position: 'bottom center'});
-                    $(this).val('');
-                }
-            })
         });
     </script>
 @endpush

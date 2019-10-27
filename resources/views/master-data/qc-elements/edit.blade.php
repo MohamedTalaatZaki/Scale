@@ -67,7 +67,7 @@
 
                             <div class="form-group col-md-6">
                                 <label for="item_group_id">@lang('global.element_type') *</label>
-                                <select id="item_group_id" class="form-control select2-single" data-placeholder="@lang('global.element_type')" name="element_type" required>
+                                <select id="item_group_id" class="form-control select2-single element_type" data-placeholder="@lang('global.element_type')" name="element_type" required>
                                     <option label="&nbsp;" value="">&nbsp; @lang('global.element_type')</option>
                                     <option value="range" {{ old("element_type" , $element->element_type) == 'range' ? "selected" : '' }}>@lang('global.range')</option>
                                     <option value="question" {{ old("element_type" , $element->element_type) == 'question' ? "selected" : '' }}>@lang('global.question')</option>
@@ -81,8 +81,8 @@
 
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="inputPassword1">@lang('global.element_unit') *</label>
-                                <input type="text" class="form-control onlyEn"  name="element_unit" value="{{ old('element_unit' , $element->element_unit) }}"
+                                <label for="inputPassword1" id="element_unit_label">@lang('global.element_unit') *</label>
+                                <input type="text" class="form-control onlyEn element_unit"  name="element_unit" value="{{ old('element_unit' , $element->element_unit) }}"
                                        placeholder="@lang('global.element_unit')" autocomplete="off" required>
                                 @if($errors->has('element_unit'))
                                     <div id="jQueryName-error" class="error" style="">{{ $errors->first('element_unit') }}</div>
@@ -105,3 +105,24 @@
     </div>
 
 @endsection
+@push('scripts')
+    <script>
+        $().ready(function(){
+            let body = $('body');
+            body.on('change' , '.element_type' , function (evt) {
+                evt.preventDefault();
+                let type    =   $(this).find('option:selected').val();
+                if(type === 'range') {
+                    $('#element_unit_label').html("@lang('global.element_unit') *");
+                    $('.element_unit').attr('required' , true);
+                } else if(type === 'question') {
+                    $('#element_unit_label').html("@lang('global.element_unit')");
+                    $('.element_unit').attr('required' , false);
+                } else {
+                    $('#element_unit_label').html("@lang('global.element_unit')");
+                    $('.element_unit').attr('required' , false);
+                }
+            });
+        });
+    </script>
+@endpush
