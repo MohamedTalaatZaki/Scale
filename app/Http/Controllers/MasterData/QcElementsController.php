@@ -33,7 +33,7 @@ class QcElementsController extends Controller
             'ar_name'   =>  'required',
             'test_type' =>  'required|in:visual,chemical',
             'element_type'  =>  'required|in:range,question',
-            'element_unit'  =>  'required',
+            'element_unit'  =>  'required_if:element_type,range',
         ]);
 
         $element    =   QcElement::query()->create($request->input());
@@ -58,7 +58,7 @@ class QcElementsController extends Controller
             'ar_name'   =>  'required',
             'test_type' =>  'required|in:visual,chemical',
             'element_type'  =>  'required|in:range,question',
-            'element_unit'  =>  'required',
+            'element_unit'  =>  'required_if:element_type,range',
         ]);
 
         $element    =   QcElement::query()->findOrFail($id);
