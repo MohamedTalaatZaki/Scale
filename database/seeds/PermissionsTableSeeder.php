@@ -320,6 +320,39 @@ class PermissionsTableSeeder extends Seeder
 
         Permission::create([
             'sub_menu_id' => $subMenu->id,
+            'name' => 'qc-elements.index',
+            'en_display_name' => 'List Qc Elements',
+            'ar_display_name' => 'عرض عناصر مراقبة الجودة',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'qc-elements.create',
+            'en_display_name' => 'Create Qc Elements',
+            'ar_display_name' => 'إضافة عنصر مراقبة الجودة',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'qc-elements.edit',
+            'en_display_name' => 'Edit Qc Elements',
+            'ar_display_name' => 'تعديل عنصر مراقبة الجودة',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'qc-elements.delete',
+            'en_display_name' => 'Delete Qc Elements',
+            'ar_display_name' => 'حذف عنصر مراقبة الجودة',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
             'name' => 'qc-test-headers.index',
             'en_display_name' => 'List Qc Test',
             'ar_display_name' => 'عرض أختبارات مراقبة الجودة',
@@ -352,7 +385,7 @@ class PermissionsTableSeeder extends Seeder
         ]);
 
 
-        $subMenu = SubMenu::where('code', 12)->first();
+        $subMenu = SubMenu::where('code', 13)->first();
 
         Permission::create([
             'sub_menu_id' => $subMenu->id,
