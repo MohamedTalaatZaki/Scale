@@ -193,4 +193,6 @@ return [
     'item_group_id' =>  'مجموعة الاصناف',
     'qc_elements'   =>  'عناصر مراقبة الجودة',
     'create_qc_elements'    =>  'انشاء عنصر مراقبة الجودة',
+    'edit_qc_elements'    =>  'تعديل عنصر مراقبة الجودة',
+    'element_name'  =>  'اسم العنصر',
 ];

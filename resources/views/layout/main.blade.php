@@ -57,7 +57,12 @@
             background-size: contain;
             background-position: center center;
         }
-
+        .bg-readonly{
+            background-color: transparent !important;
+        }
+        .qc-element-id{
+            height: 2.2rem !important;
+        }
     </style>
     @stack('styles')
 </head>
