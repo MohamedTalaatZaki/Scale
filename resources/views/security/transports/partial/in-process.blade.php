@@ -26,8 +26,8 @@
                 <td>{{ $truck->arrival_time }}</td>
                 <td>{{ $truck->arrival_time->diffForHumans() }}</td>
                 <td>
-                    @permission('trucks-arrival.check_out')
-                    <a href="{{ route('trucks-arrival.checkOut' , ['id' => $truck->id]) }}"
+                    @permission('transports.check_out')
+                    <a href="{{ route('transports.checkOut' , ['id' => $truck->id]) }}"
                        class="btn btn-primary btn-sm mb-1">@lang('global.check_out')</a>
                     @endpermission
                 </td>

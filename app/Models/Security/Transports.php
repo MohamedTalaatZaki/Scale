@@ -10,11 +10,16 @@ use App\Models\Items\ItemType;
 use App\Models\Supplier\Supplier;
 use Illuminate\Database\Eloquent\Model;
 
-class TruckArrival extends Model
+class Transports extends Model
 {
-    protected $table    =   'trucks_arrival';
+    protected $table    =   'transports';
     protected $guarded  =   ['id'];
     protected $dates    =   ['arrival_time'];
+
+    public function details()
+    {
+        return $this->hasMany(TransportDetail::class , 'transport_id' , 'id');
+    }
 
     public function governorate()
     {

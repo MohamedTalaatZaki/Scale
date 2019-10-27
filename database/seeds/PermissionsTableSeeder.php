@@ -389,7 +389,7 @@ class PermissionsTableSeeder extends Seeder
 
         Permission::create([
             'sub_menu_id' => $subMenu->id,
-            'name' => 'trucks-arrival.index',
+            'name' => 'transports.index',
             'en_display_name' => 'List Truck Arrival',
             'ar_display_name' => 'عرض وصول الشاحنات',
             'en_description' => NULL,
@@ -397,7 +397,7 @@ class PermissionsTableSeeder extends Seeder
         ]);
         Permission::create([
             'sub_menu_id' => $subMenu->id,
-            'name' => 'trucks-arrival.create',
+            'name' => 'transports.create',
             'en_display_name' => 'Create Truck Arrival',
             'ar_display_name' => 'إضافة وصول شاحنه',
             'en_description' => NULL,
@@ -405,7 +405,7 @@ class PermissionsTableSeeder extends Seeder
         ]);
         Permission::create([
             'sub_menu_id' => $subMenu->id,
-            'name' => 'trucks-arrival.edit',
+            'name' => 'transports.edit',
             'en_display_name' => 'Edit Truck Arrival',
             'ar_display_name' => 'تعديل وصول شاحنه',
             'en_description' => NULL,
@@ -413,7 +413,7 @@ class PermissionsTableSeeder extends Seeder
         ]);
         Permission::create([
             'sub_menu_id' => $subMenu->id,
-            'name' => 'trucks-arrival.delete',
+            'name' => 'transports.delete',
             'en_display_name' => 'Delete Truck Arrival',
             'ar_display_name' => 'حذف وصول الشاحنه',
             'en_description' => NULL,
@@ -421,7 +421,7 @@ class PermissionsTableSeeder extends Seeder
         ]);
         Permission::create([
             'sub_menu_id' => $subMenu->id,
-            'name' => 'trucks-arrival.check_in',
+            'name' => 'transports.check_in',
             'en_display_name' => 'Check In Truck',
             'ar_display_name' => 'ادخال الشاحنه',
             'en_description' => NULL,
@@ -429,7 +429,7 @@ class PermissionsTableSeeder extends Seeder
         ]);
         Permission::create([
             'sub_menu_id' => $subMenu->id,
-            'name' => 'trucks-arrival.check_out',
+            'name' => 'transports.check_out',
             'en_display_name' => 'Check Out Truck',
             'ar_display_name' => 'اخراج الشاحنه',
             'en_description' => NULL,

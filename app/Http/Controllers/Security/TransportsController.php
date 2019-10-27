@@ -6,14 +6,14 @@ use App\Models\Governorate;
 use App\Models\Items\ItemGroup;
 use App\Models\Items\ItemType;
 use App\Models\MasterData\TruckType;
-use App\Models\Security\TruckArrival;
+use App\Models\Security\Transports;
 use App\Models\Supplier\Supplier;
 use App\Rules\RequiredIfItemTypeRaw;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class TrucksArrivalController extends Controller
+class TransportsController extends Controller
 {
     public function index()
     {
@@ -31,35 +31,35 @@ class TrucksArrivalController extends Controller
         $item_types     =   ItemType::query()
             ->get();
 
-        $arrivalTrucks  =   TruckArrival::query()
+        $arrivalTrucks  =   Transports::query()
             ->where('status' , 'arrived')
             ->whereHas('itemType' , function ($q){$q->where('prefix' , 'raw');})
             ->paginate(15);
 
-        $rawTrucks  =   TruckArrival::query()
+        $rawTrucks  =   Transports::query()
             ->where('status' , 'qc_approved')
             ->whereHas('itemType' , function ($q){$q->where('prefix' , 'raw');})
             ->paginate(15);
 
-        $scrapTrucks  =   TruckArrival::query()
+        $scrapTrucks  =   Transports::query()
             ->where('status' , 'waiting')
             ->whereHas('itemType' , function ($q){$q->where('prefix' , 'scrap');})
             ->paginate(15);
 
-        $finishTrucks  =   TruckArrival::query()
+        $finishTrucks  =   Transports::query()
             ->where('status' , 'waiting')
             ->whereHas('itemType' , function ($q){$q->where('prefix' , 'finish');})
             ->paginate(15);
 
-        $inProcessTrucks    =   TruckArrival::query()
+        $inProcessTrucks    =   Transports::query()
             ->where('status' , 'in_process')
             ->paginate(15);
 
-        $departures    =   TruckArrival::query()
+        $departures    =   Transports::query()
             ->where('status' , 'departure')
             ->paginate(15);
 
-        return view('security.truck-arrival.index' , [
+        return view('security.transports.index' , [
             'suppliers'     =>  $suppliers,
             'governorates'  =>  $governorates,
             'truck_types'   =>  $truck_types,
@@ -94,16 +94,21 @@ class TrucksArrivalController extends Controller
 
         $request->offsetSet('arrival_time' , Carbon::now());
         $request->offsetSet('transport_number' , Carbon::now()->timestamp);
-        $request->offsetSet('status' , new RequiredIfItemTypeRaw() ? 'arrived' : 'waiting');
+        $request->offsetSet('status' , isItemTypeRaw($request->input('item_type_id')) ? 'arrived' : 'waiting');
 
-        $arrival    =   TruckArrival::query()->create($request->input());
+        $transport    =   Transports::query()->create($request->input());
 
-        return redirect()->action('Security\TrucksArrivalController@index')->with('success' , trans('global.created_success'));
+        $transport->details()->create(['truck_plates' => $transport->truck_plates_tractor , 'status' => $transport->status ]);
+
+        if(!is_null($transport->truck_plates_trailer)) {
+            $transport->details()->create(['truck_plates' => $transport->truck_plates_trailer , 'status' => $transport->status , 'is_trailer' => 1]);
+        }
+        return redirect()->action('Security\TransportsController@index')->with('success' , trans('global.created_success'));
     }
 
     public function edit($id)
     {
-        $truckArrival   =   TruckArrival::query()->find($id);
+        $truckArrival   =   Transports::query()->find($id);
         return $this->index()->with(['truckArrival'  =>  $truckArrival]);
     }
 
@@ -127,25 +132,34 @@ class TrucksArrivalController extends Controller
 
 
         $request->offsetSet('status' , isItemTypeRaw($request->input('item_type_id')) ? 'arrived' : 'waiting');
-        $truck  =   TruckArrival::query()->find($id);
+        $transport  =   Transports::query()->find($id);
 
-        $truck->update($request->input());
+        $transport->update($request->input());
 
-        return redirect()->action('Security\TrucksArrivalController@index')->with('success' , trans('global.updated_success'));
+        $transport->details()->delete();
+        $transport->details()->create(['truck_plates' => $transport->truck_plates_tractor , 'status' => $transport->status]);
+
+        if(!is_null($transport->truck_plates_trailer)) {
+            $transport->details()->create(['truck_plates' => $transport->truck_plates_trailer , 'status' => $transport->status , 'is_trailer' => 1]);
+        }
+
+        return redirect()->action('Security\TransportsController@index')->with('success' , trans('global.updated_success'));
     }
 
     public function inProcess(Request $request)
     {
-        $truck  =   TruckArrival::query()->find($request->get('id'));
-        $truck->update(['status' => 'in_process']);
-        return $this->index()->with('success' , trans('global.car_in_process' , ['truck_plates_tractor' => $truck->truck_plates_tractor]));
+        $transport  =   Transports::query()->find($request->get('id'));
+        $transport->update(['status' => 'in_process']);
+        $transport->details()->update(['status' => 'in_process']);
+        return $this->index()->with('success' , trans('global.car_in_process' , ['truck_plates_tractor' => $transport->truck_plates_tractor]));
     }
 
     public function checkOut(Request $request)
     {
-        $truck  =   TruckArrival::query()->find($request->get('id'));
-        $truck->update(['status' => 'departure']);
-        return $this->index()->with('success' , trans('global.car_departure' , ['truck_plates_tractor' => $truck->truck_plates_tractor]));
+        $transport  =   Transports::query()->find($request->get('id'));
+        $transport->update(['status' => 'departure']);
+        $transport->details()->update(['status' => 'in_process']);
+        return $this->index()->with('success' , trans('global.car_departure' , ['truck_plates_tractor' => $transport->truck_plates_tractor]));
     }
 }
 

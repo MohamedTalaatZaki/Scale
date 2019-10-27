@@ -238,15 +238,15 @@ class MainMenusTableSeeder extends Seeder
         $group = $main->menuGroups()->create([
             'en_name' => 'Truck Arrival',
             'ar_name' => 'وصول الشاحنات',
-            'aria_controls' => 'collapseTruckArrival',
+            'aria_controls' => 'collapseTransports',
             'order' => 1,
         ]);
         $group->subMenus()->createMany([
             [
                 'en_name' => 'Truck Arrival',
                 'ar_name' => 'وصول الشاحنات',
-                'route' => 'trucks-arrival.index',
-                'a_class' => 'sidebar-sub sidebar-sub-trucks-arrival',
+                'route' => 'transports.index',
+                'a_class' => 'sidebar-sub sidebar-sub-transports',
                 'i_class' => 'simple-icon-user-follow',
                 'order' => 1,
                 'code'=>13
