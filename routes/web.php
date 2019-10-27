@@ -34,6 +34,8 @@ Route::middleware(['auth'])->group(function (){
 
     Route::resource('security/transports' , 'Security\TransportsController');
 
+    Route::resource('qc/arrived-trucks' , 'QC\ArrivedTrucksController');
+
     Route::get('change-theme' , 'MasterData\UsersController@theme')->name('change-theme');
     Route::get('change-lang' , 'MasterData\UsersController@lang')->name('change-lang');
     Route::post('change-acc-info' , 'MasterData\UsersController@changeAccInfo')->name('users.change-acc-info');
@@ -47,6 +49,7 @@ Route::middleware(['auth'])->group(function (){
     Route::get('cities' , 'MasterData\CitiesController@getGovernorateCities')->name('getGovernorateCities');
     Route::get('centers' , 'MasterData\CentersController@getCityCenters')->name('getCityCenters');
     Route::get('getSupplierItemGroups' , 'MasterData\SuppliersController@getSupplierItemGroups')->name('getSupplierItemGroups');
+    Route::get('toggleTruckStatus' , 'QC\ArrivedTrucksController@toggleTruckStatus')->name('toggleTruckStatus');
 });
 
 Auth::routes();
