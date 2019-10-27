@@ -275,7 +275,7 @@ class MainMenusTableSeeder extends Seeder
                 'a_class' => 'sidebar-sub sidebar-sub-arrived-trucks',
                 'i_class' => 'simple-icon-user-follow',
                 'order' => 1,
-                'code'=>13
+                'code'=>14
             ]
         ]);
     }

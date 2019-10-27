@@ -351,6 +351,7 @@ class PermissionsTableSeeder extends Seeder
             'ar_description' => NULL,
         ]);
 
+        $subMenu = SubMenu::where('code', 12)->first();
         Permission::create([
             'sub_menu_id' => $subMenu->id,
             'name' => 'qc-test-headers.index',
@@ -436,7 +437,7 @@ class PermissionsTableSeeder extends Seeder
             'ar_description' => NULL,
         ]);
 
-        $subMenu = SubMenu::where('code', 13)->first();
+        $subMenu = SubMenu::where('code', 14)->first();
 
         Permission::create([
             'sub_menu_id' => $subMenu->id,
