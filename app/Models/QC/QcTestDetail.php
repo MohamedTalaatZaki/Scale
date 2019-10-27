@@ -15,4 +15,8 @@ class QcTestDetail extends Model
         return $this->belongsTo(QcTestDetail::class , 'qc_test_header_id' , 'id');
     }
 
+    public function element()
+    {
+        return $this->belongsTo(QcElement::class , 'qc_element_id' , 'id');
+    }
 }
