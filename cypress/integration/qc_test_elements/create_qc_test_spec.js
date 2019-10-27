@@ -27,7 +27,6 @@ describe('Create QC Test Element', function () {
     cy.contains('The Arabic Name field is required.').should('be.visible');
     cy.contains('The English Name field is required.').should('be.visible');
     cy.contains('The test type field is required.').should('be.visible');
-    cy.contains('The element unit field is required.').should('be.visible');
     cy.contains('The element type field is required.').should('be.visible');
   })
   it('checks cancel fields', function () {
@@ -41,8 +40,8 @@ describe('Create QC Test Element', function () {
     cy.url().should('contain','/master-data/qc-elements');
   })
   it('checks element unit fields', function () {
-    cy.get('input[name="en_name"]').type('new');
-    cy.get('input[name="ar_name"]').type('نيو');
+    cy.get('input[name="en_name"]').type('newel');
+    cy.get('input[name="ar_name"]').type('نيو عنصر');
     cy.get('select[name="test_type"] option[value="visual"]').invoke('attr', 'selected',true);
     cy.get('select[name="element_type"] option[value="question"]').invoke('attr', 'selected',true);
     cy.get('input[name="element_unit"]').clear();
@@ -51,10 +50,10 @@ describe('Create QC Test Element', function () {
     cy.url().should('contain','/master-data/qc-elements');
     cy.get('.text-center').should('contain','Created Successful')
     cy.server();
-    cy.request('get','/api/qc_element/new').then((response)=>{
+    cy.request('get','/api/qc_element/newel').then((response)=>{
       console.log(response);
-       expect(response.body).to.have.property('en_name', 'new')
-       expect(response.body).to.have.property('ar_name', 'نيو')
+       expect(response.body).to.have.property('en_name', 'newel')
+       expect(response.body).to.have.property('ar_name', 'نيو عنصر')
        expect(response.body).to.have.property('test_type', 'visual')
        expect(response.body).to.have.property('element_type', 'question')
      })
