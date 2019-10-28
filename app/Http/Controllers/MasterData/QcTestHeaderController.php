@@ -25,14 +25,13 @@ class QcTestHeaderController extends Controller
     {
         $this->authorized('qc-test-headers.create');
         return  view('master-data.qc-test-header.create' , [
-            'groups'    =>  ItemGroup::query()->where('testable' , 1)->get(),
+            'groups'    =>  ItemGroup::query()->doesntHave('qcTestHeader')->where('testable' , 1)->get(),
             'elements'          =>  QcElement::query()->get(),
         ]);
     }
 
     public function store(Request $request)
     {
-
         $this->validate($request , [
             'en_name'                   =>  'required',
             'ar_name'                   =>  'required',
@@ -68,7 +67,7 @@ class QcTestHeaderController extends Controller
         $this->authorized('qc-test-headers.edit');
         return  view('master-data.qc-test-header.edit' , [
             'qcTest'    =>  QcTestHeader::query()->with('details.element')->findOrFail($id),
-            'groups'    =>  ItemGroup::query()->where('testable' , 1)->get(),
+            'groups'    =>  ItemGroup::query()->doesntHave('qcTestHeader')->where('testable' , 1)->get(),
             'elements'          =>  QcElement::query()->get(),
         ]);
     }

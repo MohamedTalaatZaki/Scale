@@ -89,7 +89,6 @@
                             <tr>
                             <tr>
                                 <th style="width: 16%">@lang('global.en_name')</th>
-                                <th style="width: 16%">@lang('global.ar_name')</th>
                                 <th style="width: 11%">@lang('global.test_type')</th>
                                 <th style="width: 10%">@lang('global.element_type')</th>
                                 <th style="width: 12%">@lang('global.expected_result')</th>
@@ -108,9 +107,8 @@
                                             <input value="{{ $row['id'] }}" type="hidden" name="id">
                                             <select
                                                 class="form-control select2-single qc-element-id"
-                                                name="details[0][qc_element_id]" required
-                                                data-placeholder="@lang('global.element_name')">
-                                                <option value="">@lang('global.element_name')</option>
+                                                name="details[0][qc_element_id]" required>
+                                                <option label="&nbsp;">&nbsp; </option>
                                                 @foreach($elements as $element)
                                                     <option value="{{ $element->id }}"
                                                             data-test-type="{{ $element->test_type }}"
@@ -203,9 +201,8 @@
                                         <input value="0" type="hidden" name="id">
                                         <select
                                             class="form-control select2-single qc-element-id"
-                                            name="details[0][qc_element_id]" required
-                                            data-placeholder="@lang('global.element_name')">
-                                            <option value="">@lang('global.element_name')</option>
+                                            name="details[0][qc_element_id]" required>
+                                            <option label="&nbsp;">&nbsp; </option>
                                             @foreach($elements as $element)
                                                 <option value="{{ $element->id }}"
                                                         data-test-type="{{ $element->test_type }}"
@@ -306,7 +303,11 @@
 
             let body = $('body');
             let hasOldValue =   "{{ !is_null(old('details')) }}";
-            console.log(hasOldValue);
+            let values  =   [];
+
+            setTimeout( function () {
+                handleSelect2Values();
+            } , 200);
 
             $('.repeater').repeater({
                 isFirstItemUndeletable: true,
@@ -318,6 +319,7 @@
                     $(this).find('.element_unit').hide().prop('required' , false).val('');
                     $(this).find('.new-row').addClass('add-row');
                     $(this).find('.new-row').removeClass('new-row');
+                    $(this).find('.qc-element-id').val("").trigger('change');
                     $(this).show();
                     reInitSelect2($(this).find('.qc-element-id'));
                 }
@@ -348,6 +350,7 @@
                 let elementType =   selectedOption.data('element-type');
                 let elementUnit =   selectedOption.data('element-unit');
 
+
                 tr.find('.test-type').val(testType);
                 tr.find('.element-type').val(elementType);
                 tr.find('.element-unit').val(elementUnit);
@@ -356,12 +359,40 @@
                     tr.find('.expected_result').hide().prop('required' , false).val('');
                     tr.find('.min_range').show().prop('required' , true).val('');
                     tr.find('.max_range').show().prop('required' , true).val('');
+                    tr.find('.element-unit').show().prop('required' , true);
                 } else if(elementType === 'question') {
                     tr.find('.expected_result').show().prop('required' , true).val('');
                     tr.find('.min_range').hide().prop('required' , false).val('');
                     tr.find('.max_range').hide().prop('required' , false).val('');
+                    tr.find('.element-unit').hide().prop('required' , false).val('');
+                } else {
+                    tr.find('.expected_result').hide().prop('required' , true).val('');
+                    tr.find('.min_range').hide().prop('required' , false).val('');
+                    tr.find('.max_range').hide().prop('required' , false).val('');
+                    tr.find('.element-unit').hide().prop('required' , false).val('');
                 }
+                handleSelect2Values();
             });
+
+            let handleSelect2Values = () => {
+                values  =   body.find('select.qc-element-id').find(':selected').map(function(){
+                    if ($(this).val() > 0) {
+                        return $(this).val();
+                    }
+                }).toArray();
+                body.find('select.qc-element-id').each(function(index , elem){
+                    $(elem).find('option').each(function(optionIndex , option){
+                        if (jQuery.inArray($(option).val() , values) !== -1)
+                        {
+                            $(option).attr('disabled' , true);
+                        } else {
+                            $(option).attr('disabled' , false);
+                        }
+                    });
+                    $(elem).find('option:selected').attr('disabled' , false);
+                    reInitSelect2(elem)
+                });
+            };
 
             function reInitSelect2(selector) {
                 if ($(selector).data('select2')) {
