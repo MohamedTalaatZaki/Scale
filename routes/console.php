@@ -413,3 +413,20 @@ Artisan::command('test:create_truck_arrival', function () {
     ]);
 })->describe('create truck arrival');
 
+
+Artisan::command('test:create_qc_element', function () {
+    DB::table('qc_elements')->insert([
+        'id'=> 9999,
+        'en_name'         =>  'testing',
+        'ar_name'         =>  'اختبار',
+        'test_type'   =>  'Visual',
+        'element_type'=> 'Range',
+        'element_unit'=> 'cm'
+
+    ]);
+})->describe('create qc element test');
+
+Artisan::command('test:delete_qc_element', function () {
+    optional(App\Models\QC\QcElement::where('id','9999'))->delete();
+})->describe('delete qc element');
+
