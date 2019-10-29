@@ -320,6 +320,39 @@ class PermissionsTableSeeder extends Seeder
 
         Permission::create([
             'sub_menu_id' => $subMenu->id,
+            'name' => 'qc-elements.index',
+            'en_display_name' => 'List Qc Elements',
+            'ar_display_name' => 'عرض عناصر مراقبة الجودة',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'qc-elements.create',
+            'en_display_name' => 'Create Qc Elements',
+            'ar_display_name' => 'إضافة عنصر مراقبة الجودة',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'qc-elements.edit',
+            'en_display_name' => 'Edit Qc Elements',
+            'ar_display_name' => 'تعديل عنصر مراقبة الجودة',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'qc-elements.delete',
+            'en_display_name' => 'Delete Qc Elements',
+            'ar_display_name' => 'حذف عنصر مراقبة الجودة',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
             'name' => 'qc-test-headers.index',
             'en_display_name' => 'List Qc Test',
             'ar_display_name' => 'عرض أختبارات مراقبة الجودة',
@@ -352,5 +385,55 @@ class PermissionsTableSeeder extends Seeder
         ]);
 
 
+        $subMenu = SubMenu::where('code', 13)->first();
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'trucks-arrival.index',
+            'en_display_name' => 'List Truck Arrival',
+            'ar_display_name' => 'عرض وصول الشاحنات',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'trucks-arrival.create',
+            'en_display_name' => 'Create Truck Arrival',
+            'ar_display_name' => 'إضافة وصول شاحنه',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'trucks-arrival.edit',
+            'en_display_name' => 'Edit Truck Arrival',
+            'ar_display_name' => 'تعديل وصول شاحنه',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'trucks-arrival.delete',
+            'en_display_name' => 'Delete Truck Arrival',
+            'ar_display_name' => 'حذف وصول الشاحنه',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'trucks-arrival.check_in',
+            'en_display_name' => 'Check In Truck',
+            'ar_display_name' => 'ادخال الشاحنه',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'trucks-arrival.check_out',
+            'en_display_name' => 'Check Out Truck',
+            'ar_display_name' => 'اخراج الشاحنه',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
     }
 }

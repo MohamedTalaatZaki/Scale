@@ -219,6 +219,19 @@ Artisan::command('city:edit_faker', function () {
 
 Artisan::command('center:edit_faker', function () {
     $center = factory(App\Models\Center::class, 'center_edit')->create();
+
+})->describe('Generate fake center for edit');
+
+Artisan::command('center:demo_faker', function () {
+    $center = factory(App\Models\Center::class, 'center_demo')->create();
+    DB::table('centers')->insert([
+        'id' => 1,
+       'en_name' => 'testyyyy',
+        'ar_name' => 'لثلب',
+        'city_id' => 1,
+        'is_active' => 1
+
+    ]);
 })->describe('Generate fake center for edit');
 
 Artisan::command('city:faker', function () {
@@ -245,6 +258,14 @@ Artisan::command('supplier:edit_faker', function () {
     $item_type = factory(App\Models\Supplier\Supplier::class, 'supplier_edit')->create();
 })->describe('Generate fake Supplier for edit');
 
+Artisan::command('supplier:demo_faker', function () {
+    $supplier = factory(App\Models\Supplier\Supplier::class, 'supplier_edit')->create();
+    DB::table('suppliers_items')->insert([
+      'supplier_id' => 1000,
+      'item_id' => 1000
+    ]);
+})->describe('Generate fake Supplier for edit');
+
 Artisan::command('supplier:fake_many', function () {
     $suppliers = factory(App\Models\Supplier\Supplier::class, 'fake_suppliers', 300)->create();
 })->describe('Generate fake suppliers');
@@ -259,6 +280,7 @@ Artisan::command('item_type:edit_faker', function () {
 
 Artisan::command('item_group:fake_item_groups', function () {
     $item_groups = factory(App\Models\Items\ItemGroup::class, 'fake_item_groups', 300)->create();
+
 })->describe('Generate fake item groups');
 
 Artisan::command('item_group:demo_faker', function () {
@@ -314,7 +336,97 @@ Artisan::command('qc_test:demo_faker', function () {
 })->describe('Generate fake single qc test header');
 
 
+
 Artisan::command('qc_test_details:demo_faker', function () {
     $qc_test_1 = factory(App\Models\QC\QcTestDetail::class,'demo_faker')->create();
     $qc_test_2 = factory(App\Models\QC\QcTestDetail::class,'demo_fake1')->create();
 })->describe('Generate fake details for qc test');
+
+Artisan::command('test:create_item_group', function () {
+    DB::table('item_group')->insert([
+        'id'=> 123456,
+        'ar_name'         =>  'رتقال',
+        'en_name'         =>  'orange',
+        'testable'   =>  0,
+    ]);
+})->describe('create item type');
+
+Artisan::command('test:delete_item_group', function () {
+    optional(App\Models\items\itemGroup::find(123456))->delete();
+})->describe('delete item group');
+
+
+
+Artisan::command('test:delete_scale', function () {
+    optional(App\Models\Scales\Scale::where('ip_address','888'))->delete();
+})->describe('delete scale');
+
+Artisan::command('test:delete_scale2', function () {
+    optional(App\Models\Scales\Scale::where('ip_address','8888'))->delete();
+})->describe('delete scale2');
+
+Artisan::command('test:create_scale_test', function () {
+    DB::table('scales')->insert([
+        'id'=> 1234,
+        'code'         =>  '9999',
+        'ip_address'         =>  '9999',
+        'is_active'   =>  0,
+        'com_port'=> '1234',
+        'baud_rate'         =>  '75',
+        'byte_size'         =>  'FIVE BITS',
+        'brand'         =>  '9999',
+        'stop_bits'   =>  'STOP BITS ONE',
+        'parity'   =>  'PARITY EVEN',
+
+    ]);
+})->describe('create scale test');
+
+Artisan::command('test:delete_scale_test', function () {
+    optional(App\Models\Scales\Scale::where('ip_address','9999'))->delete();
+})->describe('delete scale2');
+
+Artisan::command('test:delete_scale3', function () {
+    optional(App\Models\Scales\Scale::where('code','12345'))->delete();
+})->describe('delete scale2');
+
+Artisan::command('test:create_truck_arrival', function () {
+    DB::table('trucks_arrival')->insert([
+        'id'=>9999,
+        'transport_number'         =>  '9999',
+        'driver_name'         =>  'test999',
+        'status'         =>  'arrived',
+        'driver_license'   =>  '123456',
+        'driver_national_id'=> '12345678912345',
+        'driver_mobile'         =>  '01234567891',
+        'supplier_id'         =>  1000,
+        'governorate_id'         =>  1,
+        'city_id'   =>  1,
+        'center_id'   =>  1,
+        'truck_type_id'   =>  1,
+        'truck_plates_tractor'   =>  '1000',
+        'truck_plates_trailer'   =>  '1000',
+        'item_type_id'   => 1,
+        'item_group_id'   =>  10001,
+        'theoretical_weight'   =>  '300000',
+        'arrival_time'  =>  '2019-10-02 00:00:00',
+
+    ]);
+})->describe('create truck arrival');
+
+
+Artisan::command('test:create_qc_element', function () {
+    DB::table('qc_elements')->insert([
+        'id'=> 9999,
+        'en_name'         =>  'testing',
+        'ar_name'         =>  'اختبار',
+        'test_type'   =>  'Visual',
+        'element_type'=> 'Range',
+        'element_unit'=> 'cm'
+
+    ]);
+})->describe('create qc element test');
+
+Artisan::command('test:delete_qc_element', function () {
+    optional(App\Models\QC\QcElement::where('id','9999'))->delete();
+})->describe('delete qc element');
+

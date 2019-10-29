@@ -205,15 +205,52 @@ class MainMenusTableSeeder extends Seeder
 
         $group->subMenus()->createMany([
             [
-                'en_name' => 'QC Test',
-                'ar_name' => 'أختبارات مراقبة الجودة',
-                'route' => 'qc-test-headers.index',
-                'a_class' => 'sidebar-sub sidebar-sub-qc-test-headers',
+                'en_name' => 'QC Elements',
+                'ar_name' => 'عناصر مراقبة الجودة',
+                'route' => 'qc-elements.index',
+                'a_class' => 'sidebar-sub sidebar-sub-qc-elements',
                 'i_class' => 'simple-icon-user-follow',
                 'order' => 1,
                 'code'=>11
             ]
         ]);
 
+        $group->subMenus()->createMany([
+            [
+                'en_name' => 'QC Test',
+                'ar_name' => 'أختبارات مراقبة الجودة',
+                'route' => 'qc-test-headers.index',
+                'a_class' => 'sidebar-sub sidebar-sub-qc-test-headers',
+                'i_class' => 'simple-icon-user-follow',
+                'order' => 1,
+                'code'=>12
+            ]
+        ]);
+
+        $main =  MainMenu::create([
+            'en_name' => 'Security',
+            'ar_name' => 'الأمن',
+            'class' => 'sidebar sidebar-security',
+            'href' => '#security',
+            'sub_class' => 'iconsminds-digital-drawing',
+            'data_link' => 'security'
+        ]);
+        $group = $main->menuGroups()->create([
+            'en_name' => 'Truck Arrival',
+            'ar_name' => 'وصول الشاحنات',
+            'aria_controls' => 'collapseTruckArrival',
+            'order' => 1,
+        ]);
+        $group->subMenus()->createMany([
+            [
+                'en_name' => 'Truck Arrival',
+                'ar_name' => 'وصول الشاحنات',
+                'route' => 'trucks-arrival.index',
+                'a_class' => 'sidebar-sub sidebar-sub-trucks-arrival',
+                'i_class' => 'simple-icon-user-follow',
+                'order' => 1,
+                'code'=>13
+            ]
+        ]);
     }
 }

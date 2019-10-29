@@ -57,7 +57,12 @@
             background-size: contain;
             background-position: center center;
         }
-
+        .bg-readonly{
+            background-color: transparent !important;
+        }
+        .qc-element-id{
+            height: 2.2rem !important;
+        }
     </style>
     @stack('styles')
 </head>
@@ -452,6 +457,28 @@
             var regex = /^([\u0600-\u06ff]|[\u0750-\u077f]|[\ufb50-\ufbc1]|[\ufbd3-\ufd3f]|[\ufd50-\ufd8f]|[\ufd92-\ufdc7]|[\ufe70-\ufefc]|[\ufdf0-\ufdfd]|[ ]|[0-9])*$/g;
             var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
             if (regex.test(str)) {
+                return true;
+            }
+
+            e.preventDefault();
+            return false;
+        });
+
+        body.on( 'keypress' , '.onlyNumbers' ,function (e) {
+            var regex = /^([0-9])*$/g;
+            var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+            if (regex.test(str)) {
+                return true;
+            }
+
+            e.preventDefault();
+            return false;
+        });
+
+        body.on( 'keypress' , '.noNumbers' ,function (e) {
+            var regex = /^([0-9])*$/g;
+            var str = String.fromCharCode(!e.charCode ? e.which : e.charCode);
+            if (!regex.test(str)) {
                 return true;
             }
 

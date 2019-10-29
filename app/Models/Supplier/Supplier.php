@@ -3,6 +3,7 @@
 namespace App\Models\Supplier;
 
 use App\Models\Items\Item;
+use App\Models\Items\ItemGroup;
 use Illuminate\Database\Eloquent\Model;
 
 class Supplier extends Model

@@ -28,6 +28,7 @@ Route::middleware(['auth'])->group(function (){
     Route::resource('master-data/items/items' , 'MasterData\ItemsController');
     Route::resource('master-data/suppliers' , 'MasterData\SuppliersController');
     Route::resource('master-data/scales' , 'MasterData\ScalesController');
+    Route::resource('master-data/qc-elements' , 'MasterData\QcElementsController');
     Route::resource('master-data/qc-test-headers' , 'MasterData\QcTestHeaderController');
 
 
@@ -37,12 +38,15 @@ Route::middleware(['auth'])->group(function (){
     Route::get('change-lang' , 'MasterData\UsersController@lang')->name('change-lang');
     Route::post('change-acc-info' , 'MasterData\UsersController@changeAccInfo')->name('users.change-acc-info');
     Route::get('master-data/supplier/items/{id}' , 'MasterData\ItemsController@supplierItems')->name('suppliers.items');
+    Route::get('security/trucks-arrival-in-process' , 'Security\TrucksArrivalController@inProcess')->name('trucks-arrival.inProcess');
+    Route::get('security/trucks-arrival-check-out' , 'Security\TrucksArrivalController@checkOut')->name('trucks-arrival.checkOut');
 
     /*
      * AJAX Routes
      */
     Route::get('cities' , 'MasterData\CitiesController@getGovernorateCities')->name('getGovernorateCities');
     Route::get('centers' , 'MasterData\CentersController@getCityCenters')->name('getCityCenters');
+    Route::get('getSupplierItemGroups' , 'MasterData\SuppliersController@getSupplierItemGroups')->name('getSupplierItemGroups');
 });
 
 Auth::routes();

@@ -42,6 +42,7 @@ Route::get('supplier/{en_name}',function($en_name){
 Route::get('item/{en_name}',function($sap_code){
   return App\Models\Items\Item::where('sap_code',$sap_code)->first();
 });
+
 Route::get('scale/{code}',function($code){
   return App\Models\Scales\Scale::where('code',$code)->first();
 });
@@ -50,6 +51,15 @@ Route::get('qc-test/{id}',function($id){
   return App\Models\QC\QcTestHeader::with('details')->find($id);
 });
 
-Route::get('qc_test/{en_name}',function($en_name){
-  return App\Models\QC\QcTestHeader::where('en_name',$en_name)->with('details')->first();
+Route::get('qc_test/{en_name}',function($en_name) {
+    return App\Models\QC\QcTestHeader::where('en_name', $en_name)->with('details')->first();
+});
+
+Route::get('truck_arrival/{driver_name}',function($driver_name){
+  return App\Models\Security\TruckArrival::where('driver_name',$driver_name)->first();
+});
+
+
+Route::get('qc_element/{em_name}',function($en_name){
+  return App\Models\QC\QcElement::where('en_name',$en_name)->first();
 });
