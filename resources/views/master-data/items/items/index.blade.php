@@ -17,6 +17,11 @@
                     <li class="breadcrumb-item">
                         <span class="default-cursor">@lang('global.master_data')</span>
                     </li>
+                    @isset($supplier)
+                        <li class="breadcrumb-item">
+                            <span>{{ $supplier->name }}</span>
+                        </li>
+                    @endisset
                     <li class="breadcrumb-item">
                         <a href="{{ route('items.index') }}">@lang('global.items')</a>
                     </li>
@@ -34,10 +39,26 @@
 
                     <form action="{{route('items.index')}}" id="searchForm">
 
-                        <input type="hidden" value="1" name="s" id="sf">
 
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-3">
+                                <div class="form-group ">
+                                    <label class="col-md-12 control-label">@lang('global.suppliers')</label>
+                                    <select class="form-control" name="supplier_id">
+                                        <option value="">@lang('global.select_supplier')</option>
+                                        @foreach($suppliers as $sup)
+                                            <option value="{{ $sup->id }}"
+                                                {{ (isset($supplier) && $sup->id == $supplier->id)
+                                                    ||
+                                                    !is_null(request()->get('supplier_id')) && request()->get('supplier_id') == $sup->id
+                                                 ? "selected" : ""}}>
+                                                {{ $sup->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
                                 <div class="form-group ">
                                     <label class="col-md-12 control-label">@lang('global.ar_name')</label>
                                     <input type="text" class="form-control onlyAr" placeholder="{{trans('global.ar_name')}}"
@@ -45,7 +66,7 @@
                                            autocomplete="off">
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group ">
                                     <label class="col-md-12 control-label">@lang('global.en_name')</label>
                                     <input type="text" class="form-control onlyEn" placeholder="{{trans('global.en_name')}}"
@@ -53,7 +74,7 @@
                                            autocomplete="off">
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="form-group ">
                                     <label class="col-md-12 control-label">@lang('global.sap_code')</label>
                                     <input type="text" class="form-control" placeholder="{{trans('global.sap_code')}}"

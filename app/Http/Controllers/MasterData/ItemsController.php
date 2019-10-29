@@ -20,8 +20,10 @@ class ItemsController extends Controller
         $items  =   Item::query()
             ->filter(new ItemsIndexFilter(request()))
             ->paginate(25);
+        $suppliers  =   Supplier::query()->where('is_active' , 1)->get();
         return view('master-data.items.items.index' , [
             'items' =>  $items,
+            'suppliers' =>  $suppliers
         ]);
     }
 
@@ -106,8 +108,11 @@ class ItemsController extends Controller
     public function supplierItems($id){
         $this->authorized('items.index');
         $items  =   Supplier::query()->findOrFail($id)->items()->paginate(25);
+        $suppliers  =   Supplier::query()->where('is_active' , 1)->get();
         return view('master-data.items.items.index' , [
             'items' =>  $items,
+            'suppliers' =>  $suppliers,
+            'supplier'  =>  Supplier::query()->findOrFail($id),
         ]);
     }
 
