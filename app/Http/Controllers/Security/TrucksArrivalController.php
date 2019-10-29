@@ -20,7 +20,6 @@ class TrucksArrivalController extends Controller
         $suppliers  =   Supplier::query()
             ->where('is_active' , 1)
             ->get();
-
         $governorates   =   Governorate::query()
             ->where('is_active' , 1)
             ->get();
