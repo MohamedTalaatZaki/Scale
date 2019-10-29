@@ -266,7 +266,7 @@
                                         @endif
                                     </td>
                                     <td>
-                                        <input type="text" class="form-control form-control-sm bg-readonly element-unit" name="details[0][element_unit]" readonly>
+                                        <input type="text" class="form-control form-control-sm bg-readonly element-unit" name="details[0][element_unit]" style="display: none" readonly>
                                     </td>
                                     <td>
                                         <div class="btn-group btn-group-sm" role="group">
@@ -396,7 +396,7 @@
                     $(elem).find('option:selected').attr('disabled' , false);
                     reInitSelect2(elem)
                 });
-            }
+            };
 
             function reInitSelect2(selector) {
                 $(selector).select2();

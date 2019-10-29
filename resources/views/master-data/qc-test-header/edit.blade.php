@@ -395,9 +395,8 @@
             };
 
             function reInitSelect2(selector) {
-                if ($(selector).data('select2')) {
-                    $(selector).select2('destroy');
-                }
+                $(selector).select2();
+                $(selector).select2('destroy');
                 $(selector).select2({
                     theme: "bootstrap",
                     maximumSelectionSize: 6,
