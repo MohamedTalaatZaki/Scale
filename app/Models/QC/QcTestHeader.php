@@ -16,6 +16,7 @@ class QcTestHeader extends Model
         return $this->hasMany(QcTestDetail::class , 'qc_test_header_id' , 'id');
     }
 
+
     public function getNameAttribute()
     {
         return $this->attributes['name']    =   app()->getLocale() == 'ar' ? $this->ar_name : $this->en_name;

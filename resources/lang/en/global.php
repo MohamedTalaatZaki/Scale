@@ -207,4 +207,8 @@ return [
     'create_qc_elements'    =>  'Create QC Elements',
     'edit_qc_elements'    =>  'Edit QC Elements',
     'element_name'  =>  'Element Name',
+
+    'sample_test'   =>  'Sample Test',
+    'sample_range'  =>  'Sample Result',
+    'result'        =>  'Result',
 ];

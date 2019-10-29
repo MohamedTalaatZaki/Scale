@@ -35,6 +35,7 @@ Route::middleware(['auth'])->group(function (){
     Route::resource('security/transports' , 'Security\TransportsController');
 
     Route::resource('qc/arrived-trucks' , 'QC\ArrivedTrucksController');
+    Route::resource('qc/samples-test' , 'QC\SamplesTestController');
 
     Route::get('change-theme' , 'MasterData\UsersController@theme')->name('change-theme');
     Route::get('change-lang' , 'MasterData\UsersController@lang')->name('change-lang');

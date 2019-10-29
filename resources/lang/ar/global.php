@@ -207,4 +207,6 @@ return [
     'create_qc_elements'    =>  'انشاء عنصر مراقبة الجودة',
     'edit_qc_elements'    =>  'تعديل عنصر مراقبة الجودة',
     'element_name'  =>  'اسم العنصر',
+
+    'sample_test'   =>  'نتيجة اختبار العينة',
 ];
