@@ -209,4 +209,8 @@ return [
     'element_name'  =>  'اسم العنصر',
 
     'sample_test'   =>  'نتيجة اختبار العينة',
+    'are_you_sure'  =>  'هل انت متاكد ؟',
+    'write_something' =>  'يجب كتابة السبب',
+    'cannot_save_contact_admin' =>  'لا يمكن حفظ البيانات تواصل مع مدير النظام',
+    'tested_trucks' =>  'شاحنات تم وزنها',
 ];

@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Models\QC\SampleTestHeader;
 use App\Traits\HasFilter;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -52,4 +53,9 @@ class User extends Authenticatable
     public function setPasswordAttribute($value) {
         return $this->attributes['password']    =   Hash::make($value);
     }
+
+    public function labUsers(){
+        return $this->hasMany(SampleTestHeader::class,'created_by' , 'id');
+    }
+
 }

@@ -29,7 +29,8 @@ class Transports extends Model
 
     public function sampledDetails()
     {
-        return $this->details()->where('status' , 'sampled')->orWhere('status' , 'retest');
+        return $this->details()->where('status' , 'sampled')
+            ->orWhere('status' , 'retest');
     }
 
     public function retestDetails()
@@ -86,5 +87,27 @@ class Transports extends Model
         $ItemGroupsIds  =   $supplier->items()->distinct()->pluck('item_group_id');
         $itemGroups =   ItemGroup::query()->find($ItemGroupsIds);
         return $itemGroups;
+    }
+
+    public function updateStatus()
+    {
+        $status         =   "sampled";
+
+        $statusArray    =   $this->details->map(function($detail){
+            return optional(optional($detail->lastSampleTestHeader->first()))->result;
+        })->toArray();
+
+        if(in_array(null , $statusArray))
+        {
+            $status = 'sampled';
+        }elseif(in_array('accepted' , $statusArray)) {
+            $status = 'accepted';
+        }elseif(in_array('rejected' , $statusArray))
+        {
+            $status = 'rejected';
+        }
+
+        $this->update(['status' => $status]);
+
     }
 }

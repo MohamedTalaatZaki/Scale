@@ -3,6 +3,8 @@
 namespace App\Models\QC;
 
 use App\Models\Items\ItemGroup;
+use App\Models\Security\TransportDetail;
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class QcTestHeader extends Model
@@ -26,4 +28,5 @@ class QcTestHeader extends Model
     {
         return $this->belongsTo(ItemGroup::class , 'item_group_id' , 'id');
     }
+
 }

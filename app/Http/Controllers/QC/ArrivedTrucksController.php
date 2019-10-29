@@ -4,6 +4,7 @@ namespace App\Http\Controllers\QC;
 
 use App\Models\Security\TransportDetail;
 use App\Models\Security\Transports;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -42,7 +43,7 @@ class ArrivedTrucksController extends Controller
 
     public function toggleTruckStatus(Request $request)
     {
-        $truck  =   TransportDetail::query()
+        $detail  =   TransportDetail::query()
             ->where(function($q) {
                 $q->where('status' , 'arrived')
                     ->orWhere('status' , 'retest')
@@ -51,10 +52,11 @@ class ArrivedTrucksController extends Controller
             ->whereHas('testableType')
             ->find($request->input('id'));
 
-        if($truck) {
-            $truck->update([
+        if($detail) {
+            $detail->update([
                 'status'    =>  $request->input('status'),
             ]);
+            $detail->transport->update(['status' => $request->input('status')]);
         }
 
         return response()->json(['result' => $request->input('status')]);

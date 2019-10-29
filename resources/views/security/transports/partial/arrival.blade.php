@@ -28,8 +28,10 @@
                 <td>{{ $truck->arrival_time->diffForHumans() }}</td>
                 <td>
                     @permission('transports.edit')
-                    <a href="{{ route('transports.edit' , ['id' => $truck->id]) }}"
-                       class="btn btn-primary btn-sm mb-1">@lang('global.edit')</a>
+                    @if($truck->status == 'arrived')
+                        <a href="{{ route('transports.edit' , ['id' => $truck->id]) }}"
+                           class="btn btn-primary btn-sm mb-1">@lang('global.edit')</a>
+                    @endif
                     @endpermission
                 </td>
             </tr>

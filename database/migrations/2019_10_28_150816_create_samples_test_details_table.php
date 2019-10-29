@@ -23,7 +23,7 @@ class CreateSamplesTestDetailsTable extends Migration
             $table->integer('expected_result')->nullable();
             $table->double('min_range')->nullable();
             $table->double('max_range')->nullable();
-            $table->double('element_unit')->nullable();
+            $table->string('element_unit')->nullable();
             $table->integer('sampled_expected_result')->nullable();
             $table->double('sampled_range')->nullable();
             $table->string('result')->nullable();

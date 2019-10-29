@@ -33,6 +33,7 @@ Route::middleware(['auth'])->group(function (){
 
 
     Route::resource('security/transports' , 'Security\TransportsController');
+    Route::resource('security/queue' , 'Security\QueueController');
 
     Route::resource('qc/arrived-trucks' , 'QC\ArrivedTrucksController');
     Route::resource('qc/samples-test' , 'QC\SamplesTestController');
@@ -43,6 +44,7 @@ Route::middleware(['auth'])->group(function (){
     Route::get('master-data/supplier/items/{id}' , 'MasterData\ItemsController@supplierItems')->name('suppliers.items');
     Route::get('security/transports-in-process' , 'Security\TransportsController@inProcess')->name('transports.inProcess');
     Route::get('security/transports-check-out' , 'Security\TransportsController@checkOut')->name('transports.checkOut');
+    Route::get('security/cancel' , 'Security\TransportsController@cancel')->name('transports.cancel');
 
     /*
      * AJAX Routes

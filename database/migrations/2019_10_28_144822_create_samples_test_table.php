@@ -19,6 +19,8 @@ class CreateSamplesTestTable extends Migration
             $table->unsignedBigInteger('qc_test_header_id');
             $table->string('result');
             $table->longText('reason')->nullable();
+            $table->unsignedBigInteger('created_by');
+            $table->char('test_type')->default('t');
             $table->timestamps();
         });
     }

@@ -436,6 +436,14 @@ class PermissionsTableSeeder extends Seeder
             'en_description' => NULL,
             'ar_description' => NULL,
         ]);
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'transports.cancel',
+            'en_display_name' => 'Cancel Truck',
+            'ar_display_name' => 'الغاء دخول الشاحنه',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
 
         $subMenu = SubMenu::where('code', 14)->first();
 

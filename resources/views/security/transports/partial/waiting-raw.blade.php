@@ -28,6 +28,10 @@
                     <a href="{{ route('transports.inProcess' , ['id' => $truck->id]) }}"
                        class="btn btn-primary btn-sm mb-1">@lang('global.check_in')</a>
                 @endpermission
+                @permission('transports.cancel')
+                <a href="{{ route('transports.cancel' , ['id' => $truck->id]) }}"
+                   class="btn btn-primary btn-sm mb-1">@lang('global.cancel')</a>
+                @endpermission
             </td>
         </tr>
     @empty

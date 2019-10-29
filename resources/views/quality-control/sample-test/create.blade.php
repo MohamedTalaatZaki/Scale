@@ -31,7 +31,7 @@
                     </div>
 
 
-                    <form action="{{ route('samples-test.store') }}" method="post">
+                    <form action="{{ route('samples-test.store') }}" method="post" id="sampleTest">
                         @csrf
 
                         <div class="form-row">
@@ -62,6 +62,10 @@
                         <div class="form-group row result-div" style="display: none">
                             <div class="col-4"></div>
                             <div class="col-4 bg-dark" style="border-radius: 30px;">
+                                <input type="hidden" name="transport_detail_id" value="{{ $transport_detail->id }}">
+                                <input type="hidden" name="qc_test_header_id" value="{{ optional($transport_detail->testableType)->id }}">
+                                <input type="hidden" name="result" class="final_result" value="">
+                                <textarea name="reason" class="final_reason" style="display: none"></textarea>
                                 <h3 style="margin: 10px;display: none" class="final-accepted text-center text-success"> Accepted </h3>
                                 <h3 style="margin: 10px;display: none" class="final-rejected text-center text-danger"> Rejected </h3>
                             </div>
@@ -81,7 +85,7 @@
                             <tbody data-repeater-list="details">
                                 @if(optional(optional(optional($transport_detail->testableType)->qcTestHeader)->details)->count() > 0)
                                     @foreach(optional(optional($transport_detail->testableType)->qcTestHeader)->details->sortByDesc('element.element_type') as $key => $row)
-                                        <tr data-repeater-item>
+                                        <tr>
                                             <td>
                                                 <input type="text"
                                                        class="form-control form-control-sm bg-readonly test-type"
@@ -99,11 +103,18 @@
                                             @if($row->element->element_type == 'question')
                                                 <td>
                                                     <select
-                                                        class="form-control form-control-sm expected_result" name="details[{{ $key }}][expected_result]" data-expected="{{ $row->expected_result }}">
+                                                        class="form-control form-control-sm expected_result result-input"
+                                                        name="details[{{ $key }}][sampled_expected_result]"
+                                                        data-expected="{{ $row->expected_result }}"
+                                                        required
+                                                    >
                                                         <option value="" selected>@lang('global.result')</option>
                                                         <option value="1" {{ old("details.$key.expected_result") === 1 ? "selected" : ""}}>@lang('global.yes')</option>
                                                         <option value="0" {{ old("details.$key.expected_result") === 0 ? "selected" : ""}}>@lang('global.no')</option>
                                                     </select>
+                                                    <div style="position: absolute">
+                                                        <div class="notify-error"></div>
+                                                    </div>
                                                     @if($errors->has("details.$key.expected_result"))
                                                         <span id="jQueryName-error" class="error"
                                                               style="">{{ $errors->first("details.$key.expected_result") }}</span>
@@ -111,12 +122,17 @@
                                                 </td>
                                             @else
                                                 <td>
-                                                    <input type="number" class="form-control form-control-sm sample_range"
-                                                           name="details[{{ $key }}][sample_range]" style="display: {{ old("details.$key.element_type" , $row['element']['element_type']) == "range"? "" : "none" }}"
+                                                    <input type="number" class="form-control form-control-sm sample_range result-input"
+                                                           name="details[{{ $key }}][sampled_range]" style="display: {{ old("details.$key.element_type" , $row['element']['element_type']) == "range"? "" : "none" }}"
                                                            value="{{ old("details.$key.sample_range") }}" placeholder="@lang('global.sample_range')"
                                                            data-min="{{ $row->min_range }}"
                                                            data-max="{{ $row->max_range }}"
-                                                           autocomplete="off">
+                                                           autocomplete="off"
+                                                           required
+                                                    >
+                                                    <div style="position: absolute">
+                                                        <div class="notify-error"></div>
+                                                    </div>
                                                     @if($errors->has("details.$key.sample_range"))
                                                         <span id="jQueryName-error" class="error"
                                                               style="">{{ $errors->first("details.$key.sample_range") }}</span>
@@ -133,10 +149,19 @@
                                             </td>
                                             <td>
                                                 <div>
-                                                    <input type="hidden" value="-1" class="result">
                                                     <a class="accepted" style="display: none"><i class="fas fa-check-circle text-success"></i></a>
                                                     <a class="rejected" style="display: none"><i class="fas fa-times-circle text-danger"></i> </a>
                                                     ( {{ $row->getExpectedResult() }} )
+
+                                                    <input name="details[{{ $key }}][qc_test_detail_id]" value="{{ $row->id }}" type="hidden">
+                                                    <input name="details[{{ $key }}][element_type]" value="{{ optional(optional($row)->element)->element_type }}" type="hidden">
+                                                    <input name="details[{{ $key }}][expected_result]" value="{{ optional($row)->expected_result }}" type="hidden">
+                                                    <input name="details[{{ $key }}][min_range]" value="{{ optional($row)->min_range }}" type="hidden">
+                                                    <input name="details[{{ $key }}][max_range]" value="{{ optional($row)->max_range }}" type="hidden">
+                                                    <input name="details[{{ $key }}][element_unit]" value="{{ optional(optional($row)->element)->element_unit }}" type="hidden">
+                                                    <input value="-1" class="result" type="hidden" disabled>
+                                                    <input name="details[{{ $key }}][result]" value="" class="final-result" type="hidden">
+
                                                 </div>
                                             </td>
                                         </tr>
@@ -144,12 +169,19 @@
                                 @endif
                             </tbody>
                         </table>
+                        <hr/>
+                        <div class="form-group col-md-12">
+                            <div class="text-center">
+                                <button class="btn btn-danger mr-5 btn-rejected resultSwal" data-type="Rejected" data-result="0" style="display: none">@lang('global.rejected')</button>
+                                <button class="btn btn-success mr-5 resultSwal" data-type="Accepted" data-result="1">@lang('global.accepted')</button>
+                            </div>
+                        </div>
+                        <hr/>
                         <div class="form-group col-md-12">
                             <div class="float-right">
-                                <a href="{{ route('centers.index') }}">
-                                    <button type="button" class="btn btn-danger btn-sm mt-3">@lang('global.cancel')</button>
+                                <a href="{{ route('arrived-trucks.index') }}">
+                                    <button type="button" class="btn btn-primary mt-3">@lang('global.cancel')</button>
                                 </a>
-                                <button type="submit" class="btn btn-primary btn-sm mt-3">@lang('global.save')</button>
                             </div>
 
                         </div>
@@ -161,10 +193,91 @@
 
 @endsection
 @push('scripts')
+    <script src="{{ asset('js/sweetalert.js') }}" type="text/javascript"></script>
     <script>
         $().ready(function () {
             let detailsCount    =   parseInt("{{ optional(optional(optional($transport_detail->testableType)->qcTestHeader)->details)->count() }}");
             let finalResult     =   -1;
+
+            $('.resultSwal').on('click' , function (evt) {
+                evt.preventDefault();
+
+                let selected    =   $(this).data('type');
+                let btnResult   =   parseInt($(this).data('result'));
+
+                if ( !checkResults() )
+                {
+                    return false;
+                }
+
+                if (finalResult > -1) {
+
+                    Swal.fire({
+                        title: selected,
+                        text: "@lang('global.are_you_sure')",
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: '@lang('global.save')',
+                        reverseButtons: true,
+                    }).then((result) => {
+                        if (result.value && btnResult !== finalResult) {
+                            Swal.fire({
+                                text: '@lang('global.error_expected_result')',
+                                input: 'textarea',
+                                inputAttributes: {
+                                    autocapitalize: 'off',
+                                    required: true,
+                                    id:"reason",
+                                },
+                                inputValidator: (value) => {
+                                    if (!value) {
+                                        return '@lang('global.write_something')'
+                                    }
+                                },
+                                preConfirm: function() {
+                                    return new Promise((resolve, reject) => {
+                                        resolve({
+                                            reason: $('textarea#reason').val(),
+                                        });
+                                    });
+                                },
+                                showCancelButton: true,
+                                confirmButtonColor: '#3085d6',
+                                cancelButtonColor: '#d33',
+                                confirmButtonText: '@lang('global.save')',
+                                reverseButtons: true,
+                            }).then(function (data) {
+                                if(data.value) {
+                                    setFinalResultAndSubmit(selected , data.value.reason);
+                                }
+                            });
+                        } else if (result.value && btnResult === finalResult) {
+                            setFinalResultAndSubmit(selected);
+                        }
+                    });
+
+                }
+            });
+
+            const setFinalResultAndSubmit  =   (result = "" , reason = "" )    =>  {
+                $('.final_result').val(result);
+                $('.final_reason').val(reason);
+
+                $('#sampleTest').submit();
+            };
+
+            const checkResults    =   () => {
+                let defaultValue    =   true;
+                $('.result-input').each(function (index , elem) {
+                    if($(elem).val() === "") {
+                        defaultValue = false;
+                        $(elem).closest('td').find('.notify-error').notify("@lang('global.required')" , 'error');
+                    }
+                });
+                return defaultValue;
+            };
+
             $('.expected_result').on('change' , function () {
                 let value    =   $(this).find('option:selected').val();
                 let expected =   $(this).data('expected');
@@ -173,17 +286,26 @@
                 if(value == expected) {
                     tr.find('.accepted').show();
                     tr.find('.rejected').hide();
+                    tr.find('.result').val(1);
+                    tr.find('.final-result').val('accepted');
                 } else {
                     tr.find('.accepted').hide();
                     tr.find('.rejected').show();
+                    tr.find('.result').val(0);
+                    tr.find('.final-result').val('rejected');
                 }
 
-                if (value === "") {tr.find('.result').val(-1);}
+                if (value === "") {
+                    tr.find('.accepted').hide();
+                    tr.find('.rejected').hide();
+                    tr.find('.result').val(-1);
+                    tr.find('.final-result').val('');
+                }
 
                 overAllResult();
             });
 
-            $('.sample_range').on('change' , function () {
+            $('.sample_range').on('keyup' , function () {
                 let value   =   $(this).val();
                 let min     =   $(this).data('min');
                 let max     =   $(this).data('max');
@@ -192,46 +314,63 @@
                     tr.find('.accepted').show();
                     tr.find('.rejected').hide();
                     tr.find('.result').val(1);
+                    tr.find('.final-result').val('accepted');
                 } else {
                     tr.find('.accepted').hide();
                     tr.find('.rejected').show();
                     tr.find('.result').val(0);
+                    tr.find('.final-result').val('rejected');
                 }
 
-                if (value === "") {tr.find('.result').val(-1);}
+                if (value === "") {
+                    tr.find('.accepted').hide();
+                    tr.find('.rejected').hide();
+                    tr.find('.result').val(-1);
+                    tr.find('.final-result').val('');
+                }
 
                 overAllResult();
             });
 
-            overAllResult   =   () => {
+            const overAllResult   =   () => {
+                let resultDiv   =   $('.result-div');
+                let rejected    =   $('.final-rejected');
+                let accepted    =   $('.final-accepted');
+                let rejectedBtn =   $('.btn-rejected');
                 let resultValues  =   $('.result').map(function(index ,elem){
                     let val =   $(elem).val();
                     if (val > -1 ) {
                         return parseInt(val);
                     }
                 }).toArray();
-                console.log(resultValues.length === detailsCount , resultValues , resultValues.length , detailsCount);
+
                 if(resultValues.length === detailsCount) {
                     finalResult =   resultValues.reduce( (a,b) => a * b );
-                    console.log(finalResult);
+
                     if( finalResult > 0 ) {
-                        $('.result-div').show();
-                        $('.final-accepted').show();
-                        $('.final-rejected').hide();
+                        resultDiv.show();
+                        accepted.show();
+                        rejected.hide();
+                        rejectedBtn.hide();
                     } else if (finalResult === 0) {
-                        $('.result-div').show();
-                        $('.final-rejected').show();
-                        $('.final-accepted').hide();
+                        resultDiv.show();
+                        rejected.show();
+                        accepted.hide();
+                        rejectedBtn.show();
                     } else {
-                        $('.result-div').hide();
-                        $('.final-accepted').hide();
-                        $('.final-rejected').hide();
+                        resultDiv.hide();
+                        accepted.hide();
+                        rejected.hide();
+                        rejectedBtn.hide();
                     }
                 } else {
+                    resultDiv.hide();
+                    accepted.hide();
+                    rejected.hide();
+                    rejectedBtn.hide();
                     finalResult =   -1;
                 }
             }
-
 
         })
     </script>

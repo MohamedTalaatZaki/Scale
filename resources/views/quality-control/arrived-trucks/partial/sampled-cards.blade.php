@@ -21,7 +21,7 @@
                     <tr>
                         <td colspan="2"><i class="fa fa-phone"></i> {{ $truck->driver_mobile }}</td>
                         <td class="lab-btn">
-                            <a href="{{ route('samples-test.create' , ['transport_detail_id' => $truck->id]) }}" class="btn btn-warning btn-xs"><i class="fa fa-vials"></i></a>
+                            <a href="{{ route('samples-test.create' , ['transport_detail_id' => $detail->id]) }}" class="btn btn-warning btn-xs"><i class="fa fa-vials"></i></a>
                         </td>
 
                     </tr>
