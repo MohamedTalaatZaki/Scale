@@ -63,3 +63,7 @@ Route::get('truck_arrival/{driver_name}',function($driver_name){
 Route::get('qc_element/{em_name}',function($en_name){
   return App\Models\QC\QcElement::where('en_name',$en_name)->first();
 });
+
+Route::get('scales/{code}',function($code){
+    return App\Models\Scales\Scale::where('code',$code)->first();
+});
