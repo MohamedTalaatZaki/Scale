@@ -42,7 +42,6 @@ class QcTestHeaderController extends Controller
             'details.*.expected_result' =>  'required_if:details.*.element_type,=,question',
             'details.*.min_range'       =>  'required_if:details.*.element_type,=,range',
             'details.*.max_range'       =>  'required_if:details.*.element_type,=,range',
-            'details.*.element_unit'    =>  'required_if:details.*.element_type,=,range',
         ],[
             "item_group_id.required"=>trans("master.errors.item_group_id_required")
         ]);
@@ -85,7 +84,6 @@ class QcTestHeaderController extends Controller
             'details.*.expected_result' =>  'required_if:details.*.element_type,=,question',
             'details.*.min_range'       =>  'required_if:details.*.element_type,=,range',
             'details.*.max_range'       =>  'required_if:details.*.element_type,=,range',
-            'details.*.element_unit'    =>  'required_if:details.*.element_type,=,range',
         ],[
             "item_group_id.required"=>trans("master.errors.item_group_id_required")
         ]);
