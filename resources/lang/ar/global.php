@@ -222,5 +222,7 @@ return [
     'supplier'  =>  'المورد',
     'truck_tractor' =>  'الجرار',
     'truck_trailer' =>  'المقطورة',
+    'from_date'=>'من تاريخ',
+    'to_date'=>'إلى تاريخ'
 
 ];

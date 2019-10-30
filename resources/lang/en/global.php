@@ -225,4 +225,6 @@ return [
     'supplier'  =>  'Supplier',
     'truck_tractor' =>  'Truck Tractor',
     'truck_trailer' =>  'Truck Trailer',
+    'from_date'=>'From Data',
+    'to_date'=>'To Date'
 ];
