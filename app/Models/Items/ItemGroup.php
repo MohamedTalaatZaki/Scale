@@ -20,7 +20,4 @@ class ItemGroup extends Model
         return $this->attributes['name']    =   app()->getLocale() == 'ar' ? $this->ar_name : $this->en_name;
     }
 
-    public function qcTestHeader(){
-        return $this->hasOne(QcTestHeader::class , 'item_group_id' , 'id');
-    }
 }
