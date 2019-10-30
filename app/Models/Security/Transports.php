@@ -89,6 +89,7 @@ class Transports extends Model
         return $itemGroups;
     }
 
+
     public function updateStatus()
     {
         $status         =   "sampled";

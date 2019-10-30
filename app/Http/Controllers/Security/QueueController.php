@@ -10,6 +10,7 @@ class QueueController extends Controller
 {
     public function index()
     {
+        app()->setLocale('ar');
         $raw    =   Transports::query()
             ->where('status' , 'accepted')
             ->whereHas('itemType' , function ($q){$q->where('prefix' , 'raw');})
@@ -29,6 +30,7 @@ class QueueController extends Controller
             'raw'       =>  $raw,
             'scrap'     =>  $scrap,
             'finish'    =>  $finish,
+            'page_dir'  =>  'rtl'
         ]);
     }
 }

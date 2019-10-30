@@ -188,6 +188,11 @@
                 }
             });
 
+            // $('.print').on('click' , function (evt) {
+            //     evt.preventDefault();
+            //     let id = $(this).data('truck-id');
+            //     console.log(id);
+            // });
             function reInitSelect2(selector) {
                 $(selector).select2('destroy');
                 $(selector).select2({

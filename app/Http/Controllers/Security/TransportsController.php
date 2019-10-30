@@ -169,5 +169,12 @@ class TransportsController extends Controller
         $transport->update(['status' => 'canceled']);
         return $this->index()->with('success' , trans('global.car_canceled' , ['truck_plates_tractor' => $transport->truck_plates_tractor]));
     }
+
+    public function print(Request $request)
+    {
+        app()->setLocale('ar');
+        $transport  =   Transports::query()->find($request->get('id'));
+        return view('security.transports.partial.print' , ['transport' => $transport]);
+    }
 }
 

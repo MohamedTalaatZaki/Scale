@@ -28,6 +28,8 @@
                     <a href="{{ route('transports.inProcess' , ['id' => $truck->id]) }}"
                        class="btn btn-primary btn-sm mb-1">@lang('global.check_in')</a>
                 @endpermission
+                <a href="{{ route('printLabels' , ['id' => $truck->id]) }}" target="_blank"
+                   class="btn btn-success btn-sm mb-1 print">@lang('global.print')</a>
             </td>
         </tr>
     @empty

@@ -33,6 +33,7 @@ Route::middleware(['auth'])->group(function (){
 
 
     Route::resource('security/transports' , 'Security\TransportsController');
+    Route::get('print' , 'Security\TransportsController@print')->name('printLabels');
     Route::resource('security/queue' , 'Security\QueueController');
 
     Route::resource('qc/arrived-trucks' , 'QC\ArrivedTrucksController');
@@ -56,5 +57,6 @@ Route::middleware(['auth'])->group(function (){
 });
 
 Auth::routes();
+
 
 

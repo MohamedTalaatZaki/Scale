@@ -213,4 +213,14 @@ return [
     'write_something' =>  'يجب كتابة السبب',
     'cannot_save_contact_admin' =>  'لا يمكن حفظ البيانات تواصل مع مدير النظام',
     'tested_trucks' =>  'شاحنات تم وزنها',
+    'truck_plate'  =>  'رقم اللوحة',
+    'qc_test_name'  =>  'اسم الاختبار',
+    'created_by'    =>  'انشئ بواسطة',
+    'created_at'    =>  'تاريخ الانشاء',
+    'is_retest'     =>  'تم اعادة الاختبار',
+    'print' =>  'طباعة',
+    'supplier'  =>  'المورد',
+    'truck_tractor' =>  'الجرار',
+    'truck_trailer' =>  'المقطورة',
+
 ];
