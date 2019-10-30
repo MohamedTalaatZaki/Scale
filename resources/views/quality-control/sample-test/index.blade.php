@@ -93,7 +93,7 @@
                         <div class="row">
                             <div class="form-group col-md-12">
                                 <div class="text-center">
-                                    <a href="{{ route('items.index') }}">
+                                    <a href="{{ route('samples-test.index') }}">
                                         <button type="button"
                                                 class="btn btn-danger btn-sm mt-3">@lang('global.clear_filters')</button>
                                     </a>
@@ -160,7 +160,7 @@
 
     <div class="row">
         <div class="col-12 list">
-            {{ $sampleTestHeaders->links() }}
+            {{ $sampleTestHeaders->appends(request()->query())->links() }}
         </div>
     </div>
 @endsection

@@ -19,5 +19,4 @@ class ItemGroup extends Model
     public function getNameAttribute() {
         return $this->attributes['name']    =   app()->getLocale() == 'ar' ? $this->ar_name : $this->en_name;
     }
-
 }
