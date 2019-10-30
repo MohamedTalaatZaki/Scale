@@ -3,6 +3,8 @@
 namespace App\Models\QC;
 
 use App\Models\Items\ItemGroup;
+use App\Models\Security\TransportDetail;
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class QcTestHeader extends Model
@@ -16,6 +18,7 @@ class QcTestHeader extends Model
         return $this->hasMany(QcTestDetail::class , 'qc_test_header_id' , 'id');
     }
 
+
     public function getNameAttribute()
     {
         return $this->attributes['name']    =   app()->getLocale() == 'ar' ? $this->ar_name : $this->en_name;
@@ -25,4 +28,5 @@ class QcTestHeader extends Model
     {
         return $this->belongsTo(ItemGroup::class , 'item_group_id' , 'id');
     }
+
 }
