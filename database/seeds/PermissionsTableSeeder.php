@@ -455,5 +455,16 @@ class PermissionsTableSeeder extends Seeder
             'en_description' => NULL,
             'ar_description' => NULL,
         ]);
+
+        $subMenu = SubMenu::where('code', 15)->first();
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'samples-test.index',
+            'en_display_name' => 'List Sampled Tests',
+            'ar_display_name' => 'عرض العينات المختبره',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
     }
 }

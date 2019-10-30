@@ -276,7 +276,16 @@ class MainMenusTableSeeder extends Seeder
                 'i_class' => 'simple-icon-user-follow',
                 'order' => 1,
                 'code'=>14
-            ]
+            ],
+            [
+                'en_name' => 'Sampled Tests',
+                'ar_name' => 'العينات المختبره',
+                'route' => 'samples-test.index',
+                'a_class' => 'sidebar-sub sidebar-sub-sampled-tests',
+                'i_class' => 'simple-icon-user-follow',
+                'order' => 1,
+                'code'=>15
+            ],
         ]);
     }
 }
