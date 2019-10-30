@@ -87,9 +87,7 @@
                         <table class="table">
                             <thead>
                             <tr>
-                            <tr>
-                                <th style="width: 16%">@lang('global.en_name')</th>
-                                <th style="width: 16%">@lang('global.ar_name')</th>
+                                <th style="width: 16%">@lang('global.element_name')</th>
                                 <th style="width: 11%">@lang('global.test_type')</th>
                                 <th style="width: 10%">@lang('global.element_type')</th>
                                 <th style="width: 12%">@lang('global.expected_result')</th>
@@ -97,7 +95,6 @@
                                 <th style="width: 10%">@lang('global.max_range')</th>
                                 <th style="width: 10%">@lang('global.element_unit')</th>
                                 <th style="width: 5%">@lang('global.actions')</th>
-                            </tr>
                             </tr>
                             </thead>
                             <tbody data-repeater-list="details">
