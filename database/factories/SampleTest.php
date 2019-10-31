@@ -10,7 +10,7 @@ $factory->defineAs(App\Models\QC\SampleTestHeader::class, 'demo_faker',function 
     return [
       'id' => 1000,
       'transport_detail_id' => 1000,
-      'qc_test_header_id' => 1,
+      'qc_test_header_id' => 1000,
       'result' => 'rejected',
       'created_by' => 1,
       'test_type' => 't',
