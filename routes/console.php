@@ -430,3 +430,42 @@ Artisan::command('test:delete_qc_element', function () {
     optional(App\Models\QC\QcElement::where('id','9999'))->delete();
 })->describe('delete qc element');
 
+Artisan::command('test:create_truck_arrival11', function () {
+    DB::table('transport_details')->insert([
+        'id'=>99999,
+        'transport_id'         =>  '99999',
+        'truck_plates'   =>  '1000',
+        'is_trailer'   =>  1,
+        'status'   => 'sampled',
+
+    ]);
+})->describe('create arrival');
+
+
+
+Artisan::command('test:create_truck_arrival2', function () {
+    DB::table('transports')->insert([
+        'id'=>99999,
+        'transport_number'         =>  '99999',
+        'driver_name'         =>  'test9999',
+        'status'         =>  'sampled',
+        'driver_license'   =>  '123456',
+        'driver_national_id'=> '12345678912355',
+        'driver_mobile'         =>  '01234567892',
+        'supplier_id'         =>  1000,
+        'governorate_id'         =>  1,
+        'city_id'   =>  1,
+        'center_id'   =>  1,
+        'truck_type_id'   =>  1,
+        'truck_plates_tractor'   =>  '1000',
+        'truck_plates_trailer'   =>  '1000',
+        'item_type_id'   => 1,
+        'item_group_id'   =>  10001,
+        'theoretical_weight'   =>  '300000',
+        'arrival_time'  =>  '2019-10-02 00:00:00',
+
+    ]);
+})->describe('create arrival');
+
+
+
