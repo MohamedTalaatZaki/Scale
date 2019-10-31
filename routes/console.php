@@ -335,12 +335,11 @@ Artisan::command('qc_test:demo_faker', function () {
     $qc_test = factory(App\Models\QC\QcTestHeader::class,'demo_faker')->create();
 })->describe('Generate fake single qc test header');
 
-
-
-Artisan::command('qc_test_details:demo_faker', function () {
-    $qc_test_1 = factory(App\Models\QC\QcTestDetail::class,'demo_faker')->create();
-    $qc_test_2 = factory(App\Models\QC\QcTestDetail::class,'demo_fake1')->create();
-})->describe('Generate fake details for qc test');
+Artisan::command('qc_test:fake_qc_details', function () {
+    $qc_test = factory(App\Models\QC\QcTestHeader::class,'demo_faker')->create();
+    $qc_test_details =  factory(App\Models\QC\QcTestDetail::class,'fake_test_details1')->create();
+    $qc_test_details =  factory(App\Models\QC\QcTestDetail::class,'fake_test_details2')->create();
+})->describe('Generate fake qc tests');
 
 Artisan::command('test:create_item_group', function () {
     DB::table('item_group')->insert([
@@ -390,7 +389,7 @@ Artisan::command('test:delete_scale3', function () {
 })->describe('delete scale2');
 
 Artisan::command('test:create_truck_arrival', function () {
-    DB::table('trucks_arrival')->insert([
+    DB::table('transports')->insert([
         'id'=>9999,
         'transport_number'         =>  '9999',
         'driver_name'         =>  'test999',
@@ -404,15 +403,20 @@ Artisan::command('test:create_truck_arrival', function () {
         'center_id'   =>  1,
         'truck_type_id'   =>  1,
         'truck_plates_tractor'   =>  '1000',
-        'truck_plates_trailer'   =>  '1000',
+        'truck_plates_trailer'   =>  null,
         'item_type_id'   => 1,
         'item_group_id'   =>  10001,
         'theoretical_weight'   =>  '300000',
-        'arrival_time'  =>  '2019-10-02 00:00:00',
-
+        'arrival_time'  =>  \Carbon\Carbon::now(),
+    ]);
+    DB::table('transport_details')->insert([
+        'id' => 1000,
+        'transport_id' => 9999,
+        'truck_plates' =>'1000',
+        'is_trailer' => 0,
+        'status' => 'rejected',
     ]);
 })->describe('create truck arrival');
-
 
 Artisan::command('test:create_qc_element', function () {
     DB::table('qc_elements')->insert([
@@ -468,4 +472,12 @@ Artisan::command('test:create_truck_arrival2', function () {
 })->describe('create arrival');
 
 
+
+
+
+Artisan::command('sample_test:create_sample_test', function () {
+    $sample_test = factory(App\Models\QC\SampleTestHeader::class,'demo_faker')->create();
+    $sample_test_details =  factory(App\Models\QC\SampleTestDetail::class,'fake_stest_details1')->create();
+    $sample_test_detail =  factory(App\Models\QC\SampleTestDetail::class,'fake_stest_details2')->create();
+})->describe('Generate fake sample rejected test');
 
