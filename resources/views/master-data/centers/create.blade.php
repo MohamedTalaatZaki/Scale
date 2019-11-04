@@ -37,7 +37,7 @@
                         <div class="form-row">
 
                             <div class="form-group col-md-12">
-                                <label>@lang('global.select_city')*</label>
+                                <label>@lang('global.select_city') *</label>
                                 <select class="form-control select2-single" name="city_id" required>
                                     <option label="&nbsp;" value="">&nbsp; @lang('global.select_city') </option>
                                     @foreach($governorates as $gov)
