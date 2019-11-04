@@ -79,7 +79,6 @@ class QcTestHeaderController extends Controller
     public function update(Request $request , $id)
     {
         $this->authorized('qc-test-headers.edit');
-//        $validator = \Validator::make($request->input() , [
         $this->validate($request , [
             'en_name'                   =>  'required',
             'ar_name'                   =>  'required',
