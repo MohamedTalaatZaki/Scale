@@ -4,14 +4,17 @@ namespace App\Http\Controllers\QC;
 
 use App\Models\Security\TransportDetail;
 use App\Models\Security\Transports;
+use App\Traits\AuthorizeTrait;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class ArrivedTrucksController extends Controller
 {
+    use AuthorizeTrait;
     public function index()
     {
+        $this->authorized('arrived-trucks.index');
         $arrived    =   Transports::query()
             ->whereHas('testableType')
             ->whereHas('arrivedDetails' )
