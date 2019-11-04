@@ -5,18 +5,16 @@ Cypress.Commands.add("login_bb", (username = 'test', password = '123456') => {
 });
 
 Cypress.Commands.add("login_out_bb", () => {
-    cy.get('#logout').click({force:true});
+    cy.get('#logout').submit();
 });
 
-
-Cypress.commands.add('assert_success_login_bb',function(username = 'test'){
+Cypress.Commands.add("open_app_bb", ($url) => {
+    cy.visit($url);
+});
+Cypress.Commands.add('assert_success_login_bb',function(username = 'test'){
     cy.get('nav span.name').should('contain',username);
 });
 
-Cypress.commands.add('assert_fail_login_bb',function(){
+Cypress.Commands.add('assert_fail_login_bb',function(){
     cy.get('li').should('contain', 'Invalid User name or password');
 });
-Cypress.commands.add('open_app_bb',function($url = '127.0.0.1:8000'){
-    cy.visit($url);
-});
-
