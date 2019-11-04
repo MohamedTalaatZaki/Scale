@@ -435,8 +435,44 @@ Artisan::command('test:delete_qc_element', function () {
 })->describe('delete qc element');
 
 
+
+
+
+
 Artisan::command('sample_test:create_sample_test', function () {
     $sample_test = factory(App\Models\QC\SampleTestHeader::class,'demo_faker')->create();
     $sample_test_details =  factory(App\Models\QC\SampleTestDetail::class,'fake_stest_details1')->create();
     $sample_test_detail =  factory(App\Models\QC\SampleTestDetail::class,'fake_stest_details2')->create();
 })->describe('Generate fake sample rejected test');
+
+
+Artisan::command('test:create_truck_arrival', function () {
+    DB::table('transports')->insert([
+        'id'=>9999,
+        'transport_number'         =>  '9999',
+        'driver_name'         =>  'test999',
+        'status'         =>  'sampled',
+        'driver_license'   =>  '123456',
+        'driver_national_id'=> '12345678912345',
+        'driver_mobile'         =>  '01234567891',
+        'supplier_id'         =>  1000,
+        'governorate_id'         =>  1,
+        'city_id'   =>  1,
+        'center_id'   =>  1,
+        'truck_type_id'   =>  1,
+        'truck_plates_tractor'   =>  '1000',
+        'truck_plates_trailer'   =>  null,
+        'item_type_id'   => 1,
+        'item_group_id'   =>  10001,
+        'theoretical_weight'   =>  '300000',
+        'arrival_time'  =>  \Carbon\Carbon::now(),
+    ]);
+    DB::table('transport_details')->insert([
+        'id' => 1000,
+        'transport_id' => 9999,
+        'truck_plates' =>'1000',
+        'is_trailer' => 0,
+        'status' => 'sampled',
+    ]);
+})->describe('create truck arrival');
+
