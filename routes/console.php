@@ -393,7 +393,7 @@ Artisan::command('test:create_truck_arrival', function () {
         'id'=>9999,
         'transport_number'         =>  '9999',
         'driver_name'         =>  'test999',
-        'status'         =>  'sampled',
+        'status'         =>  'arrived',
         'driver_license'   =>  '123456',
         'driver_national_id'=> '12345678912345',
         'driver_mobile'         =>  '01234567891',
@@ -475,3 +475,18 @@ Artisan::command('sample_test:create_truck_arrival', function () {
         'status' => 'sampled',
     ]);
 })->describe('create truck arrival');
+
+Artisan::command('truck_transports:update_status {status}', function ($status) {
+    App\Models\Security\Transports::find(9999)->update([
+        'status' => 'accepted',
+    ]);
+    App\Models\Security\Transports::find(9999)->details()->update([
+        'status' => $status,
+    ]);
+})->describe('Change Transports Status');
+
+Artisan::command('truck:update_type {type}', function ($type) {
+    App\Models\Security\Transports::find(9999)->update([
+        'truck_type_id' => $type,
+    ]);
+})->describe('Change Transports Type');
