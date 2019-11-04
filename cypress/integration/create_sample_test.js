@@ -24,7 +24,7 @@ describe('create sample test', function () {
         cy.exec('php artisan supplier:demo_faker');
         cy.exec('php artisan user:setLocale en');
         cy.exec('php artisan qc_test:fake_qc_details');
-        cy.exec('php artisan test:create_truck_arrival1');
+        cy.exec('php artisan sample_test:create_truck_arrival1');
 
     })
     it('check mandatory fields', function () {
@@ -77,7 +77,3 @@ describe('create sample test', function () {
         cy.exec("php artisan migrate:refresh && php artisan db:seed");
     });
 })
-
-
-
-
