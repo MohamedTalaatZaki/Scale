@@ -3,11 +3,13 @@
 namespace App\Models\QC;
 
 use App\Models\Security\TransportDetail;
+use App\Traits\HasFilter;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class SampleTestHeader extends Model
 {
+    use HasFilter;
     protected $table    =   'samples_test_header';
     protected $guarded  =   ['id'];
 

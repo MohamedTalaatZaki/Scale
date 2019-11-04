@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\QC;
 
+use App\Filters\SampledTestFilter;
 use App\Models\QC\QcTestHeader;
 use App\Models\QC\SampleTestHeader;
 use App\Models\Security\TransportDetail;
@@ -16,7 +17,10 @@ class SamplesTestController extends Controller
 {
     public function index()
     {
-        $sampleTestHeaders  =   SampleTestHeader::query()->orderByDesc('created_at')->paginate(25);
+        $sampleTestHeaders  =   SampleTestHeader::query()
+            ->filter(new SampledTestFilter(\request()))
+            ->orderByDesc('created_at')
+            ->paginate(25);
         $suppliers          =   Supplier::all();
         $qc_tests           =   QcTestHeader::query()->get();
         $users              =   User::query()->whereHas('labUsers')->get();
