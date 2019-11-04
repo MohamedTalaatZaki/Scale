@@ -393,7 +393,7 @@ Artisan::command('test:create_truck_arrival', function () {
         'id'=>9999,
         'transport_number'         =>  '9999',
         'driver_name'         =>  'test999',
-        'status'         =>  'arrived',
+        'status'         =>  'sampled',
         'driver_license'   =>  '123456',
         'driver_national_id'=> '12345678912345',
         'driver_mobile'         =>  '01234567891',
@@ -446,7 +446,7 @@ Artisan::command('sample_test:create_sample_test', function () {
 })->describe('Generate fake sample rejected test');
 
 
-Artisan::command('test:create_truck_arrival', function () {
+Artisan::command('sample_test:create_truck_arrival', function () {
     DB::table('transports')->insert([
         'id'=>9999,
         'transport_number'         =>  '9999',
@@ -475,4 +475,3 @@ Artisan::command('test:create_truck_arrival', function () {
         'status' => 'sampled',
     ]);
 })->describe('create truck arrival');
-
