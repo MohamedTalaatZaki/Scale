@@ -64,9 +64,14 @@ class QcTestHeaderController extends Controller
     public function edit($id)
     {
         $this->authorized('qc-test-headers.edit');
+        $groups =   ItemGroup::query()
+            ->whereDoesntHave('qcTestHeader' , function ($q) use($id) {
+                $q->where('item_group_id' , '!=' , $id);})
+            ->where('testable' , 1)->get();
+
         return  view('master-data.qc-test-header.edit' , [
             'qcTest'    =>  QcTestHeader::query()->with('details.element')->findOrFail($id),
-            'groups'    =>  ItemGroup::query()->doesntHave('qcTestHeader')->where('testable' , 1)->get(),
+            'groups'    =>  $groups,
             'elements'          =>  QcElement::query()->get(),
         ]);
     }
