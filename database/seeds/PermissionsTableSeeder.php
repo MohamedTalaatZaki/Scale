@@ -466,5 +466,23 @@ class PermissionsTableSeeder extends Seeder
             'en_description' => NULL,
             'ar_description' => NULL,
         ]);
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'samples-test.create',
+            'en_display_name' => 'Create Sampled Test',
+            'ar_display_name' => 'وضع نتائج الأختبار',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'samples-test.edit',
+            'en_display_name' => 'Create Sampled Retest',
+            'ar_display_name' => 'وضع نتائج أعادة الأختبار',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
     }
 }
