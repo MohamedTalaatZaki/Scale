@@ -77,6 +77,7 @@ class Transports extends Model
     {
         return $this->belongsTo(ItemGroup::class , 'item_group_id' , 'id');
     }
+
     public function testableType()
     {
         return $this->belongsTo(ItemGroup::class , 'item_group_id' , 'id')->where('testable' , 1);
@@ -89,10 +90,10 @@ class Transports extends Model
         return $itemGroups;
     }
 
-
     public function updateStatus()
     {
         $status         =   "sampled";
+        $nextOrder      =   null;
 
         $statusArray    =   $this->details->map(function($detail){
             return optional(optional($detail->lastSampleTestHeader->first()))->result;
@@ -102,13 +103,40 @@ class Transports extends Model
         {
             $status = 'sampled';
         }elseif(in_array('accepted' , $statusArray)) {
+            $order      =   \App\Models\Security\Transports::query()->finishOrder('DESC')->select('order')->first();
+            $nextOrder  =   $order ? $order->order + 1 : 1;
             $status = 'accepted';
         }elseif(in_array('rejected' , $statusArray))
         {
             $status = 'rejected';
         }
 
-        $this->update(['status' => $status]);
+        $this->update(['status' => $status , 'order' => $nextOrder]);
 
     }
+
+    public function scopeRawOrder($q , $orderBy = 'ASC') {
+        return $q
+            ->where('status' , 'accepted')
+            ->whereHas('itemType' , function($query){
+                return $query->where('prefix' , 'raw');
+            })->orderBy('order' , $orderBy);
+    }
+
+    public function scopeScrapOrder($q , $orderBy = 'ASC') {
+        return $q
+            ->where('status' , 'waiting')
+            ->whereHas('itemType' , function($query){
+                return $query->where('prefix' , 'scrap');
+            })->orderBy('order' , $orderBy);
+    }
+
+    public function scopeFinishOrder($q , $orderBy = 'ASC') {
+        return $q
+            ->where('status' , 'waiting')
+            ->whereHas('itemType' , function($query){
+                return $query->where('prefix' , 'finish');
+            })->orderBy('order' , $orderBy);
+    }
+
 }

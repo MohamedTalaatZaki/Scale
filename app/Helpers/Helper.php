@@ -21,3 +21,21 @@ if ( ! function_exists('editQcDetailsRow')) {
         return $element;
     }
 }
+if ( ! function_exists('nextRowOrder')) {
+    function nextRowOrder() {
+        $itemType   =   \App\Models\Items\ItemType::query()->find(request()->input('item_type_id'));
+        if(! $itemType || $itemType->prefix == 'raw') {
+            return null;
+        } elseif ($itemType->prefix == 'scrap') {
+            $order      =   \App\Models\Security\Transports::query()->scrapOrder('DESC')->select('order')->first();
+            $nextOrder  =   $order ? $order->order + 1 : 1;
+            return $nextOrder;
+        } elseif( $itemType->prefix == 'finish' ) {
+            $order      =   \App\Models\Security\Transports::query()->finishOrder('DESC')->select('order')->first();
+            $nextOrder  =   $order ? $order->order + 1 : 1;
+            return $nextOrder;
+        } else {
+            return null;
+        }
+    }
+}

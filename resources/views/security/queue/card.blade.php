@@ -8,7 +8,7 @@
                     <tr>
                         <th colspan="2"><i class="fa fa-truck"></i> @lang("global.truck_plates_tractor") #
                             {{ $truck->truck_plates_tractor }} </th>
-                        <th> {{ $truck->itemGroup->name }} </th>
+                        <th> {{ optional($truck->itemGroup)->name }} </th>
 
                     </tr>
                     </thead>

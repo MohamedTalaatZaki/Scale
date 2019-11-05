@@ -11,20 +11,11 @@ class QueueController extends Controller
     public function index()
     {
         app()->setLocale('ar');
-        $raw    =   Transports::query()
-            ->where('status' , 'accepted')
-            ->whereHas('itemType' , function ($q){$q->where('prefix' , 'raw');})
-            ->get();
+        $raw    =   Transports::query()->rawOrder()->get();
 
-        $scrap    =   Transports::query()
-            ->where('status' , 'accepted')
-            ->whereHas('itemType' , function ($q){$q->where('prefix' , 'scrap');})
-            ->get();
+        $scrap    =   Transports::query()->scrapOrder()->get();
 
-        $finish    =   Transports::query()
-            ->where('status' , 'accepted')
-            ->whereHas('itemType' , function ($q){$q->where('prefix' , 'finish');})
-            ->get();
+        $finish    =   Transports::query()->finishOrder()->get();
 
         return view('security.queue.index' , [
             'raw'       =>  $raw,

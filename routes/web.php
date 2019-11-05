@@ -15,6 +15,12 @@ Route::get('/', function () {
     return view('layout.main');
 });
 
+Route::get('test' , function(){
+    $x  =   \App\Models\Security\Transports::query()->RawOrder()->get();
+    $y  =   \App\Models\Security\Transports::query()->ScrapOrder('DESC')->select('order')->first();
+    $z  =   \App\Models\Security\Transports::query()->FinishOrder()->get();
+    dd($x , $y , $z);
+});
 Route::middleware(['auth'])->group(function (){
     Route::get('/', 'HomeController@index')->name('home');
 

@@ -96,6 +96,7 @@ class TransportsController extends Controller
         $request->offsetSet('arrival_time' , Carbon::now());
         $request->offsetSet('transport_number' , Carbon::now()->timestamp);
         $request->offsetSet('status' , isItemTypeRaw($request->input('item_type_id')) ? 'arrived' : 'waiting');
+        $request->offsetSet('order' , nextRowOrder());
 
         $transport    =   Transports::query()->create($request->input());
 
