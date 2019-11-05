@@ -484,5 +484,16 @@ class PermissionsTableSeeder extends Seeder
             'en_description' => NULL,
             'ar_description' => NULL,
         ]);
+
+        $subMenu = SubMenu::where('code', 16)->first();
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'edit-queue.index',
+            'en_display_name' => 'List Trucks Queue To Edit',
+            'ar_display_name' => 'عرض طابور الشاحنات لتعديل ترتيبها',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
     }
 }

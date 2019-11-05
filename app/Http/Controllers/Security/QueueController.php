@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Security;
 
 use App\Models\Security\Transports;
+use App\Traits\AuthorizeTrait;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class QueueController extends Controller
 {
+    use AuthorizeTrait;
     public function index()
     {
         app()->setLocale('ar');
@@ -25,14 +27,15 @@ class QueueController extends Controller
         ]);
     }
 
-    public function edit($id){
+    public function editQueueIndex(){
+        $this->authorized('edit-queue.index');
         $raw    =   Transports::query()->rawOrder()->get();
 
         $scrap    =   Transports::query()->scrapOrder()->get();
 
         $finish    =   Transports::query()->finishOrder()->get();
 
-        return view('security.queue.edit' , [
+        return view('security.queue.create' , [
             'raw'       =>  $raw,
             'scrap'     =>  $scrap,
             'finish'    =>  $finish,
