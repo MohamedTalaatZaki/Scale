@@ -446,7 +446,7 @@ Artisan::command('sample_test:create_sample_test', function () {
 })->describe('Generate fake sample rejected test');
 
 
-Artisan::command('test:create_truck_arrival', function () {
+Artisan::command('sample_test:create_truck_arrival', function () {
     DB::table('transports')->insert([
         'id'=>9999,
         'transport_number'         =>  '9999',
@@ -476,3 +476,17 @@ Artisan::command('test:create_truck_arrival', function () {
     ]);
 })->describe('create truck arrival');
 
+Artisan::command('truck_transports:update_status {status}', function ($status) {
+    App\Models\Security\Transports::find(9999)->update([
+        'status' => 'accepted',
+    ]);
+    App\Models\Security\Transports::find(9999)->details()->update([
+        'status' => $status,
+    ]);
+})->describe('Change Transports Status');
+
+Artisan::command('truck:update_type {type}', function ($type) {
+    App\Models\Security\Transports::find(9999)->update([
+        'truck_type_id' => $type,
+    ]);
+})->describe('Change Transports Type');

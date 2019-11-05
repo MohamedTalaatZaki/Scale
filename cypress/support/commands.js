@@ -23,4 +23,4 @@
 //
 // -- This is will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
-require('master_data');
+import './master_data';

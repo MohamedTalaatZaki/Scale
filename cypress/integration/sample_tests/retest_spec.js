@@ -1,5 +1,6 @@
 beforeEach(function () {
     cy.exec("php artisan user:add_permission arrived-trucks.index");
+    cy.exec("php artisan user:add_permission samples-test.index");
     cy.exec("php artisan user:add_permission transports.index");
     cy.visit('/');
     cy.wait(2000);
@@ -16,6 +17,7 @@ beforeEach(function () {
     cy.get('div.card-body > form').invoke('attr', 'noValidate','true');
 })
 before(function(){
+    cy.exec("php artisan migrate:refresh && php artisan db:seed");
     cy.exec('php artisan item_group:demo_faker');
     cy.exec('php artisan item:demo_faker');
     cy.exec('php artisan supplier:demo_faker');
@@ -40,6 +42,9 @@ describe('Create sample retest', function () {
     cy.get('.btn-rejected').click();
     cy.get('.swal2-confirm').should('be.visible').click();
     cy.get('#1000').closest('.card-body').should('contain','Rejected');
+    cy.visit('/qc/samples-test');
+    cy.get('tbody > tr > :nth-child(2)').should('contain',1000);
+    cy.visit('/qc/arrived-trucks');
   })
 
   it('checks conditional acceptance', function () {
@@ -58,6 +63,8 @@ describe('Create sample retest', function () {
       cy.visit('/security/transports');
       cy.get('#second-tab_').click();
       cy.get('tbody > tr > :nth-child(2)').should('contain','9999')
+      cy.visit('/qc/samples-test');
+      cy.get('tbody > tr > :nth-child(2)').should('contain',1000);
       cy.visit('/qc/arrived-trucks');
   })
   it('checks acceptance condition',function(){
@@ -73,6 +80,8 @@ describe('Create sample retest', function () {
       cy.visit('/security/transports');
       cy.get('#second-tab_').click();
       cy.get('tbody > tr > :nth-child(2)').should('contain','9999')
+      cy.visit('/qc/samples-test');
+      cy.get('tbody > tr > :nth-child(2)').should('contain',1000);
       cy.visit('/qc/arrived-trucks');
   })
   after(function(){
