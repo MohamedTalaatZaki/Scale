@@ -15,12 +15,6 @@ Route::get('/', function () {
     return view('layout.main');
 });
 
-Route::get('test' , function(){
-    $x  =   \App\Models\Security\Transports::query()->RawOrder()->get();
-    $y  =   \App\Models\Security\Transports::query()->ScrapOrder('DESC')->select('order')->first();
-    $z  =   \App\Models\Security\Transports::query()->FinishOrder()->get();
-    dd($x , $y , $z);
-});
 Route::middleware(['auth'])->group(function (){
     Route::get('/', 'HomeController@index')->name('home');
 
@@ -41,6 +35,7 @@ Route::middleware(['auth'])->group(function (){
     Route::resource('security/transports' , 'Security\TransportsController');
     Route::get('print' , 'Security\TransportsController@print')->name('printLabels');
     Route::resource('security/queue' , 'Security\QueueController');
+    Route::post('security/reorder-trucks-queue' , 'Security\QueueController@reorderQueue')->name('reorder-trucks-queue');
 
     Route::resource('qc/arrived-trucks' , 'QC\ArrivedTrucksController');
     Route::resource('qc/samples-test' , 'QC\SamplesTestController');
