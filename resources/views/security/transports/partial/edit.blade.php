@@ -9,7 +9,7 @@
                     <h6>@lang('global.driver_information')</h6>
                     <hr>
                     <div class="form-group col-md-12">
-                        <label for="driver_name">@lang('global.driver_name')</label>
+                        <label for="driver_name">@lang('global.driver_name') *</label>
                         <input type="text"
                                class="form-control"
                                id="driver_name"
@@ -23,7 +23,7 @@
                         @endif
                     </div>
                     <div class="form-group col-md-12">
-                        <label for="driver_license">@lang('global.driver_license')</label>
+                        <label for="driver_license">@lang('global.driver_license') *</label>
                         <input type="text"
                                class="form-control"
                                id="driver_license"
@@ -37,7 +37,7 @@
                         @endif
                     </div>
                     <div class="form-group col-md-12">
-                        <label for="driver_national_id">@lang('global.driver_national_id')</label>
+                        <label for="driver_national_id">@lang('global.driver_national_id') *</label>
                         <input type="text"
                                class="form-control"
                                id="driver_national_id"
@@ -51,7 +51,7 @@
                         @endif
                     </div>
                     <div class="form-group col-md-12">
-                        <label for="driver_mobile">@lang('global.driver_mobile')</label>
+                        <label for="driver_mobile">@lang('global.driver_mobile') *</label>
                         <input type="text"
                                class="form-control"
                                id="driver_mobile"
@@ -77,7 +77,7 @@
                     <h6>@lang('global.supplier_information')</h6>
                     <hr>
                     <div class="form-group col-md-12">
-                        <label for="supplier_name">@lang('global.supplier_name')</label>
+                        <label for="supplier_name">@lang('global.supplier_name') *</label>
                         <select id="supplierSelect" class="form-control select2-single supplierSelect" data-placeholder="@lang('global.select_supplier')" name="supplier_id" required>
                             <option value="" selected></option>
                             @foreach($suppliers as $supplier)
@@ -91,7 +91,7 @@
                         @endif
                     </div>
                     <div class="form-group col-md-12">
-                        <label for="governorate">@lang('global.governorate')</label>
+                        <label for="governorate">@lang('global.governorate') *</label>
                         <select id="governorate_select" class="form-control select2-single governorate_select" data-placeholder="@lang('global.select_governorate')" name="governorate_id" required>
                             <option value="" selected></option>
                             @foreach($governorates as $governorate)
@@ -105,7 +105,7 @@
                         @endif
                     </div>
                     <div class="form-group col-md-12">
-                        <label for="city">@lang('global.city')</label>
+                        <label for="city">@lang('global.city') *</label>
                         <select id="citySelect" class="form-control select2-single citySelect" data-placeholder="@lang('global.select_city')" name="city_id" required>
                             @if(optional($truckArrival->governorate)->cities)
                                 @foreach($truckArrival->governorate->cities as $city)
@@ -145,7 +145,7 @@
                     <h6>@lang('global.truck_information')</h6>
                     <hr>
                     <div class="form-group col-md-12">
-                        <label for="truck_type">@lang('global.truck_type')</label>
+                        <label for="truck_type">@lang('global.truck_type') *</label>
                         <select id="truck_type" class="form-control select2-single" data-placeholder="@lang('global.select_truck_type')" name="truck_type_id" required>
                             <option value="" selected></option>
                             @foreach($truck_types as $truck_type)
@@ -159,7 +159,7 @@
                         @endif
                     </div>
                     <div class="form-group col-md-12">
-                        <label for="truck_plates_tractor">@lang('global.truck_plates_tractor')</label>
+                        <label for="truck_plates_tractor">@lang('global.truck_plates_tractor') *</label>
                         <input type="text"
                                class="form-control"
                                id="truck_plates_tractor"
@@ -187,7 +187,7 @@
                         @endif
                     </div>
                     <div class="form-group col-md-12">
-                        <label for="itemTypeSelect">@lang('global.item_type')</label>
+                        <label for="itemTypeSelect">@lang('global.item_type') *</label>
                         <select id="itemTypeSelect" class="form-control select2-single itemTypeSelect" data-placeholder="@lang('global.select_item_type')" name="item_type_id" required>
                             <option value="" selected></option>
                             @foreach($item_types as $item_type)
@@ -220,7 +220,7 @@
                         </div>
 
                         <div class="form-group col-md-12">
-                            <label for="theoreticalWeight">@lang('global.theoretical_weight')</label>
+                            <label for="theoreticalWeight">@lang('global.theoretical_weight') *</label>
                             <input type="number"
                                    min="0"
                                    step="0.01"
