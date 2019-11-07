@@ -38,18 +38,15 @@ class TransportsController extends Controller
             ->paginate(15);
 
         $rawTrucks  =   Transports::query()
-            ->where('status' , 'accepted')
-            ->whereHas('itemType' , function ($q){$q->where('prefix' , 'raw');})
+            ->rawOrder()
             ->paginate(15);
 
         $scrapTrucks  =   Transports::query()
-            ->where('status' , 'waiting')
-            ->whereHas('itemType' , function ($q){$q->where('prefix' , 'scrap');})
+            ->scrapOrder()
             ->paginate(15);
 
         $finishTrucks  =   Transports::query()
-            ->where('status' , 'waiting')
-            ->whereHas('itemType' , function ($q){$q->where('prefix' , 'finish');})
+            ->finishOrder()
             ->paginate(15);
 
         $inProcessTrucks    =   Transports::query()
@@ -96,6 +93,7 @@ class TransportsController extends Controller
         $request->offsetSet('arrival_time' , Carbon::now());
         $request->offsetSet('transport_number' , Carbon::now()->timestamp);
         $request->offsetSet('status' , isItemTypeRaw($request->input('item_type_id')) ? 'arrived' : 'waiting');
+        $request->offsetSet('order' , nextRowOrder());
 
         $transport    =   Transports::query()->create($request->input());
 

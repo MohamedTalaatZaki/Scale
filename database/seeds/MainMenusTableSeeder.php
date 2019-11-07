@@ -286,6 +286,15 @@ class MainMenusTableSeeder extends Seeder
                 'order' => 1,
                 'code'=>15
             ],
+            [
+                'en_name' => 'Edit Trucks Queue',
+                'ar_name' => 'ترتيب دخول الشاحنات',
+                'route' => 'edit-queue.index',
+                'a_class' => 'sidebar-sub sidebar-sub-edit-queue',
+                'i_class' => 'simple-icon-user-follow',
+                'order' => 1,
+                'code'=>16
+            ],
         ]);
     }
 }

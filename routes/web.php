@@ -35,6 +35,8 @@ Route::middleware(['auth'])->group(function (){
     Route::resource('security/transports' , 'Security\TransportsController');
     Route::get('print' , 'Security\TransportsController@print')->name('printLabels');
     Route::resource('security/queue' , 'Security\QueueController');
+    Route::get('security/trucks/queue-edit' , 'Security\QueueController@editQueueIndex')->name('edit-queue.index');
+    Route::post('security/reorder-trucks-queue' , 'Security\QueueController@reorderQueue')->name('reorder-trucks-queue');
 
     Route::resource('qc/arrived-trucks' , 'QC\ArrivedTrucksController');
     Route::resource('qc/samples-test' , 'QC\SamplesTestController');

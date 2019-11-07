@@ -20,7 +20,7 @@
         </div>
     </div>
 
-    <div class="row content" style="display: none">
+    <div class="row content">
         <div class="col-md-4">
             <div class="card main-card">
                 <div class="card-body">
@@ -30,9 +30,9 @@
                         </div>
                     </div>
                     <hr>
-                    <div id="arrived" class="cards-container scroll scroll-content nested-sortable">
+                    <div id="raw" class="cards-container scroll scroll-content">
                         @foreach($raw as $truck)
-                            @include('security.queue.card' , ['truck' => $truck, 'order'   =>  $loop->iteration, 'type'    =>  'raw'] )
+                            @include('security.queue.card' , ['truck' => $truck, 'order'   =>  $loop->iteration , 'type'    =>  'raw'] )
                         @endforeach
                     </div>
                 </div>
@@ -47,7 +47,7 @@
                         </div>
                     </div>
                     <hr>
-                    <div id="sampled" class="cards-container scroll scroll-content nested-sortable">
+                    <div id="scrap" class="cards-container scroll scroll-content">
                         @foreach($scrap as $truck)
                             @include('security.queue.card' , ['truck' => $truck , 'order'   =>  $loop->iteration, 'type'    =>  'scrap'] )
                         @endforeach
@@ -65,7 +65,7 @@
                         </div>
                     </div>
                     <hr>
-                    <div id="sampled" class="cards-container scroll scroll-content nested-sortable">
+                    <div id="finish" class="cards-container scroll scroll-content">
                         @foreach($finish as $truck)
                             @include('security.queue.card' , ['truck' => $truck, 'order'   =>  $loop->iteration, 'type'    =>  'finish'] )
                         @endforeach
@@ -79,19 +79,6 @@
 @endsection
 @push('styles')
     <style>
-        .navbar{
-            display: none;
-        }
-
-        .menu{
-            display: none;
-        }
-        .default-transition{
-            margin-left: 60px !important;
-            margin-top: 20px !important;
-            margin-right: 60px !important;
-            margin-bottom: 40px !important;
-        }
         .blue-background .card{
             border: 1px solid #0e78c0;
         }
@@ -133,25 +120,76 @@
         .bg-red {
             background-color: #dc3545;
         }
+
+        .green-to-red > div > .bg-green{
+            background-color: #dc3545 !important;
+        }
     </style>
 @endpush
 
 @push('scripts')
     <script>
         $().ready(function () {
-            let mv = window.screen.height / 1.10;
+            let mv = window.screen.height / 1.4;
             $('.main-card').css({'max-height': mv + 'px', 'min-height': mv + 'px'});
             $('.scroll-content').css({'max-height': (mv - 100) + 'px', 'min-height': (mv - 100) + 'px'});
             $('.main-card-50').css({'max-height': (mv - 15) / 2 + 'px', 'min-height': (mv - 15) / 2 + 'px'});
             $('.scroll-content-50').css({'max-height': ((mv / 2) - 100) + 'px', 'min-height': ((mv / 2) - 100) + 'px'});
 
-            setTimeout(function () {
-                $('.content').show();
-            } , 1000);
-            setTimeout(function () {
-                window.location.reload();
-            }, 25000)
+            let raw     =   document.getElementById('raw');
+            let scrap   =   document.getElementById('scrap');
+            let finish  =   document.getElementById('finish');
 
-        })
+            Sortable.create( raw , {
+                multiDrag: true,
+                scroll: true,
+                bubbleScroll: true,
+                forceFallback: true,
+                selectedClass: "green-to-red",
+                animation: 150,
+                onUpdate: function (evt) {
+                    afterChangeCardPos(evt);
+                },
+            });
+
+            Sortable.create( scrap , {
+                multiDrag: true,
+                scroll: true,
+                bubbleScroll: true,
+                forceFallback: true,
+                selectedClass: "green-to-red",
+                animation: 150,
+                onUpdate: function (evt) {
+                    afterChangeCardPos(evt);
+                },
+            });
+
+            Sortable.create( finish , {
+                multiDrag: true,
+                scroll: true,
+                bubbleScroll: true,
+                forceFallback: true,
+                selectedClass: "green-to-red",
+                animation: 150,
+                onUpdate: function (evt) {
+                    afterChangeCardPos(evt);
+                },
+            });
+
+            let afterChangeCardPos  =   (evt)  =>  {
+                let cardType    = $(evt.item).data('type');
+                let ids         = [];
+                $('.'+cardType+'-card').each(function(index , elem) {
+                    let color = index === 0 ? "#28a745" : "#FF8E03" ;
+                    $(elem).find('.order-number').text('# '+ (index+1) ).css('color' , color);
+                    ids.push($(elem).attr('id'));
+                });
+                $.ajax({
+                    method  : "POST",
+                    url     : "{{ route('reorder-trucks-queue') }}",
+                    data    : { _token : "{{ csrf_token() }}" , ids : ids , type : cardType}
+                })
+            }
+        });
     </script>
 @endpush
