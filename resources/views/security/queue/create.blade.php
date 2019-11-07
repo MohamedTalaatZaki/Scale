@@ -142,8 +142,14 @@
 
             Sortable.create( raw , {
                 multiDrag: true,
+                scroll: true,
+                bubbleScroll: true,
+                forceFallback: true,
                 selectedClass: "green-to-red",
-                animation: 150
+                animation: 150,
+                onUpdate: function (evt) {
+                    afterChangeCardPos(evt);
+                },
             });
 
             Sortable.create( scrap , {
@@ -160,8 +166,14 @@
 
             Sortable.create( finish , {
                 multiDrag: true,
+                scroll: true,
+                bubbleScroll: true,
+                forceFallback: true,
                 selectedClass: "green-to-red",
-                animation: 150
+                animation: 150,
+                onUpdate: function (evt) {
+                    afterChangeCardPos(evt);
+                },
             });
 
             let afterChangeCardPos  =   (evt)  =>  {
