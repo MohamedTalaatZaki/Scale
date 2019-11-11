@@ -33,6 +33,9 @@
                 right: 20px;
                 width: 9.75cm !important;
             }
+            .bcTarget{
+                margin: 0 auto;
+            }
             @page {
                 size: 10cm 10cm;
             }
@@ -62,7 +65,7 @@
             @if($loop->iteration == 1)
                 <tr>
                     <td colspan="2">
-                        <div class="bcTarget" data-barcode="{{ $transport->transport_number }}{{ $truck->id }}"></div>
+                        <div class="bcTarget" data-barcode="{{ $transport->transport_number . "-" . $truck->id }}"></div>
                     </td>
                 </tr>
             @endif
@@ -92,7 +95,7 @@
             @if($loop->iteration == 2)
             <tr>
                 <td colspan="2">
-                    <div class="bcTarget" data-barcode="{{ $transport->transport_number }}{{ $truck->id }}"></div>
+                    <div class="bcTarget" data-barcode="{{ $transport->transport_number . "-" . $truck->id }}"></div>
                 </td>
             </tr>
             @endif
@@ -111,7 +114,7 @@
     $().ready(function () {
         $(".bcTarget").each(function(index , elem){
             let barcode =   $(elem).data('barcode').toString();
-            $(elem).barcode( barcode , "code128" , {barWidth : 3});
+            $(elem).barcode( barcode , "code128" , {barWidth : 2});
         });
         print();
     })

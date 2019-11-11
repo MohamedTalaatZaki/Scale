@@ -225,5 +225,7 @@ return [
     'from_date'=>'من تاريخ',
     'to_date'=>'إلى تاريخ',
     'result'    =>  'النتيجة',
+    'scale_weight_title'    =>'الميزان',
+    'status'    =>  'الحالة'
 
 ];

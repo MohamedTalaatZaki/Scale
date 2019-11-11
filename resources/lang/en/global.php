@@ -226,5 +226,7 @@ return [
     'truck_tractor' =>  'Truck Tractor',
     'truck_trailer' =>  'Truck Trailer',
     'from_date'=>'From Data',
-    'to_date'=>'To Date'
+    'to_date'=>'To Date',
+    'scale_weight_title'    =>'Scale Weight',
+    'status'    =>  'Status',
 ];

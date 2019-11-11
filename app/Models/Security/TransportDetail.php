@@ -10,7 +10,7 @@ class TransportDetail extends Model
 {
     protected $table    =   'transport_details';
     protected $guarded  =   ['id'];
-    protected $appends  =   ['plate_name'];
+    protected $appends  =   ['ar_plate_name' ,'plate_name' , 'readable_status'];
 
     public function transport()
     {
@@ -32,5 +32,26 @@ class TransportDetail extends Model
 
     public function getPlateNameAttribute() {
         return $this->attributes['plate_name']  =   $this->is_trailer ? 'trailer' : 'tractor' ;
+    }
+
+    public function getArPlateNameAttribute() {
+        return $this->attributes['ar_plate_name']  =   $this->is_trailer ? 'المقطورة' : 'الجرار' ;
+    }
+
+    public function getReadableStatusAttribute()
+    {
+        $status =   "";
+        switch ($this->status) {
+            case "waiting":
+                $status =   'بانتظار الوزن';
+                break;
+            case "accepted":
+                $status =   'مقبولة من المعمل و بانتظار الوزن';
+                break;
+            case "rejected":
+                $status =   'مرفوضه من المعمل';
+                break;
+        }
+        return $this->attributes['readable_status']  =   $status;
     }
 }
