@@ -75,7 +75,7 @@
                                     <canvas id="matrix">
                                     </canvas>
                                     <div class="scale-weight-text text-center">
-                                        <p style="color: #0f0 ; font-size: 150px ; direction: ltr">000000.00 K.g</p>
+                                        <p style="color: #0f0 ; font-size: 150px ; direction: ltr">000000 K.g</p>
                                     </div>
 
                                 </div>
@@ -137,6 +137,7 @@
             transport: null,
             timeOut: null,
             timeOutOne: null,
+            websocket: null,
         },
         methods: {
             keyUpEventFun: function (evt) {
@@ -157,7 +158,7 @@
                 console.log(this.scanned , evt.keyCode , this.barcode , this.barcodeStr , this.transport);
             },
             test: function () {
-                this.barcodeStr = "1573473184-5";
+                this.barcodeStr = "1573559332-1";
                 this.scanned = true;
                 this.checkBarcode();
             },
@@ -169,7 +170,7 @@
                     .then((response) => {
                         this.transport = response.data.transport;
                         if (this.transport.status !== "rejected") {
-                            this.matrix();
+                            setTimeout(() => {this.matrix();} , 300);
                         }
                     })
                     .catch((error) => {
@@ -232,11 +233,24 @@
                     this.resetAll();
                 }, 15000);
 
-            }
+            },
+            wsOnOpen : function(evt) {
+                console.log('conected');
+            },
+            wsOnClose : function(evt) {},
+            wsOnMessage : function(evt) {
+                console.log(evt.data);
+            },
+            wsOnError : function(evt) {},
 
         },
         created() {
             window.addEventListener('keyup', this.keyUpEventFun);
+            this.websocket = new WebSocket("ws://192.168.43.163:8500/");
+            this.websocket.onopen = (evt) => { this.wsOnOpen(evt) };
+            this.websocket.onclose = (evt) => { this.wsOnClose(evt) };
+            this.websocket.onmessage = (evt) => { this.wsOnMessage(evt) };
+            this.websocket.onerror = (evt) => { this.wsOnError(evt) };
         }
     });
 
