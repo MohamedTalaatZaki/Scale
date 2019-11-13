@@ -59,6 +59,7 @@ Route::middleware(['auth'])->group(function (){
 });
 
 Route::get('trucks-scale' , "Scale\TrucksScaleController@index")->name('trucks-scale.index');
+Route::post('trucks-scale-weight' , "Scale\TrucksScaleController@truckScaleWeight")->name('trucks-scale.weight');
 Route::post('trucks-scale-check-barcode' , "Scale\TrucksScaleController@checkBarcode")->name('checkBarcode');
 
 Auth::routes();

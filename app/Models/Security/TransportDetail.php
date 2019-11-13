@@ -35,7 +35,7 @@ class TransportDetail extends Model
     }
 
     public function getArPlateNameAttribute() {
-        return $this->attributes['ar_plate_name']  =   $this->is_trailer ? 'المقطورة' : 'الجرار' ;
+        return $this->attributes['ar_plate_name']  =   $this->is_trailer ? 'مقطورة' : 'جرار' ;
     }
 
     public function getReadableStatusAttribute()

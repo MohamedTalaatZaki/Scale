@@ -28,8 +28,11 @@
             background-color: black;
         }
 
-        canvas {
-            display: block;
+        .swal-wide{
+            width: 50% !important;
+        }
+        .swal2-timer-progress-bar {
+            background-color: brown !important;
         }
     </style>
 </head>
@@ -72,10 +75,8 @@
                             </div>
                             <div class="row" v-if="transport.status == 'waiting' || transport.status == 'accepted' ">
                                 <div class="scale-content" style="overflow: hidden">
-                                    <canvas id="matrix">
-                                    </canvas>
                                     <div class="scale-weight-text text-center">
-                                        <p style="color: #0f0 ; font-size: 150px ; direction: ltr">000000 K.g</p>
+                                        <p class="scale-weight-text-elem" style="color: #0f0 ; font-size: 150px ; direction: ltr">000000 K.g</p>
                                     </div>
 
                                 </div>
@@ -126,6 +127,7 @@
 <script src="{{ asset('js/vendor/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset("/js/vuejs-d.js") }}"></script>
 <script src="{{ asset('js/axios.js') }}"></script>
+<script src="{{ asset('js/swal.js') }}"></script>
 
 <script>
     let vue = new Vue({
@@ -135,9 +137,11 @@
             barcodeStr: "",
             scanned: false,
             transport: null,
-            timeOut: null,
-            timeOutOne: null,
             websocket: null,
+            weightValidAfterCount : 2,
+            weight: 0,
+            correctWeightCount: 0,
+            isCorrect: false,
         },
         methods: {
             keyUpEventFun: function (evt) {
@@ -155,30 +159,52 @@
                         this.resetAll();
                     }
                 }
-                console.log(this.scanned , evt.keyCode , this.barcode , this.barcodeStr , this.transport);
             },
             test: function () {
-                this.barcodeStr = "1573559332-1";
+                this.barcodeStr = "1573473184-5";
                 this.scanned = true;
                 this.checkBarcode();
             },
             checkBarcode: function () {
+                swal.close();
                 axios.post("{{ route('checkBarcode') }}", {
                     transport_id: this.barcodeStr.split("-")[0],
                     detail_id: this.barcodeStr.split("-")[1],
-                })
-                    .then((response) => {
-                        this.transport = response.data.transport;
-                        if (this.transport.status !== "rejected") {
-                            setTimeout(() => {this.matrix();} , 300);
+                }).then((response) => {
+                        if (response.data.transport && response.data.transport.weight > 0)
+                        {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'تم وزن الشاحنة مسبقا',
+                                text: "الوزنة السابقة لل"+ response.data.transport.ar_plate_name + " كانت " + response.data.transport.weight + " كيلو",
+                                timer: 10000,
+                                showCancelButton: false,
+                                showConfirmButton: false,
+                                timerProgressBar: true
+                            });
+                            this.resetAll();
+                        } else if (response.data.transport && response.data.transport.status === "rejected") {
+
+                            Swal.fire({
+                                icon: 'error',
+                                title: "".concat('تم رفض ال' , response.data.transport.ar_plate_name , ' من المعمل'),
+                                timer: 10000,
+                                showCancelButton: false,
+                                showConfirmButton: false,
+                                timerProgressBar: true
+                            });
+                            this.resetAll();
+                        }else {
+                            this.transport = response.data.transport;
                         }
+
                     })
                     .catch((error) => {
                         this.resetAll();
-                        console.log(error);
                     })
                     .finally(() => {
-                        this.scaleWeight();
+                        if(this.transport && this.transport.weight === 0)
+                            this.scaleWeight();
                     });
             },
             resetAll: function () {
@@ -186,71 +212,75 @@
                 this.barcode = [];
                 this.barcodeStr = "";
                 this.scanned = false;
-                clearTimeout(this.timeOut);
-                clearTimeout(this.timeOutOne);
-            },
-            matrix: function () {
-                var canvas = document.getElementById('matrix'),
-                    ctx = canvas.getContext('2d');
-
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-
-                var letters = 'ABCDEFGHIJKLMNOPQRSTUVXYZABCDEFGHIJKLMNOPQRSTUVXYZABCDEFGHIJKLMNOPQRSTUVXYZABCDEFGHIJKLMNOPQRSTUVXYZABCDEFGHIJKLMNOPQRSTUVXYZABCDEFGHIJKLMNOPQRSTUVXYZ';
-                letters = letters.split('');
-
-                var fontSize = 10,
-                    columns = canvas.width / fontSize;
-
-                var drops = [];
-                for (var i = 0; i < columns; i++) {
-                    drops[i] = 1;
-                }
-
-                function draw() {
-                    ctx.fillStyle = 'rgba(0, 0, 0, .1)';
-                    ctx.fillRect(0, 0, canvas.width, canvas.height);
-                    for (var i = 0; i < drops.length; i++) {
-                        var text = letters[Math.floor(Math.random() * letters.length)];
-                        ctx.fillStyle = '#0f0';
-                        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-                        drops[i]++;
-                        if (drops[i] * fontSize > canvas.height && Math.random() > .95) {
-                            drops[i] = 0;
-                        }
-                    }
-                }
-
-                setInterval(draw, 33);
-
+                this.weight = 0;
+                this.correctWeightCount = 0;
+                this.isCorrect = false;
             },
             scaleWeight: function () {
-                this.timeOut = setTimeout(function () {
-                    $('#matrix').fadeOut(1000);
-                    $('.scale-weight-text').fadeIn(1000);
-                }, 4000);
-                this.timeOutOne =   setTimeout(() => {
-                    this.resetAll();
-                }, 15000);
-
+                this.wsInit();
+            },
+            saveScaleWeight : function() {
+                axios.post("{{ route("trucks-scale.weight") }}" , {
+                    transport_id: this.transport.transport.id,
+                    transport_detail_id :   this.transport.id,
+                    weight  :   this.weight
+                }).then(response => {
+                    console.log(response.data , response.data.nextTruck);
+                    if(response.data.nextTruck) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'تم الوزن بنجاح',
+                            text: "".concat('برجاء وضع ال' , response.data.transport.ar_plate_name , ' على الميزان ووضع الكود الخاص بها على القارئ'),
+                            timer: 30000,
+                            customClass: 'swal-wide',
+                            showCancelButton: false,
+                            showConfirmButton: false,
+                            timerProgressBar: true
+                        }).then(()=>{
+                            this.resetAll();
+                        });
+                    }
+                })
+            },
+            wsInit  :   function() {
+                this.websocket = new WebSocket("ws://localhost:8500/");
+                this.websocket.onopen = (evt) => { this.wsOnOpen(evt) };
+                this.websocket.onclose = (evt) => { this.wsOnClose(evt) };
+                this.websocket.onmessage = (evt) => { this.wsOnMessage(evt) };
+                this.websocket.onerror = (evt) => { this.wsOnError(evt) };
             },
             wsOnOpen : function(evt) {
-                console.log('conected');
+                $('.scale-weight-text').fadeIn(1000);
             },
             wsOnClose : function(evt) {},
             wsOnMessage : function(evt) {
+                let input = $('.scale-weight-text-elem');
+                if(this.isNumeric(evt.data) && evt.data > 400 && evt.data === this.weight && this.correctWeightCount < this.weightValidAfterCount) {
+                    this.correctWeightCount +=1
+                } else if(this.isNumeric(evt.data) && evt.data > 400 && evt.data !== this.weight && this.correctWeightCount < this.weightValidAfterCount)
+                {
+                    this.weight =    evt.data;
+                    this.correctWeightCount = 0;
+                    input.css('color' , 'red');
+                    input.text(evt.data + " K.g");
+                } else if(this.correctWeightCount >= this.weightValidAfterCount) {
+                    input.css('color' , '#0f0');
+                    input.text(this.weight + " K.g");
+                    this.websocket.close();
+                    this.saveScaleWeight()
+                } else {
+                    input.css('color' , 'red');
+                    input.text(evt.data + " K.g");
+                }
                 console.log(evt.data);
             },
             wsOnError : function(evt) {},
-
+            isNumeric : function (number) {
+                return !isNaN(parseFloat(number)) && isFinite(number);
+            }
         },
         created() {
             window.addEventListener('keyup', this.keyUpEventFun);
-            this.websocket = new WebSocket("ws://192.168.43.163:8500/");
-            this.websocket.onopen = (evt) => { this.wsOnOpen(evt) };
-            this.websocket.onclose = (evt) => { this.wsOnClose(evt) };
-            this.websocket.onmessage = (evt) => { this.wsOnMessage(evt) };
-            this.websocket.onerror = (evt) => { this.wsOnError(evt) };
         }
     });
 
