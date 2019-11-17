@@ -116,7 +116,7 @@ class TransportDetail extends Model
             ->whereHas('transport' , function ($query){
                 $query->where('status' , 'in_process');
             })
-            ->whereIn('status' ,  ['re_weight' , 'in_process'])
+            ->whereIn('status' ,  ['re_weight' , 'in_process' , 'processed'])
             ->where(function ($query){
                 $query->where('in_weight' , 0)->orWhere('out_weight' , 0);
             });

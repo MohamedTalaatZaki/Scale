@@ -127,7 +127,8 @@
 <script src="{{ asset('js/swal.js') }}"></script>
 
 <script>
-    let vue = new Vue({
+    try{
+        let vue = new Vue({
         el: "#vue-temp",
         data: {
             barcode: [],
@@ -135,7 +136,7 @@
             scanned: false,
             transport: null,
             websocket: null,
-            weightValidAfterCount : 2,
+            weightValidAfterCount : 3,
             weight: 0,
             correctWeightCount: 0,
             isCorrect: false,
@@ -158,7 +159,7 @@
                 }
             },
             test: function () {
-                this.barcodeStr = "1573135133-1";
+                this.barcodeStr = "1573473184-5";
                 this.scanned = true;
                 this.checkBarcode();
             },
@@ -264,13 +265,37 @@
                     input.text(this.weight + " K.g");
                     this.websocket.close();
                     this.saveScaleWeight()
-                } else {
-                    input.css('color' , 'red');
-                    input.text(evt.data + " K.g");
+                } else if(!this.isNumeric(evt.data)) {
+                    console.log(evt.data);
+                    this.resetAll();
+                    this.websocket.close();
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'لا يمكن اجراء عملية الوزن',
+                        text: 'غير قادر على فتح اتصال بالميزان برجاء التواصل مع مدير النظام',
+                        timer: 10000,
+                        showCancelButton: false,
+                        showConfirmButton: false,
+                        timerProgressBar: true
+                    });
+
                 }
-                console.log(evt.data);
+                // console.log(evt.data);
             },
-            wsOnError : function(evt) {},
+            wsOnError : function(evt) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'غير قادر علي الاتصال بالميزان',
+                    text: "ناسف لهذا الخطأ برجاء حاول مره اخري او تواصل مع الادارة",
+                    timer: 20000,
+                    customClass: 'swal-wide',
+                    showCancelButton: false,
+                    showConfirmButton: false,
+                    timerProgressBar: true
+                }).then(()=>{
+                    this.resetAll();
+                });
+            },
             isNumeric : function (number) {
                 return !isNaN(parseFloat(number)) && isFinite(number);
             }
@@ -279,6 +304,9 @@
             window.addEventListener('keyup', this.keyUpEventFun);
         }
     });
+    } catch (e) {
+        window.location.reload();
+    }
 
 </script>
 </body>

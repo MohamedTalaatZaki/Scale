@@ -16,6 +16,8 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::post('get-scale-data' , 'MasterData\ScalesController@getScaleDataAjax');
 Route::get('user/{username}',function($username){
   return App\User::where('user_name',$username)->with('roles')->first();
 });
