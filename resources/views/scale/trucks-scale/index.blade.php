@@ -73,16 +73,13 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="row" v-if="transport.status == 'waiting' || transport.status == 'accepted' ">
-                                <div class="scale-content" style="overflow: hidden">
+                            <div class="row">
+                                <div class="scale-content">
                                     <div class="scale-weight-text text-center">
                                         <p class="scale-weight-text-elem" style="color: #0f0 ; font-size: 150px ; direction: ltr">000000 K.g</p>
                                     </div>
 
                                 </div>
-                            </div>
-                            <div class="row rejected text-center" v-if="transport.status === 'rejected'">
-                                <h2 style="margin: 0 auto"> @{{ transport.readable_status }} </h2>
                             </div>
                         </div>
                     </div>
@@ -161,7 +158,7 @@
                 }
             },
             test: function () {
-                this.barcodeStr = "1573473184-5";
+                this.barcodeStr = "1573135133-1";
                 this.scanned = true;
                 this.checkBarcode();
             },
@@ -171,30 +168,19 @@
                     transport_id: this.barcodeStr.split("-")[0],
                     detail_id: this.barcodeStr.split("-")[1],
                 }).then((response) => {
-                        if (response.data.transport && response.data.transport.weight > 0)
+                        if (!response.data.transport && response.data.cannot_weight_msg)
                         {
                             Swal.fire({
                                 icon: 'error',
-                                title: 'تم وزن الشاحنة مسبقا',
-                                text: "الوزنة السابقة لل"+ response.data.transport.ar_plate_name + " كانت " + response.data.transport.weight + " كيلو",
+                                title: 'لا يمكن اجراء عملية الوزن',
+                                text: response.data.cannot_weight_msg,
                                 timer: 10000,
                                 showCancelButton: false,
                                 showConfirmButton: false,
                                 timerProgressBar: true
                             });
                             this.resetAll();
-                        } else if (response.data.transport && response.data.transport.status === "rejected") {
-
-                            Swal.fire({
-                                icon: 'error',
-                                title: "".concat('تم رفض ال' , response.data.transport.ar_plate_name , ' من المعمل'),
-                                timer: 10000,
-                                showCancelButton: false,
-                                showConfirmButton: false,
-                                timerProgressBar: true
-                            });
-                            this.resetAll();
-                        }else {
+                        } else {
                             this.transport = response.data.transport;
                         }
 
@@ -203,8 +189,8 @@
                         this.resetAll();
                     })
                     .finally(() => {
-                        if(this.transport && this.transport.weight === 0)
-                            this.scaleWeight();
+                        if(this.transport)
+                            this.wsInit();
                     });
             },
             resetAll: function () {
@@ -216,21 +202,17 @@
                 this.correctWeightCount = 0;
                 this.isCorrect = false;
             },
-            scaleWeight: function () {
-                this.wsInit();
-            },
             saveScaleWeight : function() {
                 axios.post("{{ route("trucks-scale.weight") }}" , {
                     transport_id: this.transport.transport.id,
                     transport_detail_id :   this.transport.id,
                     weight  :   this.weight
                 }).then(response => {
-                    console.log(response.data , response.data.nextTruck);
-                    if(response.data.nextTruck) {
+                    if(response.data.swal_msg) {
                         Swal.fire({
                             icon: 'success',
                             title: 'تم الوزن بنجاح',
-                            text: "".concat('برجاء وضع ال' , response.data.transport.ar_plate_name , ' على الميزان ووضع الكود الخاص بها على القارئ'),
+                            text: response.data.swal_msg,
                             timer: 30000,
                             customClass: 'swal-wide',
                             showCancelButton: false,
@@ -239,6 +221,20 @@
                         }).then(()=>{
                             this.resetAll();
                         });
+                    } else if (response.data.cannot_weight_msg) {
+                        Swal.fire({
+                            icon: 'error',
+                            title: response.data.cannot_weight_msg,
+                            timer: 30000,
+                            customClass: 'swal-wide',
+                            showCancelButton: false,
+                            showConfirmButton: false,
+                            timerProgressBar: true
+                        }).then(()=>{
+                            this.resetAll();
+                        });
+                    } else {
+                        this.resetAll();
                     }
                 })
             },

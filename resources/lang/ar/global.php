@@ -226,6 +226,16 @@ return [
     'to_date'=>'إلى تاريخ',
     'result'    =>  'النتيجة',
     'scale_weight_title'    =>'الميزان',
-    'status'    =>  'الحالة'
+    'status'    =>  'الحالة',
+    'truck_rejected'    =>  'تم رفض :name  من المعمل',
+    'truck_depart'    =>  'لايمكن وزن شاحنة قامت بتسجيل الخروج من الشركة',
+    'contact_with_support'  =>  'حدث خطأ ما برجاء التواصل مع مدير النظام',
+    'the_first_weight_already_taken'    =>  'تم وزن ال:truck بالفعل وكانت الوزنة عند الدخول :weight كيلو',
+    'the_second_weight_already_taken'    =>  'تم وزن ال:truck بالفعل وكانت الوزنة عند الخروج :weight كيلو',
+    'move_next_truck'   =>  'برجاء وضع ال:name - لوحة رقم :plate على الميزان وتمرير الكود الخاص به على القارئ',
+    'second_weight_done_out'    => 'تم حفظ الوزن بنجاح يمكنك التوجه للبوابه الان',
+    'save_weight_done'    =>  'تم الوزن بنجاح يمكنك التحرك الان',
+    'the_truck_in_process'  =>  ':name رقم :plate لم تكمل الدورة الخاصه بها داخل المصنع',
+    'waiting_qc_result' =>  'لا يمكن وزن ال:name قبل صدور نتيجة المعمل',
 
 ];
