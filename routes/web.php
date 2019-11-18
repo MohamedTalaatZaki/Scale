@@ -41,6 +41,8 @@ Route::middleware(['auth'])->group(function (){
     Route::resource('qc/arrived-trucks' , 'QC\ArrivedTrucksController');
     Route::resource('qc/samples-test' , 'QC\SamplesTestController');
 
+    Route::resource('production/production-process' , 'Production\ProductionProcessController');
+
     Route::get('change-theme' , 'MasterData\UsersController@theme')->name('change-theme');
     Route::get('change-lang' , 'MasterData\UsersController@lang')->name('change-lang');
     Route::post('change-acc-info' , 'MasterData\UsersController@changeAccInfo')->name('users.change-acc-info');
@@ -48,6 +50,7 @@ Route::middleware(['auth'])->group(function (){
     Route::get('security/transports-in-process' , 'Security\TransportsController@inProcess')->name('transports.inProcess');
     Route::get('security/transports-check-out' , 'Security\TransportsController@checkOut')->name('transports.checkOut');
     Route::get('security/cancel' , 'Security\TransportsController@cancel')->name('transports.cancel');
+
 
     /*
      * AJAX Routes

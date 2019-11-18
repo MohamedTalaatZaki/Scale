@@ -3,6 +3,7 @@
 namespace App\Models\Security;
 
 use App\Models\Items\ItemGroup;
+use App\Models\Production\TransportLine;
 use App\Models\QC\SampleTestHeader;
 use Illuminate\Database\Eloquent\Model;
 
@@ -41,6 +42,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Security\TransportDetail transportCanReWeight()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Security\TransportDetail transportCannotWeight()
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Security\TransportDetail transportHasInProcess()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Security\TransportDetail notStartedTransports()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Security\TransportDetail startedTransports()
  */
 class TransportDetail extends Model
 {
@@ -66,6 +69,15 @@ class TransportDetail extends Model
         return $this->sampleTestHeader()->orderByDesc('created_at')->limit(1);
     }
 
+    public function transportLine()
+    {
+        return $this->hasMany(TransportLine::class , 'transport_detail_id' , 'id');
+    }
+
+    public function LastTransportLine()
+    {
+        return $this->transportLine()->latest();
+    }
 
     public function getPlateNameAttribute() {
         return $this->attributes['plate_name']  =   $this->is_trailer ? 'trailer' : 'tractor' ;
@@ -156,4 +168,31 @@ class TransportDetail extends Model
         }
     }
 
+    public function scopeNotStartedTransports()
+    {
+        return $this
+            ->whereHas('transport' , function ($query){
+                $query->whereHas('itemType' , function($q){
+                    return $q->where('prefix' , 'raw');
+                });
+            })
+            ->whereHas('LastTransportLine' , function ($query){
+                $query->whereNull('started_at')->whereNull('finished_at');
+            })
+            ->where('status' , 'in_process');
+    }
+
+    public function scopeStartedTransports()
+    {
+        return $this
+            ->whereHas('transport' , function ($query){
+                $query->whereHas('itemType' , function($q){
+                    return $q->where('prefix' , 'raw');
+                });
+            })
+            ->whereHas('LastTransportLine' , function ($query){
+                $query->whereNotNull('started_at')->whereNull('finished_at');
+            })
+            ->where('status' , 'in_process');
+    }
 }
