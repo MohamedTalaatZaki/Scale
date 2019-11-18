@@ -63,6 +63,3 @@ Route::post('trucks-scale-check-barcode' , "Scale\TrucksScaleController@checkBar
 Route::post('trucks-scale-weight' , "Scale\TrucksScaleController@saveTruckScaleWeight")->name('trucks-scale.weight');
 
 Auth::routes();
-
-
-
