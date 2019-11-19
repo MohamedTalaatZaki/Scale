@@ -58,7 +58,8 @@ Route::middleware(['auth'])->group(function (){
     Route::get('toggleTruckStatus' , 'QC\ArrivedTrucksController@toggleTruckStatus')->name('toggleTruckStatus');
 });
 
+Route::get('trucks-scale' , "Scale\TrucksScaleController@index")->name('trucks-scale.index');
+Route::post('trucks-scale-check-barcode' , "Scale\TrucksScaleController@checkBarcode")->name('checkBarcode');
+Route::post('trucks-scale-weight' , "Scale\TrucksScaleController@saveTruckScaleWeight")->name('trucks-scale.weight');
+
 Auth::routes();
-
-
-

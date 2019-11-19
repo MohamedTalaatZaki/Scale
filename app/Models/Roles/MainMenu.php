@@ -7,6 +7,35 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * App\Models\Roles\MainMenu
+ *
+ * @property int $id
+ * @property string $en_name
+ * @property string $ar_name
+ * @property string|null $class
+ * @property string $href
+ * @property string|null $sub_class
+ * @property string|null $data_link
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read mixed $name
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Roles\MenuGroup[] $menuGroups
+ * @property-read int|null $menu_groups_count
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Roles\MainMenu newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Roles\MainMenu newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Roles\MainMenu query()
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Roles\MainMenu whereArName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Roles\MainMenu whereClass($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Roles\MainMenu whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Roles\MainMenu whereDataLink($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Roles\MainMenu whereEnName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Roles\MainMenu whereHref($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Roles\MainMenu whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Roles\MainMenu whereSubClass($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Roles\MainMenu whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class MainMenu extends Model
 {
     protected $table = 'main_menus';

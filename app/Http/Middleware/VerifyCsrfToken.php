@@ -19,6 +19,8 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        //
+        'trucks-scale',
+        'trucks-scale-weight',
+        'trucks-scale-check-barcode'
     ];
 }
