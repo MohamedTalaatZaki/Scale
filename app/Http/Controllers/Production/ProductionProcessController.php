@@ -6,14 +6,17 @@ use App\Models\Production\Line;
 use App\Models\Production\TransportLine;
 use App\Models\Security\TransportDetail;
 use App\Models\Supplier\Supplier;
+use App\Traits\AuthorizeTrait;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class ProductionProcessController extends Controller
 {
+    use AuthorizeTrait;
     public function index()
     {
+        $this->authorized('production-process.index');
         $not_started_transport_details  =    TransportDetail::query()->NotStartedTransports()->get();
         $started_transport_details      =    TransportDetail::query()->StartedTransports()->get();
         $lines  =   Line::query()->where('is_active' , true)->where('type' , 'ProdLine')->get();
@@ -26,6 +29,7 @@ class ProductionProcessController extends Controller
 
     public function startProcess(Request $request)
     {
+        $this->authorized('startProcess');
         $this->validate($request , [
             'item_group_id' =>  'required',
             'item_id' =>  'required',
@@ -55,6 +59,7 @@ class ProductionProcessController extends Controller
 
     public function finishProcess(Request $request)
     {
+        $this->authorized('finishProcess');
         $detail =    TransportDetail::query()->StartedTransports()->find($request->input('detail_id'));
         if($detail)
         {
@@ -69,6 +74,7 @@ class ProductionProcessController extends Controller
 
     public function transferLine(Request $request)
     {
+        $this->authorized('transferLine');
         $detail =    TransportDetail::query()->StartedTransports()->find($request->input('detail_id'));
         if($detail)
         {

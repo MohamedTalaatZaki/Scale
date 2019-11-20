@@ -27,13 +27,15 @@
                             <td>{{ $detail->transport->theoretical_weight }}</td>
                             <td>{{ $detail->transport->arrival_time }}</td>
                             <td>
-                                {{--                                    @permission('centers.edit')--}}
-                                <a href="#"
-                                   data-detail-id="{{ $detail->id }}"
-                                   class="btn btn-success btn-sm mb-1 finishBtn">@lang('global.finish')</a>
-                                <a href="{{ route('transferLine' , ['detail_id' => $detail->id]) }}"
-                                   class="btn btn-danger btn-sm mb-1">@lang('global.transfer')</a>
-                                {{--                                    @endpermission--}}
+                                @permission('finishProcess')
+                                    <a href="#"
+                                       data-detail-id="{{ $detail->id }}"
+                                       class="btn btn-success btn-sm mb-1 finishBtn">@lang('global.finish')</a>
+                                @endpermission
+                                @permission('transferLine')
+                                    <a href="{{ route('transferLine' , ['detail_id' => $detail->id]) }}"
+                                       class="btn btn-danger btn-sm mb-1">@lang('global.transfer')</a>
+                                @endpermission
                             </td>
                         </tr>
                     @empty

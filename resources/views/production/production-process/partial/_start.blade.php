@@ -27,15 +27,17 @@
                             <td>{{ $detail->transport->theoretical_weight }}</td>
                             <td>{{ $detail->transport->arrival_time }}</td>
                             <td>
-                                <button type="button"
-                                        data-toggle="modal"
-                                        data-target="#startModal"
-                                        data-detail-id="{{ $detail->id }}"
-                                        data-supplier-id="{{ $detail->transport->supplier_id }}"
-                                        data-item-group-id="{{ $detail->transport->item_group_id }}"
-                                        class="btn btn-primary btn-sm mb-1">
-                                    @lang('global.start')
-                                </button>
+                                @permission('startProcess')
+                                    <button type="button"
+                                            data-toggle="modal"
+                                            data-target="#startModal"
+                                            data-detail-id="{{ $detail->id }}"
+                                            data-supplier-id="{{ $detail->transport->supplier_id }}"
+                                            data-item-group-id="{{ $detail->transport->item_group_id }}"
+                                            class="btn btn-primary btn-sm mb-1">
+                                        @lang('global.start')
+                                    </button>
+                                @endpermission
                             </td>
                         </tr>
                     @empty
