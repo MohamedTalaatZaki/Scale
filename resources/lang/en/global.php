@@ -243,4 +243,7 @@ return [
     'production_process'    =>  'Production Process',
     'waiting_to_start'  =>  'Waiting To Start',
     'waiting_to_finish' =>  'Waiting To Finish',
+    'start' =>  'Start',
+    'transfer'  =>  'Transfer',
+    'start_data'    =>  'Start Data',
 ];

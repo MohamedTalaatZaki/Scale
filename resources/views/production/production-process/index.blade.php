@@ -22,19 +22,20 @@
     </div>
 
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
                     <h3 class="text-center">@lang('global.waiting_to_start')</h3>
                     <table class="table">
                         <thead>
                         <tr>
-                            <th>#</th>
-                            <th>@lang('global.governorate_name')</th>
-                            <th>@lang('global.city_name')</th>
-                            <th>@lang('global.en_name')</th>
-                            <th>@lang('global.ar_name')</th>
-                            <th>@lang('global.is_active')</th>
+                            <th>@lang('global.transport_number')</th>
+                            <th>@lang('global.truck_plate')</th>
+                            <th>@lang('global.supplier')</th>
+                            <th>@lang('global.driver_name')</th>
+                            <th>@lang('global.item_group')</th>
+                            <th>@lang('global.theoretical_weight')</th>
+                            <th>@lang('global.arrival_time')</th>
                             <th>@lang('global.actions')</th>
                         </tr>
                         </thead>
@@ -49,10 +50,12 @@
                                 <td>{{ $detail->transport->theoretical_weight }}</td>
                                 <td>{{ $detail->transport->arrival_time }}</td>
                                 <td>
-{{--                                    @permission('centers.edit')--}}
-                                    <a href="#"
-                                       class="btn btn-primary btn-sm mb-1">@lang('global.start')</a>
-{{--                                    @endpermission--}}
+                                    <button type="button"
+                                            data-toggle="modal"
+                                            data-target="#startModal"
+                                            class="btn btn-primary btn-sm mb-1">
+                                        @lang('global.start')
+                                    </button>
                                 </td>
                             </tr>
                         @empty
@@ -66,24 +69,28 @@
 
             </div>
         </div>
-        <div class="col-md-6">
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
                     <h3 class="text-center">@lang('global.waiting_to_finish')</h3>
                     <table class="table">
                         <thead>
                         <tr>
-                            <th>#</th>
-                            <th>@lang('global.governorate_name')</th>
-                            <th>@lang('global.city_name')</th>
-                            <th>@lang('global.en_name')</th>
-                            <th>@lang('global.ar_name')</th>
-                            <th>@lang('global.is_active')</th>
+                            <th>@lang('global.transport_number')</th>
+                            <th>@lang('global.truck_plate')</th>
+                            <th>@lang('global.supplier')</th>
+                            <th>@lang('global.driver_name')</th>
+                            <th>@lang('global.item_group')</th>
+                            <th>@lang('global.theoretical_weight')</th>
+                            <th>@lang('global.arrival_time')</th>
                             <th>@lang('global.actions')</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @forelse($not_started_transport_details as $detail)
+                        @forelse($started_transport_details as $detail)
                             <tr>
                                 <td>{{ $detail->transport->transport_number }}</td>
                                 <td>{{ $detail->truck_plates }}</td>
@@ -114,4 +121,26 @@
         </div>
     </div>
 
+    <div class="modal fade " id="startModal" tabindex="-1" role="dialog" aria-labelledby="startModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <form>
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="startModalTitle">@lang('global.start_data')</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+
+                        <hr>
+                        <div class="row btn-group-sm float-right mb-2">
+                            <button type="button" class="btn btn-secondary mr-1" data-dismiss="modal">@lang('global.close')</button>
+                            <button type="submit" class="btn btn-primary">@lang('global.save')</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection

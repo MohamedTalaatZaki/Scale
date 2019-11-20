@@ -237,5 +237,7 @@ return [
     'save_weight_done'    =>  'تم الوزن بنجاح يمكنك التحرك الان',
     'the_truck_in_process'  =>  ':name رقم :plate لم تكمل الدورة الخاصه بها داخل المصنع',
     'waiting_qc_result' =>  'لا يمكن وزن ال:name قبل صدور نتيجة المعمل',
-
+    'start' =>  'بداء',
+    'transfer'  =>  'تحويل',
+    'start_data'    =>  'بيانات البدء',
 ];
