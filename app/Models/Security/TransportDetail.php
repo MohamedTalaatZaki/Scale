@@ -175,7 +175,7 @@ class TransportDetail extends Model
         }
     }
 
-    public function scopeNotStartedTransports()
+    public function scopeRawNotStartedTransports()
     {
         return $this
             ->whereHas('transport' , function ($query){
@@ -189,12 +189,40 @@ class TransportDetail extends Model
             ->where('status' , 'in_process');
     }
 
-    public function scopeStartedTransports()
+    public function scopeRawStartedTransports()
     {
         return $this
             ->whereHas('transport' , function ($query){
                 $query->whereHas('itemType' , function($q){
                     return $q->where('prefix' , 'raw');
+                });
+            })
+            ->whereHas('LastTransportLine' , function ($query){
+                $query->whereNotNull('started_at')->whereNull('finished_at');
+            })
+            ->where('status' , 'start_unload');
+    }
+
+    public function scopeScrapNotStartedTransports()
+    {
+        return $this
+            ->whereHas('transport' , function ($query){
+                $query->whereHas('itemType' , function($q){
+                    return $q->where('prefix' , 'scrap');
+                });
+            })
+            ->whereHas('LastTransportLine' , function ($query){
+                $query->whereNull('started_at')->whereNull('finished_at');
+            })
+            ->where('status' , 'in_process');
+    }
+
+    public function scopeScrapStartedTransports()
+    {
+        return $this
+            ->whereHas('transport' , function ($query){
+                $query->whereHas('itemType' , function($q){
+                    return $q->where('prefix' , 'scrap');
                 });
             })
             ->whereHas('LastTransportLine' , function ($query){

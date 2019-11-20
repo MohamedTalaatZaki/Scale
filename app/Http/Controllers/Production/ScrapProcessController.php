@@ -11,16 +11,16 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class ProductionProcessController extends Controller
+class ScrapProcessController extends Controller
 {
-    use AuthorizeTrait;
+//    use AuthorizeTrait;
     public function index()
     {
-        $this->authorized('production-process.index');
-        $not_started_transport_details  =    TransportDetail::query()->RawNotRawStartedTransports()->get();
-        $started_transport_details      =    TransportDetail::query()->RawStartedTransports()->get();
-        $lines  =   Line::query()->where('is_active' , true)->where('type' , 'ProdLine')->get();
-        return view('production.production-process.index' , [
+//        $this->authorized('production-process.index');
+        $not_started_transport_details  =    TransportDetail::query()->ScrapNotStartedTransports()->get();
+        $started_transport_details      =    TransportDetail::query()->ScrapStartedTransports()->get();
+        $lines  =   Line::query()->where('is_active' , true)->where('type' , 'ScrapLine')->get();
+        return view('production.scrap-process.index' , [
             'not_started_transport_details' => $not_started_transport_details,
             'started_transport_details'     => $started_transport_details,
             'lines' =>  $lines
@@ -29,7 +29,7 @@ class ProductionProcessController extends Controller
 
     public function startProcess(Request $request)
     {
-        $this->authorized('startProcess');
+//        $this->authorized('startProcess');
         $this->validate($request , [
             'item_group_id' =>  'required',
             'item_id' =>  'required',
@@ -59,8 +59,8 @@ class ProductionProcessController extends Controller
 
     public function finishProcess(Request $request)
     {
-        $this->authorized('finishProcess');
-        $detail =    TransportDetail::query()->RawStartedTransports()->find($request->input('detail_id'));
+//        $this->authorized('finishProcess');
+        $detail =    TransportDetail::query()->ScrapStartedTransports()->find($request->input('detail_id'));
         if($detail)
         {
             $detail->update(['status' => 'processed' , 'discount' => $request->input('discount')]);
@@ -74,8 +74,8 @@ class ProductionProcessController extends Controller
 
     public function transferLine(Request $request)
     {
-        $this->authorized('transferLine');
-        $detail =    TransportDetail::query()->RawStartedTransports()->find($request->input('detail_id'));
+//        $this->authorized('transferLine');
+        $detail =    TransportDetail::query()->ScrapStartedTransports()->find($request->input('detail_id'));
         if($detail)
         {
             $detail->update(['status' => 're_weight']);
@@ -101,7 +101,7 @@ class ProductionProcessController extends Controller
             $items  =   $supplier->items()
                 ->where('item_group_id' , $request->input('itemGroupId'))
                 ->whereHas('type' , function ($q){
-                    $q->where('prefix' , 'raw');
+                    $q->where('prefix' , 'scrap');
                 })
                 ->get();
             return response()->json(['items' => $items->pluck('name' , 'id')]);

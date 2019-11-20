@@ -250,4 +250,5 @@ return [
     'discount_perc' =>  'نسبة الخصم',
     'discount_perc_required'    =>  'يجب ادخال قيمة او وضع صفر في حالة عدم وجود خصم',
     'truck_reweight'   =>  'رجاء توجيه الشاحنة الى الميزان',
+    'scrap_process' =>  'عمليات المخلفات',
 ];
