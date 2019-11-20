@@ -42,6 +42,9 @@ Route::middleware(['auth'])->group(function (){
     Route::resource('qc/samples-test' , 'QC\SamplesTestController');
 
     Route::resource('production/production-process' , 'Production\ProductionProcessController');
+    Route::post('production/production-process-start' , 'Production\ProductionProcessController@startProcess')->name('startProcess');
+    Route::get('production/production-process-transfer' , 'Production\ProductionProcessController@transferLine')->name('transferLine');
+    Route::post('production/production-process-finish' , 'Production\ProductionProcessController@finishProcess')->name('finishProcess');
 
     Route::get('change-theme' , 'MasterData\UsersController@theme')->name('change-theme');
     Route::get('change-lang' , 'MasterData\UsersController@lang')->name('change-lang');
@@ -59,6 +62,9 @@ Route::middleware(['auth'])->group(function (){
     Route::get('centers' , 'MasterData\CentersController@getCityCenters')->name('getCityCenters');
     Route::get('getSupplierItemGroups' , 'MasterData\SuppliersController@getSupplierItemGroups')->name('getSupplierItemGroups');
     Route::get('toggleTruckStatus' , 'QC\ArrivedTrucksController@toggleTruckStatus')->name('toggleTruckStatus');
+
+    Route::post('getLastBatch' , 'Production\ProductionProcessController@getLastBatch')->name('getLastBatch');
+    Route::post('getSupplierItemByGroup' , 'Production\ProductionProcessController@getSupplierItemByGroup')->name('getSupplierItemByGroup');
 });
 
 Route::get('trucks-scale' , "Scale\TrucksScaleController@index")->name('trucks-scale.index');

@@ -56,6 +56,11 @@ class TransportDetail extends Model
         return $this->belongsTo(Transports::class , 'transport_id' , 'id');
     }
 
+    public function ItemGroup()
+    {
+        return $this->belongsTo(ItemGroup::class , 'item_group_id' , 'id');
+    }
+
     public function testableType()
     {
         return $this->hasOneThrough(ItemGroup::class , Transports::class , 'id' , 'id' , 'transport_id' , 'item_group_id');
@@ -68,6 +73,8 @@ class TransportDetail extends Model
     public function lastSampleTestHeader(){
         return $this->sampleTestHeader()->orderByDesc('created_at')->limit(1);
     }
+
+
 
     public function transportLine()
     {
@@ -193,6 +200,6 @@ class TransportDetail extends Model
             ->whereHas('LastTransportLine' , function ($query){
                 $query->whereNotNull('started_at')->whereNull('finished_at');
             })
-            ->where('status' , 'in_process');
+            ->where('status' , 'start_unload');
     }
 }

@@ -246,4 +246,15 @@ return [
     'start' =>  'Start',
     'transfer'  =>  'Transfer',
     'start_data'    =>  'Start Data',
+
+    'select_item'   =>  'Select Item',
+    'last_batch'    =>  'Last Batch',
+    'transport_start_successful'    =>  'Transport Start Successful',
+    'lines' =>  'Lines',
+    'select_line'   =>  'Select Line',
+    'finish_confirmation'   =>  'Are You Sure The Truck Has Been Finished Unload',
+    'has_discount'  =>  'Has Discount ?',
+    'discount_perc' =>  'Discount Percent',
+    'discount_perc_required'    =>  'Discount Percent Required',
+    'truck_reweight'   =>  'Please Redirect Back The Truck To The Scale.',
 ];
