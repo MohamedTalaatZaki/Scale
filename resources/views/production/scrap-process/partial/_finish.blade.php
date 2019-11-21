@@ -25,15 +25,15 @@
                             <td>{{ $detail->itemGroup->name }}</td>
                             <td>{{ $detail->transport->arrival_time }}</td>
                             <td>
-{{--                                @permission('scrapFinishProcess')--}}
+                                @permission('scrapFinishProcess')
                                     <a href="#"
                                        data-detail-id="{{ $detail->id }}"
                                        class="btn btn-success btn-sm mb-1 finishBtn">@lang('global.finish')</a>
-{{--                                @endpermission--}}
-{{--                                @permission('scrapTransferLine')--}}
+                                @endpermission
+                                @permission('scrapTransferLine')
                                     <a href="{{ route('scrapTransferLine' , ['detail_id' => $detail->id]) }}"
                                        class="btn btn-danger btn-sm mb-1">@lang('global.transfer')</a>
-{{--                                @endpermission--}}
+                                @endpermission
                             </td>
                         </tr>
                     @empty

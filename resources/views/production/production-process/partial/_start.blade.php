@@ -122,16 +122,16 @@
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-2">
-                            <input type="number" minlength="2" maxlength="2" class="form-control text-center day batchNumStr" name="day" value="" required>
+                            <input type="number" data-max-length="2" class="form-control text-center day batchNumStr limitInputLength" name="day" value="" required>
                         </div>
                         <div class="form-group col-md-2">
-                            <input type="number" minlength="2" maxlength="2" class="form-control text-center month batchNumStr" name="month" value="" required>
+                            <input type="number" data-max-length="2" class="form-control text-center month batchNumStr limitInputLength" name="month" value="" required>
                         </div>
                         <div class="form-group col-md-4">
-                            <input type="number" minlength="3" maxlength="3" class="form-control text-center year batchNumStr" name="year" value="" required>
+                            <input type="number" data-max-length="3" class="form-control text-center year batchNumStr limitInputLength" name="year" value="" required>
                         </div>
                         <div class="form-group col-md-4 input-group">
-                            <input type="number" minlength="3" class="form-control text-center batch_num batchNumStr" name="batch_num" value="" required>
+                            <input type="number" data-max-length="3" class="form-control text-center batch_num batchNumStr limitInputLength" name="batch_num" value="" required>
                             <div class="input-group-append">
                                 <button class="btn btn-outline-primary last_batch" type="button">@lang('global.last_batch')</button>
                             </div>

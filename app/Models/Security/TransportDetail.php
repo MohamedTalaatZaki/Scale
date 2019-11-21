@@ -228,6 +228,6 @@ class TransportDetail extends Model
             ->whereHas('LastTransportLine' , function ($query){
                 $query->whereNotNull('started_at')->whereNull('finished_at');
             })
-            ->where('status' , 'start_unload');
+            ->where('status' , 'start_load');
     }
 }

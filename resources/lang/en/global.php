@@ -253,6 +253,7 @@ return [
     'lines' =>  'Lines',
     'select_line'   =>  'Select Line',
     'finish_confirmation'   =>  'Are You Sure The Truck Has Been Finished Unload',
+    'scrap_finish_confirmation'   =>  'Are You Sure The Truck Has Been Finished Load',
     'has_discount'  =>  'Has Discount ?',
     'discount_perc' =>  'Discount Percent',
     'discount_perc_required'    =>  'Discount Percent Required',

@@ -13,7 +13,7 @@
                         <span class="default-cursor">@lang('global.production')</span>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="{{ route('production-process.index') }}">@lang('global.scrap_process')</a>
+                        <a href="{{ route('scrap-process.index') }}">@lang('global.scrap_process')</a>
                     </li>
                 </ol>
             </nav>
@@ -108,38 +108,28 @@
             $('.finishBtn').on('click' , function () {
                 let detailId    =   $(this).data('detail-id');
                 Swal.fire({
-                    title: "{{ trans('global.has_discount') }}",
-                    input: 'number',
-                    inputAttributes: {
-                        autocapitalize: 'off',
-                        id: 'discount_percent',
-                    },
+                    title: '{{ trans('global.are_you_sure') }}',
+                    text: "{{ trans('global.scrap_finish_confirmation') }}",
+                    icon: 'warning',
                     showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
                     confirmButtonText: '{{trans('global.save')}}',
                     cancelButtonText: '{{trans('global.cancel')}}',
-                    showLoaderOnConfirm: true,
-                    preConfirm: (discount) => {
-                        if (discount) {
-                          return true;
-                        } else {
-                            Swal.showValidationMessage("{{ trans('global.discount_perc_required') }}");
-                        }
-                    },
-                    allowOutsideClick: () => !Swal.isLoading()
                 }).then((result) => {
                     if (result.value) {
-                        let discount = $('#discount_percent').val();
                         $.ajax({
                             url:    "{{ route('scrapFinishProcess') }}",
                             method: "post",
-                            data: {_token: "{{ csrf_token() }}" , detail_id : detailId , discount : discount},
+                            data: {_token: "{{ csrf_token() }}" , detail_id : detailId},
                             success:    ()  =>  {
                                 $('#detail_'+detailId).remove();
                             }
                         });
                     }
-                });
+                })
             });
+
             function reInitSelect2(selector) {
                 $(selector).select2('destroy');
                 $(selector).select2({

@@ -13,10 +13,10 @@ use App\Http\Controllers\Controller;
 
 class ScrapProcessController extends Controller
 {
-//    use AuthorizeTrait;
+    use AuthorizeTrait;
     public function index()
     {
-//        $this->authorized('production-process.index');
+        $this->authorized('scrap-process.index');
         $not_started_transport_details  =    TransportDetail::query()->ScrapNotStartedTransports()->get();
         $started_transport_details      =    TransportDetail::query()->ScrapStartedTransports()->get();
         $lines  =   Line::query()->where('is_active' , true)->where('type' , 'ScrapLine')->get();
@@ -29,7 +29,7 @@ class ScrapProcessController extends Controller
 
     public function startProcess(Request $request)
     {
-//        $this->authorized('startProcess');
+        $this->authorized('scrapStartProcess');
         $this->validate($request , [
             'item_group_id' =>  'required',
             'item_id' =>  'required',
@@ -45,7 +45,7 @@ class ScrapProcessController extends Controller
         $transportDetail->update([
             'item_group_id' =>  $request->input('item_group_id'),
             'item_id'       =>  $request->input('item_id'),
-            'status'        =>  'start_unload',
+            'status'        =>  'start_load',
         ]);
 
         $transportDetail->LastTransportLine()->first()->update([
@@ -59,11 +59,11 @@ class ScrapProcessController extends Controller
 
     public function finishProcess(Request $request)
     {
-//        $this->authorized('finishProcess');
+        $this->authorized('scrapFinishProcess');
         $detail =    TransportDetail::query()->ScrapStartedTransports()->find($request->input('detail_id'));
         if($detail)
         {
-            $detail->update(['status' => 'processed' , 'discount' => $request->input('discount')]);
+            $detail->update(['status' => 'processed']);
             $detail->LastTransportLine()->first()->update([
                 'finished_at'   =>  Carbon::now(),
             ]);
@@ -74,7 +74,7 @@ class ScrapProcessController extends Controller
 
     public function transferLine(Request $request)
     {
-//        $this->authorized('transferLine');
+        $this->authorized('scrapTransferLine');
         $detail =    TransportDetail::query()->ScrapStartedTransports()->find($request->input('detail_id'));
         if($detail)
         {
