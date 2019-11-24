@@ -10,8 +10,6 @@
                         <th>@lang('global.truck_plate')</th>
                         <th>@lang('global.supplier')</th>
                         <th>@lang('global.driver_name')</th>
-                        <th>@lang('global.item_group')</th>
-                        <th>@lang('global.theoretical_weight')</th>
                         <th>@lang('global.arrival_time')</th>
                         <th>@lang('global.actions')</th>
                     </tr>
@@ -23,11 +21,9 @@
                             <td>{{ $detail->truck_plates }}</td>
                             <td>{{ $detail->transport->supplier->name }}</td>
                             <td>{{ $detail->transport->driver_name }}</td>
-                            <td>{{ $detail->transport->itemGroup->name }}</td>
-                            <td>{{ $detail->transport->theoretical_weight }}</td>
                             <td>{{ $detail->transport->arrival_time }}</td>
                             <td>
-                                @permission('startProcess')
+                                @permission('scrapStartProcess')
                                     <button type="button"
                                             data-toggle="modal"
                                             data-target="#startModal"
@@ -58,7 +54,7 @@
 <div class="modal fade " id="startModal" tabindex="-1" role="dialog" aria-labelledby="startModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <form action="{{ route('startProcess') }}" method="post">
+            <form action="{{ route('scrapStartProcess') }}" method="post">
                 @csrf
                 <div class="modal-header">
                     <h5 class="modal-title" id="startModalTitle">@lang('global.start_data')</h5>

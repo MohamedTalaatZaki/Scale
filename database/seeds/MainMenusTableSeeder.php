@@ -320,6 +320,15 @@ class MainMenusTableSeeder extends Seeder
                 'i_class' => 'simple-icon-user-follow',
                 'order' => 1,
                 'code'=>17
+            ],
+            [
+                'en_name' => 'Scrap Process',
+                'ar_name' => 'عمليات المخلفات',
+                'route' => 'scrap-process.index',
+                'a_class' => 'sidebar-sub sidebar-sub-scrap-process',
+                'i_class' => 'simple-icon-user-follow',
+                'order' => 1,
+                'code'=>18
             ]
         ]);
     }

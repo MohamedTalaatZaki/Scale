@@ -486,6 +486,14 @@
             return false;
         });
 
+        body.on( 'keypress' , '.limitInputLength' , function (evt) {
+            let max = $(this).data('max-length') - 1;
+            let len =   $(this).val().length;
+            if(len > max ) {
+                evt.preventDefault();
+            }
+        })
+
     });
 </script>
 @stack('scripts')
