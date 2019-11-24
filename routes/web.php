@@ -46,6 +46,11 @@ Route::middleware(['auth'])->group(function (){
     Route::get('production/production-process-transfer' , 'Production\ProductionProcessController@transferLine')->name('transferLine');
     Route::post('production/production-process-finish' , 'Production\ProductionProcessController@finishProcess')->name('finishProcess');
 
+    Route::resource('production/scrap-process' , 'Production\ScrapProcessController');
+    Route::post('production/scrap-process-start' , 'Production\ScrapProcessController@startProcess')->name('scrapStartProcess');
+    Route::get('production/scrap-process-transfer' , 'Production\ScrapProcessController@transferLine')->name('scrapTransferLine');
+    Route::post('production/scrap-process-finish' , 'Production\ScrapProcessController@finishProcess')->name('scrapFinishProcess');
+
     Route::get('change-theme' , 'MasterData\UsersController@theme')->name('change-theme');
     Route::get('change-lang' , 'MasterData\UsersController@lang')->name('change-lang');
     Route::post('change-acc-info' , 'MasterData\UsersController@changeAccInfo')->name('users.change-acc-info');
@@ -65,6 +70,7 @@ Route::middleware(['auth'])->group(function (){
 
     Route::post('getLastBatch' , 'Production\ProductionProcessController@getLastBatch')->name('getLastBatch');
     Route::post('getSupplierItemByGroup' , 'Production\ProductionProcessController@getSupplierItemByGroup')->name('getSupplierItemByGroup');
+    Route::post('getScrapSupplierItemByGroup' , 'Production\ScrapProcessController@getSupplierItemByGroup')->name('getScrapSupplierItemByGroup');
 });
 
 Route::get('trucks-scale' , "Scale\TrucksScaleController@index")->name('trucks-scale.index');

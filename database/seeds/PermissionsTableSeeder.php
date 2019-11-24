@@ -533,5 +533,43 @@ class PermissionsTableSeeder extends Seeder
             'en_description' => NULL,
             'ar_description' => NULL,
         ]);
+
+        $subMenu = SubMenu::where('code', 18)->first();
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'scrap-process.index',
+            'en_display_name' => 'List Raw Process',
+            'ar_display_name' => 'عرض شاحنات الخامات',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'scrapStartProcess',
+            'en_display_name' => 'Can Start Process',
+            'ar_display_name' => 'بدء عملية التحميل',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'scrapFinishProcess',
+            'en_display_name' => 'Can Finish Process',
+            'ar_display_name' => 'انهاء عملية التحميل',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'scrapTransferLine',
+            'en_display_name' => 'Can Transfer Process',
+            'ar_display_name' => 'تحويل الشاحنة لخط اخر',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
     }
 }
