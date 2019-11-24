@@ -33,7 +33,7 @@ before(function(){
     cy.exec('php artisan production:started_weight');
 });
 describe('Start/End Production process', function () {
-  it.only('checks required fields', function () {
+  it('checks required fields', function () {
     cy.get('.btn-group-sm > .btn-primary').should('be.visible').click()
     cy.get('.alert').should('contain','The item id field is required.')
     cy.get('.alert').should('contain','The batch num field is required.')
