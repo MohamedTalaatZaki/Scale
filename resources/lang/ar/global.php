@@ -237,5 +237,17 @@ return [
     'save_weight_done'    =>  'تم الوزن بنجاح يمكنك التحرك الان',
     'the_truck_in_process'  =>  ':name رقم :plate لم تكمل الدورة الخاصه بها داخل المصنع',
     'waiting_qc_result' =>  'لا يمكن وزن ال:name قبل صدور نتيجة المعمل',
-
+    'start' =>  'بداء',
+    'transfer'  =>  'تحويل',
+    'start_data'    =>  'بيانات البدء',
+    'select_item'   =>  'اختار الصنف',
+    'last_batch'    =>  'اخر رقم',
+    'transport_start_successful'    =>  'تم حفظ البيانات بنجاح',
+    'lines' =>  'الخطوط',
+    'select_line'   =>  'اختار خط',
+    'finish_confirmation'   =>  'هل انت متاكد من انتهاء تفريغ الحمولة',
+    'has_discount'  =>  'هل يوجد خصم ؟',
+    'discount_perc' =>  'نسبة الخصم',
+    'discount_perc_required'    =>  'يجب ادخال قيمة او وضع صفر في حالة عدم وجود خصم',
+    'truck_reweight'   =>  'رجاء توجيه الشاحنة الى الميزان',
 ];

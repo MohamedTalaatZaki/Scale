@@ -296,5 +296,31 @@ class MainMenusTableSeeder extends Seeder
                 'code'=>16
             ],
         ]);
+
+        $main =  MainMenu::create([
+            'en_name' => 'Production',
+            'ar_name' => 'الانتاج',
+            'class' => 'sidebar sidebar-production',
+            'href' => '#production',
+            'sub_class' => 'iconsminds-digital-drawing',
+            'data_link' => 'production'
+        ]);
+        $group = $main->menuGroups()->create([
+            'en_name' => 'Production Process',
+            'ar_name' => 'الانتاج',
+            'aria_controls' => 'collapseProductionProcess',
+            'order' => 1,
+        ]);
+        $group->subMenus()->createMany([
+            [
+                'en_name' => 'Raw Process',
+                'ar_name' => 'عمليات الخامات',
+                'route' => 'production-process.index',
+                'a_class' => 'sidebar-sub sidebar-sub-production-process',
+                'i_class' => 'simple-icon-user-follow',
+                'order' => 1,
+                'code'=>17
+            ]
+        ]);
     }
 }

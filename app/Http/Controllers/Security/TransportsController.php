@@ -108,7 +108,7 @@ class TransportsController extends Controller
     public function edit($id)
     {
         $truckArrival   =   Transports::query()->find($id);
-        return $this->index()->with(['truckArrival'  =>  $truckArrival]);
+        return redirect()->action('Security\TransportsController@index')->with(['truckArrival'  =>  $truckArrival]);
     }
 
     public function update(Request $request , $id)
@@ -150,7 +150,7 @@ class TransportsController extends Controller
         $transport  =   Transports::query()->find($request->get('id'));
         $transport->update(['status' => 'in_process']);
 //        $transport->details()->update(['status' => 'in_process']);
-        return $this->index()->with('success' , trans('global.car_in_process' , ['truck_plates_tractor' => $transport->truck_plates_tractor]));
+        return redirect()->action('Security\TransportsController@index')->with('success' , trans('global.car_in_process' , ['truck_plates_tractor' => $transport->truck_plates_tractor]));
     }
 
     public function checkOut(Request $request)
@@ -158,13 +158,13 @@ class TransportsController extends Controller
         $transport  =   Transports::query()->find($request->get('id'));
         $transport->update(['status' => 'departure']);
 //        $transport->details()->update(['status' => 'departure']);
-        return $this->index()->with('success' , trans('global.car_departure' , ['truck_plates_tractor' => $transport->truck_plates_tractor]));
+        return redirect()->action('Security\TransportsController@index')->with('success' , trans('global.car_departure' , ['truck_plates_tractor' => $transport->truck_plates_tractor]));
     }
 
     public function cancel(Request $request) {
         $transport  =   Transports::query()->find($request->get('id'));
         $transport->update(['status' => 'canceled']);
-        return $this->index()->with('success' , trans('global.car_canceled' , ['truck_plates_tractor' => $transport->truck_plates_tractor]));
+        return redirect()->action('Security\TransportsController@index')->with('success' , trans('global.car_canceled' , ['truck_plates_tractor' => $transport->truck_plates_tractor]));
     }
 
     public function print(Request $request)
