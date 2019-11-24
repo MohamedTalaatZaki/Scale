@@ -490,3 +490,10 @@ Artisan::command('truck:update_type {type}', function ($type) {
         'truck_type_id' => $type,
     ]);
 })->describe('Change Transports Type');
+
+Artisan::command('production:started_weight',function(){
+  App\Models\Production\TransportLine::create([
+    'transport_detail_id' => App\Models\Security\Transports::find(9999)->details[0]->id,
+    'line_id' => 1
+  ]);
+});
