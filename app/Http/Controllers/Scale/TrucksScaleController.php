@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Scale;
 
+use App\Models\Production\TransportLine;
 use App\Models\Security\TransportDetail;
 use App\Models\Security\Transports;
 use Illuminate\Http\Request;
@@ -73,6 +74,8 @@ class TrucksScaleController extends Controller
             ->TransportCanWeight()
             ->first();
 
+        $this->createTransportLineTransaction($transportDetail->id);
+
         $transportDetail->transport()->update([
             'total_weight' => $transportDetail->transport->total_weight + $request->input('weight'),
             'status'    =>  (boolean) $nextTruck ? $transportDetail->transport->status : 'in_process',
@@ -92,6 +95,10 @@ class TrucksScaleController extends Controller
         $transportDetail->update([
             'out_weight' => $request->input('weight'),
             'status' => 'out_weight'
+        ]);
+
+        $transportDetail->LastTransportLine()->first()->update([
+            'weight'    =>  $request->input('weight'),
         ]);
 
         $nextTruck  =   TransportDetail::query()
@@ -119,6 +126,12 @@ class TrucksScaleController extends Controller
             'status'    =>  'in_process',
         ]);
 
+        $transportDetail->LastTransportLine()->first()->update([
+            'weight'    =>  $request->input('weight'),
+        ]);
+
+        $this->createTransportLineTransaction($transportDetail->id);
+
         $nextTruck  =   TransportDetail::query()
             ->where('transport_id' , $request->input('transport_id'))
             ->TransportCanReWeight()
@@ -140,5 +153,12 @@ class TrucksScaleController extends Controller
     private function setPageLocale()
     {
         app()->setLocale('ar');
+    }
+
+    private function createTransportLineTransaction($id)
+    {
+        TransportLine::query()->create([
+            'transport_detail_id'   =>  $id
+        ]);
     }
 }
