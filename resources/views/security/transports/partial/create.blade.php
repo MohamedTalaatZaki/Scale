@@ -1,4 +1,4 @@
-<form action="{{ route('transports.store') }}" method="post" novalidate>
+<form action="{{ route('transports.store') }}" method="post">
     @csrf
     <div style="display: {{ $errors->count() > 0 ? 'flex' : 'none' }}" class="row create-arrival-truck">
         <div class="col-md-4">
