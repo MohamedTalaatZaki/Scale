@@ -490,3 +490,49 @@ Artisan::command('truck:update_type {type}', function ($type) {
         'truck_type_id' => $type,
     ]);
 })->describe('Change Transports Type');
+
+
+
+
+Artisan::command('sample_test:create_truck_arrival_scrap', function () {
+    DB::table('transports')->insert([
+        'id'=>111111,
+        'transport_number'         =>  '9999999',
+        'driver_name'         =>  'test1111',
+        'status'         =>  'waiting',
+        'driver_license'   =>  '123456',
+        'driver_national_id'=> '12345678912345',
+        'driver_mobile'         =>  '01234567891',
+        'supplier_id'         =>  1000,
+        'governorate_id'         =>  1,
+        'city_id'   =>  1,
+        'truck_type_id'   =>  1,
+        'truck_plates_tractor'   =>  '1000',
+        'truck_plates_trailer'   =>  null,
+        'item_type_id'   => 3,
+        'item_group_id'   =>  123456,
+        'theoretical_weight'   =>  '0',
+        'arrival_time'  =>  \Carbon\Carbon::now(),
+    ]);
+    DB::table('transport_details')->insert([
+        'id' => 1000,
+        'transport_id' => 111111,
+        'truck_plates' =>'1000',
+        'is_trailer' => 0,
+        'status' => 'in_process',
+    ]);
+    DB::table('transport_lines')->insert([
+        'id' => 1000,
+        'transport_detail_id' => 1000,
+        'line_id' =>3,
+        'batch_number' => 1000,
+        'weight' => '0',
+
+    ]);
+})->describe('create truck arrival');
+
+//Artisan::command('truck:edit_item_type_id', function () {
+//    App\Models\Security\Transports::find(111111)->update([
+//        'item_type_id' => 3,
+//    ]);
+//})->describe('Change Transports item type');
