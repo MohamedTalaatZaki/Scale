@@ -159,7 +159,7 @@
                 }
             },
             test: function () {
-                this.barcodeStr = "1573473184-5";
+                this.barcodeStr = "1574327752-4";
                 this.scanned = true;
                 this.checkBarcode();
             },
@@ -240,7 +240,7 @@
                 })
             },
             wsInit  :   function() {
-                this.websocket = new WebSocket("ws://localhost:8500/");
+                this.websocket = new WebSocket("ws://192.168.1.7:8500/");
                 this.websocket.onopen = (evt) => { this.wsOnOpen(evt) };
                 this.websocket.onclose = (evt) => { this.wsOnClose(evt) };
                 this.websocket.onmessage = (evt) => { this.wsOnMessage(evt) };
