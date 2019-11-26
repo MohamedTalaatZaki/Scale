@@ -113,7 +113,7 @@
                                             <select
                                                     class="form-control select2-single qc-element-id"
                                                     name="details[0][qc_element_id]" required>
-                                                <option label="&nbsp;">&nbsp;</option>
+                                                <option label="&nbsp;">&nbsp;@lang('global.element_name')</option>
                                                 @foreach($elements as $element)
                                                     <option value="{{ $element->id }}"
                                                             data-test-type="{{ $element->test_type }}"
@@ -208,7 +208,7 @@
                                         <select
                                                 class="form-control select2-single qc-element-id"
                                                 name="details[0][qc_element_id]" required>
-                                            <option label="&nbsp;">&nbsp; </option>
+                                            <option label="&nbsp;">&nbsp; @lang('global.element_name')</option>
                                             @foreach($elements as $element)
                                                 <option value="{{ $element->id }}"
                                                         data-test-type="{{ $element->test_type }}"
