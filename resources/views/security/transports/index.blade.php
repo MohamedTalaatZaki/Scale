@@ -104,6 +104,13 @@
     <script>
         $().ready(function () {
 
+            let errors = "{{ $errors->count() }}";
+
+            if(errors > 0) {
+                govChange("{{ old('governorate_id') }}" , "{{ old('city_id') }}");
+                supplierChange("{{ old('supplier_id') }}" , "{{ old('item_group_id') }}")
+            }
+
             $('.show-create-div,.reset-close').on('click', function () {
                 $('.create-arrival-truck').toggle();
                 $('.search-trucks').toggle();
@@ -111,67 +118,17 @@
 
             $('.governorate_select').on('change' , function(evt){
                 evt.preventDefault();
-                let citySelect  =   $('.citySelect');
-                let govId  =   $(this).val();
-                $.ajax({
-                    method: 'GET',
-                    url:    "{{ route('getGovernorateCities') }}",
-                    data:   { _token: "{{ csrf_token() }}" , id : govId},
-                    success : (response)    =>  {
-                        citySelect.empty();
-                        let option = "<option value='' selected></option>";
-                        citySelect.append(option);
-                        $.each(response.cities , function (index , city) {
-                            let option = "<option value='"+index+"'>"+ city +"</option>";
-                            citySelect.append(option);
-                        });
-                        reInitSelect2("#citySelect");
-                    }
-                });
-
+                govChange($(this).val());
             });
 
             $('.citySelect').on('change' , function(evt){
                 evt.preventDefault();
-                let centerSelect  =   $('.centerSelect');
-                let govId  =   $(this).val();
-                $.ajax({
-                    method: 'GET',
-                    url:    "{{ route('getCityCenters') }}",
-                    data:   { _token: "{{ csrf_token() }}" , id : govId},
-                    success : (response)    =>  {
-                        centerSelect.empty();
-                        let option = "<option value='' selected></option>";
-                        centerSelect.append(option);
-                        $.each(response.centers , function (index , center) {
-                            let option = "<option value='"+index+"'>"+ center +"</option>";
-                            centerSelect.append(option);
-                        });
-                    }
-                });
-                reInitSelect2("#centerSelect");
+                cityChange($(this).val());
             });
 
             $('.supplierSelect').on('change' , function(evt){
                 evt.preventDefault();
-                let itemsGroupSelect  =   $('.itemsGroupSelect');
-                let supplier  =   $(this).val();
-                $.ajax({
-                    method: 'GET',
-                    url:    "{{ route('getSupplierItemGroups') }}",
-                    data:   { _token: "{{ csrf_token() }}" , id : supplier},
-                    success : (response)    =>  {
-                        itemsGroupSelect.empty();
-                        let option = "<option value='' selected></option>";
-                        itemsGroupSelect.append(option);
-                        $.each(response.itemGroups , function (index , itemGroup) {
-                            let option = "<option value='"+index+"'>"+ itemGroup +"</option>";
-                            itemsGroupSelect.append(option);
-                        });
-                        reInitSelect2("#itemsGroupSelect");
-                    }
-                });
-
+                supplierChange($(this).val());
             });
 
             $('#itemTypeSelect').on('change' , function (evt) {
@@ -188,11 +145,66 @@
                 }
             });
 
-            // $('.print').on('click' , function (evt) {
-            //     evt.preventDefault();
-            //     let id = $(this).data('truck-id');
-            //     console.log(id);
-            // });
+            function govChange(govId , cityId = 0) {
+                let citySelect  =   $('.citySelect');
+                $.ajax({
+                    method: 'GET',
+                    url:    "{{ route('getGovernorateCities') }}",
+                    data:   { _token: "{{ csrf_token() }}" , id : govId},
+                    success : (response)    =>  {
+                        citySelect.empty();
+                        let option = "<option value='' selected></option>";
+                        citySelect.append(option);
+                        $.each(response.cities , function (index , city) {
+                            let option = "<option value='"+index+"' " + ( cityId == index ? 'selected' : '') +">"+ city +"</option>";
+                            citySelect.append(option);
+                        });
+                        reInitSelect2("#citySelect");
+                        if(cityId > 0) {
+                            cityChange(cityId , "{{ old('center_id' , 0) }}")
+                        }
+                    }
+                });
+            }
+
+            function cityChange(cityId , centerId = 0) {
+                let centerSelect  =   $('.centerSelect');
+                $.ajax({
+                    method: 'GET',
+                    url:    "{{ route('getCityCenters') }}",
+                    data:   { _token: "{{ csrf_token() }}" , id : cityId},
+                    success : (response)    =>  {
+                        centerSelect.empty();
+                        let option = "<option value='' selected></option>";
+                        centerSelect.append(option);
+                        $.each(response.centers , function (index , center) {
+                            let option = "<option value='"+index+"' "+ (centerId == index ? 'selected' : '') +">"+ center +"</option>";
+                            centerSelect.append(option);
+                        });
+                    }
+                });
+                reInitSelect2("#centerSelect");
+            }
+
+            function supplierChange(supplier , itemId = 0) {
+                let itemsGroupSelect  =   $('.itemsGroupSelect');
+                $.ajax({
+                    method: 'GET',
+                    url:    "{{ route('getSupplierItemGroups') }}",
+                    data:   { _token: "{{ csrf_token() }}" , id : supplier},
+                    success : (response)    =>  {
+                        itemsGroupSelect.empty();
+                        let option = "<option value='' selected></option>";
+                        itemsGroupSelect.append(option);
+                        $.each(response.itemGroups , function (index , itemGroup) {
+                            let option = "<option value='"+index+"' "+ (itemId == index ? 'selected' : '')+">"+ itemGroup +"</option>";
+                            itemsGroupSelect.append(option);
+                        });
+                        reInitSelect2("#itemsGroupSelect");
+                    }
+                });
+            }
+
             function reInitSelect2(selector) {
                 $(selector).select2('destroy');
                 $(selector).select2({
