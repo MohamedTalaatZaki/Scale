@@ -31,6 +31,15 @@
     <script src="{{ asset('js/swal.js') }}"></script>
     <script>
         $().ready(function(){
+            $('body,#discount_percent').on('keyup' , function (evt) {
+                let value = $('#discount_percent').val();
+                if (value < 0 || value > 100)
+                {
+                    $('#discount_percent').val('');
+                    $('#discount_percent').notify("{{ trans('global.discount_perc_required') }}" , 'error');
+                }
+            });
+
             $('#startModal').on('show.bs.modal' , function (event) {
                 let detail_id   =   $(event.relatedTarget).data('detail-id');
                 let supplier    =   $(event.relatedTarget).data('supplier-id');
