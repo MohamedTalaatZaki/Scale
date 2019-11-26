@@ -38,22 +38,21 @@
         @include('security.transports.partial.create')
     @endisset
 
+{{--    @if(!isset($truckArrival))--}}
+{{--        <div class="row search-trucks" style="display: {{ $errors->count() > 0 ? 'none' : 'flex' }}">--}}
+{{--            <div class="col-md-12">--}}
+{{--                <div class="input-group">--}}
+{{--                    <input class="form-control" placeholder="Search...">--}}
 
-    @if(!isset($truckArrival))
-        <div class="row search-trucks" style="display: {{ $errors->count() > 0 ? 'none' : 'flex' }}">
-            <div class="col-md-12">
-                <div class="input-group">
-                    <input class="form-control" placeholder="Search...">
-
-                    <span class="input-group-btn">
-                        <button class="btn btn-primary default" type="submit">
-                            <i class="simple-icon-magnifier"></i>
-                        </button>
-                    </span>
-                </div>
-            </div>
-        </div>
-    @endif
+{{--                    <span class="input-group-btn">--}}
+{{--                        <button class="btn btn-primary default" type="submit">--}}
+{{--                            <i class="simple-icon-magnifier"></i>--}}
+{{--                        </button>--}}
+{{--                    </span>--}}
+{{--                </div>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    @endif--}}
     <hr/>
 
     <div class="row">
