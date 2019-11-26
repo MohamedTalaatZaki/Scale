@@ -226,6 +226,9 @@ return [
         'item_type_id'   =>  'نوع النصف',
         'theoretical_weight'   =>  'الوزن التقديري',
         'arrival_time'   =>  'تاريخ الوصول',
+        'line_id'   =>  'رقم الخط',
+        'item_id'   =>  'الصنف',
+        'batch_num' =>  'رقم التشغيلة'
     ],
 
 ];
