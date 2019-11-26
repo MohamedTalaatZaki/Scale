@@ -127,6 +127,7 @@
                                                            value="{{ old("details.$key.sample_range") }}" placeholder="@lang('global.sample_range')"
                                                            data-min="{{ $row->min_range }}"
                                                            data-max="{{ $row->max_range }}"
+                                                           step="0.0001"
                                                            autocomplete="off"
                                                            required
                                                     >

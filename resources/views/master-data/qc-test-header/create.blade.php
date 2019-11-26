@@ -160,6 +160,7 @@
                                         </td>
                                         <td>
                                             <input type="number" class="form-control form-control-sm min_range range"
+                                                   step="0.0001"
                                                    name="details[0][min_range]" style="display: {{ old("details.$key.element_type") == "range"? "" : "none" }}"
                                                    value="{{ old("details.$key.min_range") }}" placeholder="@lang('global.min_range')"
                                                    autocomplete="off">
@@ -170,6 +171,7 @@
                                         </td>
                                         <td>
                                             <input type="number" class="form-control form-control-sm max_range range"
+                                                   step="0.0001"
                                                    name="details[0][max_range]" style="display: {{ old("details.$key.element_type") == "range"? "" : "none" }}"
                                                    value="{{ old("details.$key.max_range") }}" placeholder="@lang('global.max_range')"
                                                    autocomplete="off">
@@ -247,6 +249,7 @@
                                     </td>
                                     <td>
                                         <input type="number" class="form-control form-control-sm min_range range"
+                                               step="0.0001"
                                                name="details[0][min_range]" style="display: none"
                                                value="{{ old('min_range') }}" placeholder="@lang('global.min_range')"
                                                autocomplete="off">
@@ -257,6 +260,7 @@
                                     </td>
                                     <td>
                                         <input type="number" class="form-control form-control-sm max_range range"
+                                               step="0.0001"
                                                name="details[0][max_range]" style="display: none"
                                                value="{{ old('max_range') }}" placeholder="@lang('global.max_range')"
                                                autocomplete="off">
