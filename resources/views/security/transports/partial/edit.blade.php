@@ -245,7 +245,7 @@
         <div class="col-md-12 mt-3">
             <div class="btn-group-sm text-center text-black-50">
                 <button type="submit" class="btn btn-primary">@lang('global.edit_print')</button>
-                <button type="reset" class="btn btn-danger reset-close">@lang('global.reset_close')</button>
+                <a href="{{ route('transports.index') }}" class="btn btn-danger">@lang('global.reset_close')</a>
             </div>
         </div>
 

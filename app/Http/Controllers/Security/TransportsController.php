@@ -108,7 +108,7 @@ class TransportsController extends Controller
     public function edit($id)
     {
         $truckArrival   =   Transports::query()->find($id);
-        return redirect()->action('Security\TransportsController@index')->with(['truckArrival'  =>  $truckArrival]);
+        return $this->index()->with(['truckArrival'  =>  $truckArrival]);
     }
 
     public function update(Request $request , $id)
