@@ -17,7 +17,7 @@ class ProductionProcessController extends Controller
     public function index()
     {
         $this->authorized('production-process.index');
-        $not_started_transport_details  =    TransportDetail::query()->RawNotRawStartedTransports()->get();
+        $not_started_transport_details  =    TransportDetail::query()->RawNotStartedTransports()->get();
         $started_transport_details      =    TransportDetail::query()->RawStartedTransports()->get();
         $lines  =   Line::query()->where('is_active' , true)->where('type' , 'ProdLine')->get();
         return view('production.production-process.index' , [
