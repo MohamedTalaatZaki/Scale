@@ -511,6 +511,7 @@ Artisan::command('test:create_truck_arrival_edit', function () {
         'item_group_id'   =>  10001,
         'theoretical_weight'   =>  '300000',
         'arrival_time'  =>  \Carbon\Carbon::now(),
+        'order' => 1
     ]);
     DB::table('transport_details')->insert([
         'id' => 1100,
@@ -541,6 +542,7 @@ Artisan::command('test:create_truck_arrival_edit2', function () {
         'item_group_id'   =>  10001,
         'theoretical_weight'   =>  '300000',
         'arrival_time'  =>  \Carbon\Carbon::now(),
+        'order' => 3
     ]);
     DB::table('transport_details')->insert([
         'id' => 1110,
@@ -571,6 +573,7 @@ Artisan::command('test:create_truck_arrival_edit1', function () {
         'item_group_id'   =>  10001,
         'theoretical_weight'   =>  '300000',
         'arrival_time'  =>  \Carbon\Carbon::now(),
+        'order' => 2
     ]);
     DB::table('transport_details')->insert([
         'id' => 1010,
