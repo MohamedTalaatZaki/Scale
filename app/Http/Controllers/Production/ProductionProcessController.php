@@ -33,9 +33,9 @@ class ProductionProcessController extends Controller
         $this->validate($request , [
             'item_group_id' =>  'required',
             'item_id' =>  'required',
-            'day' =>  'required',
-            'month' =>  'required',
-            'year' =>  'required',
+            'day' =>  'required|size:2',
+            'month' =>  'required|size:2',
+            'year' =>  'required|size:3',
             'batch_num' =>  'required',
             'line_id' =>  'required',
         ]);
