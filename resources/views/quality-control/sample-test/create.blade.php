@@ -66,8 +66,8 @@
                                 <input type="hidden" name="qc_test_header_id" value="{{ optional($transport_detail->testableType)->id }}">
                                 <input type="hidden" name="result" class="final_result" value="">
                                 <textarea name="reason" class="final_reason" style="display: none"></textarea>
-                                <h3 style="margin: 10px;display: none" class="final-accepted text-center text-success"> Accepted </h3>
-                                <h3 style="margin: 10px;display: none" class="final-rejected text-center text-danger"> Rejected </h3>
+                                <h3 style="margin: 10px;display: none" class="final-accepted text-center text-success"> @lang('global.accepted') </h3>
+                                <h3 style="margin: 10px;display: none" class="final-rejected text-center text-danger"> @lang('global.rejected') </h3>
                             </div>
                             <div class="col-4"></div>
 

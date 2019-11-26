@@ -140,7 +140,7 @@
                                 <td>{{ $header->transportDetail->transport->driver_mobile }}</td>
                                 <td>{{ $header->transportDetail->transport->supplier->name }}</td>
                                 <td>{{ $header->qcTestHeader->name }}</td>
-                                <td>{{ $header->result }}</td>
+                                <td>{{ trans("global.{$header->result}") }}</td>
                                 <td>{{ $header->createdBy->full_name }}</td>
                                 <td>{{ $header->created_at }}</td>
                                 <td><i class="simple-icon-{{ $header->test_type == 'r' ? 'check' : 'close' }}"></i></td>
