@@ -98,7 +98,7 @@
                             </tr>
                             </thead>
                             <tbody data-repeater-list="details">
-                            @if(old('details' , $qcTest->details)->count() > 0)
+                            @if(count(old('details' , $qcTest->details->toArray())) > 0)
                                 @foreach(old('details' , $qcTest->details->toArray()) as $key => $row)
                                     <tr data-repeater-item>
                                         <td>
@@ -126,20 +126,22 @@
                                             <input type="text"
                                                    class="form-control form-control-sm bg-readonly test-type"
                                                    name="details[0][test_type]"
-                                                   value="{{ old("details.$key.test_type" , $row['element']['test_type']) }}"
+                                                   value="{{ old("details.$key.test_type" , qcRowElement($row)['test_type']) }}"
                                                    readonly>
                                         </td>
                                         <td>
                                             <input type="text"
                                                    class="form-control form-control-sm bg-readonly element-type"
                                                    name="details[0][element_type]"
-                                                   value="{{ old("details.$key.element_type" , $row['element']['element_type']) }}"
+                                                   value="{{ old("details.$key.element_type" , qcRowElement($row)['element_type']) }}"
                                                    readonly>
                                         </td>
                                         <td>
                                             <select
                                                 class="form-control form-control-sm expected_result"
-                                                name="details[0][expected_result]" style="display: {{ old("details.$key.element_type" , $row['element']['element_type']) == "question"? "" : "none" }}">
+                                                name="details[0][expected_result]"
+                                                style="display: {{ old("details.$key.element_type" , qcRowElement($row)['element_type']) == "question"? "" : "none" }}"
+                                                {{ old("details.$key.element_type" , qcRowElement($row)['element_type']) == "question" ? "required" : '' }}>
                                                 <option value="" selected>@lang('global.expected_result')</option>
                                                 <option value="1" {{ old("details.$key.expected_result" , $row['expected_result']) == 1 ? "selected" : ""}}>@lang('global.yes')</option>
                                                 <option value="0" {{ old("details.$key.expected_result" , $row['expected_result']) == 0 ? "selected" : ""}}>@lang('global.no')</option>
@@ -151,9 +153,11 @@
                                         </td>
                                         <td>
                                             <input type="number" class="form-control form-control-sm min_range range"
-                                                   name="details[0][min_range]" style="display: {{ old("details.$key.element_type" , $row['element']['element_type']) == "range"? "" : "none" }}"
+                                                   name="details[0][min_range]" style="display: {{ old("details.$key.element_type" , qcRowElement($row)['element_type']) == "range"? "" : "none" }}"
                                                    value="{{ old("details.$key.min_range" , $row['min_range']) }}" placeholder="@lang('global.min_range')"
-                                                   autocomplete="off">
+                                                   autocomplete="off"
+                                                   {{ old("details.$key.element_type" , qcRowElement($row)['element_type']) == "range" ? "required" : '' }}
+                                            >
                                             @if($errors->has("details.$key.min_range"))
                                                 <span id="jQueryName-error" class="error"
                                                       style="">{{ $errors->first("details.$key.min_range") }}</span>
@@ -161,9 +165,11 @@
                                         </td>
                                         <td>
                                             <input type="number" class="form-control form-control-sm max_range range"
-                                                   name="details[0][max_range]" style="display: {{ old("details.$key.element_type" , $row['element']['element_type']) == "range"? "" : "none" }}"
+                                                   name="details[0][max_range]" style="display: {{ old("details.$key.element_type" , qcRowElement($row)['element_type']) == "range"? "" : "none" }}"
                                                    value="{{ old("details.$key.max_range" , $row['max_range']) }}" placeholder="@lang('global.max_range')"
-                                                   autocomplete="off">
+                                                   autocomplete="off"
+                                                {{ old("details.$key.element_type" , qcRowElement($row)['element_type']) == "range" ? "required" : '' }}
+                                            >
                                             @if($errors->has('max_range'))
                                                 <span id="jQueryName-error" class="error"
                                                       style="">{{ $errors->first("details.$key.max_range") }}</span>
@@ -173,7 +179,7 @@
                                             <input type="text"
                                                    class="form-control form-control-sm bg-readonly element-unit"
                                                    name="details[0][element_unit]"
-                                                   value="{{ old("details.$key.element_unit" , $row['element']['element_unit']) }}"
+                                                   value="{{ old("details.$key.element_unit" , qcRowElement($row)['element_unit']) }}"
                                                    readonly>
                                         </td>
                                         <td>

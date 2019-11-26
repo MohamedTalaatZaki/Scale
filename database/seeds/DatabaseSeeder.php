@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ItemTypeSeeder::class);
         $this->call(TrucksTypesSeeder::class);
         $this->call(ElementSeeder::class);
+        $this->call(LinesTableSeeder::class);
 
     }
 }

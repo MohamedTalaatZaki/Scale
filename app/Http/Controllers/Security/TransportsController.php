@@ -38,18 +38,15 @@ class TransportsController extends Controller
             ->paginate(15);
 
         $rawTrucks  =   Transports::query()
-            ->where('status' , 'accepted')
-            ->whereHas('itemType' , function ($q){$q->where('prefix' , 'raw');})
+            ->rawOrder()
             ->paginate(15);
 
         $scrapTrucks  =   Transports::query()
-            ->where('status' , 'waiting')
-            ->whereHas('itemType' , function ($q){$q->where('prefix' , 'scrap');})
+            ->scrapOrder()
             ->paginate(15);
 
         $finishTrucks  =   Transports::query()
-            ->where('status' , 'waiting')
-            ->whereHas('itemType' , function ($q){$q->where('prefix' , 'finish');})
+            ->finishOrder()
             ->paginate(15);
 
         $inProcessTrucks    =   Transports::query()
@@ -96,6 +93,7 @@ class TransportsController extends Controller
         $request->offsetSet('arrival_time' , Carbon::now());
         $request->offsetSet('transport_number' , Carbon::now()->timestamp);
         $request->offsetSet('status' , isItemTypeRaw($request->input('item_type_id')) ? 'arrived' : 'waiting');
+        $request->offsetSet('order' , nextRowOrder());
 
         $transport    =   Transports::query()->create($request->input());
 
@@ -110,7 +108,7 @@ class TransportsController extends Controller
     public function edit($id)
     {
         $truckArrival   =   Transports::query()->find($id);
-        return $this->index()->with(['truckArrival'  =>  $truckArrival]);
+        return redirect()->action('Security\TransportsController@index')->with(['truckArrival'  =>  $truckArrival]);
     }
 
     public function update(Request $request , $id)
@@ -152,7 +150,7 @@ class TransportsController extends Controller
         $transport  =   Transports::query()->find($request->get('id'));
         $transport->update(['status' => 'in_process']);
 //        $transport->details()->update(['status' => 'in_process']);
-        return $this->index()->with('success' , trans('global.car_in_process' , ['truck_plates_tractor' => $transport->truck_plates_tractor]));
+        return redirect()->action('Security\TransportsController@index')->with('success' , trans('global.car_in_process' , ['truck_plates_tractor' => $transport->truck_plates_tractor]));
     }
 
     public function checkOut(Request $request)
@@ -160,13 +158,13 @@ class TransportsController extends Controller
         $transport  =   Transports::query()->find($request->get('id'));
         $transport->update(['status' => 'departure']);
 //        $transport->details()->update(['status' => 'departure']);
-        return $this->index()->with('success' , trans('global.car_departure' , ['truck_plates_tractor' => $transport->truck_plates_tractor]));
+        return redirect()->action('Security\TransportsController@index')->with('success' , trans('global.car_departure' , ['truck_plates_tractor' => $transport->truck_plates_tractor]));
     }
 
     public function cancel(Request $request) {
         $transport  =   Transports::query()->find($request->get('id'));
         $transport->update(['status' => 'canceled']);
-        return $this->index()->with('success' , trans('global.car_canceled' , ['truck_plates_tractor' => $transport->truck_plates_tractor]));
+        return redirect()->action('Security\TransportsController@index')->with('success' , trans('global.car_canceled' , ['truck_plates_tractor' => $transport->truck_plates_tractor]));
     }
 
     public function print(Request $request)

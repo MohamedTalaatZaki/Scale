@@ -286,6 +286,50 @@ class MainMenusTableSeeder extends Seeder
                 'order' => 1,
                 'code'=>15
             ],
+            [
+                'en_name' => 'Edit Trucks Queue',
+                'ar_name' => 'ترتيب دخول الشاحنات',
+                'route' => 'edit-queue.index',
+                'a_class' => 'sidebar-sub sidebar-sub-edit-queue',
+                'i_class' => 'simple-icon-user-follow',
+                'order' => 1,
+                'code'=>16
+            ],
+        ]);
+
+        $main =  MainMenu::create([
+            'en_name' => 'Production',
+            'ar_name' => 'الانتاج',
+            'class' => 'sidebar sidebar-production',
+            'href' => '#production',
+            'sub_class' => 'iconsminds-digital-drawing',
+            'data_link' => 'production'
+        ]);
+        $group = $main->menuGroups()->create([
+            'en_name' => 'Production Process',
+            'ar_name' => 'الانتاج',
+            'aria_controls' => 'collapseProductionProcess',
+            'order' => 1,
+        ]);
+        $group->subMenus()->createMany([
+            [
+                'en_name' => 'Raw Process',
+                'ar_name' => 'عمليات الخامات',
+                'route' => 'production-process.index',
+                'a_class' => 'sidebar-sub sidebar-sub-production-process',
+                'i_class' => 'simple-icon-user-follow',
+                'order' => 1,
+                'code'=>17
+            ],
+            [
+                'en_name' => 'Scrap Process',
+                'ar_name' => 'عمليات المخلفات',
+                'route' => 'scrap-process.index',
+                'a_class' => 'sidebar-sub sidebar-sub-scrap-process',
+                'i_class' => 'simple-icon-user-follow',
+                'order' => 1,
+                'code'=>18
+            ]
         ]);
     }
 }

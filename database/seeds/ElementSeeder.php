@@ -29,7 +29,7 @@ class ElementSeeder extends Seeder
                 'ar_name'=>'Acidity',
                 'test_type'=>'chemical',
                 'element_type'=>'range',
-                'element_unit'=>''
+                'element_unit'=>'degree'
             ]);
         }
         $el = QcElement::where('en_name','Ph')->first();

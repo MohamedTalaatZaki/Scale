@@ -33,17 +33,17 @@
                                 <div class="form-group ">
                                     <label class="col-md-12 control-label">@lang('global.truck_plate')</label>
                                     <input type="text" class="form-control onlyAr" placeholder="{{trans('global.truck_plate')}}"
-                                           name="truck_plates" value="{{request()->input('truck_plate')}}"
+                                           name="truck_plates" value="{{request()->input('truck_plates')}}"
                                            autocomplete="off">
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group ">
-                                    <label class="col-md-12 control-label">@lang('global.en_name')</label>
+                                    <label class="col-md-12 control-label">@lang('global.supplier')</label>
                                     <select class="form-control select2-single" name="supplier_id">
                                         <option value="&nbsp;"> &nbsp;</option>
                                         @foreach($suppliers as $suppler)
-                                            <option value="{{ $suppler->id }}">{{ $suppler->name }}</option>
+                                            <option value="{{ $suppler->id }}" {{ request()->input('supplier_id') == $suppler->id ? "selected" : "" }}>{{ $suppler->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -54,7 +54,7 @@
                                     <select class="form-control select2-single" name="qc_test_id">
                                         <option value="&nbsp;"> &nbsp;</option>
                                         @foreach($qc_tests as $qc_test)
-                                            <option value="{{ $qc_test->id }}">{{ $qc_test->name }}</option>
+                                            <option value="{{ $qc_test->id }}" {{ request()->input('qc_test_id') == $qc_test->id ? "selected" : "" }}>{{ $qc_test->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -67,7 +67,7 @@
                                     <select class="form-control select2-single" name="user_id">
                                         <option value="&nbsp;"> &nbsp;</option>
                                         @foreach($users as $user)
-                                            <option value="{{ $user->id }}">{{ $user->full_name }}</option>
+                                            <option value="{{ $user->id }}" {{ request()->input('user_id') == $user->id ? "selected" : "" }}>{{ $user->full_name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -75,7 +75,7 @@
                             <div class="col-md-4">
                                 <div class="form-group ">
                                     <label class="col-md-12 control-label">@lang('global.from_date')</label>
-                                    <input type="text" class="form-control datepicker" placeholder="{{trans('global.from_date')}}"
+                                    <input type="text" class="form-control datepicker" data-date-format="yyyy-mm-dd" placeholder="{{trans('global.from_date')}}"
                                            name="from_date" value="{{request()->input('from_date')}}"
                                            autocomplete="off">
                                 </div>
@@ -83,7 +83,7 @@
                             <div class="col-md-4">
                                 <div class="form-group ">
                                     <label class="col-md-12 control-label">@lang('global.to_date')</label>
-                                    <input type="text" class="form-control datepicker" placeholder="{{trans('global.to_date')}}"
+                                    <input type="text" class="form-control datepicker" data-date-format="yyyy-mm-dd" placeholder="{{trans('global.to_date')}}"
                                            name="to_date" value="{{request()->input('to_date')}}"
                                            autocomplete="off">
                                 </div>

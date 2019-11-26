@@ -35,9 +35,21 @@ Route::middleware(['auth'])->group(function (){
     Route::resource('security/transports' , 'Security\TransportsController');
     Route::get('print' , 'Security\TransportsController@print')->name('printLabels');
     Route::resource('security/queue' , 'Security\QueueController');
+    Route::get('security/trucks/queue-edit' , 'Security\QueueController@editQueueIndex')->name('edit-queue.index');
+    Route::post('security/reorder-trucks-queue' , 'Security\QueueController@reorderQueue')->name('reorder-trucks-queue');
 
     Route::resource('qc/arrived-trucks' , 'QC\ArrivedTrucksController');
     Route::resource('qc/samples-test' , 'QC\SamplesTestController');
+
+    Route::resource('production/production-process' , 'Production\ProductionProcessController');
+    Route::post('production/production-process-start' , 'Production\ProductionProcessController@startProcess')->name('startProcess');
+    Route::get('production/production-process-transfer' , 'Production\ProductionProcessController@transferLine')->name('transferLine');
+    Route::post('production/production-process-finish' , 'Production\ProductionProcessController@finishProcess')->name('finishProcess');
+
+    Route::resource('production/scrap-process' , 'Production\ScrapProcessController');
+    Route::post('production/scrap-process-start' , 'Production\ScrapProcessController@startProcess')->name('scrapStartProcess');
+    Route::get('production/scrap-process-transfer' , 'Production\ScrapProcessController@transferLine')->name('scrapTransferLine');
+    Route::post('production/scrap-process-finish' , 'Production\ScrapProcessController@finishProcess')->name('scrapFinishProcess');
 
     Route::get('change-theme' , 'MasterData\UsersController@theme')->name('change-theme');
     Route::get('change-lang' , 'MasterData\UsersController@lang')->name('change-lang');
@@ -47,6 +59,7 @@ Route::middleware(['auth'])->group(function (){
     Route::get('security/transports-check-out' , 'Security\TransportsController@checkOut')->name('transports.checkOut');
     Route::get('security/cancel' , 'Security\TransportsController@cancel')->name('transports.cancel');
 
+
     /*
      * AJAX Routes
      */
@@ -54,9 +67,14 @@ Route::middleware(['auth'])->group(function (){
     Route::get('centers' , 'MasterData\CentersController@getCityCenters')->name('getCityCenters');
     Route::get('getSupplierItemGroups' , 'MasterData\SuppliersController@getSupplierItemGroups')->name('getSupplierItemGroups');
     Route::get('toggleTruckStatus' , 'QC\ArrivedTrucksController@toggleTruckStatus')->name('toggleTruckStatus');
+
+    Route::post('getLastBatch' , 'Production\ProductionProcessController@getLastBatch')->name('getLastBatch');
+    Route::post('getSupplierItemByGroup' , 'Production\ProductionProcessController@getSupplierItemByGroup')->name('getSupplierItemByGroup');
+    Route::post('getScrapSupplierItemByGroup' , 'Production\ScrapProcessController@getSupplierItemByGroup')->name('getScrapSupplierItemByGroup');
 });
 
+Route::get('trucks-scale' , "Scale\TrucksScaleController@index")->name('trucks-scale.index');
+Route::post('trucks-scale-check-barcode' , "Scale\TrucksScaleController@checkBarcode")->name('checkBarcode');
+Route::post('trucks-scale-weight' , "Scale\TrucksScaleController@saveTruckScaleWeight")->name('trucks-scale.weight');
+
 Auth::routes();
-
-
-

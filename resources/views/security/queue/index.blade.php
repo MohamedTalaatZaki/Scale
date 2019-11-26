@@ -32,7 +32,7 @@
                     <hr>
                     <div id="arrived" class="cards-container scroll scroll-content nested-sortable">
                         @foreach($raw as $truck)
-                            @include('security.queue.card' , ['truck' => $truck, 'order'   =>  $loop->iteration] )
+                            @include('security.queue.card' , ['truck' => $truck, 'order'   =>  $loop->iteration, 'type'    =>  'raw'] )
                         @endforeach
                     </div>
                 </div>
@@ -49,7 +49,7 @@
                     <hr>
                     <div id="sampled" class="cards-container scroll scroll-content nested-sortable">
                         @foreach($scrap as $truck)
-                            @include('security.queue.card' , ['truck' => $truck , 'order'   =>  $loop->iteration] )
+                            @include('security.queue.card' , ['truck' => $truck , 'order'   =>  $loop->iteration, 'type'    =>  'scrap'] )
                         @endforeach
                     </div>
                 </div>
@@ -67,7 +67,7 @@
                     <hr>
                     <div id="sampled" class="cards-container scroll scroll-content nested-sortable">
                         @foreach($finish as $truck)
-                            @include('security.queue.card' , ['truck' => $truck, 'order'   =>  $loop->iteration] )
+                            @include('security.queue.card' , ['truck' => $truck, 'order'   =>  $loop->iteration, 'type'    =>  'finish'] )
                         @endforeach
                     </div>
                 </div>

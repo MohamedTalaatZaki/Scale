@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\QC;
 
+use App\Filters\SampledTestFilter;
 use App\Models\QC\QcTestHeader;
 use App\Models\QC\SampleTestHeader;
 use App\Models\Security\TransportDetail;
 use App\Models\Supplier\Supplier;
+use App\Traits\AuthorizeTrait;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -14,9 +16,15 @@ use Illuminate\Support\Facades\DB;
 
 class SamplesTestController extends Controller
 {
+    use AuthorizeTrait;
     public function index()
     {
+        $this->authorized('samples-test.index');
         $sampleTestHeaders  =   SampleTestHeader::query()->orderByDesc('created_at')->paginate(25);
+        $sampleTestHeaders  =   SampleTestHeader::query()
+            ->filter(new SampledTestFilter(\request()))
+            ->orderByDesc('created_at')
+            ->paginate(25);
         $suppliers          =   Supplier::all();
         $qc_tests           =   QcTestHeader::query()->get();
         $users              =   User::query()->whereHas('labUsers')->get();
@@ -30,6 +38,7 @@ class SamplesTestController extends Controller
     }
     public function create()
     {
+        $this->authorized('samples-test.create');
         $transport_detail   =   TransportDetail::query()
             ->where('id' , \request()->get('transport_detail_id'))
             ->doesntHave('sampleTestHeader')
@@ -47,6 +56,7 @@ class SamplesTestController extends Controller
 
     public function store(Request $request)
     {
+        $this->authorized(['samples-test.create' , 'samples-test.edit']);
         $this->validate($request , [
             'details.*.sampled_range'           =>  'required_if:element_type,range',
             'details.*.sampled_expected_result' =>  'required_if:element_type,question',
@@ -86,6 +96,7 @@ class SamplesTestController extends Controller
     }
 
     public function edit($id) {
+        $this->authorized('samples-test.edit');
         $transport_detail   =   TransportDetail::query()
             ->where('id' , $id)
             ->first();
