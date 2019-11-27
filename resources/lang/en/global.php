@@ -260,4 +260,5 @@ return [
     'truck_reweight'   =>  'Please Redirect Back The Truck To The Scale.',
     'scrap_process' =>  'Scrap Process',
     'unknown_transport' =>  'Transport Number Unknown !!',
+    'trucks_help'   =>  'Contact Us For Help On Phone Number : :phone'
 ];

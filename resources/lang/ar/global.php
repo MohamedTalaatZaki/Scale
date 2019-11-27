@@ -257,4 +257,5 @@ return [
     'truck_reweight'   =>  'رجاء توجيه السيارة الى الميزان',
     'scrap_process' =>  'عمليات المخلفات',
     'unknown_transport' =>  'رقم النقلة خطأ !!',
+    'trucks_help'   =>  'للمساعدة اتصل على رقم : :phone'
 ];
