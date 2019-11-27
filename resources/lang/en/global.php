@@ -259,4 +259,5 @@ return [
     'discount_perc_required'    =>  'Discount Percent Required',
     'truck_reweight'   =>  'Please Redirect Back The Truck To The Scale.',
     'scrap_process' =>  'Scrap Process',
+    'unknown_transport' =>  'Transport Number Unknown !!',
 ];

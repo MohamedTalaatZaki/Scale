@@ -26,7 +26,8 @@ class TrucksScaleController extends Controller
             ->with('transport')
             ->find($request->input('detail_id'));
 
-        $cannotWeightMsg    =   !$transportDetail ? TransportDetail::query()->find($request->input('detail_id'))->TransportCannotWeight() : null;
+        $errorMsg           =   optional(TransportDetail::query()->find($request->input('detail_id')))->TransportCannotWeight();
+        $cannotWeightMsg    =   $errorMsg ? $errorMsg : trans('global.unknown_transport');
 
         return response()->json(['transport'    =>  $transportDetail , 'cannot_weight_msg'    =>  $cannotWeightMsg ]);
     }
