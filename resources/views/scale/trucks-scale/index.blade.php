@@ -152,7 +152,6 @@
                         this.barcode.push(evt.key);
                     } else if (evt.keyCode === 13 && this.barcodeStr !== "" && this.transport === null) {
                         this.barcodeStr = this.barcode.join("");
-                        console.log(this.barcodeStr);
                         this.scanned = true;
                         this.checkBarcode();
                     } else if(this.scanned && this.transport)
@@ -248,7 +247,7 @@
                 })
             },
             wsInit  :   function() {
-                this.websocket = new WebSocket("ws://192.168.1.7:8500/");
+                this.websocket = new WebSocket("ws://127.0.0.1:8500/");
                 this.websocket.onopen = (evt) => { this.wsOnOpen(evt) };
                 this.websocket.onclose = (evt) => { this.wsOnClose(evt) };
                 this.websocket.onmessage = (evt) => { this.wsOnMessage(evt) };
