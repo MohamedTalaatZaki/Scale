@@ -27,8 +27,10 @@
                 <td>{{ $truck->arrival_time->diffForHumans() }}</td>
                 <td>
                     @permission('transports.check_out')
-                    <a href="{{ route('transports.checkOut' , ['id' => $truck->id]) }}"
-                       class="btn btn-primary btn-sm mb-1">@lang('global.check_out')</a>
+                        @if($truck->status == 'out_weight')
+                            <a href="{{ route('transports.checkOut' , ['id' => $truck->id]) }}"
+                               class="btn btn-primary btn-sm mb-1">@lang('global.check_out')</a>
+                        @endif
                     @endpermission
                     <a href="{{ route('printLabels' , ['id' => $truck->id]) }}" target="_blank"
                        class="btn btn-success btn-sm mb-1 print">@lang('global.print')</a>

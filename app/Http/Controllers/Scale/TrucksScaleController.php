@@ -5,11 +5,14 @@ namespace App\Http\Controllers\Scale;
 use App\Models\Production\TransportLine;
 use App\Models\Security\TransportDetail;
 use App\Models\Security\Transports;
+use App\Traits\AuthorizeTrait;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class TrucksScaleController extends Controller
 {
+    use AuthorizeTrait;
+
     public function index()
     {
         $this->setPageLocale();
