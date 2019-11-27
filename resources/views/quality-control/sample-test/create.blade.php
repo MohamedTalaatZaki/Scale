@@ -173,8 +173,8 @@
                         <hr/>
                         <div class="form-group col-md-12">
                             <div class="text-center">
-                                <button class="btn btn-danger mr-5 btn-rejected resultSwal" data-type="@lang('global.rejected')" data-result="0" style="display: none">@lang('global.rejected')</button>
-                                <button class="btn btn-success mr-5 resultSwal" data-type="@lang('global.accepted')" data-result="1">@lang('global.accepted')</button>
+                                <button class="btn btn-danger mr-5 btn-rejected resultSwal" data-type-result="rejected" data-type="@lang('global.rejected')" data-result="0" style="display: none">@lang('global.rejected')</button>
+                                <button class="btn btn-success mr-5 resultSwal" data-type-result="accepted" data-type="@lang('global.accepted')" data-result="1">@lang('global.accepted')</button>
                             </div>
                         </div>
                         <hr/>
@@ -203,7 +203,7 @@
             $('.resultSwal').on('click' , function (evt) {
                 evt.preventDefault();
 
-                let selected    =   $(this).data('type');
+                let selected    =   $(this).data('type-result');
                 let btnResult   =   parseInt($(this).data('result'));
 
                 if ( !checkResults() )
