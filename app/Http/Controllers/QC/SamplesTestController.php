@@ -56,7 +56,6 @@ class SamplesTestController extends Controller
 
     public function store(Request $request)
     {
-        dd($request->input());
         $this->authorized(['samples-test.create' , 'samples-test.edit']);
         $this->validate($request , [
             'details.*.sampled_range'           =>  'required_if:element_type,range',
