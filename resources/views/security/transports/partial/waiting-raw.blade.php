@@ -26,7 +26,7 @@
             <td>
                 @permission('transports.check_in')
                     <a href="{{ route('transports.inProcess' , ['id' => $truck->id]) }}"
-                       class="btn btn-primary btn-sm mb-1">@lang('global.check_in')</a>
+                       class="btn btn-sm mb-1" style="background-color: darkblue; color: white ; border-color: blue">@lang('global.check_in')</a>
                 @endpermission
                 @permission('transports.cancel')
                 <a href="{{ route('transports.cancel' , ['id' => $truck->id]) }}"
