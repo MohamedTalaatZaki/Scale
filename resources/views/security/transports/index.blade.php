@@ -60,28 +60,41 @@
             <div class="card">
                 <div class="card-header pl-0 pr-0">
                     <ul class="nav nav-tabs card-header-tabs  ml-0 mr-0" role="tablist">
-                        <li class="nav-item w-25 text-center">
+                        <li class="nav-item w-20 text-center">
                             <a class="nav-link {{ !request()->has('itemType') ? " active" : "" }}" id="first-tab_" data-toggle="tab" href="#firstFull" role="tab"
                                aria-controls="first" aria-selected="true">
                                 @lang('global.arrival_trucks')
                             </a>
                         </li>
-                        <li class="nav-item w-25 text-center">
+                        <li class="nav-item w-15 text-center">
                             <a class="nav-link {{ request()->has('itemType') ? " active" : "" }}" id="second-tab_" data-toggle="tab" href="#secondFull" role="tab"
                                aria-controls="second" aria-selected="false">
                                 @lang('global.waiting_trucks')
                             </a>
                         </li>
-                        <li class="nav-item w-25 text-center">
+                        <li class="nav-item w-15 text-center">
                             <a class="nav-link" id="third-tab_" data-toggle="tab" href="#thirdFull" role="tab"
                                aria-controls="third" aria-selected="false">
                                 @lang('global.in_process_trucks')
                             </a>
                         </li>
-                        <li class="nav-item w-25 text-center">
+                        <li class="nav-item w-15 text-center">
                             <a class="nav-link" id="fourth-tab_" data-toggle="tab" href="#fourthFull" role="tab"
                                aria-controls="fourth" aria-selected="false">
                                 @lang('global.departures_trucks')
+                            </a>
+                        </li>
+                        <li class="nav-item w-15 text-center">
+                            <a class="nav-link" id="canceled-tab_" data-toggle="tab" href="#canceledFull" role="tab"
+                               aria-controls="fourth" aria-selected="false">
+                                @lang('global.canceled_trucks')
+                            </a>
+                        </li>
+
+                        <li class="nav-item w-15 text-center">
+                            <a class="nav-link" id="rejected-tab_" data-toggle="tab" href="#rejectedFull" role="tab"
+                               aria-controls="fourth" aria-selected="false">
+                                @lang('global.rejected_trucks')
                             </a>
                         </li>
                     </ul>
@@ -92,6 +105,8 @@
                         @include('security.transports.partial.waiting')
                         @include('security.transports.partial.in-process')
                         @include('security.transports.partial.departures')
+                        @include('security.transports.partial.canceled')
+                        @include('security.transports.partial.rejected')
 
                     </div>
                 </div>

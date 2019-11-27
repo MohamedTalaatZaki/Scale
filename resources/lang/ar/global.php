@@ -257,4 +257,6 @@ return [
     'truck_reweight'   =>  'رجاء توجيه السيارة الى الميزان',
     'scrap_process' =>  'عمليات المخلفات',
     'unknown_transport' =>  'رقم النقلة خطأ !!',
+    'canceled_trucks'   =>  'سيارات ملغاة',
+    'rejected_trucks'   =>  'سيارات مرفوضة',
 ];

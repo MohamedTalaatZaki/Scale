@@ -260,4 +260,6 @@ return [
     'truck_reweight'   =>  'Please Redirect Back The Truck To The Scale.',
     'scrap_process' =>  'Scrap Process',
     'unknown_transport' =>  'Transport Number Unknown !!',
+    'canceled_trucks'   =>  'Canceled Trucks',
+    'rejected_trucks'   =>  'Rejected Trucks',
 ];

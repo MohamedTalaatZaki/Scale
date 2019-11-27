@@ -61,6 +61,14 @@ class TransportsController extends Controller
             ->where('status' , 'departure')
             ->paginate(15);
 
+        $canceled   =   Transports::query()
+            ->where('status' , 'canceled')
+            ->paginate(15);
+
+        $rejected   =   Transports::query()
+            ->where('status' , 'rejected')
+            ->paginate(15);
+
         return view('security.transports.index' , [
             'suppliers'     =>  $suppliers,
             'governorates'  =>  $governorates,
@@ -72,6 +80,8 @@ class TransportsController extends Controller
             'finishTrucks'  =>  $finishTrucks,
             'inProcessTrucks'  =>  $inProcessTrucks,
             'departures'    =>  $departures,
+            'canceled'      =>  $canceled,
+            'rejected'      =>  $rejected,
         ]);
     }
 
