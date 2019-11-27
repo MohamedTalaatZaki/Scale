@@ -203,6 +203,7 @@
             $('.resultSwal').on('click' , function (evt) {
                 evt.preventDefault();
 
+                let swalText    =   $(this).data('type');
                 let selected    =   $(this).data('type-result');
                 let btnResult   =   parseInt($(this).data('result'));
 
@@ -214,7 +215,7 @@
                 if (finalResult > -1) {
 
                     Swal.fire({
-                        title: selected,
+                        title: swalText,
                         text: "@lang('global.are_you_sure')",
                         showCancelButton: true,
                         confirmButtonColor: '#3085d6',
