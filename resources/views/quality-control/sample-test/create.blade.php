@@ -63,7 +63,7 @@
                             <div class="col-4"></div>
                             <div class="col-4 bg-dark" style="border-radius: 30px;">
                                 <input type="hidden" name="transport_detail_id" value="{{ $transport_detail->id }}">
-                                <input type="hidden" name="qc_test_header_id" value="{{ optional($transport_detail->testableType)->id }}">
+                                <input type="hidden" name="qc_test_header_id" value="{{ optional(optional($transport_detail->testableType)->qcTestHeader)->id }}">
                                 <input type="hidden" name="result" class="final_result" value="">
                                 <textarea name="reason" class="final_reason" style="display: none"></textarea>
                                 <h3 style="margin: 10px;display: none" class="final-accepted text-center text-success"> @lang('global.accepted') </h3>
