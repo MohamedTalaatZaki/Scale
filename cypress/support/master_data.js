@@ -18,3 +18,9 @@ Cypress.Commands.add('assert_success_login_bb',function(username = 'test'){
 Cypress.Commands.add('assert_fail_login_bb',function(){
     cy.get('li').should('contain', 'Invalid User name or password');
 });
+
+Cypress.Commands.add('assert_user_url_permission_bb',function(permission_name,url){
+  cy.exec('php artisan user:remove_permission '+permission_name)
+  cy.visit(url,{ failOnStatusCode: false});
+  cy.get('.code').should('contain','403')
+});
