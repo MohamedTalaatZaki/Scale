@@ -529,7 +529,7 @@ class PermissionsTableSeeder extends Seeder
             'sub_menu_id' => $subMenu->id,
             'name' => 'transferLine',
             'en_display_name' => 'Can Transfer Process',
-            'ar_display_name' => 'تحويل الشاحنة لخط اخر',
+            'ar_display_name' => 'تحويل السيارة لخط اخر',
             'en_description' => NULL,
             'ar_description' => NULL,
         ]);
@@ -567,7 +567,18 @@ class PermissionsTableSeeder extends Seeder
             'sub_menu_id' => $subMenu->id,
             'name' => 'scrapTransferLine',
             'en_display_name' => 'Can Transfer Process',
-            'ar_display_name' => 'تحويل الشاحنة لخط اخر',
+            'ar_display_name' => 'تحويل السيارة لخط اخر',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+
+        $subMenu = SubMenu::where('code', 19)->first();
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'trucks-scale.index',
+            'en_display_name' => 'Manual Scale',
+            'ar_display_name' => 'الميزان',
             'en_description' => NULL,
             'ar_description' => NULL,
         ]);

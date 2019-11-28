@@ -331,5 +331,22 @@ class MainMenusTableSeeder extends Seeder
                 'code'=>18
             ]
         ]);
+        $group = $main->menuGroups()->create([
+            'en_name' => 'Manual Scale',
+            'ar_name' => 'الميزان',
+            'aria_controls' => 'collapseManualScale',
+            'order' => 1,
+        ]);
+        $group->subMenus()->createMany([
+            [
+                'en_name' => 'Scale',
+                'ar_name' => 'الميزان',
+                'route' => 'trucks-scale.index',
+                'a_class' => 'sidebar-sub sidebar-sub-manual-scale',
+                'i_class' => 'simple-icon-user-follow',
+                'order' => 1,
+                'code'=>19
+            ]
+        ]);
     }
 }

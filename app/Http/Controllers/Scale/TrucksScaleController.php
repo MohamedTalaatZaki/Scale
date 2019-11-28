@@ -5,11 +5,14 @@ namespace App\Http\Controllers\Scale;
 use App\Models\Production\TransportLine;
 use App\Models\Security\TransportDetail;
 use App\Models\Security\Transports;
+use App\Traits\AuthorizeTrait;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class TrucksScaleController extends Controller
 {
+    use AuthorizeTrait;
+
     public function index()
     {
         $this->setPageLocale();
@@ -23,7 +26,8 @@ class TrucksScaleController extends Controller
             ->with('transport')
             ->find($request->input('detail_id'));
 
-        $cannotWeightMsg    =   !$transportDetail ? TransportDetail::query()->find($request->input('detail_id'))->TransportCannotWeight() : null;
+        $errorMsg           =   optional(TransportDetail::query()->find($request->input('detail_id')))->TransportCannotWeight();
+        $cannotWeightMsg    =   $errorMsg ? $errorMsg : trans('global.unknown_transport');
 
         return response()->json(['transport'    =>  $transportDetail , 'cannot_weight_msg'    =>  $cannotWeightMsg ]);
     }
