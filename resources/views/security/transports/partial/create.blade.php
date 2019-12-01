@@ -23,7 +23,7 @@
                     <div class="form-group col-md-12">
                         <label for="driver_license">@lang('global.driver_license') *</label>
                         <input type="text"
-                               class="form-control"
+                               class="form-control driver_license"
                                id="driver_license"
                                placeholder="@lang('global.driver_license')"
                                value="{{ old('driver_license') }}"
@@ -225,7 +225,7 @@
 
         <div class="col-md-12 mt-3">
             <div class="btn-group-sm text-center text-black-50">
-                <button type="submit" class="btn btn-primary">@lang('global.save_print')</button>
+                <button type="submit" class="btn btn-primary submit-btn">@lang('global.save_print')</button>
                 <button type="reset" class="btn btn-danger reset-close">@lang('global.reset_close')</button>
             </div>
         </div>

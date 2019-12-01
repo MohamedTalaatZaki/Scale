@@ -260,4 +260,11 @@ return [
     'truck_reweight'   =>  'Please Redirect Back The Truck To The Scale.',
     'scrap_process' =>  'Scrap Process',
     'unknown_transport' =>  'Transport Number Unknown !!',
+    'blocked_driver'    =>  'This Driver Has Been Blocked',
+    'alert' =>  '!!!  Alert  !!!',
+    'blocked_drivers'   =>  'Blocked Drivers',
+    'security'  =>  'Security',
+    'blocked_count' =>  'Blocked Count',
+    'unblock'   =>  'Unblock',
+    'driver_unblocked_success'  =>  'Driver Unblocked Successful',
 ];

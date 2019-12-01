@@ -38,6 +38,8 @@ Route::middleware(['auth'])->group(function (){
     Route::get('security/trucks/queue-edit' , 'Security\QueueController@editQueueIndex')->name('edit-queue.index');
     Route::post('security/reorder-trucks-queue' , 'Security\QueueController@reorderQueue')->name('reorder-trucks-queue');
 
+    Route::resource('security/blocked-drivers' , 'Security\BlockedDriversController');
+
     Route::resource('qc/arrived-trucks' , 'QC\ArrivedTrucksController');
     Route::resource('qc/samples-test' , 'QC\SamplesTestController');
 
@@ -71,6 +73,8 @@ Route::middleware(['auth'])->group(function (){
     Route::post('getLastBatch' , 'Production\ProductionProcessController@getLastBatch')->name('getLastBatch');
     Route::post('getSupplierItemByGroup' , 'Production\ProductionProcessController@getSupplierItemByGroup')->name('getSupplierItemByGroup');
     Route::post('getScrapSupplierItemByGroup' , 'Production\ScrapProcessController@getSupplierItemByGroup')->name('getScrapSupplierItemByGroup');
+
+    Route::post('checkBlockedDriver' , 'Security\BlockedDriversController@checkIfBlocked')->name('checkIfBlocked');
 });
 
 Route::get('trucks-scale' , "Scale\TrucksScaleController@index")->name('trucks-scale.index');

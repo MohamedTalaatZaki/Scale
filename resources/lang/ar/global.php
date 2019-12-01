@@ -257,4 +257,11 @@ return [
     'truck_reweight'   =>  'رجاء توجيه السيارة الى الميزان',
     'scrap_process' =>  'عمليات المخلفات',
     'unknown_transport' =>  'رقم النقلة خطأ !!',
+    'blocked_driver'    =>  'تم حذر هذا السائق من دخول الشركة',
+    'alert' =>  '!!!  تنبيه  !!!',
+    'blocked_drivers'   =>  'السائقين المحظورين',
+    'security'  =>  'الامن',
+    'blocked_count' =>  'عدد مرات الحظر',
+    'unblock'   =>  'الغاء الحظر',
+    'driver_unblocked_success'  =>  'تم الغاء الحظر عن السائق بنجاح',
 ];
