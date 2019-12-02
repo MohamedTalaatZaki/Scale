@@ -34,7 +34,7 @@ Route::middleware(['auth'])->group(function (){
 
     Route::resource('security/transports' , 'Security\TransportsController');
     Route::get('security/print' , 'Security\TransportsController@print')->name('printLabels');
-    Route::resource('security/queue' , 'Security\QueueController');
+    Route::resource('security/queue' , 'Security\QueueController')->except('index');
     Route::get('security/trucks/queue-edit' , 'Security\QueueController@editQueueIndex')->name('edit-queue.index');
     Route::post('security/reorder-trucks-queue' , 'Security\QueueController@reorderQueue')->name('reorder-trucks-queue');
 
@@ -76,7 +76,7 @@ Route::middleware(['auth'])->group(function (){
 
     Route::post('checkBlockedDriver' , 'Security\BlockedDriversController@checkIfBlocked')->name('checkIfBlocked');
 });
-
+Route::get('security/queue' , 'Security\QueueController@index')->name('queue.index');
 Route::get('trucks-scale' , "Scale\TrucksScaleController@index")->name('trucks-scale.index');
 Route::post('trucks-scale-check-barcode' , "Scale\TrucksScaleController@checkBarcode")->name('checkBarcode');
 Route::post('trucks-scale-weight' , "Scale\TrucksScaleController@saveTruckScaleWeight")->name('trucks-scale.weight');
