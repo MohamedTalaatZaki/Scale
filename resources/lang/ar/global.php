@@ -266,4 +266,8 @@ return [
     'blocked_count' =>  'عدد مرات الحظر',
     'unblock'   =>  'الغاء الحظر',
     'driver_unblocked_success'  =>  'تم الغاء الحظر عن السائق بنجاح',
+    'you_want_cancel_truck' =>  'هل انت متاكد انك تريد الالغاء',
+    'select_reason' =>  'اختار سبب ',
+    'note'  =>  'ملحوظة',
+    'if_want_block_driver'  =>  'هل تريد حظر السائق ؟',
 ];

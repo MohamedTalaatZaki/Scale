@@ -7,6 +7,7 @@ use App\Models\Items\ItemGroup;
 use App\Models\Items\ItemType;
 use App\Models\MasterData\TruckType;
 use App\Models\Security\BlockedDriver;
+use App\Models\Security\BlockedReason;
 use App\Models\Security\Transports;
 use App\Models\Supplier\Supplier;
 use App\Rules\RequiredIfItemTypeRaw;
@@ -70,6 +71,8 @@ class TransportsController extends Controller
             ->where('status' , 'rejected')
             ->paginate(15);
 
+        $cancelReason   =   BlockedReason::all();
+
         return view('security.transports.index' , [
             'suppliers'     =>  $suppliers,
             'governorates'  =>  $governorates,
@@ -83,6 +86,7 @@ class TransportsController extends Controller
             'departures'    =>  $departures,
             'canceled'      =>  $canceled,
             'rejected'      =>  $rejected,
+            'reasons'       =>  $cancelReason,
         ]);
     }
 
@@ -184,13 +188,20 @@ class TransportsController extends Controller
     {
         $transport  =   Transports::query()->find($request->get('id'));
         $transport->update(['status' => 'departure']);
-//        $transport->details()->update(['status' => 'departure']);
+        if($request->has('block_driver'))
+        {
+            $this->blockDriver($transport , $request);
+        }
         return redirect()->action('Security\TransportsController@index')->with('success' , trans('global.car_departure' , ['truck_plates_tractor' => $transport->truck_plates_tractor]));
     }
 
     public function cancel(Request $request) {
-        $transport  =   Transports::query()->find($request->get('id'));
+        $transport  =   Transports::query()->find($request->get('transport_id'));
         $transport->update(['status' => 'canceled']);
+        if($request->has('block_driver'))
+        {
+            $this->blockDriver($transport , $request);
+        }
         return redirect()->action('Security\TransportsController@index')->with('success' , trans('global.car_canceled' , ['truck_plates_tractor' => $transport->truck_plates_tractor]));
     }
 
@@ -199,6 +210,18 @@ class TransportsController extends Controller
         app()->setLocale('ar');
         $transport  =   Transports::query()->find($request->get('id'));
         return view('security.transports.partial.print' , ['transport' => $transport]);
+    }
+
+    private function blockDriver(Transports $transport , Request $request)
+    {
+        $driver     =   BlockedDriver::query()->where('license' , $transport->driver_license)->first();
+        $driver->update([
+            'is_blocked' => 1,
+            'blocked_count' =>  $driver->blocked_count + 1,
+            'blocked_by'    =>  \Auth::id(),
+            'blocked_reason_id' =>  $request->input('reason_id'),
+            'block_reason'  =>  $request->input('note')
+        ]);
     }
 }
 

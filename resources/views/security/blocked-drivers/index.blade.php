@@ -47,7 +47,7 @@
                                 <td>{{ $driver->mobile }}</td>
                                 <td>{{ $driver->blocked_count }}</td>
                                 <td>
-                                    @permission('blocked-drivers.update')
+                                    @permission('blocked-drivers.edit')
                                         <form action="{{ route('blocked-drivers.update' , ['id' => $driver->id]) }}" method="post">
                                             @csrf
                                             @method('put')

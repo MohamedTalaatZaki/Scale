@@ -7,20 +7,6 @@
                     <h6>@lang('global.driver_information') *</h6>
                     <hr>
                     <div class="form-group col-md-12">
-                        <label for="driver_name">@lang('global.driver_name')</label>
-                        <input type="text"
-                               class="form-control noNumbers"
-                               id="driver_name"
-                               placeholder="@lang('global.driver_name')"
-                               name="driver_name"
-                               value="{{ old('driver_name') }}"
-                               autocomplete="off"
-                               required>
-                        @if($errors->has('driver_name'))
-                            <div class="error" style="">{{ $errors->first('driver_name') }}</div>
-                        @endif
-                    </div>
-                    <div class="form-group col-md-12">
                         <label for="driver_license">@lang('global.driver_license') *</label>
                         <input type="text"
                                class="form-control driver_license"
@@ -34,6 +20,21 @@
                             <div class="error" style="">{{ $errors->first('driver_license') }}</div>
                         @endif
                     </div>
+                    <div class="form-group col-md-12">
+                        <label for="driver_name">@lang('global.driver_name')</label>
+                        <input type="text"
+                               class="form-control noNumbers"
+                               id="driver_name"
+                               placeholder="@lang('global.driver_name')"
+                               name="driver_name"
+                               value="{{ old('driver_name') }}"
+                               autocomplete="off"
+                               required>
+                        @if($errors->has('driver_name'))
+                            <div class="error" style="">{{ $errors->first('driver_name') }}</div>
+                        @endif
+                    </div>
+
                     <div class="form-group col-md-12">
                         <label for="driver_national_id">@lang('global.driver_national_id') *</label>
                         <input type="text"
@@ -51,7 +52,7 @@
                     <div class="form-group col-md-12">
                         <label for="driver_mobile">@lang('global.driver_mobile') *</label>
                         <input type="text"
-                               class="form-control"
+                               class="form-control onlyNumbers"
                                id="driver_mobile"
                                placeholder="@lang('global.driver_mobile')"
                                name="driver_mobile"

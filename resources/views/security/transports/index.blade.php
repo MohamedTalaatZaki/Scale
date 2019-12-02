@@ -5,12 +5,12 @@
             <h1>@lang('global.truck_arrival')</h1>
             <div class="text-zero top-right-button-container">
                 @if(!isset($truckArrival))
-                    {{--                @permission('truck_arrival.create')--}}
-                    <a href="javascript:void(0)" class="show-create-div">
-                        <button type="button"
-                                class="btn btn-primary btn-sm top-right-button mr-1">@lang('global.create')</button>
-                    </a>
-                    {{--                @endpermission--}}
+                    @permission('transports.create')
+                        <a href="javascript:void(0)" class="show-create-div">
+                            <button type="button"
+                                    class="btn btn-primary btn-sm top-right-button mr-1">@lang('global.create')</button>
+                        </a>
+                    @endpermission
                 @endif
             </div>
             <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
@@ -142,6 +142,55 @@
         </div>
     </div>
 
+    <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog" aria-labelledby="cancelModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">@lang('global.cancel')</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form action="" method="post" id="cancelForm">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="row form-group">
+                            <input type="hidden" name="transport_id" id="cancelTransportId">
+                            <div class="col-md-12">
+                                <label class="col-12 col-form-label">@lang('global.if_want_block_driver')</label>
+                                <div class="col-12">
+                                    <div class="custom-switch custom-switch-primary-inverse mb-2" style="padding-left: 0">
+                                        <input class="custom-switch-input" id="block_driver" type="checkbox" value="1" name="block_driver">
+                                        <label class="custom-switch-btn" for="block_driver"></label>
+                                        <hr/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 blockDiv"  style="display: none">
+                                <label>@lang('global.select_reason')</label>
+                                <select class="form-control select2-single reasonId" name="reason_id" data-placeholder="@lang('global.select_reason')">
+                                    <option value="" selected></option>
+                                    @foreach($reasons as $reason)
+                                        <option value="{{ $reason->id }}"> {{ $reason->name }} </option>
+                                    @endforeach
+                                </select>
+                                <hr/>
+                            </div>
+                            <div class="col-md-12 blockDiv" style="display: none">
+                                <label>@lang('global.note')</label>
+                                <textarea class="form-control reasonNote" name="note" cols="12" rows="6"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">@lang('global.save')</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">@lang('global.close')</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 @endsection
 @push('scripts')
     <script src="{{ asset('js/axios.js') }}"></script>
@@ -206,6 +255,24 @@
                     })
             });
 
+            $('#cancelModal').on('show.bs.modal', function (event) {
+                let id  =   $(event.relatedTarget).data('transport-id');
+                let route   =   $(event.relatedTarget).data('route');
+                $('#cancelTransportId').val(id);
+                $('#cancelForm').prop('action' , route);
+            });
+
+            $('#block_driver').on('change' , function () {
+                if ($(this).is(':checked')){
+                    $('.reasonId').attr('required' , true);
+                    $('.reasonId').val('');
+                    $('.reasonNote').val('');
+                    $('.blockDiv').show();
+                } else {
+                    $('.reasonId').attr('required' , false);
+                    $('.blockDiv').hide();
+                }
+            });
             function govChange(govId , cityId = 0) {
                 let citySelect  =   $('.citySelect');
                 $.ajax({

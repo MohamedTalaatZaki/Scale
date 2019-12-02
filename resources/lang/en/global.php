@@ -269,4 +269,8 @@ return [
     'blocked_count' =>  'Blocked Count',
     'unblock'   =>  'Unblock',
     'driver_unblocked_success'  =>  'Driver Unblocked Successful',
+    'you_want_cancel_truck' =>  'Please Confirm Cancelation',
+    'select_reason' =>  'Select Reason ',
+    'note'  =>  'Note',
+    'if_want_block_driver'  =>  'Are You Want Block The Driver ?',
 ];
