@@ -67,7 +67,7 @@ class MainMenusTableSeeder extends Seeder
                 'ar_name' => 'المستخدمين',
                 'route' => 'users.index',
                 'a_class' => 'sidebar-sub sidebar-sub-users',
-                'i_class' => 'simple-icon-user-follow',
+                'i_class' => 'usersIcon',
                 'order' => 1,
                 'code'=>1
             ],
@@ -76,7 +76,7 @@ class MainMenusTableSeeder extends Seeder
                 'ar_name' => 'الصلاحيات',
                 'route' => 'roles.index',
                 'a_class' => 'sidebar-sub sidebar-sub-roles',
-                'i_class' => 'simple-icon-user-following',
+                'i_class' => 'rolesIcon',
                 'order' => 2,
                 'code'=>2
             ]
@@ -94,7 +94,7 @@ class MainMenusTableSeeder extends Seeder
                 'ar_name' => 'المحافظات',
                 'route' => 'governorates.index',
                 'a_class' => 'sidebar-sub sidebar-sub-governorates',
-                'i_class' => 'simple-icon-credit-card',
+                'i_class' => 'governoratesIcon',
                 'order' => 1,
                 'code'=>3
             ],
@@ -104,7 +104,7 @@ class MainMenusTableSeeder extends Seeder
                 'ar_name' => 'المدن',
                 'route' => 'cities.index',
                 'a_class' => 'sidebar-sub sidebar-sub-cities',
-                'i_class' => 'simple-icon-list',
+                'i_class' => 'citiesIcon',
                 'order' => 2,
                 'code'=>4
 
@@ -115,7 +115,7 @@ class MainMenusTableSeeder extends Seeder
                 'ar_name' => 'المراكز',
                 'route' => 'centers.index',
                 'a_class' => 'sidebar-sub sidebar-sub-centers',
-                'i_class' => 'simple-icon-grid',
+                'i_class' => 'centersIcon',
                 'order' => 3,
                 'code'=>5
             ]
@@ -134,7 +134,7 @@ class MainMenusTableSeeder extends Seeder
                 'ar_name' => 'مجموعات الاصناف',
                 'route' => 'item-group.index',
                 'a_class' => 'sidebar-sub sidebar-sub-item-group',
-                'i_class' => 'simple-icon-user-follow',
+                'i_class' => 'itemGroupsIcon',
                 'order' => 1,
                 'code'=>6
             ],
@@ -143,7 +143,7 @@ class MainMenusTableSeeder extends Seeder
                 'ar_name' => 'أنواع الاصناف',
                 'route' => 'item-types.index',
                 'a_class' => 'sidebar-sub sidebar-sub-item-types',
-                'i_class' => 'simple-icon-user-follow',
+                'i_class' => 'itemTypesIcon',
                 'order' => 2,
                 'code'=>7
             ],
@@ -152,7 +152,7 @@ class MainMenusTableSeeder extends Seeder
                 'ar_name' => 'الاصناف',
                 'route' => 'items.index',
                 'a_class' => 'sidebar-sub sidebar-sub-items',
-                'i_class' => 'simple-icon-user-follow',
+                'i_class' => 'itemsIcon',
                 'order' => 3,
                 'code'=>8
             ]
@@ -171,7 +171,7 @@ class MainMenusTableSeeder extends Seeder
                 'ar_name' => 'الموردين',
                 'route' => 'suppliers.index',
                 'a_class' => 'sidebar-sub sidebar-sub-suppliers',
-                'i_class' => 'simple-icon-user-follow',
+                'i_class' => 'suppliersIcon',
                 'order' => 1,
                 'code'=>9
             ]
@@ -190,7 +190,7 @@ class MainMenusTableSeeder extends Seeder
                 'ar_name' => 'الموازين',
                 'route' => 'scales.index',
                 'a_class' => 'sidebar-sub sidebar-sub-scales',
-                'i_class' => 'simple-icon-user-follow',
+                'i_class' => 'scalesIcon',
                 'order' => 1,
                 'code'=>10
             ]
@@ -209,7 +209,7 @@ class MainMenusTableSeeder extends Seeder
                 'ar_name' => 'عناصر مراقبة الجودة',
                 'route' => 'qc-elements.index',
                 'a_class' => 'sidebar-sub sidebar-sub-qc-elements',
-                'i_class' => 'simple-icon-user-follow',
+                'i_class' => 'qcElementsIcon',
                 'order' => 1,
                 'code'=>11
             ]
@@ -221,7 +221,7 @@ class MainMenusTableSeeder extends Seeder
                 'ar_name' => 'أختبارات مراقبة الجودة',
                 'route' => 'qc-test-headers.index',
                 'a_class' => 'sidebar-sub sidebar-sub-qc-test-headers',
-                'i_class' => 'simple-icon-user-follow',
+                'i_class' => 'qcTestIcon',
                 'order' => 1,
                 'code'=>12
             ]
@@ -247,7 +247,7 @@ class MainMenusTableSeeder extends Seeder
                 'ar_name' => 'وصول الشاحنات',
                 'route' => 'transports.index',
                 'a_class' => 'sidebar-sub sidebar-sub-transports',
-                'i_class' => 'simple-icon-user-follow',
+                'i_class' => 'truckArrivalIcon',
                 'order' => 1,
                 'code'=>13
             ],
@@ -256,7 +256,7 @@ class MainMenusTableSeeder extends Seeder
                 'ar_name' => 'السائقين المحظورين',
                 'route' => 'blocked-drivers.index',
                 'a_class' => 'sidebar-sub sidebar-sub-blocked-drivers',
-                'i_class' => 'simple-icon-user-follow',
+                'i_class' => 'blockedDriversIcon',
                 'order' => 1,
                 'code'=>20
             ]
@@ -282,7 +282,7 @@ class MainMenusTableSeeder extends Seeder
                 'ar_name' => 'شاحنات بالانتظار',
                 'route' => 'arrived-trucks.index',
                 'a_class' => 'sidebar-sub sidebar-sub-arrived-trucks',
-                'i_class' => 'simple-icon-user-follow',
+                'i_class' => 'arrivedTrucksIcon',
                 'order' => 1,
                 'code'=>14
             ],
@@ -291,7 +291,7 @@ class MainMenusTableSeeder extends Seeder
                 'ar_name' => 'العينات المختبره',
                 'route' => 'samples-test.index',
                 'a_class' => 'sidebar-sub sidebar-sub-sampled-tests',
-                'i_class' => 'simple-icon-user-follow',
+                'i_class' => 'sampledTestIcon',
                 'order' => 1,
                 'code'=>15
             ],
@@ -300,7 +300,7 @@ class MainMenusTableSeeder extends Seeder
                 'ar_name' => 'ترتيب دخول الشاحنات',
                 'route' => 'edit-queue.index',
                 'a_class' => 'sidebar-sub sidebar-sub-edit-queue',
-                'i_class' => 'simple-icon-user-follow',
+                'i_class' => 'EditTruckQueueIcon',
                 'order' => 1,
                 'code'=>16
             ],
@@ -326,7 +326,7 @@ class MainMenusTableSeeder extends Seeder
                 'ar_name' => 'عمليات الخامات',
                 'route' => 'production-process.index',
                 'a_class' => 'sidebar-sub sidebar-sub-production-process',
-                'i_class' => 'simple-icon-user-follow',
+                'i_class' => 'rawProcessIcon',
                 'order' => 1,
                 'code'=>17
             ],
@@ -335,7 +335,7 @@ class MainMenusTableSeeder extends Seeder
                 'ar_name' => 'عمليات المخلفات',
                 'route' => 'scrap-process.index',
                 'a_class' => 'sidebar-sub sidebar-sub-scrap-process',
-                'i_class' => 'simple-icon-user-follow',
+                'i_class' => 'scrapProcessIcon',
                 'order' => 1,
                 'code'=>18
             ]
@@ -352,7 +352,7 @@ class MainMenusTableSeeder extends Seeder
                 'ar_name' => 'الميزان',
                 'route' => 'trucks-scale.index',
                 'a_class' => 'sidebar-sub sidebar-sub-manual-scale',
-                'i_class' => 'simple-icon-user-follow',
+                'i_class' => 'scaleIcon',
                 'order' => 1,
                 'code'=>19
             ]

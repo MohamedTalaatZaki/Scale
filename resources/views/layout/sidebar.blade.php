@@ -35,7 +35,7 @@
                                             @permission($sub->route)
                                                 <li>
                                                     <a class="{{ $sub->a_class }}" href="{{ route($sub->route) }}">
-                                                        <i class="{{ config("fontawsome.{$main_menu->i_class}" , 'iconsminds-digital-drawing') }}"></i> <span
+                                                        <i class="{{ config("fontawsome.{$sub->i_class}" , 'iconsminds-digital-drawing') }}"></i> <span
                                                             class="d-inline-block">{{ $sub->name }}</span>
                                                     </a>
                                                 </li>
