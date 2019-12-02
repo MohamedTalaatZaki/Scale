@@ -64,30 +64,35 @@
                             <a class="nav-link {{ !request()->has('itemType') ? " active" : "" }}" id="first-tab_" data-toggle="tab" href="#firstFull" role="tab"
                                aria-controls="first" aria-selected="true">
                                 @lang('global.arrival_trucks')
+                                <span class="badge badge-success mx-2">{{ $arrivalTrucks->total() }}</span>
                             </a>
                         </li>
                         <li class="nav-item w-15 text-center">
                             <a class="nav-link {{ request()->has('itemType') ? " active" : "" }}" id="second-tab_" data-toggle="tab" href="#secondFull" role="tab"
                                aria-controls="second" aria-selected="false">
                                 @lang('global.waiting_trucks')
+                                <span class="badge badge-success mx-2">{{ $rawTrucks->total() + $scrapTrucks->total() + $finishTrucks->total() }}</span>
                             </a>
                         </li>
                         <li class="nav-item w-15 text-center">
                             <a class="nav-link" id="third-tab_" data-toggle="tab" href="#thirdFull" role="tab"
                                aria-controls="third" aria-selected="false">
                                 @lang('global.in_process_trucks')
+                                <span class="badge badge-success mx-2">{{ $inProcessTrucks->total() }}</span>
                             </a>
                         </li>
                         <li class="nav-item w-15 text-center">
                             <a class="nav-link" id="fourth-tab_" data-toggle="tab" href="#fourthFull" role="tab"
                                aria-controls="fourth" aria-selected="false">
                                 @lang('global.departures_trucks')
+                                <span class="badge badge-success mx-2">{{ $departures->total() }}</span>
                             </a>
                         </li>
                         <li class="nav-item w-15 text-center">
                             <a class="nav-link" id="canceled-tab_" data-toggle="tab" href="#canceledFull" role="tab"
                                aria-controls="fourth" aria-selected="false">
                                 @lang('global.canceled_trucks')
+                                <span class="badge badge-success mx-2">{{ $canceled->total() }}</span>
                             </a>
                         </li>
 
@@ -95,6 +100,7 @@
                             <a class="nav-link" id="rejected-tab_" data-toggle="tab" href="#rejectedFull" role="tab"
                                aria-controls="fourth" aria-selected="false">
                                 @lang('global.rejected_trucks')
+                                <span class="badge badge-success mx-2">{{ $rejected->total() }}</span>
                             </a>
                         </li>
                     </ul>

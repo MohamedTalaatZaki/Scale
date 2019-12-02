@@ -6,13 +6,22 @@
         <div class="col-6 mb-4">
             <div class="btn-group btn-group-toggle float-right">
                 <a href="{{ route('transports.index' , ['itemType' => 'raw']) }}"
-                   class="btn btn-primary {{ request()->input('itemType') == 'raw' || !request()->has('itemType') ? 'active' : '' }}"  style="color: white">@lang('global.raw')</a>
+                   class="btn btn-primary {{ request()->input('itemType') == 'raw' || !request()->has('itemType') ? 'active' : '' }}"  style="color: white">
+                    @lang('global.raw')
+                    <span class="badge badge-success mx-2">{{ $rawTrucks->total() }}</span>
+                </a>
 
                 <a href="{{ route('transports.index' , ['itemType' => 'scrap']) }}"
-                   class="btn btn-primary {{ request()->input('itemType') == 'scrap' ? 'active' : '' }}" style="color: white">@lang('global.scrap')</a>
+                   class="btn btn-primary {{ request()->input('itemType') == 'scrap' ? 'active' : '' }}" style="color: white">
+                    @lang('global.scrap')
+                    <span class="badge badge-success mx-2">{{ $scrapTrucks->total() }}</span>
+                </a>
 
                 <a href="{{ route('transports.index' , ['itemType' => 'finish']) }}"
-                   class="btn btn-primary {{ request()->input('itemType') == 'finish' ? 'active' : '' }}" style="color: white">@lang('global.finish')</a>
+                   class="btn btn-primary {{ request()->input('itemType') == 'finish' ? 'active' : '' }}" style="color: white">
+                    @lang('global.finish')
+                    <span class="badge badge-success mx-2">{{ $finishTrucks->total() }}</span>
+                </a>
             </div>
         </div>
     </div>
