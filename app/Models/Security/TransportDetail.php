@@ -83,7 +83,7 @@ class TransportDetail extends Model
 
     public function LastTransportLine()
     {
-        return $this->transportLine()->latest();
+        return $this->transportLine()->orderByDesc('id')->limit(1);
     }
 
     public function getPlateNameAttribute() {

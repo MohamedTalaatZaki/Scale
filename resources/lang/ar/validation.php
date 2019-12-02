@@ -220,12 +220,15 @@ return [
         'governorate_id'   =>  'المحافظة',
         'city_id'   =>  'المدينة',
         'center_id'   =>  'المركز',
-        'truck_type_id'   =>  'نوع الشاحنة',
+        'truck_type_id'   =>  'نوع السيارة',
         'truck_plates_tractor'   =>  'رقم لوحة الجرار',
         'truck_plates_trailer'   =>  'رقم لوحة المقطورة',
         'item_type_id'   =>  'نوع النصف',
         'theoretical_weight'   =>  'الوزن التقديري',
         'arrival_time'   =>  'تاريخ الوصول',
+        'line_id'   =>  'رقم الخط',
+        'item_id'   =>  'الصنف',
+        'batch_num' =>  'رقم التشغيلة'
     ],
 
 ];

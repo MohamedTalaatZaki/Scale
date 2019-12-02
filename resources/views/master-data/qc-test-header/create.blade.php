@@ -113,7 +113,7 @@
                                             <select
                                                     class="form-control select2-single qc-element-id"
                                                     name="details[0][qc_element_id]" required>
-                                                <option label="&nbsp;">&nbsp;</option>
+                                                <option label="&nbsp;">&nbsp;@lang('global.element_name')</option>
                                                 @foreach($elements as $element)
                                                     <option value="{{ $element->id }}"
                                                             data-test-type="{{ $element->test_type }}"
@@ -160,6 +160,7 @@
                                         </td>
                                         <td>
                                             <input type="number" class="form-control form-control-sm min_range range"
+                                                   step="0.0001"
                                                    name="details[0][min_range]" style="display: {{ old("details.$key.element_type") == "range"? "" : "none" }}"
                                                    value="{{ old("details.$key.min_range") }}" placeholder="@lang('global.min_range')"
                                                    autocomplete="off">
@@ -170,6 +171,7 @@
                                         </td>
                                         <td>
                                             <input type="number" class="form-control form-control-sm max_range range"
+                                                   step="0.0001"
                                                    name="details[0][max_range]" style="display: {{ old("details.$key.element_type") == "range"? "" : "none" }}"
                                                    value="{{ old("details.$key.max_range") }}" placeholder="@lang('global.max_range')"
                                                    autocomplete="off">
@@ -208,7 +210,7 @@
                                         <select
                                                 class="form-control select2-single qc-element-id"
                                                 name="details[0][qc_element_id]" required>
-                                            <option label="&nbsp;">&nbsp; </option>
+                                            <option label="&nbsp;">&nbsp; @lang('global.element_name')</option>
                                             @foreach($elements as $element)
                                                 <option value="{{ $element->id }}"
                                                         data-test-type="{{ $element->test_type }}"
@@ -247,6 +249,7 @@
                                     </td>
                                     <td>
                                         <input type="number" class="form-control form-control-sm min_range range"
+                                               step="0.0001"
                                                name="details[0][min_range]" style="display: none"
                                                value="{{ old('min_range') }}" placeholder="@lang('global.min_range')"
                                                autocomplete="off">
@@ -257,6 +260,7 @@
                                     </td>
                                     <td>
                                         <input type="number" class="form-control form-control-sm max_range range"
+                                               step="0.0001"
                                                name="details[0][max_range]" style="display: none"
                                                value="{{ old('max_range') }}" placeholder="@lang('global.max_range')"
                                                autocomplete="off">
@@ -290,7 +294,7 @@
 
                         <div class="form-group col-md-12">
                             <div class="float-right">
-                                <a href="{{ route('qc-elements.index') }}">
+                                <a href="{{ route('qc-test-headers.index') }}">
                                     <button type="button"
                                             class="btn btn-danger btn-sm mt-3">@lang('global.cancel')</button>
                                 </a>

@@ -151,3 +151,29 @@
         </div>
     </div>
 </div>
+@push('scripts')
+    <script>
+        $().ready(function () {
+            $('.day').on('keyup' , function (evt) {
+                let value = $(this).val();
+                if (value < 0 || value > 31) {
+                    $('.day').val(moment().format('DD'));
+                }
+            });
+
+            $('.month').on('keyup' , function (evt) {
+                let value = $(this).val();
+                if (value < 0 || value > 12) {
+                    $('.month').val(moment().format('MM'));
+                }
+            });
+
+            $('.year').on('keyup' , function (evt) {
+                let value = $(this).val();
+                if (value < 0 || value > 999) {
+                    $('.year').val("0"+moment().format('YY'));
+                }
+            });
+        })
+    </script>
+@endpush

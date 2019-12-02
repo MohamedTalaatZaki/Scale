@@ -250,6 +250,15 @@ class MainMenusTableSeeder extends Seeder
                 'i_class' => 'simple-icon-user-follow',
                 'order' => 1,
                 'code'=>13
+            ],
+            [
+                'en_name' => 'Blocked Drivers',
+                'ar_name' => 'السائقين المحظورين',
+                'route' => 'blocked-drivers.index',
+                'a_class' => 'sidebar-sub sidebar-sub-blocked-drivers',
+                'i_class' => 'simple-icon-user-follow',
+                'order' => 1,
+                'code'=>20
             ]
         ]);
 
@@ -331,5 +340,24 @@ class MainMenusTableSeeder extends Seeder
                 'code'=>18
             ]
         ]);
+        $group = $main->menuGroups()->create([
+            'en_name' => 'Manual Scale',
+            'ar_name' => 'الميزان',
+            'aria_controls' => 'collapseManualScale',
+            'order' => 1,
+        ]);
+        $group->subMenus()->createMany([
+            [
+                'en_name' => 'Scale',
+                'ar_name' => 'الميزان',
+                'route' => 'trucks-scale.index',
+                'a_class' => 'sidebar-sub sidebar-sub-manual-scale',
+                'i_class' => 'simple-icon-user-follow',
+                'order' => 1,
+                'code'=>19
+            ]
+        ]);
     }
+
+     //permission code next = 21 ;
 }
