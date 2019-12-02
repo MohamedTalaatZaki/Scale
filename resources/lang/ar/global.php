@@ -270,4 +270,5 @@ return [
     'select_reason' =>  'اختار سبب ',
     'note'  =>  'ملحوظة',
     'if_want_block_driver'  =>  'هل تريد حظر السائق ؟',
+    'trucks_help'   =>  'للمساعدة اتصل على رقم : :phone'
 ];

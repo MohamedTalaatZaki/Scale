@@ -24,7 +24,7 @@
                     @isset($truckArrival)
                         <li class="breadcrumb-item " aria-current="page">@lang('global.edit')</li>
                     @else
-                        <li class="breadcrumb-item " aria-current="page">@lang('global.index')</li>
+                        <li class="breadcrumb-item " aria-current="page">@lang('global.index') -- <b> @lang('global.trucks_help' , ['phone' => env('SUPPORT_NUMBER')]) </b></li>
                     @endisset
                 </ol>
             </nav>

@@ -260,6 +260,7 @@ return [
     'truck_reweight'   =>  'Please Redirect Back The Truck To The Scale.',
     'scrap_process' =>  'Scrap Process',
     'unknown_transport' =>  'Transport Number Unknown !!',
+    'trucks_help'   =>  'Contact Us For Help On Phone Number : :phone',
     'canceled_trucks'   =>  'Canceled Trucks',
     'rejected_trucks'   =>  'Rejected Trucks',
     'blocked_driver'    =>  'This Driver Has Been Blocked',
