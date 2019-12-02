@@ -6,7 +6,7 @@
                     @if($main_menu->hasPermissions())
                     <li>
                     <a class="{{ $main_menu->class }}" href="{{ $main_menu->href }}">
-                        <i class="{{ $main_menu->sub_class }}"></i>
+                        <i class="{{ config("fontawsome.{$main_menu->sub_class}" , 'iconsminds-digital-drawing') }}"></i>
                         <span>{{ $main_menu->name }}</span>
                     </a>
                     </li>
@@ -35,7 +35,7 @@
                                             @permission($sub->route)
                                                 <li>
                                                     <a class="{{ $sub->a_class }}" href="{{ route($sub->route) }}">
-                                                        <i class="{{ $sub->i_class }}"></i> <span
+                                                        <i class="{{ config("fontawsome.{$main_menu->i_class}" , 'iconsminds-digital-drawing') }}"></i> <span
                                                             class="d-inline-block">{{ $sub->name }}</span>
                                                     </a>
                                                 </li>

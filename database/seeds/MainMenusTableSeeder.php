@@ -25,7 +25,7 @@ class MainMenusTableSeeder extends Seeder
             'ar_name' => 'اللوحة الرئيسية',
             'class' => 'sidebar sidebar-dashboard',
             'href' => 'home',
-            'sub_class' => 'iconsminds-shop-4',
+            'sub_class' => 'dashboardIcon',
             'data_link' => NULL,
         ]);
         $group = $main->menuGroups()->create([
@@ -40,7 +40,7 @@ class MainMenusTableSeeder extends Seeder
                 'ar_name' => 'اللوحة الرئيسية',
                 'route' => 'home',
                 'a_class' => 'sidebar-sub sidebar-sub-roles',
-                'i_class' => 'simple-icon-user-following',
+                'i_class' => 'dashboardIcon',
                 'order' => 1,
                 'code'=>0
             ]
@@ -51,7 +51,7 @@ class MainMenusTableSeeder extends Seeder
             'ar_name' => 'البيانات الاساسية',
             'class' => 'sidebar sidebar-master-data',
             'href' => '#masterData',
-            'sub_class' => 'iconsminds-digital-drawing',
+            'sub_class' => 'masterDataIcon',
             'data_link' => 'masterData'
         ]);
         $group = $main->menuGroups()->create([
@@ -232,7 +232,7 @@ class MainMenusTableSeeder extends Seeder
             'ar_name' => 'الأمن',
             'class' => 'sidebar sidebar-security',
             'href' => '#security',
-            'sub_class' => 'iconsminds-digital-drawing',
+            'sub_class' => 'securityIcon',
             'data_link' => 'security'
         ]);
         $group = $main->menuGroups()->create([
@@ -267,7 +267,7 @@ class MainMenusTableSeeder extends Seeder
             'ar_name' => 'مراقبة الجودة',
             'class' => 'sidebar sidebar-qc',
             'href' => '#qualityControl',
-            'sub_class' => 'iconsminds-digital-drawing',
+            'sub_class' => 'qualityControlIcon',
             'data_link' => 'qualityControl'
         ]);
         $group = $main->menuGroups()->create([
@@ -311,7 +311,7 @@ class MainMenusTableSeeder extends Seeder
             'ar_name' => 'الانتاج',
             'class' => 'sidebar sidebar-production',
             'href' => '#production',
-            'sub_class' => 'iconsminds-digital-drawing',
+            'sub_class' => 'productionIcon',
             'data_link' => 'production'
         ]);
         $group = $main->menuGroups()->create([
