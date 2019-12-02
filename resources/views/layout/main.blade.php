@@ -63,6 +63,11 @@
         .qc-element-id{
             height: 2.2rem !important;
         }
+
+        .sidebar-icon{
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
     </style>
     @stack('styles')
 </head>
