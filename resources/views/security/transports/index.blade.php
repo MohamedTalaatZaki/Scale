@@ -113,8 +113,39 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="driverBlockedModal" tabindex="-1" role="dialog" aria-labelledby="driverBlockedModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row bg-danger" >
+                        <h1 style="color: white; padding: 5px ; margin: 0 auto">@lang('global.alert')</h1>
+                    </div>
+                    <hr/>
+                    <div class="row text-center">
+                        <h4 style=" margin: 0 auto">@lang('global.blocked_driver')</h4>
+                    </div>
+                    <div class="row text-center">
+                        <h5 style=" top : 10px ; padding-top: 10px ;margin: 0 auto" class="blockReason"></h5>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">@lang('global.close')</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
 @push('scripts')
+    <script src="{{ asset('js/axios.js') }}"></script>
+    <script src="{{ asset('js/swal.js') }}"></script>
     <script>
         $().ready(function () {
 
@@ -157,6 +188,22 @@
                     $('.itemsGroupSelect').prop('required' , false);
                     $('.theoreticalWeight').prop('required' , false);
                 }
+            });
+
+            $('.driver_license').on('keyup' , function (evt) {
+                let license =   $(this).val();
+                axios.post('{{ route('checkIfBlocked') }}' , { 'license' : license })
+                    .then( function (response) {
+                        if(response.data) {
+                            $('.submit-btn').hide();
+                            $('.blockReason').text(response.data.block_reason);
+                            $('#driverBlockedModal').modal('show');
+                        } else {
+                            $('.submit-btn').show();
+                            $('.blockReason').text('');
+                            $('#driverBlockedModal').modal('hide');
+                        }
+                    })
             });
 
             function govChange(govId , cityId = 0) {

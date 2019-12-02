@@ -25,7 +25,7 @@
                     <div class="form-group col-md-12">
                         <label for="driver_license">@lang('global.driver_license') *</label>
                         <input type="text"
-                               class="form-control"
+                               class="form-control driver_license"
                                id="driver_license"
                                placeholder="@lang('global.driver_license')"
                                value="{{ old('driver_license' , $truckArrival->driver_license) }}"
@@ -244,7 +244,7 @@
 
         <div class="col-md-12 mt-3">
             <div class="btn-group-sm text-center text-black-50">
-                <button type="submit" class="btn btn-primary">@lang('global.edit_print')</button>
+                <button type="submit" class="btn btn-primary submit-btn">@lang('global.edit_print')</button>
                 <a href="{{ route('transports.index') }}" class="btn btn-danger">@lang('global.reset_close')</a>
             </div>
         </div>

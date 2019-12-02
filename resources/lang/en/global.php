@@ -262,4 +262,11 @@ return [
     'unknown_transport' =>  'Transport Number Unknown !!',
     'canceled_trucks'   =>  'Canceled Trucks',
     'rejected_trucks'   =>  'Rejected Trucks',
+    'blocked_driver'    =>  'This Driver Has Been Blocked',
+    'alert' =>  '!!!  Alert  !!!',
+    'blocked_drivers'   =>  'Blocked Drivers',
+    'security'  =>  'Security',
+    'blocked_count' =>  'Blocked Count',
+    'unblock'   =>  'Unblock',
+    'driver_unblocked_success'  =>  'Driver Unblocked Successful',
 ];

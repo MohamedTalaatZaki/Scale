@@ -6,6 +6,7 @@ use App\Models\Governorate;
 use App\Models\Items\ItemGroup;
 use App\Models\Items\ItemType;
 use App\Models\MasterData\TruckType;
+use App\Models\Security\BlockedDriver;
 use App\Models\Security\Transports;
 use App\Models\Supplier\Supplier;
 use App\Rules\RequiredIfItemTypeRaw;
@@ -113,6 +114,15 @@ class TransportsController extends Controller
         $transport    =   Transports::query()->create($request->input());
 
         $transport->details()->create(['truck_plates' => $transport->truck_plates_tractor , 'status' => $transport->status ]);
+
+        BlockedDriver::query()->updateOrCreate([
+            'license'       => $request->get('driver_license')
+        ],[
+            'license'       =>  $request->get('driver_license'),
+            'name'          =>  $request->get('driver_name'),
+            'national_id'   =>  $request->get('driver_national_id'),
+            'mobile'        =>  $request->get('driver_mobile'),
+        ]);
 
         if(!is_null($transport->truck_plates_trailer)) {
             $transport->details()->create(['truck_plates' => $transport->truck_plates_trailer , 'status' => $transport->status , 'is_trailer' => 1]);

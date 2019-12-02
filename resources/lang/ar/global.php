@@ -259,4 +259,11 @@ return [
     'unknown_transport' =>  'رقم النقلة خطأ !!',
     'canceled_trucks'   =>  'سيارات ملغاة',
     'rejected_trucks'   =>  'سيارات مرفوضة',
+    'blocked_driver'    =>  'تم حذر هذا السائق من دخول الشركة',
+    'alert' =>  '!!!  تنبيه  !!!',
+    'blocked_drivers'   =>  'السائقين المحظورين',
+    'security'  =>  'الامن',
+    'blocked_count' =>  'عدد مرات الحظر',
+    'unblock'   =>  'الغاء الحظر',
+    'driver_unblocked_success'  =>  'تم الغاء الحظر عن السائق بنجاح',
 ];
