@@ -582,5 +582,25 @@ class PermissionsTableSeeder extends Seeder
             'en_description' => NULL,
             'ar_description' => NULL,
         ]);
+
+        $subMenu = SubMenu::where('code', 20)->first();
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'blocked-drivers.index',
+            'en_display_name' => 'List Blocked Drivers',
+            'ar_display_name' => 'عرض السائقين المحظورين',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'blocked-drivers.edit',
+            'en_display_name' => 'Unblock Blocked Drivers',
+            'ar_display_name' => 'الغاء حظر السائقين',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
     }
 }
