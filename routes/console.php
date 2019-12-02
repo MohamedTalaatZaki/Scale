@@ -492,6 +492,15 @@ Artisan::command('truck:update_type {type}', function ($type) {
 })->describe('Change Transports Type');
 
 
+Artisan::command('sample_test:create_item_group_scrap', function () {
+    DB::table('item_group')->insert([
+        'id' => 111111,
+        'ar_name' => 'فثسف',
+        'en_name' => 'test1111',
+        'testable' => 0,
+
+    ]);
+});
 
 
 Artisan::command('sample_test:create_truck_arrival_scrap', function () {
@@ -509,8 +518,8 @@ Artisan::command('sample_test:create_truck_arrival_scrap', function () {
         'truck_type_id'   =>  1,
         'truck_plates_tractor'   =>  '1000',
         'truck_plates_trailer'   =>  null,
-        'item_type_id'   => 3,
-        'item_group_id'   =>  123456,
+        'item_type_id'   => 2,
+        'item_group_id'   =>  111111,
         'theoretical_weight'   =>  '0',
         'arrival_time'  =>  \Carbon\Carbon::now(),
     ]);
@@ -520,6 +529,8 @@ Artisan::command('sample_test:create_truck_arrival_scrap', function () {
         'truck_plates' =>'1000',
         'is_trailer' => 0,
         'status' => 'in_process',
+        'item_group_id'   =>  123456,
+//        'item_id'=> 300,
     ]);
     DB::table('transport_lines')->insert([
         'id' => 1000,
@@ -536,3 +547,25 @@ Artisan::command('sample_test:create_truck_arrival_scrap', function () {
 //        'item_type_id' => 3,
 //    ]);
 //})->describe('Change Transports item type');
+
+Artisan::command('sample_test:create__item_scrap', function () {
+    DB::table('items')->insert([
+        'id'=>111111,
+        'ar_name'         =>  'فثسفزز',
+        'en_name'         =>  'test1111',
+        'sap_code'         =>  123456,
+        'item_group_id'   =>  111111,
+        'item_type_id'=> 2,
+        'description'         =>  'test',
+        'is_active'         =>  1,
+
+    ]);
+})->describe('create item');
+
+Artisan::command('sample_test:create__item_supplier', function () {
+    DB::table('suppliers_items')->insert([
+        'supplier_id'=>1000,
+        'item_id'         => 111111 ,
+
+    ]);
+})->describe('create item');

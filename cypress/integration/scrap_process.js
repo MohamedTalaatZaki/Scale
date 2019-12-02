@@ -1,15 +1,17 @@
 describe('scrap process test', function () {
     before(function(){
-        cy.exec("php artisan migrate:refresh && php artisan db:seed");
+        cy.exec("php artisan migrate:fresh && php artisan db:seed");
         cy.exec("php artisan user:add_permission scrap-process.index");
         cy.exec("php artisan user:add_permission scrapStartProcess");
         cy.exec("php artisan user:add_permission scrapFinishProcess");
-        cy.exec('php artisan test:create_item_group');
+        cy.exec('php artisan user:setLocale en');
+        cy.exec('php artisan sample_test:create_item_group_scrap');
         cy.exec('php artisan supplier:demo_faker');
+        cy.exec('php artisan sample_test:create__item_scrap');
+        cy.exec('php artisan sample_test:create__item_supplier');
         cy.exec("php artisan sample_test:create_truck_arrival_scrap");
     });
     beforeEach(function () {
-        cy.exec('php artisan user:setLocale en');
         cy.visit('http://127.0.0.1:8000/');
         cy.wait(2000);
         cy.url().should('contain', '/login');
@@ -44,6 +46,6 @@ describe('scrap process test', function () {
 
     after(function(){
 
-        cy.exec("php artisan migrate:refresh && php artisan db:seed");
+        // cy.exec("php artisan migrate:refresh && php artisan db:seed");
     });
 });
