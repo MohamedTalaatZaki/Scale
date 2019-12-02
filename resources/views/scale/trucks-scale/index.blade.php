@@ -1,5 +1,5 @@
 <!DOCTYPE html >
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>@lang('global.juhayna')</title>
@@ -109,7 +109,9 @@
                                        v-model="barcodeStr"
                                        style="text-align: center ; font-weight: bolder"
                                        placeholder="بأنتظار تمرير الورقة لقراءة الكود"
-                                       readonly>
+                                       ref="barcodeInput"
+                                       v-on:paste="OnPaste"
+                                       >
                             </div>
                         </div>
                     </div>
@@ -146,9 +148,9 @@
                 if (evt.keyCode === 107) {
                     this.test();
                 } else {
-                    if (!this.scanned && evt.keyCode !== 13) {
+                    if (!this.scanned && evt.keyCode !== 13 && ((evt.keyCode >= 48 && evt.keyCode <= 57) || (evt.keyCode >= 96 && evt.keyCode <= 105) || evt.keyCode === 109)) {
                         this.barcode.push(evt.key);
-                    } else if (evt.keyCode === 13 && this.barcodeStr === "" && this.transport === null) {
+                    } else if (evt.keyCode === 13 && this.barcodeStr !== "" && this.transport === null) {
                         this.barcodeStr = this.barcode.join("");
                         this.scanned = true;
                         this.checkBarcode();
@@ -159,9 +161,14 @@
                 }
             },
             test: function () {
-                this.barcodeStr = "1573473184-5";
+                this.barcodeStr = "1574327752-4";
                 this.scanned = true;
                 this.checkBarcode();
+            },
+            OnPaste: function() {
+                setTimeout(() => {
+                    this.barcode    =   this.barcodeStr.split('');
+                } , 100);
             },
             checkBarcode: function () {
                 swal.close();
@@ -240,7 +247,7 @@
                 })
             },
             wsInit  :   function() {
-                this.websocket = new WebSocket("ws://localhost:8500/");
+                this.websocket = new WebSocket("ws://127.0.0.1:8500/");
                 this.websocket.onopen = (evt) => { this.wsOnOpen(evt) };
                 this.websocket.onclose = (evt) => { this.wsOnClose(evt) };
                 this.websocket.onmessage = (evt) => { this.wsOnMessage(evt) };
@@ -302,6 +309,9 @@
         },
         created() {
             window.addEventListener('keyup', this.keyUpEventFun);
+        } ,
+        mounted() {
+            this.$refs.barcodeInput.focus();
         }
     });
     } catch (e) {

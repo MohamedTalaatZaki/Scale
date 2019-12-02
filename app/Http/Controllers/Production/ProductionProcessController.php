@@ -17,7 +17,7 @@ class ProductionProcessController extends Controller
     public function index()
     {
         $this->authorized('production-process.index');
-        $not_started_transport_details  =    TransportDetail::query()->RawNotRawStartedTransports()->get();
+        $not_started_transport_details  =    TransportDetail::query()->RawNotStartedTransports()->get();
         $started_transport_details      =    TransportDetail::query()->RawStartedTransports()->get();
         $lines  =   Line::query()->where('is_active' , true)->where('type' , 'ProdLine')->get();
         return view('production.production-process.index' , [
@@ -33,9 +33,9 @@ class ProductionProcessController extends Controller
         $this->validate($request , [
             'item_group_id' =>  'required',
             'item_id' =>  'required',
-            'day' =>  'required',
-            'month' =>  'required',
-            'year' =>  'required',
+            'day' =>  'required|size:2',
+            'month' =>  'required|size:2',
+            'year' =>  'required|size:3',
             'batch_num' =>  'required',
             'line_id' =>  'required',
         ]);

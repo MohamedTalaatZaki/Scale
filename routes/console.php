@@ -492,6 +492,7 @@ Artisan::command('truck:update_type {type}', function ($type) {
 })->describe('Change Transports Type');
 
 
+
 Artisan::command('sample_test:create_item_group_scrap', function () {
     DB::table('item_group')->insert([
         'id' => 111111,
@@ -569,3 +570,103 @@ Artisan::command('sample_test:create__item_supplier', function () {
 
     ]);
 })->describe('create item');
+
+Artisan::command('production:started_weight',function(){
+  App\Models\Production\TransportLine::create([
+    'transport_detail_id' => App\Models\Security\Transports::find(9999)->details[0]->id,
+    'line_id' => 1
+  ]);
+});
+Artisan::command('test:create_truck_arrival_edit', function () {
+    DB::table('transports')->insert([
+        'id'=>1,
+        'transport_number'         =>  '99999',
+        'driver_name'         =>  'test9999',
+        'status'         =>  'accepted',
+        'driver_license'   =>  '1234596',
+        'driver_national_id'=> '12345678912385',
+        'driver_mobile'         =>  '01234567811',
+        'supplier_id'         =>  1000,
+        'governorate_id'         =>  1,
+        'city_id'   =>  1,
+        'center_id'   =>  1,
+        'truck_type_id'   =>  1,
+        'truck_plates_tractor'   =>  '1000',
+        'truck_plates_trailer'   =>  null,
+        'item_type_id'   => 1,
+        'item_group_id'   =>  10001,
+        'theoretical_weight'   =>  '300000',
+        'arrival_time'  =>  \Carbon\Carbon::now(),
+        'order' => 1
+    ]);
+    DB::table('transport_details')->insert([
+        'id' => 1100,
+        'transport_id' => 99999,
+        'truck_plates' =>'1000',
+        'is_trailer' => 0,
+        'status' => 'accepted',
+    ]);
+})->describe('create truck arrival');
+
+Artisan::command('test:create_truck_arrival_edit2', function () {
+    DB::table('transports')->insert([
+        'id'=>3,
+        'transport_number'         =>  '999999',
+        'driver_name'         =>  'test99999',
+        'status'         =>  'accepted',
+        'driver_license'   =>  '12345969',
+        'driver_national_id'=> '12345678912985',
+        'driver_mobile'         =>  '01234567871',
+        'supplier_id'         =>  1000,
+        'governorate_id'         =>  1,
+        'city_id'   =>  1,
+        'center_id'   =>  1,
+        'truck_type_id'   =>  1,
+        'truck_plates_tractor'   =>  '1000',
+        'truck_plates_trailer'   =>  null,
+        'item_type_id'   => 1,
+        'item_group_id'   =>  10001,
+        'theoretical_weight'   =>  '300000',
+        'arrival_time'  =>  \Carbon\Carbon::now(),
+        'order' => 3
+    ]);
+    DB::table('transport_details')->insert([
+        'id' => 1110,
+        'transport_id' => 999999,
+        'truck_plates' =>'1000',
+        'is_trailer' => 0,
+        'status' => 'accepted',
+    ]);
+})->describe('create truck arrival');
+
+Artisan::command('test:create_truck_arrival_edit1', function () {
+    DB::table('transports')->insert([
+        'id'=>2,
+        'transport_number'         =>  '9998',
+        'driver_name'         =>  'test9989',
+        'status'         =>  'accepted',
+        'driver_license'   =>  '123452',
+        'driver_national_id'=> '12345679912345',
+        'driver_mobile'         =>  '01232567891',
+        'supplier_id'         =>  1000,
+        'governorate_id'         =>  1,
+        'city_id'   =>  1,
+        'center_id'   =>  1,
+        'truck_type_id'   =>  1,
+        'truck_plates_tractor'   =>  '1000',
+        'truck_plates_trailer'   =>  null,
+        'item_type_id'   => 1,
+        'item_group_id'   =>  10001,
+        'theoretical_weight'   =>  '300000',
+        'arrival_time'  =>  \Carbon\Carbon::now(),
+        'order' => 2
+    ]);
+    DB::table('transport_details')->insert([
+        'id' => 1010,
+        'transport_id' => 9919,
+        'truck_plates' =>'1000',
+        'is_trailer' => 0,
+        'status' => 'accepted',
+    ]);
+})->describe('create truck arrival');
+

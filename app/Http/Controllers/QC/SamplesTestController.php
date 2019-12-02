@@ -74,6 +74,7 @@ class SamplesTestController extends Controller
                 'qc_test_header_id'     =>  $request->get('qc_test_header_id'),
                 'result'                =>  strtolower($request->get('result')),
                 'reason'                =>  $request->get('reason'),
+                'test_type'             =>  $transportDetail->sampleTestHeader->count() > 0 ? "r" : "t",
                 'created_by'            =>  Auth::user()->id,
             ]);
 

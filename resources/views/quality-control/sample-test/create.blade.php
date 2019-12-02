@@ -63,11 +63,11 @@
                             <div class="col-4"></div>
                             <div class="col-4 bg-dark" style="border-radius: 30px;">
                                 <input type="hidden" name="transport_detail_id" value="{{ $transport_detail->id }}">
-                                <input type="hidden" name="qc_test_header_id" value="{{ optional($transport_detail->testableType)->id }}">
+                                <input type="hidden" name="qc_test_header_id" value="{{ optional(optional($transport_detail->testableType)->qcTestHeader)->id }}">
                                 <input type="hidden" name="result" class="final_result" value="">
                                 <textarea name="reason" class="final_reason" style="display: none"></textarea>
-                                <h3 style="margin: 10px;display: none" class="final-accepted text-center text-success"> Accepted </h3>
-                                <h3 style="margin: 10px;display: none" class="final-rejected text-center text-danger"> Rejected </h3>
+                                <h3 style="margin: 10px;display: none" class="final-accepted text-center text-success"> @lang('global.accepted') </h3>
+                                <h3 style="margin: 10px;display: none" class="final-rejected text-center text-danger"> @lang('global.rejected') </h3>
                             </div>
                             <div class="col-4"></div>
 
@@ -127,6 +127,7 @@
                                                            value="{{ old("details.$key.sample_range") }}" placeholder="@lang('global.sample_range')"
                                                            data-min="{{ $row->min_range }}"
                                                            data-max="{{ $row->max_range }}"
+                                                           step="0.0001"
                                                            autocomplete="off"
                                                            required
                                                     >
@@ -172,8 +173,8 @@
                         <hr/>
                         <div class="form-group col-md-12">
                             <div class="text-center">
-                                <button class="btn btn-danger mr-5 btn-rejected resultSwal" data-type="Rejected" data-result="0" style="display: none">@lang('global.rejected')</button>
-                                <button class="btn btn-success mr-5 resultSwal" data-type="Accepted" data-result="1">@lang('global.accepted')</button>
+                                <button class="btn btn-danger mr-5 btn-rejected resultSwal" data-type-result="rejected" data-type="@lang('global.rejected')" data-result="0" style="display: none">@lang('global.rejected')</button>
+                                <button class="btn btn-success mr-5 resultSwal" data-type-result="accepted" data-type="@lang('global.accepted')" data-result="1">@lang('global.accepted')</button>
                             </div>
                         </div>
                         <hr/>
@@ -202,7 +203,8 @@
             $('.resultSwal').on('click' , function (evt) {
                 evt.preventDefault();
 
-                let selected    =   $(this).data('type');
+                let swalText    =   $(this).data('type');
+                let selected    =   $(this).data('type-result');
                 let btnResult   =   parseInt($(this).data('result'));
 
                 if ( !checkResults() )
@@ -213,12 +215,13 @@
                 if (finalResult > -1) {
 
                     Swal.fire({
-                        title: selected,
+                        title: swalText,
                         text: "@lang('global.are_you_sure')",
                         showCancelButton: true,
                         confirmButtonColor: '#3085d6',
                         cancelButtonColor: '#d33',
                         confirmButtonText: '@lang('global.save')',
+                        cancelButtonText: '@lang('global.cancel')',
                         reverseButtons: true,
                     }).then((result) => {
                         if (result.value && btnResult !== finalResult) {

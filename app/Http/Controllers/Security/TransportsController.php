@@ -9,14 +9,18 @@ use App\Models\MasterData\TruckType;
 use App\Models\Security\Transports;
 use App\Models\Supplier\Supplier;
 use App\Rules\RequiredIfItemTypeRaw;
+use App\Traits\AuthorizeTrait;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class TransportsController extends Controller
 {
+    use AuthorizeTrait;
     public function index()
     {
+        $this->authorized('transports.index');
+
         $suppliers  =   Supplier::query()
             ->where('is_active' , 1)
             ->get();
@@ -74,6 +78,7 @@ class TransportsController extends Controller
 
     public function store(Request $request)
     {
+        $this->authorized('transports.create');
         $this->validate($request , [
             'driver_name'  =>  'required',
             'driver_license'  =>  'required',
@@ -107,12 +112,14 @@ class TransportsController extends Controller
 
     public function edit($id)
     {
+        $this->authorized('transports.edit');
         $truckArrival   =   Transports::query()->find($id);
-        return redirect()->action('Security\TransportsController@index')->with(['truckArrival'  =>  $truckArrival]);
+        return $this->index()->with(['truckArrival'  =>  $truckArrival]);
     }
 
     public function update(Request $request , $id)
     {
+        $this->authorized('transports.edit');
         $this->validate($request , [
             'driver_name'  =>  'required',
             'driver_license'  =>  'required',
