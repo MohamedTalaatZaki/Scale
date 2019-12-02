@@ -14,11 +14,13 @@ class AlterTransportsTable extends Migration
     public function up()
     {
         Schema::table('transports', function (Blueprint $table) {
+            $table->double('weight_difference')->after('arrival_time')->nullable();
             $table->double('total_weight')->default(0)->after('arrival_time');
         });
 
         Schema::table('transport_details', function (Blueprint $table) {
-            $table->double('weight')->default(0)->after('status');
+            $table->double('out_weight')->default(0)->after('status');
+            $table->double('in_weight')->default(0)->after('status');
         });
     }
 
