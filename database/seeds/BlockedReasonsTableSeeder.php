@@ -13,14 +13,17 @@ class BlockedReasonsTableSeeder extends Seeder
     {
         \App\Models\Security\BlockedReason::query()->truncate();
 
-        \App\Models\Security\BlockedReason::query()->createMany([
+        \App\Models\Security\BlockedReason::query()->insert(
             [
                 'en_name'   =>  'Violation of security instructions',
                 'ar_name'   =>  'مخالفة تعليمات الامن',
-            ],[
+            ]
+        );
+        \App\Models\Security\BlockedReason::query()->insert(
+            [
                 'en_name'   =>  'Smoking',
                 'ar_name'   =>  'التدخين',
             ]
-        ]);
+        );
     }
 }
