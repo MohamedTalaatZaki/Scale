@@ -189,7 +189,7 @@ return [
     'finish'   =>  'Finish',
     'check_in'  =>  'Check In',
     'check_out'  =>  'Check Out',
-    'departures_trucks' =>  'Departures Trucks',
+    'departures_trucks' =>  'Departure Trucks',
     'arrived_trucks'    =>  'Arrived Trucks',
     'qc'    =>  'Quality Control',
     'waiting'   =>  'Waiting',
