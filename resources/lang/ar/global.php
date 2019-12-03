@@ -180,7 +180,7 @@ return [
     'truck_tractor_trailer' =>  'رقم الجرار',
     'arrival_time' =>  'تاريخ الوصول',
     'waiting_time'  =>  'وقت الانتظار',
-    'theoretical_weight'    =>  'الوزن التقديري',
+    'theoretical_weight'    => 'الوزن التقريبي - بالكيلوجرام',
     'select_items_group'    =>  'اختر مجموعة الاصناف',
     'required'  =>  'مطلوب',
     'waiting_trucks'    =>  'شاحنات بالانتظار',

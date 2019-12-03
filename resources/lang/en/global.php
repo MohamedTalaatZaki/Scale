@@ -179,7 +179,7 @@ return [
     'truck_tractor_trailer' =>  'Truck Tractor Trailer',
     'arrival_time' =>  'Arrival Time',
     'waiting_time'  =>  'Waiting Time',
-    'theoretical_weight'    =>  'Theoretical Weight',
+    'theoretical_weight'    =>  'Theoretical Weight - KG',
     'select_items_group'    =>  'Select Items Group',
     'required'  =>  'Required',
     'item_group_id' =>  'Item Group',
