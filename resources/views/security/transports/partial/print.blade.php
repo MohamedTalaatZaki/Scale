@@ -120,7 +120,7 @@
     $().ready(function () {
         $(".bcTarget").each(function(index , elem){
             let barcode =   $(elem).data('barcode').toString();
-            $(elem).barcode( barcode , "code128" , {barWidth : 2});
+            $(elem).barcode( barcode , "code128" , {barWidth : 2 , output: 'bmp'});
         });
         print();
     })
