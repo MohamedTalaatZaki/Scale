@@ -213,7 +213,7 @@
 
             $('.show-create-div,.reset-close').on('click', function () {
                 $('.create-arrival-truck').toggle();
-                $('.search-trucks').toggle();
+                $('.submit-btn').show();
             });
 
             $('.governorate_select').on('change' , function(evt){

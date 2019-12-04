@@ -274,4 +274,8 @@ return [
     'select_reason' =>  'Select Reason ',
     'note'  =>  'Note',
     'if_want_block_driver'  =>  'Are You Want Block The Driver ?',
+    'history'   =>  'Blocked History',
+    'blocked_by'    =>  'Blocked By',
+    'blocked_reason'    =>  'Blocked Reason',
+    'block_reason'    =>  'Blocked Note',
 ];

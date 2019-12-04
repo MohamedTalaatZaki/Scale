@@ -217,10 +217,15 @@ class TransportsController extends Controller
 
     private function blockDriver(Transports $transport , Request $request)
     {
-        $driver     =   BlockedDriver::query()->where('license' , $transport->driver_license)->first();
+        $driver     =   BlockedDriver::query()->where('national_id' , $transport->driver_national_id)->first();
         $driver->update([
             'is_blocked' => 1,
             'blocked_count' =>  $driver->blocked_count + 1,
+            'blocked_by'    =>  \Auth::id(),
+            'blocked_reason_id' =>  $request->input('reason_id'),
+            'block_reason'  =>  $request->input('note')
+        ]);
+        $driver->logs()->create([
             'blocked_by'    =>  \Auth::id(),
             'blocked_reason_id' =>  $request->input('reason_id'),
             'block_reason'  =>  $request->input('note')

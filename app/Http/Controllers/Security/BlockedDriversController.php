@@ -14,7 +14,8 @@ class BlockedDriversController extends Controller
     public function index()
     {
         $this->authorized('blocked-drivers.index');
-        $drivers    =   BlockedDriver::query()->where('is_blocked' , 1)->paginate(25);
+        $drivers    =   BlockedDriver::query()->with('logs')->where('is_blocked' , 1)->paginate(25);
+
         return view('security.blocked-drivers.index' , ['drivers' => $drivers]);
     }
 
