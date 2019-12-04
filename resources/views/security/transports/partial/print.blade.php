@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>@lang('start.choose_restaurant')</title>
+    <title>Print</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <link rel="stylesheet" href="{{ asset('css/vendor/bootstrap.min.css') }}"/>
@@ -37,9 +37,9 @@
                 margin: 0 auto;
             }
             @page {
+                margin: 0;
                 size: 10cm 10cm;
             }
-
         }
     </style>
 
@@ -54,6 +54,7 @@
 <body class="hold-transition">
 
 <div id="print">
+{{--<div >--}}
     <div class="text-center">
         <img src="{{ asset('img/Picture2.png') }}">
         <br>
@@ -66,6 +67,9 @@
                 <tr>
                     <td colspan="2">
                         <div class="bcTarget" data-barcode="{{ $transport->transport_number . "-" . $truck->id }}"></div>
+                        <div class="row" style="text-align: center ">
+                            <span  style="margin: 0 auto ">{{ $transport->transport_number . "-" . $truck->id }}</span>
+                        </div>
                     </td>
                 </tr>
             @endif
@@ -102,6 +106,9 @@
             <tr>
                 <td colspan="2">
                     <div class="bcTarget" data-barcode="{{ $transport->transport_number . "-" . $truck->id }}"></div>
+                    <div class="row" style="text-align: center ">
+                        <span  style="margin: 0 auto ">{{ $transport->transport_number . "-" . $truck->id }}</span>
+                    </div>
                 </td>
             </tr>
             @endif
@@ -118,11 +125,15 @@
 <script src="{{ asset('js/jquery-barcode.min.js') }}"></script>
 <script>
     $().ready(function () {
+        console.log(chrome);
         $(".bcTarget").each(function(index , elem){
             let barcode =   $(elem).data('barcode').toString();
             $(elem).barcode( barcode , "code128" , {barWidth : 2 , output: 'bmp'});
         });
-        print();
+        window.print();
+        window.onafterprint  = function () {
+            window.close();
+        };
     })
 </script>
 </body>

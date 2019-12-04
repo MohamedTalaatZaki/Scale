@@ -68,6 +68,16 @@
             font-size: 30px;
             margin-bottom: 10px;
         }
+        @if(optional(Auth::user())->theme == 'light')
+
+            table.table-bordered > thead > tr > th{
+            border:1px solid #c1c1c1 !important;
+        }
+        table.table-bordered > tbody > tr > td{
+            border:1px solid #c1c1c1 !important;
+        }
+        @endif
+
     </style>
     @stack('styles')
 </head>

@@ -134,6 +134,7 @@ class TransportsController extends Controller
         if(!is_null($transport->truck_plates_trailer)) {
             $transport->details()->create(['truck_plates' => $transport->truck_plates_trailer , 'status' => $transport->status , 'is_trailer' => 1]);
         }
+        \Session::flash('print' , $transport->id);
         return redirect()->action('Security\TransportsController@index')->with('success' , trans('global.created_success'));
     }
 

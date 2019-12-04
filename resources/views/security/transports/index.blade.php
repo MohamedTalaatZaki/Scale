@@ -203,7 +203,15 @@
     <script src="{{ asset('js/swal.js') }}"></script>
     <script>
         $().ready(function () {
-
+            if ("{{ Session::has('print') }}" == 1) {
+             let transportId    =   "{{ Session::get('print') }}";
+                var win = window.open('{{ route('printLabels') }}?id='+transportId, '_blank');
+                if (win) {
+                    win.focus();
+                } else {
+                    alert('Please allow popups for this website');
+                }
+            }
             let errors = "{{ $errors->count() }}";
 
             if(errors > 0) {

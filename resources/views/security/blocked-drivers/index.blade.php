@@ -90,13 +90,12 @@
                     </button>
                 </div>
                     <div class="modal-body">
-                        <table class="table">
+                        <table class="table table-bordered text-center">
                             <thead>
                                 <tr>
                                     <th>#</th>
                                     <th>@lang('global.blocked_by')</th>
                                     <th>@lang('global.blocked_reason')</th>
-                                    <th>@lang('global.block_reason')</th>
                                     <th>@lang('global.created_at')</th>
                                 </tr>
                             </thead>
@@ -122,12 +121,15 @@
                 $.each(history , function (index , row) {
                     console.log(row);
                     let tr  =   "<tr>" +
-                        "<td>"+ (parseInt(index)+1) +"</td>" +
+                        "<td rowspan='2'>"+ (parseInt(index)+1) +"</td>" +
                         "<td>"+ row.blocked_by_name +"</td>" +
                         "<td>"+ row.blocked_reason +"</td>" +
-                        "<td>"+ row.block_reason +"</td>" +
                         "<td>"+ row.created_at +"</td>" +
-                        "</tr>";
+                        "</tr>" +
+                        "<tr>" +
+                        "<td colspan='5' style='text-align: center'>"+ row.block_reason +"</td>" +
+                        "</tr>" +
+                        "<tr><td colspan='5'></td></tr>";
                     historyBody.append(tr);
                 })
             });
