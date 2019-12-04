@@ -125,7 +125,6 @@
 <script src="{{ asset('js/jquery-barcode.min.js') }}"></script>
 <script>
     $().ready(function () {
-        console.log(chrome);
         $(".bcTarget").each(function(index , elem){
             let barcode =   $(elem).data('barcode').toString();
             $(elem).barcode( barcode , "code128" , {barWidth : 2 , output: 'bmp'});
