@@ -180,7 +180,7 @@ return [
     'truck_tractor_trailer' =>  'رقم الجرار',
     'arrival_time' =>  'تاريخ الوصول',
     'waiting_time'  =>  'وقت الانتظار',
-    'theoretical_weight'    =>  'الوزن التقديري',
+    'theoretical_weight'    => 'الوزن التقريبي - بالكيلوجرام',
     'select_items_group'    =>  'اختر مجموعة الاصناف',
     'required'  =>  'مطلوب',
     'waiting_trucks'    =>  'شاحنات بالانتظار',
@@ -257,6 +257,8 @@ return [
     'truck_reweight'   =>  'رجاء توجيه السيارة الى الميزان',
     'scrap_process' =>  'عمليات المخلفات',
     'unknown_transport' =>  'رقم النقلة خطأ !!',
+    'canceled_trucks'   =>  'سيارات ملغاة',
+    'rejected_trucks'   =>  'سيارات مرفوضة',
     'blocked_driver'    =>  'تم حذر هذا السائق من دخول الشركة',
     'alert' =>  '!!!  تنبيه  !!!',
     'blocked_drivers'   =>  'السائقين المحظورين',
@@ -264,4 +266,9 @@ return [
     'blocked_count' =>  'عدد مرات الحظر',
     'unblock'   =>  'الغاء الحظر',
     'driver_unblocked_success'  =>  'تم الغاء الحظر عن السائق بنجاح',
+    'you_want_cancel_truck' =>  'هل انت متاكد انك تريد الالغاء',
+    'select_reason' =>  'اختار سبب ',
+    'note'  =>  'ملحوظة',
+    'if_want_block_driver'  =>  'هل تريد حظر السائق ؟',
+    'trucks_help'   =>  'للمساعدة اتصل على رقم : :phone'
 ];

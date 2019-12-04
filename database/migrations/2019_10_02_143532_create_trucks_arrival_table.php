@@ -28,7 +28,7 @@ class CreateTrucksArrivalTable extends Migration
             $table->unsignedBigInteger('truck_type_id');
             $table->string('truck_plates_tractor');
             $table->string('truck_plates_trailer')->nullable();
-            $table->string('item_type_id');
+            $table->unsignedBigInteger('item_type_id');
             $table->unsignedBigInteger('item_group_id')->nullable();
             $table->double('theoretical_weight')->nullable();
             $table->dateTime('arrival_time')->nullable();

@@ -145,10 +145,11 @@
         },
         methods: {
             keyUpEventFun: function (evt) {
+                console.log(evt.keyCode , evt.code);
                 if (evt.keyCode === 107) {
                     this.test();
                 } else {
-                    if (!this.scanned && evt.keyCode !== 13 && ((evt.keyCode >= 48 && evt.keyCode <= 57) || (evt.keyCode >= 96 && evt.keyCode <= 105) || evt.keyCode === 109)) {
+                    if (!this.scanned && evt.keyCode !== 13 && ((evt.keyCode >= 48 && evt.keyCode <= 57) || (evt.keyCode >= 96 && evt.keyCode <= 105) || evt.keyCode === 109 || evt.keyCode === 189)) {
                         this.barcode.push(evt.key);
                     } else if (evt.keyCode === 13 && this.barcodeStr !== "" && this.transport === null) {
                         this.barcodeStr = this.barcode.join("");

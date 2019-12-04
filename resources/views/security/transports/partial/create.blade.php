@@ -51,7 +51,7 @@
                     <div class="form-group col-md-12">
                         <label for="driver_mobile">@lang('global.driver_mobile') *</label>
                         <input type="text"
-                               class="form-control"
+                               class="form-control onlyNumbers"
                                id="driver_mobile"
                                placeholder="@lang('global.driver_mobile')"
                                name="driver_mobile"

@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="{{ asset('css/vendor/bootstrap-datepicker3.min.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/vendor/component-custom-switch.min.css') }}"/>
     <link rel="stylesheet" href="{{ asset('fontawesome/css/all.min.css') }}"/>
-    @if (Auth::check() && Auth::user()->theme == 'light')
+    @if (Auth::check() && optional(Auth::user())->theme == 'light')
         <link rel="stylesheet" type="text/css" href="{{ asset('css/dore.light.orange.min.css') }}">
     @else
         <link rel="stylesheet" type="text/css" href="{{ asset('css/dore.dark.orange.min.css') }}">
@@ -62,6 +62,11 @@
         }
         .qc-element-id{
             height: 2.2rem !important;
+        }
+
+        .sidebar-icon{
+            font-size: 30px;
+            margin-bottom: 10px;
         }
     </style>
     @stack('styles')
@@ -112,9 +117,9 @@
             <div class="d-none d-md-inline-block align-text-bottom mr-3">
                 <div class="custom-switch custom-switch-primary-inverse custom-switch-small pl-1"
                      data-toggle="tooltip" data-placement="left"
-                     title="{{ Auth::user()->theme == 'light' ? trans('global.dark') : trans('global.light') }}">
+                     title="{{ optional(Auth::user())->theme == 'light' ? trans('global.dark') : trans('global.light') }}">
                     <input class="custom-switch-input" id="switchDark"
-                           type="checkbox" {{ Auth::user()->theme == 'light' ? "" : "checked" }}>
+                           type="checkbox" {{ optional(Auth::user())->theme == 'light' ? "" : "checked" }}>
                     <label class="custom-switch-btn" for="switchDark"></label>
                 </div>
             </div>
@@ -242,9 +247,9 @@
         <div class="user d-inline-block">
             <button class="btn btn-empty p-0" type="button" data-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">
-                <span class="name" style="color: #c0702f">{{ Auth::user()->full_name }}</span>
+                <span class="name" style="color: #c0702f">{{ optional(Auth::user())->full_name }}</span>
                 <span>
-                        <img alt="Profile Picture" src="{{ Auth::user()->avatar_url }}"/>
+                        <img alt="Profile Picture" src="{{ optional(Auth::user())->avatar_url }}"/>
                     </span>
             </button>
             <form action="{{route('logout')}}" id="logout" method="post">@csrf</form>
@@ -257,9 +262,9 @@
         </div>
     </div>
 </nav>
-
-@include('layout.sidebar')
-
+@if(Auth::check())
+    @include('layout.sidebar')
+@endif
 <main>
     <div class="container-fluid">
         @yield('content')
@@ -282,7 +287,7 @@
                         <div class="form-group col-md-6">
                             <label>@lang('global.full_name')</label>
                             <input type="text" class="form-control" name="full_name"
-                                   value="{{ old('full_name' , Auth::user()->full_name) }}"
+                                   value="{{ old('full_name' , optional(Auth::user())->full_name) }}"
                                    placeholder="@lang('global.full_name')" disabled>
                             @if($errors->has('full_name'))
                                 <div id="jQueryName-error" class="error"
@@ -292,7 +297,7 @@
                         <div class="form-group col-md-6">
                             <label>@lang('global.user_name')</label>
                             <input type="text" class="form-control" name="user_name"
-                                   value="{{ old('user_name' , Auth::user()->user_name) }}"
+                                   value="{{ old('user_name' , optional(Auth::user())->user_name) }}"
                                    placeholder="@lang('global.user_name')" disabled>
                             @if($errors->has('user_name'))
                                 <div id="jQueryName-error" class="error"
@@ -325,11 +330,11 @@
                             <label for="inputState1">@lang('global.select_theme')</label>
                             <select id="inputState1" class="form-control" name="theme">
                                 <option
-                                    value="light" {{ old('theme' , Auth::user()->theme) == 'light' ? 'selected' : '' }}>
+                                    value="light" {{ old('theme' , optional(Auth::user())->theme) == 'light' ? 'selected' : '' }}>
                                     @lang('global.light')
                                 </option>
                                 <option
-                                    value="dark" {{ old('theme' , Auth::user()->theme) == 'dark' ? 'selected' : '' }}>
+                                    value="dark" {{ old('theme' , optional(Auth::user())->theme) == 'dark' ? 'selected' : '' }}>
                                     @lang('global.dark')
                                 </option>
                             </select>
@@ -340,10 +345,10 @@
                         <div class="form-group col-md-6">
                             <label for="inputState2">@lang('global.select_lang')</label>
                             <select id="inputState2" class="form-control" name="lang">
-                                <option value="ar" {{ old('lang' , Auth::user()->lang) == 'ar' ? 'selected' : '' }}>
+                                <option value="ar" {{ old('lang' , optional(Auth::user())->lang) == 'ar' ? 'selected' : '' }}>
                                     @lang('global.arabic')
                                 </option>
-                                <option value="en" {{ old('lang' , Auth::user()->lang) == 'en' ? 'selected' : '' }}>
+                                <option value="en" {{ old('lang' , optional(Auth::user())->lang) == 'en' ? 'selected' : '' }}>
                                     @lang('global.english')
                                 </option>
                             </select>
