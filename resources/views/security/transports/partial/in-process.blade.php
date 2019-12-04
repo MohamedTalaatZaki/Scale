@@ -34,7 +34,7 @@
                     @permission('transports.cancel')
                         @if($truck->status == 'out_weight')
                             <a data-target="#cancelModal" data-toggle="modal" data-transport-id="{{ $truck->id }}"
-                               class="btn btn-danger text-white btn-sm mb-1 cancelBtn">@lang('global.cancel')</a>
+                               class="btn btn-danger text-white btn-sm mb-1 cancelBtn" style="cursor: pointer">@lang('global.cancel')</a>
                         @endif
                     @endpermission
                     @endpermission

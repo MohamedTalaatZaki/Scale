@@ -26,7 +26,7 @@
             <td>
                 @permission('transports.cancel')
                 <a data-target="#cancelModal" data-toggle="modal" data-transport-id="{{ $truck->id }}" data-route="{{ route('transports.cancel') }}"
-                   class="btn btn-danger text-white btn-sm mb-1 cancelBtn">@lang('global.cancel')</a>
+                   class="btn btn-danger text-white btn-sm mb-1 cancelBtn" style="cursor: pointer">@lang('global.cancel')</a>
                 @endpermission
                 @permission('transports.check_in')
                 <a href="{{ route('transports.inProcess' , ['id' => $truck->id]) }}"

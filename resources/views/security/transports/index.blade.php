@@ -213,7 +213,7 @@
 
             $('.show-create-div,.reset-close').on('click', function () {
                 $('.create-arrival-truck').toggle();
-                $('.search-trucks').toggle();
+                $('.submit-btn').show();
             });
 
             $('.governorate_select').on('change' , function(evt){
@@ -245,9 +245,9 @@
                 }
             });
 
-            $('.driver_license').on('keyup' , function (evt) {
-                let license =   $(this).val();
-                axios.post('{{ route('checkIfBlocked') }}' , { 'license' : license })
+            $('.driver_national_id').on('keyup' , function (evt) {
+                let nationalId  =   $(this).val();
+                axios.post('{{ route('checkIfBlocked') }}' , { 'national_id' : nationalId })
                     .then( function (response) {
                         if(response.data) {
                             $('.submit-btn').hide();

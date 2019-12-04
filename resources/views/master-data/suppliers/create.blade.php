@@ -36,7 +36,7 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label>@lang('global.en_name') *</label>
-                                <input type="text" class="form-control no_arabic" name="en_name" value="{{ old('en_name') }}" placeholder="@lang('global.en_name')" autocomplete="off" required>
+                                <input type="text" class="form-control onlyEn" name="en_name" value="{{ old('en_name') }}" placeholder="@lang('global.en_name')" autocomplete="off" required>
                                 @if($errors->has('en_name'))
                                     <div id="jQueryName-error" class="error" style="">{{ $errors->first('en_name') }}</div>
                                 @endif
