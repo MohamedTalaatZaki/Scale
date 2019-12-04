@@ -33,10 +33,12 @@ Route::middleware(['auth'])->group(function (){
 
 
     Route::resource('security/transports' , 'Security\TransportsController');
-    Route::get('print' , 'Security\TransportsController@print')->name('printLabels');
-    Route::resource('security/queue' , 'Security\QueueController');
+    Route::get('security/print' , 'Security\TransportsController@print')->name('printLabels');
+    Route::resource('security/queue' , 'Security\QueueController')->except('index');
     Route::get('security/trucks/queue-edit' , 'Security\QueueController@editQueueIndex')->name('edit-queue.index');
     Route::post('security/reorder-trucks-queue' , 'Security\QueueController@reorderQueue')->name('reorder-trucks-queue');
+
+    Route::resource('security/blocked-drivers' , 'Security\BlockedDriversController');
 
     Route::resource('qc/arrived-trucks' , 'QC\ArrivedTrucksController');
     Route::resource('qc/samples-test' , 'QC\SamplesTestController');
@@ -56,8 +58,8 @@ Route::middleware(['auth'])->group(function (){
     Route::post('change-acc-info' , 'MasterData\UsersController@changeAccInfo')->name('users.change-acc-info');
     Route::get('master-data/supplier/items/{id}' , 'MasterData\ItemsController@supplierItems')->name('suppliers.items');
     Route::get('security/transports-in-process' , 'Security\TransportsController@inProcess')->name('transports.inProcess');
-    Route::get('security/transports-check-out' , 'Security\TransportsController@checkOut')->name('transports.checkOut');
-    Route::get('security/cancel' , 'Security\TransportsController@cancel')->name('transports.cancel');
+    Route::post('security/transports-check-out' , 'Security\TransportsController@checkOut')->name('transports.checkOut');
+    Route::post('security/cancel' , 'Security\TransportsController@cancel')->name('transports.cancel');
 
 
     /*
@@ -71,8 +73,10 @@ Route::middleware(['auth'])->group(function (){
     Route::post('getLastBatch' , 'Production\ProductionProcessController@getLastBatch')->name('getLastBatch');
     Route::post('getSupplierItemByGroup' , 'Production\ProductionProcessController@getSupplierItemByGroup')->name('getSupplierItemByGroup');
     Route::post('getScrapSupplierItemByGroup' , 'Production\ScrapProcessController@getSupplierItemByGroup')->name('getScrapSupplierItemByGroup');
-});
 
+    Route::post('checkBlockedDriver' , 'Security\BlockedDriversController@checkIfBlocked')->name('checkIfBlocked');
+});
+Route::get('security/queue' , 'Security\QueueController@index')->name('queue.index');
 Route::get('trucks-scale' , "Scale\TrucksScaleController@index")->name('trucks-scale.index');
 Route::post('trucks-scale-check-barcode' , "Scale\TrucksScaleController@checkBarcode")->name('checkBarcode');
 Route::post('trucks-scale-weight' , "Scale\TrucksScaleController@saveTruckScaleWeight")->name('trucks-scale.weight');

@@ -73,6 +73,10 @@
                 <td colspan="2" class="text-center">**** <b>@lang("global.truck_{$truck->plate_name}")</b> ****</td>
             </tr>
             <tr class="text-center">
+                <td>@lang('global.driver_name')</td>
+                <th>{{ $transport->driver_name }}</th>
+            </tr>
+            <tr class="text-center">
                 <td>@lang('global.transport_number')</td>
                 <th>{{ $transport->transport_number }}</th>
             </tr>
@@ -80,10 +84,12 @@
                 <td>@lang('global.truck_plate')</td>
                 <th>{{ $truck->truck_plates }}</th>
             </tr>
-            <tr class="text-center">
-                <td>@lang('global.item_group')</td>
-                <th>{{ $transport->itemGroup->name }}</th>
-            </tr>
+            @if(isItemTypeRaw($transport->item_type_id))
+                <tr class="text-center">
+                    <td>@lang('global.item_group')</td>
+                    <th>{{ $transport->itemGroup->name }}</th>
+                </tr>
+            @endif
             <tr class="text-center">
                 <td>@lang('global.supplier')</td>
                 <th>{{ $transport->supplier->name }}</th>
@@ -114,7 +120,7 @@
     $().ready(function () {
         $(".bcTarget").each(function(index , elem){
             let barcode =   $(elem).data('barcode').toString();
-            $(elem).barcode( barcode , "code128" , {barWidth : 2});
+            $(elem).barcode( barcode , "code128" , {barWidth : 2 , output: 'bmp'});
         });
         print();
     })

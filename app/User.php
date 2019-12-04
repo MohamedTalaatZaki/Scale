@@ -90,8 +90,8 @@ class User extends Authenticatable
     protected $appends  =   ['avatar_url'];
 
     public function getAvatarUrlAttribute() {
-        $avatar =   is_null($this->avatar) ? asset('/img/GOHAINA.png') : asset( '/storage/'.$this->avatar);
-        return $this->attributes['avatar']  =  $avatar;
+        $avatar =   is_null($this->avatar) ? 'img/GOHAINA.png' : asset( '/storage/'.$this->avatar);
+        return  $avatar;
     }
 
     public function setPasswordAttribute($value) {
