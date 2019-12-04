@@ -175,9 +175,9 @@
                 }
             });
 
-            $('.driver_license').on('keyup' , function (evt) {
-                let license =   $(this).val();
-                axios.post('{{ route('checkIfBlocked') }}' , { 'license' : license })
+            $('.driver_national_id').on('keyup' , function (evt) {
+                let nationalId  =   $(this).val();
+                axios.post('{{ route('checkIfBlocked') }}' , { 'national_id' : nationalId })
                     .then( function (response) {
                         if(response.data) {
                             $('.submit-btn').hide();

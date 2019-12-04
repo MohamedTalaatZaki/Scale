@@ -21,7 +21,7 @@ class BlockedDriversController extends Controller
     public function checkIfBlocked(Request $request)
     {
         $driver =   BlockedDriver::query()
-            ->where( 'license' , $request->input('license'))
+            ->where( 'national_id' , $request->input('national_id'))
             ->where('is_blocked' , 1)
             ->first();
 
