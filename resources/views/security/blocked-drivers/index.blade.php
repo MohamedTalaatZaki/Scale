@@ -55,11 +55,9 @@
                                             <button type="submit"
                                                     class="btn btn-danger btn-sm mb-1 mr-2">@lang('global.unblock')</button>
                                         </form>
-                                    @endpermission
-{{--                                    @permission('blocked-drivers.show-logs')--}}
                                         <button type="button" data-target="#blockedModal" data-toggle="modal"  data-history="{{ $driver->logs }}"
                                                 class="btn btn-primary btn-sm mb-1" >@lang('global.history')</button>
-{{--                                    @endpermission--}}
+                                    @endpermission
                                     </div>
                                 </td>
                             </tr>
