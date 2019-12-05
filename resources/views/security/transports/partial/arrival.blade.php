@@ -29,8 +29,13 @@
                 <td>
                     @permission('transports.edit')
                     @if($truck->status == 'arrived')
-                        <a data-target="#cancelModal" data-toggle="modal" data-transport-id="{{ $truck->id }}" data-route="{{ route('transports.cancel') }}"
-                           class="btn btn-danger text-white btn-sm mb-1 cancelBtn" style="cursor: pointer">@lang('global.cancel')</a>
+                        <a href="#"
+                           data-target="#cancelModal"
+                           data-toggle="modal"
+                           data-transport-id="{{ $truck->id }}"
+                           data-route="{{ route('transports.cancel') }}"
+                           data-label="@lang('global.cancel')"
+                           class="btn btn-danger text-white btn-sm mb-1 cancelBtn" >@lang('global.cancel')</a>
 
                         <a href="{{ route('transports.edit' , ['id' => $truck->id]) }}"
                            class="btn btn-primary btn-sm mb-1">@lang('global.edit')</a>

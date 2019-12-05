@@ -275,4 +275,5 @@ return [
     'blocked_by'    =>  'حظر بواسطة',
     'blocked_reason'    =>  'سبب الحظر',
     'block_reason'    =>  'التعليق على الحظر',
+    'check_out' =>  'تسجيل خروج السيارة',
 ];

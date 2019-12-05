@@ -56,7 +56,7 @@ class TransportsController extends Controller
             ->paginate(15);
 
         $inProcessTrucks    =   Transports::query()
-            ->where('status' , 'in_process')
+            ->whereIn('status' , ['in_process' , 'out_weight'])
             ->paginate(15);
 
         $departures    =   Transports::query()

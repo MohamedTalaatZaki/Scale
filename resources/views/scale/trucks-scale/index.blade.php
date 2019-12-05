@@ -162,7 +162,7 @@
                 }
             },
             test: function () {
-                this.barcodeStr = "1574327752-4";
+                this.barcodeStr = "1575547202-1";
                 this.scanned = true;
                 this.checkBarcode();
             },

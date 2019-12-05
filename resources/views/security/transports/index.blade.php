@@ -152,7 +152,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">@lang('global.cancel')</h5>
+                    <h5 class="modal-title" id="cancelModalLabel">@lang('global.cancel')</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -196,6 +196,7 @@
             </div>
         </div>
     </div>
+
 
 @endsection
 @push('scripts')
@@ -272,6 +273,8 @@
             $('#cancelModal').on('show.bs.modal', function (event) {
                 let id  =   $(event.relatedTarget).data('transport-id');
                 let route   =   $(event.relatedTarget).data('route');
+                let label   =   $(event.relatedTarget).data('label');
+                $('#cancelModalLabel').text(label);
                 $('#cancelTransportId').val(id);
                 $('#cancelForm').prop('action' , route);
             });
