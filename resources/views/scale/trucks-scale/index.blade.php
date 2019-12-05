@@ -248,7 +248,7 @@
                 })
             },
             wsInit  :   function() {
-                this.websocket = new WebSocket("ws://127.0.0.1:8500/");
+                this.websocket = new WebSocket("{{ config('websocket.ws_ip' , 'ws://127.0.0.1:8500/') }}");
                 this.websocket.onopen = (evt) => { this.wsOnOpen(evt) };
                 this.websocket.onclose = (evt) => { this.wsOnClose(evt) };
                 this.websocket.onmessage = (evt) => { this.wsOnMessage(evt) };
