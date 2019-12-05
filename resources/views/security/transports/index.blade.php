@@ -203,7 +203,15 @@
     <script src="{{ asset('js/swal.js') }}"></script>
     <script>
         $().ready(function () {
-
+            if ("{{ Session::has('print') }}" == 1) {
+             let transportId    =   "{{ Session::get('print') }}";
+                var win = window.open('{{ route('printLabels') }}?id='+transportId, '_blank');
+                if (win) {
+                    win.focus();
+                } else {
+                    alert('Please allow popups for this website');
+                }
+            }
             let errors = "{{ $errors->count() }}";
 
             if(errors > 0) {
@@ -213,7 +221,7 @@
 
             $('.show-create-div,.reset-close').on('click', function () {
                 $('.create-arrival-truck').toggle();
-                $('.search-trucks').toggle();
+                $('.submit-btn').show();
             });
 
             $('.governorate_select').on('change' , function(evt){
@@ -245,9 +253,9 @@
                 }
             });
 
-            $('.driver_license').on('keyup' , function (evt) {
-                let license =   $(this).val();
-                axios.post('{{ route('checkIfBlocked') }}' , { 'license' : license })
+            $('.driver_national_id').on('keyup' , function (evt) {
+                let nationalId  =   $(this).val();
+                axios.post('{{ route('checkIfBlocked') }}' , { 'national_id' : nationalId })
                     .then( function (response) {
                         if(response.data) {
                             $('.submit-btn').hide();

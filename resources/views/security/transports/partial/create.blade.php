@@ -7,17 +7,17 @@
                     <h6>@lang('global.driver_information') *</h6>
                     <hr>
                     <div class="form-group col-md-12">
-                        <label for="driver_license">@lang('global.driver_license') *</label>
+                        <label for="driver_national_id">@lang('global.driver_national_id') *</label>
                         <input type="text"
-                               class="form-control driver_license"
-                               id="driver_license"
-                               placeholder="@lang('global.driver_license')"
-                               value="{{ old('driver_license') }}"
-                               name="driver_license"
+                               class="form-control driver_national_id"
+                               id="driver_national_id"
+                               placeholder="@lang('global.driver_national_id')"
+                               value="{{ old('driver_national_id') }}"
+                               name="driver_national_id"
                                autocomplete="off"
                                required>
-                        @if($errors->has('driver_license'))
-                            <div class="error" style="">{{ $errors->first('driver_license') }}</div>
+                        @if($errors->has('driver_national_id'))
+                            <div class="error" style="">{{ $errors->first('driver_national_id') }}</div>
                         @endif
                     </div>
                     <div class="form-group col-md-12">
@@ -34,19 +34,18 @@
                             <div class="error" style="">{{ $errors->first('driver_name') }}</div>
                         @endif
                     </div>
-
                     <div class="form-group col-md-12">
-                        <label for="driver_national_id">@lang('global.driver_national_id') *</label>
+                        <label for="driver_license">@lang('global.driver_license') *</label>
                         <input type="text"
                                class="form-control"
-                               id="driver_national_id"
-                               placeholder="@lang('global.driver_national_id')"
-                               value="{{ old('driver_national_id') }}"
-                               name="driver_national_id"
+                               id="driver_license"
+                               placeholder="@lang('global.driver_license')"
+                               value="{{ old('driver_license') }}"
+                               name="driver_license"
                                autocomplete="off"
                                required>
-                        @if($errors->has('driver_national_id'))
-                            <div class="error" style="">{{ $errors->first('driver_national_id') }}</div>
+                        @if($errors->has('driver_license'))
+                            <div class="error" style="">{{ $errors->first('driver_license') }}</div>
                         @endif
                     </div>
                     <div class="form-group col-md-12">

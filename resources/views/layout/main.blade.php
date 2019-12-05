@@ -68,6 +68,16 @@
             font-size: 30px;
             margin-bottom: 10px;
         }
+        @if(optional(Auth::user())->theme == 'light')
+
+            table.table-bordered > thead > tr > th{
+            border:1px solid #c1c1c1 !important;
+        }
+        table.table-bordered > tbody > tr > td{
+            border:1px solid #c1c1c1 !important;
+        }
+        @endif
+
     </style>
     @stack('styles')
 </head>
@@ -249,7 +259,7 @@
                     aria-expanded="false">
                 <span class="name" style="color: #c0702f">{{ optional(Auth::user())->full_name }}</span>
                 <span>
-                        <img alt="Profile Picture" src="{{ optional(Auth::user())->avatar_url }}"/>
+                        <img alt="Profile Picture" src="{{ asset(optional(Auth::user())->avatar_url) }}"/>
                     </span>
             </button>
             <form action="{{route('logout')}}" id="logout" method="post">@csrf</form>
