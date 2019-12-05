@@ -259,6 +259,7 @@
             },
             wsOnClose : function(evt) {},
             wsOnMessage : function(evt) {
+                // console.log(evt.data);
                 let input = $('.scale-weight-text-elem');
                 if(this.isNumeric(evt.data) && evt.data > 400 && evt.data === this.weight && this.correctWeightCount < this.weightValidAfterCount) {
                     this.correctWeightCount +=1
