@@ -33,10 +33,6 @@ class ScrapProcessController extends Controller
         $this->validate($request , [
             'item_group_id' =>  'required',
             'item_id' =>  'required',
-            'day' =>  'required',
-            'month' =>  'required',
-            'year' =>  'required',
-            'batch_num' =>  'required',
             'line_id' =>  'required',
         ]);
 
@@ -49,7 +45,7 @@ class ScrapProcessController extends Controller
         ]);
 
         $transportDetail->LastTransportLine()->first()->update([
-            'batch_number'  => $request->input('batch_number'),
+            'batch_number'  =>  '',
             'started_at'    =>  Carbon::now(),
             'line_id'       =>  $request->input('line_id'),
         ]);
@@ -84,12 +80,6 @@ class ScrapProcessController extends Controller
             ]);
         }
         return redirect()->back()->with('success' , trans('global.truck_reweight'));
-    }
-
-    public function getLastBatch()
-    {
-        $batchNumber    =   optional(TransportLine::query()->whereNotNull('batch_number')->orderByDesc('batch_number')->first())->batch_number;
-        return  $batchNumber ? substr($batchNumber , 7) : "";
     }
 
     public function getSupplierItemByGroup(Request $request)
