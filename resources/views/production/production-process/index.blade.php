@@ -144,6 +144,11 @@
                             data: {_token: "{{ csrf_token() }}" , detail_id : detailId , discount : discount},
                             success:    ()  =>  {
                                 $('#detail_'+detailId).remove();
+                                Swal.fire(
+                                    '{{ trans('global.production_done') }}',
+                                    '',
+                                    'success'
+                                )
                             }
                         });
                     }

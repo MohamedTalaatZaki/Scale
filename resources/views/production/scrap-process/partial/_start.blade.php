@@ -116,27 +116,6 @@
                             @endif
                         </div>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group col-md-2">
-                            <input type="number" data-max-length="2" class="form-control text-center day batchNumStr limitInputLength" name="day" value="" required>
-                        </div>
-                        <div class="form-group col-md-2">
-                            <input type="number" data-max-length="2" class="form-control text-center month batchNumStr limitInputLength" name="month" value="" required>
-                        </div>
-                        <div class="form-group col-md-4">
-                            <input type="number" data-max-length="3" class="form-control text-center year batchNumStr limitInputLength" name="year" value="" required>
-                        </div>
-                        <div class="form-group col-md-4 input-group">
-                            <input type="number" data-max-length="3" class="form-control text-center batch_num batchNumStr limitInputLength" name="batch_num" value="" required>
-                            <div class="input-group-append">
-                                <button class="btn btn-outline-primary last_batch" type="button">@lang('global.last_batch')</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row m-4 bg-dark text-primary">
-                        <h4 class="p-3" style="margin: 0 auto"><span>Batch Number : </span><span id="batchNumberStr"></span></h4>
-                        <input type="hidden" id="batch_number" name="batch_number" value="">
-                    </div>
                     <hr>
                     <div class="row btn-group-sm float-right mb-2">
                         <button type="button" class="btn btn-secondary mr-1" data-dismiss="modal">@lang('global.close')</button>

@@ -276,4 +276,5 @@ return [
     'blocked_reason'    =>  'سبب الحظر',
     'block_reason'    =>  'التعليق على الحظر',
     'check_out' =>  'تسجيل خروج السيارة',
+    'production_done'  =>  'تم تسجيل انتهاء السيارة بنجاح'
 ];

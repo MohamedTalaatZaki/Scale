@@ -278,4 +278,5 @@ return [
     'blocked_by'    =>  'Blocked By',
     'blocked_reason'    =>  'Blocked Reason',
     'block_reason'    =>  'Blocked Note',
+    'production_done'  =>  'The Truck Has Been Finished The Cycle'
 ];
