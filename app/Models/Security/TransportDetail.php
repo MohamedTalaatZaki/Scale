@@ -241,4 +241,32 @@ class TransportDetail extends Model
             })
             ->where('status' , 'start_load');
     }
+
+    public function scopeFinishNotStartedTransports()
+    {
+        return $this
+            ->whereHas('transport' , function ($query){
+                $query->whereHas('itemType' , function($q){
+                    return $q->where('prefix' , 'finish');
+                });
+            })
+            ->whereHas('LastTransportLine' , function ($query){
+                $query->whereNull('started_at')->whereNull('finished_at');
+            })
+            ->where('status' , 'in_process');
+    }
+
+    public function scopeFinishStartedTransports()
+    {
+        return $this
+            ->whereHas('transport' , function ($query){
+                $query->whereHas('itemType' , function($q){
+                    return $q->where('prefix' , 'finish');
+                });
+            })
+            ->whereHas('LastTransportLine' , function ($query){
+                $query->whereNotNull('started_at')->whereNull('finished_at');
+            })
+            ->where('status' , 'start_load');
+    }
 }

@@ -539,8 +539,8 @@ class PermissionsTableSeeder extends Seeder
         Permission::create([
             'sub_menu_id' => $subMenu->id,
             'name' => 'scrap-process.index',
-            'en_display_name' => 'List Raw Process',
-            'ar_display_name' => 'عرض شاحنات الخامات',
+            'en_display_name' => 'List Scrap Process',
+            'ar_display_name' => 'عرض شاحنات المخلفات',
             'en_description' => NULL,
             'ar_description' => NULL,
         ]);
@@ -566,6 +566,44 @@ class PermissionsTableSeeder extends Seeder
         Permission::create([
             'sub_menu_id' => $subMenu->id,
             'name' => 'scrapTransferLine',
+            'en_display_name' => 'Can Transfer Process',
+            'ar_display_name' => 'تحويل السيارة لخط اخر',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+
+        $subMenu = SubMenu::where('code', 21)->first();
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'finish-process.index',
+            'en_display_name' => 'List Finish Process',
+            'ar_display_name' => 'عرض شاحنات المادة التامه',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'finishStartProcess',
+            'en_display_name' => 'Can Start Process',
+            'ar_display_name' => 'بدء عملية التحميل',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'finishFinishProcess',
+            'en_display_name' => 'Can Finish Process',
+            'ar_display_name' => 'انهاء عملية التحميل',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'finishTransferLine',
             'en_display_name' => 'Can Transfer Process',
             'ar_display_name' => 'تحويل السيارة لخط اخر',
             'en_description' => NULL,
