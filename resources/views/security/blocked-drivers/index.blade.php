@@ -55,7 +55,7 @@
                                             <button type="submit"
                                                     class="btn btn-danger btn-sm mb-1 mr-2">@lang('global.unblock')</button>
                                         </form>
-                                        <button type="button" data-target="#blockedModal" data-toggle="modal"  data-history="{{ $driver->logs }}"
+                                        <button type="button" data-target="#blockedModal" data-toggle="modal"  data-history="{{ $driver->logs->toJson() }}"
                                                 class="btn btn-primary btn-sm mb-1" >@lang('global.history')</button>
                                     @endpermission
                                     </div>
