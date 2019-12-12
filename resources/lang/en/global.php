@@ -281,4 +281,7 @@ return [
     'production_done'  =>  'The Truck Has Been Finished The Cycle',
     'finish_process'    =>  'Finish Process',
     'finish_finish_confirmation'    =>  'Are You Sure The Truck Has Been Finished Load',
+    'in_process'    =>  'In Process',
+    'departed'  =>  'Departed',
+    'cancelled' =>  'Cancelled',
 ];

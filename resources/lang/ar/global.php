@@ -279,4 +279,7 @@ return [
     'production_done'  =>  'تم تسجيل انتهاء السيارة بنجاح',
     'finish_process'    =>  'عمليات المنتجات',
     'finish_finish_confirmation'    =>  'هل انت متاكد من انتهاء العملية',
+    'in_process'    =>  'في الداخل',
+    'departed'  =>  'غادرت',
+    'cancelled' =>  'ملغاه',
 ];

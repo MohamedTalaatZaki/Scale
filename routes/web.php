@@ -89,3 +89,17 @@ Route::post('trucks-scale-check-barcode' , "Scale\TrucksScaleController@checkBar
 Route::post('trucks-scale-weight' , "Scale\TrucksScaleController@saveTruckScaleWeight")->name('trucks-scale.weight');
 
 Auth::routes();
+
+Route::get('test' , function (){
+    $test =
+   \App\Models\Security\TransportDetail::whereHas('transport' , function ($query){
+       $query->whereHas('itemType' , function($q){
+           return $q->where('prefix' , 'finish');
+       });
+   })
+       ->whereHas('LastTransportLine' , function ($query){
+           $query->whereNotNull('started_at')->whereNull('finished_at');
+       })
+       ->where('status' , 'start_load')->toSql();
+    dd($test);
+});

@@ -394,7 +394,7 @@
 <script src="{{ asset('js/vendor/Sortable.js') }}"></script>
 <script src="{{ asset('js/vendor/mousetrap.min.js') }}"></script>
 <script src="{{ asset('js/dore.script.js') }}"></script>
-<script src="{{ asset('js/scripts'.$page_dir.'.js') }}"></script>
+<script src="{{ asset('js/scripts.js') }}"></script>
 <script src="{{ asset('js/notify.min.js') }}"></script>
 <script src="{{ asset('js/multi-select/js/jquery.quicksearch.js') }}"></script>
 <script src="{{ asset('js/multi-select/js/jquery.multi-select.js') }}"></script>
@@ -403,13 +403,15 @@
 
 <script>
     $().ready(function () {
-
+        let pageDir =   "{{ $page_dir }}";
         let body    =   $('body');
         let notify = parseInt('{{ Session::has('notify') }}');
         let openAccountInfo = parseInt('{{ Session::has('openAccountInfo') }}');
-        var isHome = !!'{{Route::currentRouteName() == 'home'}}';
+        let isHome = !!'{{Route::currentRouteName() == 'home'}}';
+
+        localStorage.setItem('dore-direction',pageDir);
+
         if(isHome){
-            console.log(isHome);
             localStorage.setItem('sidebar','sidebar-dashboard');
         }
         $('.' + localStorage.getItem('sidebar')).closest('li').addClass('active');
