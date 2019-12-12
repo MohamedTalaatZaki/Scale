@@ -53,6 +53,11 @@ Route::middleware(['auth'])->group(function (){
     Route::get('production/scrap-process-transfer' , 'Production\ScrapProcessController@transferLine')->name('scrapTransferLine');
     Route::post('production/scrap-process-finish' , 'Production\ScrapProcessController@finishProcess')->name('scrapFinishProcess');
 
+    Route::resource('production/finish-process' , 'Production\FinishProcessController');
+    Route::post('production/finish-process-start' , 'Production\FinishProcessController@startProcess')->name('finishStartProcess');
+    Route::get('production/finish-process-transfer' , 'Production\FinishProcessController@transferLine')->name('finishTransferLine');
+    Route::post('production/finish-process-finish' , 'Production\FinishProcessController@finishProcess')->name('finishFinishProcess');
+
     Route::get('change-theme' , 'MasterData\UsersController@theme')->name('change-theme');
     Route::get('change-lang' , 'MasterData\UsersController@lang')->name('change-lang');
     Route::post('change-acc-info' , 'MasterData\UsersController@changeAccInfo')->name('users.change-acc-info');
@@ -73,6 +78,8 @@ Route::middleware(['auth'])->group(function (){
     Route::post('getLastBatch' , 'Production\ProductionProcessController@getLastBatch')->name('getLastBatch');
     Route::post('getSupplierItemByGroup' , 'Production\ProductionProcessController@getSupplierItemByGroup')->name('getSupplierItemByGroup');
     Route::post('getScrapSupplierItemByGroup' , 'Production\ScrapProcessController@getSupplierItemByGroup')->name('getScrapSupplierItemByGroup');
+
+    Route::post('getFinishSupplierItemByGroup' , 'Production\FinishProcessController@getSupplierItemByGroup')->name('getFinishSupplierItemByGroup');
 
     Route::post('checkBlockedDriver' , 'Security\BlockedDriversController@checkIfBlocked')->name('checkIfBlocked');
 });

@@ -74,8 +74,9 @@ class TrucksScaleController extends Controller
         ]);
 
         $nextTruck  =   TransportDetail::query()
-            ->where('transport_id' , $request->input('transport_id'))
             ->TransportCanWeight()
+            ->where('transport_id' , $request->input('transport_id'))
+            ->where('id' , '!=' , $request->input('transport_detail_id'))
             ->first();
 
         $this->createTransportLineTransaction($transportDetail->id);
@@ -106,8 +107,8 @@ class TrucksScaleController extends Controller
         ]);
 
         $nextTruck  =   TransportDetail::query()
-            ->where('transport_id' , $request->input('transport_id'))
             ->TransportHasInProcess()
+            ->where('transport_id' , $request->input('transport_id'))
             ->first();
 
         $transportDetail->transport()->update([
@@ -137,8 +138,8 @@ class TrucksScaleController extends Controller
         $this->createTransportLineTransaction($transportDetail->id);
 
         $nextTruck  =   TransportDetail::query()
-            ->where('transport_id' , $request->input('transport_id'))
             ->TransportCanReWeight()
+            ->where('transport_id' , $request->input('transport_id'))
             ->first();
 
         $transportDetail->transport()->update([

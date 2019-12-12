@@ -338,6 +338,15 @@ class MainMenusTableSeeder extends Seeder
                 'i_class' => 'scrapProcessIcon',
                 'order' => 1,
                 'code'=>18
+            ],
+            [
+                'en_name' => 'Finish Process',
+                'ar_name' => 'عمليات المنتج التام',
+                'route' => 'finish-process.index',
+                'a_class' => 'sidebar-sub sidebar-sub-finish-process',
+                'i_class' => 'finishProcessIcon',
+                'order' => 1,
+                'code'=>21
             ]
         ]);
         $group = $main->menuGroups()->create([
@@ -359,5 +368,5 @@ class MainMenusTableSeeder extends Seeder
         ]);
     }
 
-     //permission code next = 21 ;
+     //permission code next = 22 ;
 }
