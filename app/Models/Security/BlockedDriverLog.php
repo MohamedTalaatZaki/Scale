@@ -24,12 +24,12 @@ class BlockedDriverLog extends Model
     public function getBlockedByNameAttribute()
     {
         $name   =   User::query()->find($this->blocked_by);
-        return $name->full_name;
+        return optional($name)->full_name;
     }
 
     public function getBlockedReasonAttribute()
     {
         $reason   =   BlockedReason::query()->find($this->blocked_reason_id);
-        return $reason->name;
+        return optional($reason)->name;
     }
 }
