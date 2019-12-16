@@ -176,6 +176,9 @@
             background-color: #dc3545;
         }
 
+        .resetInput{
+            display: none;
+        }
     </style>
 @endpush
 
@@ -239,6 +242,12 @@
                    }
                    // return {id : id , truckPlates : truckPlates , itemGroup : itemGroup , driverMobile : driverMobile , driverName : driverName}
                 });
+
+                if(word.length > 0) {
+                    $(this).closest('div').find('.resetInput').show()
+                } else {
+                    $(this).closest('div').find('.resetInput').hide()
+                }
             });
 
             $('.resetInput').on('click' , function(evt){
