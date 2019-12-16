@@ -23,6 +23,8 @@
     <link rel="stylesheet" href="{{ asset('css/vendor/bootstrap-datepicker3.min.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/vendor/component-custom-switch.min.css') }}"/>
     <link rel="stylesheet" href="{{ asset('fontawesome/css/all.min.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('js/datetimepicker/jquery.datetimepicker.min.css') }}"/>
+
     @if (Auth::check() && optional(Auth::user())->theme == 'light')
         <link rel="stylesheet" type="text/css" href="{{ asset('css/dore.light.orange.min.css') }}">
     @else
@@ -400,7 +402,7 @@
 <script src="{{ asset('js/multi-select/js/jquery.multi-select.js') }}"></script>
 <script src="{{ asset('fontawesome/js/all.min.js') }}"></script>
 <script src="{{ asset('js/jquery.repeater.js') }}"></script>
-
+<script src="{{ asset('js/datetimepicker/jquery.datetimepicker.full.min.js') }}"></script>
 <script>
     $().ready(function () {
         let pageDir =   "{{ $page_dir }}";

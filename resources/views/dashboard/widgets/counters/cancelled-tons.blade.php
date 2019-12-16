@@ -1,3 +1,4 @@
+@isset($canceledCounters)
 <a href="#" class="card">
     <div class="card-body text-center">
         <i class="iconsminds-clock"></i>
@@ -5,12 +6,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-6 text-left" style="color: #c0702f">
-                    Count : 16
+                    Count : {{ $canceledCounters->count() }}
                 </div>
                 <div class="col-xs-6 text-right" style="color: #c0702f">
-                    Tons : 2000
+                    Tons : {{ $canceledCounters->sum('theoretical_weight') / 1000 }}
                 </div>
             </div>
         </div>
     </div>
 </a>
+@endisset

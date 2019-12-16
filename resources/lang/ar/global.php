@@ -282,4 +282,7 @@ return [
     'in_process'    =>  'في الداخل',
     'departed'  =>  'غادرت',
     'cancelled' =>  'ملغاه',
+    'arrived'   =>  'وصلت',
+    'reset' =>  'مسح',
+    'qc_result' =>  'نتائج المعمل'
 ];

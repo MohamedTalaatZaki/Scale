@@ -284,4 +284,7 @@ return [
     'in_process'    =>  'In Process',
     'departed'  =>  'Departed',
     'cancelled' =>  'Cancelled',
+    'arrived'   =>  'Arrived',
+    'reset' =>  'Reset',
+    'qc_result' =>  'QC Results',
 ];

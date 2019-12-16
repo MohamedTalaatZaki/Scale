@@ -82,6 +82,7 @@ Route::middleware(['auth'])->group(function (){
     Route::post('getFinishSupplierItemByGroup' , 'Production\FinishProcessController@getSupplierItemByGroup')->name('getFinishSupplierItemByGroup');
 
     Route::post('checkBlockedDriver' , 'Security\BlockedDriversController@checkIfBlocked')->name('checkIfBlocked');
+    Route::post('suppliersItemGroup' , 'HomeController@getSuppliersAndItemGroupByItemTypePrefix')->name('dashboard.suppliersItemGroup');
 });
 Route::get('security/queue' , 'Security\QueueController@index')->name('queue.index');
 Route::get('trucks-scale' , "Scale\TrucksScaleController@index")->name('trucks-scale.index');
