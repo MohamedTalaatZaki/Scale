@@ -174,7 +174,7 @@
             <div class="col-12">
                 <div class="card mb-4">
                     <div class="card-body">
-                        <h5 class="mb-4">Items</h5>
+                        <h5 class="mb-4">@lang('global.qc')</h5>
                         <div class="row">
                             <div class="col-5">
                                 <div class="form-group">

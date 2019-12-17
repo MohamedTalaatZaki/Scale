@@ -292,5 +292,7 @@ return [
     'lines_weight'  =>  'الوزن لكل خط',
     'degree'    =>  'الدرجة',
     'total_weight'  =>  'الوزن الاجمالي',
-    'kilogram'  =>  'كيلو جرام'
+    'kilogram'  =>  'كيلو جرام',
+    'filters'   =>  'اعدادت البحث'
+
 ];

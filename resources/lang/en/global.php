@@ -294,6 +294,7 @@ return [
     'lines_weight'  =>  'Lines Weight',
     'degree'    =>  'Degree',
     'total_weight'  =>  'Total Weight',
-    'kilogram'  =>  'Kg'
+    'kilogram'  =>  'Kg',
+    'filters'   =>  'Filters',
 
 ];
