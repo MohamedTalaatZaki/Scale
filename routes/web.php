@@ -82,6 +82,7 @@ Route::middleware(['auth'])->group(function (){
     Route::post('getFinishSupplierItemByGroup' , 'Production\FinishProcessController@getSupplierItemByGroup')->name('getFinishSupplierItemByGroup');
 
     Route::post('checkBlockedDriver' , 'Security\BlockedDriversController@checkIfBlocked')->name('checkIfBlocked');
+    Route::post('suppliersItemGroup' , 'HomeController@getSuppliersAndItemGroupByItemTypePrefix')->name('dashboard.suppliersItemGroup');
 });
 Route::get('security/queue' , 'Security\QueueController@index')->name('queue.index');
 Route::get('trucks-scale' , "Scale\TrucksScaleController@index")->name('trucks-scale.index');
@@ -89,3 +90,17 @@ Route::post('trucks-scale-check-barcode' , "Scale\TrucksScaleController@checkBar
 Route::post('trucks-scale-weight' , "Scale\TrucksScaleController@saveTruckScaleWeight")->name('trucks-scale.weight');
 
 Auth::routes();
+
+Route::get('test' , function (){
+    $test =
+   \App\Models\Security\TransportDetail::whereHas('transport' , function ($query){
+       $query->whereHas('itemType' , function($q){
+           return $q->where('prefix' , 'finish');
+       });
+   })
+       ->whereHas('LastTransportLine' , function ($query){
+           $query->whereNotNull('started_at')->whereNull('finished_at');
+       })
+       ->where('status' , 'start_load')->toSql();
+    dd($test);
+});

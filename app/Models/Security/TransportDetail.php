@@ -51,7 +51,9 @@ class TransportDetail extends Model
     protected $guarded  =   ['id'];
     protected $appends  =   ['ar_plate_name' ,'plate_name' , 'readable_status'];
 
+    const ARRIVED       =   'arrived';
     const WAITING       =   'waiting';
+    const SAMPLED       =   'sampled';
     const ACCEPTED      =   'accepted';
     const PROCESSED     =   'processed';
     const RE_WEIGHT     =   're_weight';
@@ -61,6 +63,8 @@ class TransportDetail extends Model
     const OUT_WEIGHT    =   'in_weight';
     const START_UNLOAD  =   'start_unload';
     const START_LOAD    =   'start_load';
+    const DEPARTURE     =   'departure';
+    const CANCELED      =   'canceled';
 
     public function transport()
     {

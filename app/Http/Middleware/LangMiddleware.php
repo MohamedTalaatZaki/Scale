@@ -26,7 +26,7 @@ class LangMiddleware
 //        }
         $lang = App::getLocale();
 //        View::share('lang',$lang);
-        View::share('page_dir',$lang == 'ar' ? 'rtl' : '');
+        View::share('page_dir',$lang == 'ar' ? 'rtl' : 'ltr');
         return $next($request);
     }
 }

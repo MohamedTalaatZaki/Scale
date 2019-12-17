@@ -281,4 +281,19 @@ return [
     'production_done'  =>  'The Truck Has Been Finished The Cycle',
     'finish_process'    =>  'Finish Process',
     'finish_finish_confirmation'    =>  'Are You Sure The Truck Has Been Finished Load',
+    'in_process'    =>  'In Process',
+    'departed'  =>  'Departed',
+    'cancelled' =>  'Cancelled',
+    'arrived'   =>  'Arrived',
+    'reset' =>  'Reset',
+    'qc_result' =>  'QC Results',
+    'batch_number'   =>  'Batch Number',
+    'weight'    =>  'Weight',
+    'transport_lines'   =>  'Transport Lines',
+    'from'  =>  'From',
+    'lines_weight'  =>  'Lines Weight',
+    'degree'    =>  'Degree',
+    'total_weight'  =>  'Total Weight',
+    'kilogram'  =>  'Kg'
+
 ];

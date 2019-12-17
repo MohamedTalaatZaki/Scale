@@ -279,4 +279,18 @@ return [
     'production_done'  =>  'تم تسجيل انتهاء السيارة بنجاح',
     'finish_process'    =>  'عمليات المنتجات',
     'finish_finish_confirmation'    =>  'هل انت متاكد من انتهاء العملية',
+    'in_process'    =>  'في الداخل',
+    'departed'  =>  'غادرت',
+    'cancelled' =>  'ملغاه',
+    'arrived'   =>  'وصلت',
+    'reset' =>  'مسح',
+    'qc_result' =>  'نتائج المعمل',
+    'batch_number'   =>  'رقم التشغيلة',
+    'weight'    =>  'الوزن',
+    'transport_lines'   =>  'سيارات غدارت خط الانتاج',
+    'from'  =>  'من',
+    'lines_weight'  =>  'الوزن لكل خط',
+    'degree'    =>  'الدرجة',
+    'total_weight'  =>  'الوزن الاجمالي',
+    'kilogram'  =>  'كيلو جرام'
 ];
