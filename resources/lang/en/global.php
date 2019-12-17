@@ -287,4 +287,13 @@ return [
     'arrived'   =>  'Arrived',
     'reset' =>  'Reset',
     'qc_result' =>  'QC Results',
+    'batch_number'   =>  'Batch Number',
+    'weight'    =>  'Weight',
+    'transport_lines'   =>  'Transport Lines',
+    'from'  =>  'From',
+    'lines_weight'  =>  'Lines Weight',
+    'degree'    =>  'Degree',
+    'total_weight'  =>  'Total Weight',
+    'kilogram'  =>  'Kg'
+
 ];

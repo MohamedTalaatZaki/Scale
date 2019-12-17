@@ -284,5 +284,13 @@ return [
     'cancelled' =>  'ملغاه',
     'arrived'   =>  'وصلت',
     'reset' =>  'مسح',
-    'qc_result' =>  'نتائج المعمل'
+    'qc_result' =>  'نتائج المعمل',
+    'batch_number'   =>  'رقم التشغيلة',
+    'weight'    =>  'الوزن',
+    'transport_lines'   =>  'سيارات غدارت خط الانتاج',
+    'from'  =>  'من',
+    'lines_weight'  =>  'الوزن لكل خط',
+    'degree'    =>  'الدرجة',
+    'total_weight'  =>  'الوزن الاجمالي',
+    'kilogram'  =>  'كيلو جرام'
 ];

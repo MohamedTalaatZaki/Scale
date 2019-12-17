@@ -16,7 +16,7 @@ class ElementSeeder extends Seeder
        if(is_null($el)){
            QcElement::create([
                'en_name'=>'Brix',
-               'ar_name'=>'Brix',
+               'ar_name'=>'محتوي السكر',
                'test_type'=>'chemical',
                'element_type'=>'range',
                'element_unit'=>'%'
@@ -26,7 +26,7 @@ class ElementSeeder extends Seeder
         if(is_null($el)){
             QcElement::create([
                 'en_name'=>'Acidity',
-                'ar_name'=>'Acidity',
+                'ar_name'=>'الحموضة',
                 'test_type'=>'chemical',
                 'element_type'=>'range',
                 'element_unit'=>'degree'
@@ -36,7 +36,7 @@ class ElementSeeder extends Seeder
         if(is_null($el)){
             QcElement::create([
                 'en_name'=>'Ph',
-                'ar_name'=>'Ph',
+                'ar_name'=>'الأس الهيدروجيني',
                 'test_type'=>'chemical',
                 'element_type'=>'range',
                 'element_unit'=>'%'
@@ -46,7 +46,7 @@ class ElementSeeder extends Seeder
         if(is_null($el)){
             QcElement::create([
                 'en_name'=>'Ratio',
-                'ar_name'=>'Ratio',
+                'ar_name'=>'نسبة السكر',
                 'test_type'=>'chemical',
                 'element_type'=>'range',
                 'element_unit'=>'%'
@@ -56,7 +56,7 @@ class ElementSeeder extends Seeder
         if(is_null($el)){
             QcElement::create([
                 'en_name'=>'Color',
-                'ar_name'=>'Color',
+                'ar_name'=>'اللون',
                 'test_type'=>'visual',
                 'element_type'=>'range',
                 'element_unit'=>'%'
@@ -65,8 +65,8 @@ class ElementSeeder extends Seeder
         $el = QcElement::where('en_name','Mold Free')->first();
         if(is_null($el)){
             QcElement::create([
-                'en_name'=>'Brix',
-                'ar_name'=>'Brix',
+                'en_name'=>'Mold Free',
+                'ar_name'=>'خالي من العفن',
                 'test_type'=>'visual',
                 'element_type'=>'question',
                 'element_unit'=>''
@@ -76,7 +76,7 @@ class ElementSeeder extends Seeder
         if(is_null($el)){
             QcElement::create([
                 'en_name'=>'Not Damaged',
-                'ar_name'=>'Not Damaged',
+                'ar_name'=>'غير تالف',
                 'test_type'=>'visual',
                 'element_type'=>'question',
                 'element_unit'=>''

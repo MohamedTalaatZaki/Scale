@@ -5,11 +5,16 @@ namespace App\Http\Controllers;
 use App\Filters\DashboardFilter;
 use App\Models\Items\ItemGroup;
 use App\Models\Items\ItemType;
+use App\Models\Production\TransportLine;
+use App\Models\QC\QcElement;
+use App\Models\QC\SampleTestHeader;
 use App\Models\Security\TransportDetail;
 use App\Models\Security\Transports;
 use App\Models\Supplier\Supplier;
+use App\Models\Views\AcceptedResultDetail;
 use App\Models\Views\TruckInfo;
 use App\Traits\AuthorizeTrait;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -36,6 +41,7 @@ class HomeController extends Controller
 
         $dashboardData  =   TruckInfo::query()
             ->filter(new DashboardFilter($request))
+            ->with('trucksLineTransactions')
             ->get();
 
         /*
@@ -70,6 +76,13 @@ class HomeController extends Controller
          * End Counters In Tons
          */
 
+        $transportLines =   $this->getTransportLines($dashboardData);
+
+        $topSuppliers   =   $this->topSuppliers($dashboardData);
+
+        $linesWeight    =   $this->getLinesWeight($transportLines);
+
+        $qcResults      =   $this->getQcElementByBatchNumber($request);
 
         return view('dashboard.index' , [
             'dashboardData'=>$dashboardData,
@@ -81,8 +94,15 @@ class HomeController extends Controller
             'inProcessCounters'=>$inProcessCounters,
             'departureCounters'=>$departureCounters,
             'canceledCounters'=>$canceledCounters,
+            'transportLines'=>$transportLines->paginate(10),
+            'transportLinesWeight'=>$transportLines->sum('weight'),
             'item_types'=>ItemType::all(),
             'item_groups'=>ItemGroup::query()->ItemGroupsByPrefix($request->input('filter_item_type'))->get(),
+            'topSuppliers'=>json_encode($topSuppliers),
+            'linesWeight'=>json_encode($linesWeight),
+            'qcResultsLabels'=>json_encode($qcResults->pluck('truck_plates')),
+            'qcResultsData'=>json_encode($qcResults->pluck('sampled_range')),
+            'qcElements'=>QcElement::query()->where('element_type' , 'range')->get(),
             'suppliers'=>Supplier::query()
                 ->SupplierByItemTypePrefix($request->input('filter_item_type'))
                 ->FilterByItemGroup($request->input('filter_item_group') , 0)
@@ -99,5 +119,68 @@ class HomeController extends Controller
                 ->FilterByItemGroup($request->get('filter_item_group') , 0)
                 ->get()
         ]);
+    }
+
+    private function getTransportLines($dashboardData){
+        $TableCollection =   new Collection();
+        $rawTableData       =   $dashboardData
+//            ->where('status' , TransportDetail::DEPARTURE)
+            ->each(function($truck) use(&$TableCollection){
+            $truck->trucksLineTransactions->each(function($lineTransaction)use($TableCollection){
+                $TableCollection->push($lineTransaction);
+            });
+        });
+
+        return $TableCollection;
+    }
+
+    private function topSuppliers($dashboardData)
+    {
+        $suppliers = $dashboardData
+            ->where('status' , TransportDetail::DEPARTURE)
+            ->groupBy('supplier_id')
+            ->mapWithKeys( function($supplierTrucks){
+                $supplier   =   $supplierTrucks->first()->supplier->name;
+                return[
+                    $supplier =>
+                        array_sum(
+                            $supplierTrucks->map(function($truck){
+                                return $truck->trucksLineTransactions->sum('weight');
+                            })->toArray())
+                ];
+            })->toArray();
+        arsort($suppliers);
+        if(count($suppliers) > 3)
+        {
+            $topThree   =   array_slice($suppliers , 0 , 3);
+            $others     =   ['others' => array_sum(array_slice($suppliers , 3 ))];
+            $suppliers  =   array_merge($topThree , $others);
+        }
+        return $suppliers;
+    }
+
+    private function getLinesWeight($transportLines)
+    {
+        $lines = $transportLines->groupBy('line_id')->mapWithKeys(function($line){
+            return [ $line->first()->line->name => $line->sum('weight') ];
+        });
+        return $lines;
+    }
+
+    public function getQcElementByBatchNumber(Request $request)
+    {
+        if($request->has('filter_batch_number') && $request->has('filter_qc_element'))
+        {
+            $qcResults  =   AcceptedResultDetail::query()
+                ->filter(new DashboardFilter($request))
+                ->where('batch_number' , $request->input('filter_batch_number'))
+                ->where('element_name' , $request->input('filter_qc_element'))
+                ->orderBy('created_at')
+                ->get();
+
+            return $qcResults;
+        } else {
+            return collect([]);
+        }
     }
 }
