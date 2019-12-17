@@ -47,6 +47,19 @@ class Supplier extends Model
         return $this->attributes['name']    =   app()->getLocale() == 'ar' ? $this->ar_name : $this->en_name;
     }
 
+    public function scopeFilterByItemGroup($query , $itemGroup)
+    {
+        if ($itemGroup > 0)
+        {
+            return $query->whereHas('items' , function($itemQuery)use($itemGroup){
+                $itemQuery->where('item_group_id' , $itemGroup);
+            });
+        } else {
+            return $query;
+        }
+
+    }
+
     public function scopeSupplierByItemTypePrefix($query, $itemType)
     {
         return $this->whereHas('items' , function ($q)use($itemType){

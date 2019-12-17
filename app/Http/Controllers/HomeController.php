@@ -83,7 +83,10 @@ class HomeController extends Controller
             'canceledCounters'=>$canceledCounters,
             'item_types'=>ItemType::all(),
             'item_groups'=>ItemGroup::query()->ItemGroupsByPrefix($request->input('filter_item_type'))->get(),
-            'suppliers'=>Supplier::query()->SupplierByItemTypePrefix($request->input('filter_item_type'))->get()
+            'suppliers'=>Supplier::query()
+                ->SupplierByItemTypePrefix($request->input('filter_item_type'))
+                ->FilterByItemGroup($request->input('filter_item_group') , 0)
+                ->get()
         ]);
     }
 
@@ -91,7 +94,10 @@ class HomeController extends Controller
     {
         return response()->json([
             'item_groups'=>ItemGroup::query()->ItemGroupsByPrefix($request->input('filter_item_type'))->get(),
-            'suppliers'=>Supplier::query()->SupplierByItemTypePrefix($request->input('filter_item_type'))->get()
+            'suppliers'=>Supplier::query()
+                ->SupplierByItemTypePrefix($request->input('filter_item_type'))
+                ->FilterByItemGroup($request->get('filter_item_group') , 0)
+                ->get()
         ]);
     }
 }

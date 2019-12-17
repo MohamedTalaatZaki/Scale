@@ -274,12 +274,15 @@
                 theme:  '{{ Auth::user()->theme }}',
             });
 
-            $('.ItemTypeFilter').on('change' , function (evt) {
+            $('#ItemTypeFilter,#itemGroupFilter').on('change' , function (evt) {
                 evt.preventDefault();
+                let ItemTypeFilter = $('#ItemTypeFilter');
+                let itemGroupFilter = $('#itemGroupFilter');
+                let itemGroupValue = itemGroupFilter.val();
                 $.ajax({
                     method : "post",
                     url : "{{ route('dashboard.suppliersItemGroup') }}",
-                    data : {_token: "{{ csrf_token() }}" , filter_item_type : $(this).val()},
+                    data : {_token: "{{ csrf_token() }}" , filter_item_type : ItemTypeFilter.val() , filter_item_group: itemGroupFilter.val()},
                     success : (response) => {
                         let itemGroupFilter =   $('#itemGroupFilter');
                         let suppliersFilter =   $('#suppliersFilter');
@@ -296,6 +299,8 @@
                                 let option  =   '<option value="'+supplier.id+'"> '+supplier.name+' </option>';
                                 suppliersFilter.append(option);
                             })
+
+                            itemGroupFilter.find('option[value="'+itemGroupValue+'"]').attr('selected' , true);
                         }
                     }
                 })
