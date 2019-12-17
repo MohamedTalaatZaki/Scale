@@ -287,7 +287,7 @@ return [
     'qc_result' =>  'نتائج المعمل',
     'batch_number'   =>  'رقم التشغيلة',
     'weight'    =>  'الوزن',
-    'transport_lines'   =>  'سيارات غدارت خط الانتاج',
+    'transport_lines'   =>  'سيارات غادرت خط الانتاج',
     'from'  =>  'من',
     'lines_weight'  =>  'الوزن لكل خط',
     'degree'    =>  'الدرجة',
