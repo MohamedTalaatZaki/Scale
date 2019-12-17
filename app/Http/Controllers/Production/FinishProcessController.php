@@ -38,6 +38,10 @@ class FinishProcessController extends Controller
 
         $transportDetail    =   TransportDetail::query()->find($request->input('detail_id'));
 
+        $transportDetail->transport()->update([
+            'item_group_id' =>  $request->input('item_group_id'),
+        ]);
+
         $transportDetail->update([
             'item_group_id' =>  $request->input('item_group_id'),
             'item_id'       =>  $request->input('item_id'),
