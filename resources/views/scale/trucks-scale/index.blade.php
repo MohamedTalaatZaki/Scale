@@ -162,7 +162,7 @@
                 }
             },
             test: function () {
-                this.barcodeStr = "1574327752-4";
+                this.barcodeStr = "1575547202-1";
                 this.scanned = true;
                 this.checkBarcode();
             },
@@ -248,7 +248,7 @@
                 })
             },
             wsInit  :   function() {
-                this.websocket = new WebSocket("ws://127.0.0.1:8500/");
+                this.websocket = new WebSocket("{{ env('SCALE_AGENT_IP' , 'ws://127.0.0.1:8500/') }}");
                 this.websocket.onopen = (evt) => { this.wsOnOpen(evt) };
                 this.websocket.onclose = (evt) => { this.wsOnClose(evt) };
                 this.websocket.onmessage = (evt) => { this.wsOnMessage(evt) };
@@ -259,6 +259,7 @@
             },
             wsOnClose : function(evt) {},
             wsOnMessage : function(evt) {
+                // console.log(evt.data);
                 let input = $('.scale-weight-text-elem');
                 if(this.isNumeric(evt.data) && evt.data > 400 && evt.data === this.weight && this.correctWeightCount < this.weightValidAfterCount) {
                     this.correctWeightCount +=1

@@ -131,7 +131,7 @@
                         @forelse($users as $user)
                             <tr>
                                 <td>
-                                    <img src="{{ $user->avatar_url }}" class="rounded"
+                                    <img src="{{ asset($user->avatar_url) }}" class="rounded"
                                          style="width: 35px ; height: 35px ; margin: 0 20px">
                                 </td>
                                 <td>{{ $user->full_name }}</td>

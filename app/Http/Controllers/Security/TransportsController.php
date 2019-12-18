@@ -56,7 +56,7 @@ class TransportsController extends Controller
             ->paginate(15);
 
         $inProcessTrucks    =   Transports::query()
-            ->where('status' , 'in_process')
+            ->whereIn('status' , ['in_process' , 'out_weight'])
             ->paginate(15);
 
         $departures    =   Transports::query()
@@ -123,7 +123,7 @@ class TransportsController extends Controller
         $transport->details()->create(['truck_plates' => $transport->truck_plates_tractor , 'status' => $transport->status ]);
 
         BlockedDriver::query()->updateOrCreate([
-            'license'       => $request->get('driver_license')
+            'national_id'       => $request->get('driver_national_id')
         ],[
             'license'       =>  $request->get('driver_license'),
             'name'          =>  $request->get('driver_name'),
@@ -134,6 +134,7 @@ class TransportsController extends Controller
         if(!is_null($transport->truck_plates_trailer)) {
             $transport->details()->create(['truck_plates' => $transport->truck_plates_trailer , 'status' => $transport->status , 'is_trailer' => 1]);
         }
+        \Session::flash('print' , $transport->id);
         return redirect()->action('Security\TransportsController@index')->with('success' , trans('global.created_success'));
     }
 
@@ -176,6 +177,15 @@ class TransportsController extends Controller
             $transport->details()->create(['truck_plates' => $transport->truck_plates_trailer , 'status' => $transport->status , 'is_trailer' => 1]);
         }
 
+        BlockedDriver::query()->updateOrCreate([
+            'national_id'       => $request->get('driver_national_id')
+        ],[
+            'license'       =>  $request->get('driver_license'),
+            'name'          =>  $request->get('driver_name'),
+            'national_id'   =>  $request->get('driver_national_id'),
+            'mobile'        =>  $request->get('driver_mobile'),
+        ]);
+
         return redirect()->action('Security\TransportsController@index')->with('success' , trans('global.updated_success'));
     }
 
@@ -189,7 +199,7 @@ class TransportsController extends Controller
 
     public function checkOut(Request $request)
     {
-        $transport  =   Transports::query()->find($request->get('id'));
+        $transport  =   Transports::query()->find($request->get('transport_id'));
         $transport->update(['status' => 'departure']);
         if($request->has('block_driver'))
         {
@@ -217,10 +227,15 @@ class TransportsController extends Controller
 
     private function blockDriver(Transports $transport , Request $request)
     {
-        $driver     =   BlockedDriver::query()->where('license' , $transport->driver_license)->first();
+        $driver     =   BlockedDriver::query()->where('national_id' , $transport->driver_national_id)->first();
         $driver->update([
             'is_blocked' => 1,
             'blocked_count' =>  $driver->blocked_count + 1,
+            'blocked_by'    =>  \Auth::id(),
+            'blocked_reason_id' =>  $request->input('reason_id'),
+            'block_reason'  =>  $request->input('note')
+        ]);
+        $driver->logs()->create([
             'blocked_by'    =>  \Auth::id(),
             'blocked_reason_id' =>  $request->input('reason_id'),
             'block_reason'  =>  $request->input('note')

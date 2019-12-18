@@ -87,6 +87,7 @@ class SuppliersController extends Controller
                 })
                 ->distinct()
                 ->pluck('item_group_id');
+
             $itemGroups =   ItemGroup::query()->find($ItemGroupsIds);
             return response()->json(['itemGroups'   =>  $itemGroups->pluck( 'name' , 'id')]);
         } else {

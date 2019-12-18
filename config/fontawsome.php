@@ -11,7 +11,7 @@ return [
     'citiesIcon'            =>  'fas fa-directions',
     'centersIcon'           =>  'fas fa-map-marker-alt',
     'itemGroupsIcon'        =>  'far fa-apple-crate',
-    'itemTypesIcon'         =>  'fad fa-tag',
+    'itemTypesIcon'         =>  'fas fa-tags',
     'itemsIcon'             =>  'fad fa-apple-alt',
     'suppliersIcon'         =>  'fas fa-user-tie',
     'scalesIcon'            =>  'fas fa-balance-scale-right',

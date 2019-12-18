@@ -152,7 +152,7 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">@lang('global.cancel')</h5>
+                    <h5 class="modal-title" id="cancelModalLabel">@lang('global.cancel')</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -197,13 +197,22 @@
         </div>
     </div>
 
+
 @endsection
 @push('scripts')
     <script src="{{ asset('js/axios.js') }}"></script>
     <script src="{{ asset('js/swal.js') }}"></script>
     <script>
         $().ready(function () {
-
+            if ("{{ Session::has('print') }}" == 1) {
+             let transportId    =   "{{ Session::get('print') }}";
+                var win = window.open('{{ route('printLabels') }}?id='+transportId, '_blank');
+                if (win) {
+                    win.focus();
+                } else {
+                    alert('Please allow popups for this website');
+                }
+            }
             let errors = "{{ $errors->count() }}";
 
             if(errors > 0) {
@@ -213,7 +222,7 @@
 
             $('.show-create-div,.reset-close').on('click', function () {
                 $('.create-arrival-truck').toggle();
-                $('.search-trucks').toggle();
+                $('.submit-btn').show();
             });
 
             $('.governorate_select').on('change' , function(evt){
@@ -245,9 +254,9 @@
                 }
             });
 
-            $('.driver_license').on('keyup' , function (evt) {
-                let license =   $(this).val();
-                axios.post('{{ route('checkIfBlocked') }}' , { 'license' : license })
+            $('.driver_national_id').on('keyup' , function (evt) {
+                let nationalId  =   $(this).val();
+                axios.post('{{ route('checkIfBlocked') }}' , { 'national_id' : nationalId })
                     .then( function (response) {
                         if(response.data) {
                             $('.submit-btn').hide();
@@ -264,6 +273,8 @@
             $('#cancelModal').on('show.bs.modal', function (event) {
                 let id  =   $(event.relatedTarget).data('transport-id');
                 let route   =   $(event.relatedTarget).data('route');
+                let label   =   $(event.relatedTarget).data('label');
+                $('#cancelModalLabel').text(label);
                 $('#cancelTransportId').val(id);
                 $('#cancelForm').prop('action' , route);
             });

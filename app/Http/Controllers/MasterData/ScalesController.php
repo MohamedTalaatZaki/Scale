@@ -87,7 +87,7 @@ class ScalesController extends Controller
 
     public function getScaleDataAjax(Request $request)
     {
-        $scale  =   Scale::query()->where('code' , $request->input('code'))->first();
+        $scale  =   Scale::query()->where('ip_address' , $request->getClientIp())->first();
         return $scale ? $scale : response("cannot find scale" , 400);
     }
 }

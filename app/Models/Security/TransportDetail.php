@@ -51,6 +51,21 @@ class TransportDetail extends Model
     protected $guarded  =   ['id'];
     protected $appends  =   ['ar_plate_name' ,'plate_name' , 'readable_status'];
 
+    const ARRIVED       =   'arrived';
+    const WAITING       =   'waiting';
+    const SAMPLED       =   'sampled';
+    const ACCEPTED      =   'accepted';
+    const PROCESSED     =   'processed';
+    const RE_WEIGHT     =   're_weight';
+    const REJECTED      =   'rejected';
+    const IN_PROCESS    =   'in_process';
+    const IN_WEIGHT     =   'in_weight';
+    const OUT_WEIGHT    =   'in_weight';
+    const START_UNLOAD  =   'start_unload';
+    const START_LOAD    =   'start_load';
+    const DEPARTURE     =   'departure';
+    const CANCELED      =   'canceled';
+
     public function transport()
     {
         return $this->belongsTo(Transports::class , 'transport_id' , 'id');
@@ -223,6 +238,34 @@ class TransportDetail extends Model
             ->whereHas('transport' , function ($query){
                 $query->whereHas('itemType' , function($q){
                     return $q->where('prefix' , 'scrap');
+                });
+            })
+            ->whereHas('LastTransportLine' , function ($query){
+                $query->whereNotNull('started_at')->whereNull('finished_at');
+            })
+            ->where('status' , 'start_load');
+    }
+
+    public function scopeFinishNotStartedTransports()
+    {
+        return $this
+            ->whereHas('transport' , function ($query){
+                $query->whereHas('itemType' , function($q){
+                    return $q->where('prefix' , 'finish');
+                });
+            })
+            ->whereHas('LastTransportLine' , function ($query){
+                $query->whereNull('started_at')->whereNull('finished_at');
+            })
+            ->where('status' , 'in_process');
+    }
+
+    public function scopeFinishStartedTransports()
+    {
+        return $this
+            ->whereHas('transport' , function ($query){
+                $query->whereHas('itemType' , function($q){
+                    return $q->where('prefix' , 'finish');
                 });
             })
             ->whereHas('LastTransportLine' , function ($query){

@@ -47,14 +47,18 @@
                                 <td>{{ $driver->mobile }}</td>
                                 <td>{{ $driver->blocked_count }}</td>
                                 <td>
+                                    <div style="display: -webkit-box">
                                     @permission('blocked-drivers.edit')
                                         <form action="{{ route('blocked-drivers.update' , ['id' => $driver->id]) }}" method="post">
                                             @csrf
                                             @method('put')
                                             <button type="submit"
-                                                    class="btn btn-danger btn-sm mb-1">@lang('global.unblock')</button>
+                                                    class="btn btn-danger btn-sm mb-1 mr-2">@lang('global.unblock')</button>
                                         </form>
+                                        <button type="button" data-target="#blockedModal" data-toggle="modal"  data-history="{{ $driver->logs->toJson() }}"
+                                                class="btn btn-primary btn-sm mb-1" >@lang('global.history')</button>
                                     @endpermission
+                                    </div>
                                 </td>
                             </tr>
                         @empty
@@ -75,4 +79,60 @@
             {{ $drivers->links() }}
         </div>
     </div>
+
+    <div class="modal fade" id="blockedModal" tabindex="-1" role="dialog" aria-labelledby="blockedModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">@lang('global.history')</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                    <div class="modal-body">
+                        <table class="table table-bordered text-center">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>@lang('global.blocked_by')</th>
+                                    <th>@lang('global.blocked_reason')</th>
+                                    <th>@lang('global.created_at')</th>
+                                </tr>
+                            </thead>
+                            <tbody class="historyBody">
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">@lang('global.close')</button>
+                    </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
+@push('scripts')
+    <script>
+        $().ready(function(){
+            $('#blockedModal').on('show.bs.modal', function (event) {
+                let history  =   $(event.relatedTarget).data('history');
+                let historyBody =   $('.historyBody');
+                historyBody.empty();
+                $.each(history , function (index , row) {
+                    console.log(row);
+                    let tr  =   "<tr>" +
+                        "<td rowspan='2'>"+ (parseInt(index)+1) +"</td>" +
+                        "<td>"+ row.blocked_by_name +"</td>" +
+                        "<td>"+ row.blocked_reason +"</td>" +
+                        "<td>"+ row.created_at +"</td>" +
+                        "</tr>" +
+                        "<tr>" +
+                        "<td colspan='5' style='text-align: center'>"+ row.block_reason +"</td>" +
+                        "</tr>" +
+                        "<tr><td colspan='5'></td></tr>";
+                    historyBody.append(tr);
+                })
+            });
+        });
+    </script>
+@endpush
