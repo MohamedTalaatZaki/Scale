@@ -109,6 +109,7 @@
                                        v-model="barcodeStr"
                                        style="text-align: center ; font-weight: bolder"
                                        placeholder="بأنتظار تمرير الورقة لقراءة الكود"
+                                       id="barcodeInput"
                                        ref="barcodeInput"
                                        v-on:paste="OnPaste"
                                        >
@@ -145,20 +146,23 @@
         },
         methods: {
             keyUpEventFun: function (evt) {
-                console.log(evt.keyCode , evt.code);
-                if (evt.keyCode === 107) {
-                    this.test();
-                } else {
-                    if (!this.scanned && evt.keyCode !== 13 && ((evt.keyCode >= 48 && evt.keyCode <= 57) || (evt.keyCode >= 96 && evt.keyCode <= 105) || evt.keyCode === 109 || evt.keyCode === 189)) {
-                        this.barcode.push(evt.key);
-                    } else if (evt.keyCode === 13 && this.barcodeStr !== "" && this.transport === null) {
-                        this.barcodeStr = this.barcode.join("");
-                        this.scanned = true;
-                        this.checkBarcode();
-                    } else if(this.scanned && this.transport)
-                    {
-                        this.resetAll();
+                if($('#barcodeInput').is(":focus")){
+                    if (evt.keyCode === 107) {
+                        this.test();
+                    } else {
+                        if (!this.scanned && evt.keyCode !== 13 && ((evt.keyCode >= 48 && evt.keyCode <= 57) || (evt.keyCode >= 96 && evt.keyCode <= 105) || evt.keyCode === 109 || evt.keyCode === 189)) {
+                            this.barcode.push(evt.key);
+                        } else if (evt.keyCode === 13 && this.barcodeStr !== "" && this.transport === null) {
+                            this.barcodeStr = this.barcode.join("");
+                            this.scanned = true;
+                            this.checkBarcode();
+                        } else if(this.scanned && this.transport)
+                        {
+                            this.resetAll();
+                        }
                     }
+                } else {
+                    this.resetAll();
                 }
             },
             test: function () {
@@ -210,6 +214,7 @@
                 this.weight = 0;
                 this.correctWeightCount = 0;
                 this.isCorrect = false;
+                $('#barcodeInput').focus();
             },
             saveScaleWeight : function() {
                 axios.post("{{ route("trucks-scale.weight") }}" , {
@@ -259,7 +264,7 @@
             },
             wsOnClose : function(evt) {},
             wsOnMessage : function(evt) {
-                // console.log(evt.data);
+                console.log(evt.data);
                 let input = $('.scale-weight-text-elem');
                 if(this.isNumeric(evt.data) && evt.data > 400 && evt.data === this.weight && this.correctWeightCount < this.weightValidAfterCount) {
                     this.correctWeightCount +=1
@@ -320,6 +325,12 @@
         window.location.reload();
     }
 
+</script>
+
+<script>
+    $().ready(function(){
+        $('#barcodeInput').focus();
+    })
 </script>
 </body>
 </html>

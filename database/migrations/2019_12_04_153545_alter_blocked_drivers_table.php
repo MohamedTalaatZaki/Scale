@@ -14,8 +14,8 @@ class AlterBlockedDriversTable extends Migration
     public function up()
     {
         Schema::table('blocked_drivers', function (Blueprint $table) {
-            $table->dropUnique('blocked_drivers_license_unique');
-            $table->string('national_id')->unique()->change();
+            // $table->dropUnique('blocked_drivers_license_unique');
+            // $table->string('national_id')->unique()->change();
         });
     }
 

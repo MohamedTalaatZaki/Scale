@@ -15,9 +15,9 @@ class CreateBlockedDriversTable extends Migration
     {
         Schema::create('blocked_drivers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('license')->unique();
+            $table->string('license')->nullable();
             $table->string('name')->nullable();
-            $table->string('national_id')->nullable();
+            $table->string('national_id')->unique();
             $table->string('mobile')->nullable();
             $table->integer('blocked_count')->default(0);
             $table->integer('is_blocked')->default(0);

@@ -103,7 +103,7 @@ class TrucksScaleController extends Controller
         ]);
 
         $transportDetail->LastTransportLine()->first()->update([
-            'weight'    =>  $request->input('weight'),
+            'weight'    =>  $transportDetail->in_weight - $request->input('weight'),
         ]);
 
         $nextTruck  =   TransportDetail::query()

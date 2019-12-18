@@ -193,7 +193,7 @@
                                     <select class="form-control select2-single" name="filter_qc_element">
                                         <option label="&nbsp;"></option>
                                         @foreach($qcElements as $element)
-                                            <option value="{{ $element->name }}" {{ request()->input('filter_qc_element') == $element->name ? "selected" : "" }}>
+                                            <option value="{{ $element->en_name }}" {{ request()->input('filter_qc_element') == $element->en_name ? "selected" : "" }}>
                                                 {{ $element->name }}
                                             </option>
                                         @endforeach
