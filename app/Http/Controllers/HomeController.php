@@ -14,6 +14,7 @@ use App\Models\Supplier\Supplier;
 use App\Models\Views\AcceptedResultDetail;
 use App\Models\Views\TruckInfo;
 use App\Traits\AuthorizeTrait;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
@@ -38,6 +39,8 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         $request->offsetSet('filter_item_type' , $request->input('filter_item_type' , 'raw'));
+        $request->offsetSet('filter_from_date' , $request->input('filter_from_date' , Carbon::now()->subDay()->format('Y-m-d h:m')));
+        $request->offsetSet('filter_to_date' , $request->input('filter_to_date' , Carbon::now()->format('Y-m-d h:m')));
 
         $dashboardData  =   TruckInfo::query()
             ->filter(new DashboardFilter($request))
@@ -124,7 +127,7 @@ class HomeController extends Controller
     private function getTransportLines($dashboardData){
         $TableCollection =   new Collection();
         $rawTableData       =   $dashboardData
-//            ->where('status' , TransportDetail::DEPARTURE)
+            ->where('status' , TransportDetail::DEPARTURE)
             ->each(function($truck) use(&$TableCollection){
             $truck->trucksLineTransactions->each(function($lineTransaction)use($TableCollection){
                 $TableCollection->push($lineTransaction);

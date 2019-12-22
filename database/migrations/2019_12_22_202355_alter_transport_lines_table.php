@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddInWeightDateColumnToTransportDetailsTable extends Migration
+class AlterTransportLinesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class AddInWeightDateColumnToTransportDetailsTable extends Migration
      */
     public function up()
     {
-        Schema::table('transport_details', function (Blueprint $table) {
+        Schema::table('transport_lines', function (Blueprint $table) {
+            $table->double('weight_in')->nullable();
             $table->dateTime('weight_in_date')->nullable();
+            $table->double('weight_out')->nullable();
             $table->dateTime('weight_out_date')->nullable();
         });
     }
@@ -26,8 +28,10 @@ class AddInWeightDateColumnToTransportDetailsTable extends Migration
      */
     public function down()
     {
-        Schema::table('transport_details', function (Blueprint $table) {
+        Schema::table('transport_lines', function (Blueprint $table) {
+            $table->dropColumn('weight_in');
             $table->dropColumn('weight_in_date');
+            $table->dropColumn('weight_out');
             $table->dropColumn('weight_out_date');
         });
     }
