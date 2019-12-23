@@ -294,6 +294,13 @@ return [
     'degree'    =>  'الدرجة',
     'total_weight'  =>  'الوزن الاجمالي',
     'kilogram'  =>  'كيلو جرام',
-    'filters'   =>  'اعدادت البحث'
-
+    'filters'   =>  'اعدادت البحث',
+    'truck_plates'  =>  'رقم اللوحة',
+    'item_name' =>  'الصنف',
+    'in_weight' =>  'الوزن 1',
+    'out_weight' =>  'الوزن 2',
+    'discount' =>  'الخصم',
+    'disc_weight'   =>  'كمية الخصم',
+    'Net_weight_af_disc'   =>  'الوزن الصافي',
+    'truck_summary' =>  'ملخص العمليات',
 ];

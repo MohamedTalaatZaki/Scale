@@ -21,7 +21,7 @@ class SapController extends Controller
     public function setTransactionPostDate(Request $request)
     {
         $transportDetail = TransportDetail::query()
-            ->whereNull('posted_at')
+            //->whereNull('posted_at')
             ->find($request->input('SERIAL'));
 
         if($transportDetail) {

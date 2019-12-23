@@ -347,6 +347,15 @@ class MainMenusTableSeeder extends Seeder
                 'i_class' => 'finishProcessIcon',
                 'order' => 1,
                 'code'=>21
+            ],
+            [
+                'en_name' => 'Finish Process',
+                'ar_name' => 'ملخص العمليات',
+                'route' => 'truck_summary.index',
+                'a_class' => 'sidebar-sub sidebar-sub-truck-summary',
+                'i_class' => 'truckSummaryIcon',
+                'order' => 1,
+                'code'=>22
             ]
         ]);
         $group = $main->menuGroups()->create([
@@ -368,5 +377,5 @@ class MainMenusTableSeeder extends Seeder
         ]);
     }
 
-     //permission code next = 22 ;
+     //permission code next = 23 ;
 }

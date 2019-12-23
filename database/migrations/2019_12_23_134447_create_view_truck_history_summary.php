@@ -22,6 +22,9 @@ class CreateViewTruckHistorySummary extends Migration
                    th.driver_name,
                    th.driver_national_id,
                    th.driver_mobile,
+                   Case When truck_plates_trailer is not null then th.truck_plates_tractor+'/'+truck_plates_trailer
+                        Else truck_plates_trailer
+                   End full_truck_plates,     
                    th.supplier_id,
                    s.ar_name supplier_name,
                    th.governorate_id,
@@ -29,6 +32,7 @@ class CreateViewTruckHistorySummary extends Migration
                    th.truck_type_id,
                    tt.ar_name truck_desc,
                    td.id transport_detail_id,
+                   cast(th.transport_number as varchar(50))+'-'+cast(td.id as varchar(50)) transport_detail_number,
                    td.truck_plates ,
                    Case When is_trailer = 1 then 'المقطورة'
                         when is_trailer = 0 then 'القاطرة/سيارة'
@@ -43,8 +47,8 @@ class CreateViewTruckHistorySummary extends Migration
                    Cast(td.out_weight/1000 as decimal(10,3)) out_weight,
                    td.discount,
                    ABS(Cast(td.in_weight/1000 as decimal(10,3))-Cast(td.out_weight/1000 as decimal(10,3))) Net_wieght_bf_disc,
-                   ABS(Cast(td.in_weight/1000 as decimal(10,3))-Cast(td.out_weight/1000 as decimal(10,3)))*td.discount disc_weight,
-                   ABS(ABS(Cast(td.in_weight/1000 as decimal(10,3))-Cast(td.out_weight/1000 as decimal(10,3)))-(ABS(Cast(td.in_weight/1000 as decimal(10,3))-Cast(td.out_weight/1000 as decimal(10,3)))*td.discount)) Net_weight_af_disc,
+                   ABS(Cast(td.in_weight/1000 as decimal(10,3))-Cast(td.out_weight/1000 as decimal(10,3)))*cast((td.discount/100) as decimal(10,3)) disc_weight,
+                   ABS(ABS(Cast(td.in_weight/1000 as decimal(10,3))-Cast(td.out_weight/1000 as decimal(10,3)))-(ABS(Cast(td.in_weight/1000 as decimal(10,3))-Cast(td.out_weight/1000 as decimal(10,3)))*cast((td.discount/100) as decimal(10,2))) Net_weight_af_disc,
                    th.arrival_time,
                    ts.sampling_time,
                    tr.result_time,

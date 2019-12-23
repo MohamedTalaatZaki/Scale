@@ -1,2 +1,35 @@
-http://10.200.3.15/api/get-transports-data => "GET"
-http://10.200.3.15/api/set-transports-post-date  => "POST" > { Take SERIAL As Attribute }
+http://10.200.3.15/api/get-transports-data
+Request method is : "GET"
+
+
+http://10.200.3.15/api/set-transports-post-date
+Request method is : "POST"
+Parameter Name    : "SERIAL"
+
+Brief             : First Call the "get-transports-data " which will return JSON as the required format the JSON
+                    returned does contain multiple records and you have to loop on each one while in loop process
+                    insert process accrued after insert a successful insert directly call the "set-transports-post-date"
+                    link so you close the record at scale system so you do not receive it again and for precaution
+                    you have to check before insert if the SERIAL is exist in your system if exists
+                    call "set-transports-post-date" link if not do your process
+
+                    when the response 'status' = true and response code 200 then the raw is actually closed
+                         the response response code = 404 then the raw is not successful closed
+
+EXAMPLE ABAP POST FUNCTION:
+DATA: lo_client TYPE REF TO if_http_client,
+      lv_url TYPE string VALUE 'http://http://10.200.3.15/api/set-transports-post-date'.
+
+CALL METHOD cl_http_client=>create_internal
+  IMPORTING
+    client = lo_client.
+
+cl_http_utility=>set_request_uri( request  = lo_client->request
+                                  uri      = lv_url ).
+
+lo_client->request->set_header_field( name  = '~request_method'
+                                      value = 'POST' ).
+
+lo_client->request->set_form_field( EXPORTING name  = 'SERIAL'
+                                              value = 'myvalue').
+lo_client->send( ).
