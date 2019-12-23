@@ -192,7 +192,10 @@ class TransportsController extends Controller
     public function inProcess(Request $request)
     {
         $transport  =   Transports::query()->find($request->get('id'));
-        $transport->update(['status' => 'in_process']);
+        $transport->update([
+            'checkin_time'  =>  Carbon::now(),
+            'status' => 'in_process',
+        ]);
 //        $transport->details()->update(['status' => 'in_process']);
         return redirect()->action('Security\TransportsController@index')->with('success' , trans('global.car_in_process' , ['truck_plates_tractor' => $transport->truck_plates_tractor]));
     }
@@ -200,7 +203,10 @@ class TransportsController extends Controller
     public function checkOut(Request $request)
     {
         $transport  =   Transports::query()->find($request->get('id'));
-        $transport->update(['status' => 'departure']);
+        $transport->update([
+            'departure_time' => Carbon::now(),
+            'status' => 'departure',
+        ]);
         if($request->has('block_driver'))
         {
             $this->blockDriver($transport , $request);
@@ -210,7 +216,10 @@ class TransportsController extends Controller
 
     public function cancel(Request $request) {
         $transport  =   Transports::query()->find($request->get('transport_id'));
-        $transport->update(['status' => 'canceled']);
+        $transport->update([
+            'departure_time' => Carbon::now(),
+            'status' => 'canceled'
+        ]);
         if($request->has('block_driver'))
         {
             $this->blockDriver($transport , $request);

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateViewApiRaw extends Migration
+class CreateViewVApiRaw extends Migration
 {
     /**
      * Run the migrations.
@@ -48,7 +48,8 @@ class CreateViewApiRaw extends Migration
                 on (s.id=th.supplier_id)
                 left join lines l
                 on (l.id=tl.line_id)
-                Where i.item_type_id = (select id from item_types where prefix = 'raw');
+                Where i.item_type_id = (select id from item_types where prefix = 'raw')
+                and   td.posted_at is null;
         ");
     }
 

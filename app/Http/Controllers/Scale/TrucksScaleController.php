@@ -72,6 +72,7 @@ class TrucksScaleController extends Controller
     {
         $transport = Transports::query()->find($request->input('transport_id'));
         $transportDetail->update([
+            'in_weight_time'=>Carbon::now(),
             'in_weight' => $request->input('weight'),
             'status' => 'in_process'
         ]);
@@ -100,6 +101,7 @@ class TrucksScaleController extends Controller
     private function outWeight($transportDetail , Request $request)
     {
         $transportDetail->update([
+            'out_weight_time'=>Carbon::now(),
             'out_weight' => $request->input('weight'),
             'status' => 'out_weight'
         ]);

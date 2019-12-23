@@ -1,0 +1,2 @@
+http://10.200.3.15/api/get-transports-data => "GET"
+http://10.200.3.15/api/set-transports-post-date  => "POST" > { Take SERIAL As Attribute }

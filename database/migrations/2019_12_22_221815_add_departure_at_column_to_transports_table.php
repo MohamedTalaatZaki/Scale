@@ -14,7 +14,8 @@ class AddDepartureAtColumnToTransportsTable extends Migration
     public function up()
     {
         Schema::table('transports', function (Blueprint $table) {
-            $table->dateTime('departure_at')->nullable();
+            $table->dateTime('checkin_time')->nullable();
+            $table->dateTime('departure_time')->nullable();
         });
     }
 
@@ -26,7 +27,8 @@ class AddDepartureAtColumnToTransportsTable extends Migration
     public function down()
     {
         Schema::table('transports', function (Blueprint $table) {
-            $table->dropColumn('departure_at');
+            $table->dropColumn('checkin_time');
+            $table->dropColumn('departure_time');
         });
     }
 }
