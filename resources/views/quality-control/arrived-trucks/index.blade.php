@@ -29,7 +29,12 @@
                             @lang('global.waiting')
                         </div>
                         <div class="col-8" style="margin-top: -6px">
-                            <input class="form-control form-control-sm" placeholder="search ....">
+                            <div class="input-group input-group-sm">
+                                <input class="form-control searchInput" data-cards-class="wittingCardHeader" placeholder="@lang('global.search')">
+                                <button class="btn bg-transparent resetInput" style="margin-left: -40px; margin-top: -5px; z-index: 100; color: #969696">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                     <hr>
@@ -49,7 +54,12 @@
                             @lang('global.sampled')
                         </div>
                         <div class="col-8" style="margin-top: -6px">
-                            <input class="form-control form-control-sm" placeholder="search ....">
+                            <div class="input-group input-group-sm">
+                                <input class="form-control searchInput" data-cards-class="sampledCardHeader" placeholder="@lang('global.search')">
+                                <button class="btn bg-transparent resetInput" style="margin-left: -40px; margin-top: -5px; z-index: 100; color: #969696">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                     <hr>
@@ -72,7 +82,12 @@
                             @lang('global.accepted')
                         </div>
                         <div class="col-8" style="margin-top: -6px">
-                            <input class="form-control form-control-sm" placeholder="search ....">
+                            <div class="input-group input-group-sm">
+                                <input class="form-control searchInput" data-cards-class="acceptedCardHeader" placeholder="@lang('global.search')">
+                                <button class="btn bg-transparent resetInput" style="margin-left: -40px; margin-top: -5px; z-index: 100; color: #969696">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                     <hr>
@@ -94,7 +109,12 @@
                             @lang('global.rejected')
                         </div>
                         <div class="col-8" style="margin-top: -6px">
-                            <input class="form-control form-control-sm" placeholder="search ....">
+                            <div class="input-group input-group-sm">
+                                <input class="form-control searchInput" data-cards-class="rejectedCardHeader" placeholder="@lang('global.search')">
+                                <button class="btn bg-transparent resetInput" style="margin-left: -40px; margin-top: -5px; z-index: 100; color: #969696">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                     <hr>
@@ -156,6 +176,9 @@
             background-color: #dc3545;
         }
 
+        .resetInput{
+            display: none;
+        }
     </style>
 @endpush
 
@@ -183,9 +206,13 @@
                         let cardId      =   card.attr('id');
                         let status      =   card.closest('.cards-container').attr('id');
                         if( status === 'sampled' ){
+                            card.removeClass('wittingCardHeader');
+                            card.addClass('sampledCardHeader');
                             card.find('.lab-btn').show();
                             card.find('.card-status').attr( 'class' , 'card-status bg-yellow');
                         } else if(status === 'arrived') {
+                            card.removeClass('sampledCardHeader');
+                            card.addClass('wittingCardHeader');
                             card.find('.lab-btn').hide();
                             card.find('.card-status').attr( 'class' , 'card-status bg-blue');
                         }
@@ -197,6 +224,36 @@
                     },
                 });
             }
+
+            $('.searchInput').on('keyup' , function (evt) {
+                evt.preventDefault();
+                let cardsClass  =   $(this).data('cards-class');
+                let word = $(this).val();
+                $.map($('.'+cardsClass) , function (elem) {
+                   let id = $(elem).attr('id');
+                   let truckPlates = $(elem).find('.cardTruckPlates').text();
+                   let itemGroup = $(elem).find('.cardItemGroup').text();
+                   let driverName = $(elem).find('.cardDriverName').text();
+                   let driverMobile = $(elem).find('.cardDriverMobile').text();
+                   if (truckPlates.search(word) !== -1 || itemGroup.search(word) !== -1 || driverName.search(word) !== -1  || driverMobile.search(word) !== -1 ) {
+                       $('#'+id).show();
+                   } else {
+                       $('#'+id).hide();
+                   }
+                   // return {id : id , truckPlates : truckPlates , itemGroup : itemGroup , driverMobile : driverMobile , driverName : driverName}
+                });
+
+                if(word.length > 0) {
+                    $(this).closest('div').find('.resetInput').show()
+                } else {
+                    $(this).closest('div').find('.resetInput').hide()
+                }
+            });
+
+            $('.resetInput').on('click' , function(evt){
+                evt.preventDefault();
+                $(this).closest('div').find('.searchInput').val('').trigger('keyup');
+            });
 
 
             setTimeout( ()=>{

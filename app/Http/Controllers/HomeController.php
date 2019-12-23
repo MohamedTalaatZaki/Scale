@@ -165,7 +165,11 @@ class HomeController extends Controller
     private function getLinesWeight($transportLines)
     {
         $lines = $transportLines->groupBy('line_id')->mapWithKeys(function($line){
-            return [ $line->first()->line->name => $line->sum('weight') ];
+            if(isset($line->first()->line)){
+                return [ $line->first()->line->name => $line->sum('weight') ];                
+            } else {
+                return [];
+            };
         });
         return $lines;
     }

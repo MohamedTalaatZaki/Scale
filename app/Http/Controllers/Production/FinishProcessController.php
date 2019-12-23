@@ -30,6 +30,12 @@ class FinishProcessController extends Controller
     {
         $this->authorized('finishStartProcess');
 
+        $this->validate($request , [
+            'item_group_id' =>  'required',
+            'item_id' =>  'required',
+            'line_id' =>  'required',
+        ]);
+
         $transportDetail    =   TransportDetail::query()->find($request->input('detail_id'));
 
         $transportDetail->transport()->update([
@@ -37,6 +43,8 @@ class FinishProcessController extends Controller
         ]);
 
         $transportDetail->update([
+            'item_group_id' =>  $request->input('item_group_id'),
+            'item_id'       =>  $request->input('item_id'),
             'status'        =>  'start_load',
         ]);
 

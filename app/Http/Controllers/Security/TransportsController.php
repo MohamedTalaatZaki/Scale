@@ -202,7 +202,7 @@ class TransportsController extends Controller
 
     public function checkOut(Request $request)
     {
-        $transport  =   Transports::query()->find($request->get('id'));
+        $transport  =   Transports::query()->find($request->get('transport_id'));
         $transport->update([
             'departure_time' => Carbon::now(),
             'status' => 'departure',
