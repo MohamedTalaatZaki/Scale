@@ -347,17 +347,9 @@ class MainMenusTableSeeder extends Seeder
                 'i_class' => 'finishProcessIcon',
                 'order' => 1,
                 'code'=>21
-            ],
-            [
-                'en_name' => 'Finish Process',
-                'ar_name' => 'ملخص العمليات',
-                'route' => 'truck_summary.index',
-                'a_class' => 'sidebar-sub sidebar-sub-truck-summary',
-                'i_class' => 'truckSummaryIcon',
-                'order' => 1,
-                'code'=>22
             ]
         ]);
+
         $group = $main->menuGroups()->create([
             'en_name' => 'Manual Scale',
             'ar_name' => 'الميزان',
@@ -373,6 +365,24 @@ class MainMenusTableSeeder extends Seeder
                 'i_class' => 'scaleIcon',
                 'order' => 1,
                 'code'=>19
+            ]
+        ]);
+
+        $group = $main->menuGroups()->create([
+            'en_name' => 'Trucks Summary',
+            'ar_name' => 'ملخص العمليات',
+            'aria_controls' => 'collapseTrucksSummary',
+            'order' => 1,
+        ]);
+        $group->subMenus()->createMany([
+            [
+                'en_name' => 'Trucks Summery',
+                'ar_name' => 'ملخص العمليات',
+                'route' => 'truck-summary.index',
+                'a_class' => 'sidebar-sub sidebar-sub-truck-summary',
+                'i_class' => 'truckSummaryIcon',
+                'order' => 1,
+                'code'=>22
             ]
         ]);
     }

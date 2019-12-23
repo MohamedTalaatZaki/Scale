@@ -17,7 +17,7 @@ class TruckSummaryController extends Controller
 
     public function index(Request $request)
     {
-        $this->authorized('truck_summary.index');
+        $this->authorized('truck-summary.index');
         $trucks =   TruckSummary::query()->groupBy(
             'transport_id' ,
             'transport_number' ,

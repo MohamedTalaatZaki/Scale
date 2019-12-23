@@ -13,6 +13,7 @@ class CreateViewVApiRaw extends Migration
      */
     public function up()
     {
+        $this->down();
         DB::statement("
                 Create View v_api_raw
                 As
@@ -60,6 +61,6 @@ class CreateViewVApiRaw extends Migration
      */
     public function down()
     {
-        DB::statement("Drop view v_api_raw;");
+        DB::statement("drop view if exists v_api_raw");
     }
 }
