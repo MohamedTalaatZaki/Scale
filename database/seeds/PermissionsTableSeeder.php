@@ -640,5 +640,16 @@ class PermissionsTableSeeder extends Seeder
             'en_description' => NULL,
             'ar_description' => NULL,
         ]);
+
+        $subMenu = SubMenu::where('code', 22)->first();
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'truck-summary.index',
+            'en_display_name' => 'Trucks Summary',
+            'ar_display_name' => 'ملخص العمليات',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
     }
 }

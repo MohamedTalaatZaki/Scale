@@ -139,7 +139,7 @@
             scanned: false,
             transport: null,
             websocket: null,
-            weightValidAfterCount : 3,
+            weightValidAfterCount : parseInt("{{ env('SCALE_WEIGHT_VALID_AFTER_COUNT' , 20) }}"),
             weight: 0,
             correctWeightCount: 0,
             isCorrect: false,

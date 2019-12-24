@@ -25,4 +25,5 @@ return [
     'rawProcessIcon'        =>  'fas fa-conveyor-belt-alt',
     'scrapProcessIcon'      =>  'far fa-recycle',
     'scaleIcon'             =>  'fal fa-barcode-read',
+    'truckSummaryIcon'      >   'far fa-recycle',
 ];

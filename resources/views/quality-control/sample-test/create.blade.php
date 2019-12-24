@@ -309,10 +309,12 @@
             });
 
             $('.sample_range').on('keyup' , function () {
-                let value   =   $(this).val();
-                let min     =   $(this).data('min');
-                let max     =   $(this).data('max');
+                let value   =   parseFloat($(this).val());
+                let min     =   parseFloat($(this).data('min'));
+                let max     =   parseFloat($(this).data('max'));
                 let tr      =   $(this).closest('tr');
+                console.log(value , min , max);
+                console.log(value >= min && value <= max);
                 if( value >= min && value <= max ) {
                     tr.find('.accepted').show();
                     tr.find('.rejected').hide();

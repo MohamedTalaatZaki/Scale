@@ -254,6 +254,12 @@
                 evt.preventDefault();
                 $(this).closest('div').find('.searchInput').val('').trigger('keyup');
             });
+
+
+            setTimeout( ()=>{
+                window.location.reload();
+            } , 60000);
+
         })
     </script>
 @endpush

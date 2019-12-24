@@ -232,6 +232,7 @@
         $().ready(function () {
             $(".datetimePicker").datetimepicker({
                 theme: '{{ Auth::user()->theme }}',
+                format : 'Y-m-d h:m'
             });
 
             $('#ItemTypeFilter,#itemGroupFilter').on('change', function (evt) {

@@ -239,6 +239,7 @@ return [
     'save_weight_done'    =>  'تم الوزن بنجاح يمكنك التحرك الان',
     'the_truck_in_process'  =>  ':name رقم :plate لم تكمل الدورة الخاصه بها داخل المصنع',
     'waiting_qc_result' =>  'لا يمكن وزن ال:name قبل صدور نتيجة المعمل',
+    'waiting_check_in' =>  'لا يمكن وزن ال:name قبل تسجيل الدخول من البوابة',
     'production'    =>  'Production',
     'production_process'    =>  'Production Process',
     'waiting_to_start'  =>  'Waiting To Start',
@@ -296,5 +297,13 @@ return [
     'total_weight'  =>  'Total Weight',
     'kilogram'  =>  'Kg',
     'filters'   =>  'Filters',
+    'truck_plates'  =>  'Truck Plates',
+    'item_name' =>  'Item Name',
+    'in_weight' =>  'In Weight',
+    'out_weight' =>  'Out Weight',
+    'discount' =>  'Discount',
+    'disc_weight'   =>  'Discount Weight',
+    'Net_weight_af_disc'   =>  'Net Weight',
+    'truck_summary' =>  'Truck Summary',
 
 ];

@@ -13,6 +13,8 @@ class CreateVTrucksInfoView extends Migration
      */
     public function up()
     {
+        $this->down();
+
         DB::statement("
             CREATE VIEW v_tractors
                 AS
@@ -96,9 +98,9 @@ class CreateVTrucksInfoView extends Migration
     public function down()
     {
         DB::statement("
-            DROP VIEW v_tractors;
-            DROP VIEW v_trailers;
-            DROP VIEW v_trucks_info;
+            drop view if exists v_tractors;
+            drop view if exists v_trailers;
+            drop view if exists v_trucks_info;
         ");
     }
 }

@@ -132,11 +132,12 @@ class TransportDetail extends Model
         return $this->attributes['readable_status']  =   $status;
     }
 
-    public function scopeTransportCanWeight()
+    public function scopeTransportCanWeight($query, $transport_number)
     {
         return $this
-            ->whereHas('transport' , function ($query){
-                $query->whereIn('status' , ['accepted' , 'waiting' , 'in_process']);
+            ->whereHas('transport' , function ($query)use($transport_number){
+                $query->where('status' , 'in_process')
+                    ->where('transport_number' , $transport_number);
             })
             ->whereIn('status' , ['accepted' , 'waiting' , 'processed' , 're_weight'])
             ->where(function ($query){
@@ -168,25 +169,30 @@ class TransportDetail extends Model
             });
     }
 
-    public function scopeTransportCannotWeight()
+    public function scopeTransportCannotWeight($query , $transportNumber)
     {
-        switch ($this->status)
-        {
-            case "arrived":
-                return trans('global.waiting_qc_result' , ['name' => $this->ar_plate_name]);
-            case "rejected":
-                return trans('global.truck_rejected');
-            case "depart":
-                return trans('global.truck_depart');
-                break;
-            case "first_weight":
-                return trans('global.the_first_weight_already_taken' , ['weight' => $this->in_weight , 'truck' => $this->ar_plate_name]);
-            case "in_process":
-                return trans('global.the_truck_in_process' , ['plate' => $this->truck_plates , 'name' => $this->ar_plate_name]);
-            case "out_weight":
-                return trans('global.the_second_weight_already_taken' , ['weight' => $this->out_weight , 'truck' => $this->ar_plate_name]);
-            default:
-                return trans('global.contact_with_support');
+        if($transportNumber == $this->transport->transport_number) {
+            switch ($this->status) {
+                case "arrived":
+                    return trans('global.waiting_qc_result', ['name' => $this->ar_plate_name]);
+                case "waiting":
+                    return trans('global.waiting_check_in', ['name' => $this->ar_plate_name]);
+                case "rejected":
+                    return trans('global.truck_rejected');
+                case "depart":
+                    return trans('global.truck_depart');
+                    break;
+                case "first_weight":
+                    return trans('global.the_first_weight_already_taken', ['weight' => $this->in_weight, 'truck' => $this->ar_plate_name]);
+                case "in_process":
+                    return trans('global.the_truck_in_process', ['plate' => $this->truck_plates, 'name' => $this->ar_plate_name]);
+                case "out_weight":
+                    return trans('global.the_second_weight_already_taken', ['weight' => $this->out_weight, 'truck' => $this->ar_plate_name]);
+                default:
+                    return trans('global.contact_with_support');
+            }
+        } else {
+            return trans('global.unknown_transport');
         }
     }
 
