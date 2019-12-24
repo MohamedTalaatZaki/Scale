@@ -107,7 +107,7 @@
                                 <td>{{ number_format($truck->Net_weight_af_disc , 3) }}</td>
                                 <td>
                                     @if($truck->out_weight > 0)
-                                        <a href="{{ route('truck-summary.show' , ['id' => $truck->id]) }}"
+                                        <a href="{{ route('scale-printout-rpt.index', ['transport_id' => $truck->id]) }}"
                                            class="btn btn-primary btn-sm">@lang('global.print')</a>
                                     @endif
                                 </td>
