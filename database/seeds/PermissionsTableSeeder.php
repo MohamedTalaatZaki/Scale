@@ -17,7 +17,7 @@ class PermissionsTableSeeder extends Seeder
     {
 
 
-        DB::table('permissions')->delete();
+        DB::table('permissions')->truncate();
         $subMenu = SubMenu::where('code', 0)->first();
         Permission::create([
             'sub_menu_id' => $subMenu->id,
