@@ -22,6 +22,9 @@ class DatabaseSeeder extends Seeder
         $this->call(GovSeeders::class);
         $this->call(ItemTypeSeeder::class);
         $this->call(TrucksTypesSeeder::class);
+        $this->call(ElementSeeder::class);
+        $this->call(LinesTableSeeder::class);
+        $this->call(BlockedReasonsTableSeeder::class);
 
     }
 }

@@ -351,6 +351,7 @@ class PermissionsTableSeeder extends Seeder
             'ar_description' => NULL,
         ]);
 
+        $subMenu = SubMenu::where('code', 12)->first();
         Permission::create([
             'sub_menu_id' => $subMenu->id,
             'name' => 'qc-test-headers.index',
@@ -389,7 +390,7 @@ class PermissionsTableSeeder extends Seeder
 
         Permission::create([
             'sub_menu_id' => $subMenu->id,
-            'name' => 'trucks-arrival.index',
+            'name' => 'transports.index',
             'en_display_name' => 'List Truck Arrival',
             'ar_display_name' => 'عرض وصول الشاحنات',
             'en_description' => NULL,
@@ -397,7 +398,7 @@ class PermissionsTableSeeder extends Seeder
         ]);
         Permission::create([
             'sub_menu_id' => $subMenu->id,
-            'name' => 'trucks-arrival.create',
+            'name' => 'transports.create',
             'en_display_name' => 'Create Truck Arrival',
             'ar_display_name' => 'إضافة وصول شاحنه',
             'en_description' => NULL,
@@ -405,7 +406,7 @@ class PermissionsTableSeeder extends Seeder
         ]);
         Permission::create([
             'sub_menu_id' => $subMenu->id,
-            'name' => 'trucks-arrival.edit',
+            'name' => 'transports.edit',
             'en_display_name' => 'Edit Truck Arrival',
             'ar_display_name' => 'تعديل وصول شاحنه',
             'en_description' => NULL,
@@ -413,7 +414,7 @@ class PermissionsTableSeeder extends Seeder
         ]);
         Permission::create([
             'sub_menu_id' => $subMenu->id,
-            'name' => 'trucks-arrival.delete',
+            'name' => 'transports.delete',
             'en_display_name' => 'Delete Truck Arrival',
             'ar_display_name' => 'حذف وصول الشاحنه',
             'en_description' => NULL,
@@ -421,7 +422,7 @@ class PermissionsTableSeeder extends Seeder
         ]);
         Permission::create([
             'sub_menu_id' => $subMenu->id,
-            'name' => 'trucks-arrival.check_in',
+            'name' => 'transports.check_in',
             'en_display_name' => 'Check In Truck',
             'ar_display_name' => 'ادخال الشاحنه',
             'en_description' => NULL,
@@ -429,9 +430,224 @@ class PermissionsTableSeeder extends Seeder
         ]);
         Permission::create([
             'sub_menu_id' => $subMenu->id,
-            'name' => 'trucks-arrival.check_out',
+            'name' => 'transports.check_out',
             'en_display_name' => 'Check Out Truck',
             'ar_display_name' => 'اخراج الشاحنه',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'transports.cancel',
+            'en_display_name' => 'Cancel Truck',
+            'ar_display_name' => 'الغاء دخول الشاحنه',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+
+        $subMenu = SubMenu::where('code', 14)->first();
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'arrived-trucks.index',
+            'en_display_name' => 'List Arrived Trucks',
+            'ar_display_name' => 'عرض الشاحنات المنتظره',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+
+        $subMenu = SubMenu::where('code', 15)->first();
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'samples-test.index',
+            'en_display_name' => 'List Sampled Tests',
+            'ar_display_name' => 'عرض العينات المختبره',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'samples-test.create',
+            'en_display_name' => 'Create Sampled Test',
+            'ar_display_name' => 'وضع نتائج الأختبار',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'samples-test.edit',
+            'en_display_name' => 'Create Sampled Retest',
+            'ar_display_name' => 'وضع نتائج أعادة الأختبار',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+
+        $subMenu = SubMenu::where('code', 16)->first();
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'edit-queue.index',
+            'en_display_name' => 'List Trucks Queue To Edit',
+            'ar_display_name' => 'عرض طابور الشاحنات لتعديل ترتيبها',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+
+        $subMenu = SubMenu::where('code', 17)->first();
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'production-process.index',
+            'en_display_name' => 'List Raw Process',
+            'ar_display_name' => 'عرض شاحنات الخامات',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'startProcess',
+            'en_display_name' => 'Can Start Process',
+            'ar_display_name' => 'بدء عملية التفريغ',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'finishProcess',
+            'en_display_name' => 'Can Finish Process',
+            'ar_display_name' => 'انهاء عملية التفريغ',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'transferLine',
+            'en_display_name' => 'Can Transfer Process',
+            'ar_display_name' => 'تحويل السيارة لخط اخر',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+
+        $subMenu = SubMenu::where('code', 18)->first();
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'scrap-process.index',
+            'en_display_name' => 'List Scrap Process',
+            'ar_display_name' => 'عرض شاحنات المخلفات',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'scrapStartProcess',
+            'en_display_name' => 'Can Start Process',
+            'ar_display_name' => 'بدء عملية التحميل',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'scrapFinishProcess',
+            'en_display_name' => 'Can Finish Process',
+            'ar_display_name' => 'انهاء عملية التحميل',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'scrapTransferLine',
+            'en_display_name' => 'Can Transfer Process',
+            'ar_display_name' => 'تحويل السيارة لخط اخر',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+
+        $subMenu = SubMenu::where('code', 21)->first();
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'finish-process.index',
+            'en_display_name' => 'List Finish Process',
+            'ar_display_name' => 'عرض شاحنات المادة التامه',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'finishStartProcess',
+            'en_display_name' => 'Can Start Process',
+            'ar_display_name' => 'بدء عملية التحميل',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'finishFinishProcess',
+            'en_display_name' => 'Can Finish Process',
+            'ar_display_name' => 'انهاء عملية التحميل',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'finishTransferLine',
+            'en_display_name' => 'Can Transfer Process',
+            'ar_display_name' => 'تحويل السيارة لخط اخر',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+
+        $subMenu = SubMenu::where('code', 19)->first();
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'trucks-scale.index',
+            'en_display_name' => 'Manual Scale',
+            'ar_display_name' => 'الميزان',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+
+        $subMenu = SubMenu::where('code', 20)->first();
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'blocked-drivers.index',
+            'en_display_name' => 'List Blocked Drivers',
+            'ar_display_name' => 'عرض السائقين المحظورين',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'blocked-drivers.edit',
+            'en_display_name' => 'Unblock Blocked Drivers',
+            'ar_display_name' => 'الغاء حظر السائقين',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+
+        $subMenu = SubMenu::where('code', 22)->first();
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'truck-summary.index',
+            'en_display_name' => 'Trucks Summary',
+            'ar_display_name' => 'ملخص العمليات',
             'en_description' => NULL,
             'ar_description' => NULL,
         ]);

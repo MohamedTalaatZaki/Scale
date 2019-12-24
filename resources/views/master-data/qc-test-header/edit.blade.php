@@ -87,9 +87,7 @@
                         <table class="table">
                             <thead>
                             <tr>
-                            <tr>
-                                <th style="width: 16%">@lang('global.en_name')</th>
-                                <th style="width: 16%">@lang('global.ar_name')</th>
+                                <th style="width: 16%">@lang('global.element_name')</th>
                                 <th style="width: 11%">@lang('global.test_type')</th>
                                 <th style="width: 10%">@lang('global.element_type')</th>
                                 <th style="width: 12%">@lang('global.expected_result')</th>
@@ -98,19 +96,17 @@
                                 <th style="width: 10%">@lang('global.element_unit')</th>
                                 <th style="width: 5%">@lang('global.actions')</th>
                             </tr>
-                            </tr>
                             </thead>
                             <tbody data-repeater-list="details">
-                            @if(old('details' , $qcTest->details)->count() > 0)
+                            @if(count(old('details' , $qcTest->details->toArray())) > 0)
                                 @foreach(old('details' , $qcTest->details->toArray()) as $key => $row)
                                     <tr data-repeater-item>
                                         <td>
                                             <input value="{{ $row['id'] }}" type="hidden" name="id">
                                             <select
                                                 class="form-control select2-single qc-element-id"
-                                                name="details[0][qc_element_id]" required
-                                                data-placeholder="@lang('global.element_name')">
-                                                <option value="">@lang('global.element_name')</option>
+                                                name="details[0][qc_element_id]" required>
+                                                <option label="&nbsp;">&nbsp; </option>
                                                 @foreach($elements as $element)
                                                     <option value="{{ $element->id }}"
                                                             data-test-type="{{ $element->test_type }}"
@@ -130,20 +126,22 @@
                                             <input type="text"
                                                    class="form-control form-control-sm bg-readonly test-type"
                                                    name="details[0][test_type]"
-                                                   value="{{ old("details.$key.test_type" , $row['element']['test_type']) }}"
+                                                   value="{{ old("details.$key.test_type" , qcRowElement($row)['test_type']) }}"
                                                    readonly>
                                         </td>
                                         <td>
                                             <input type="text"
                                                    class="form-control form-control-sm bg-readonly element-type"
                                                    name="details[0][element_type]"
-                                                   value="{{ old("details.$key.element_type" , $row['element']['element_type']) }}"
+                                                   value="{{ old("details.$key.element_type" , qcRowElement($row)['element_type']) }}"
                                                    readonly>
                                         </td>
                                         <td>
                                             <select
                                                 class="form-control form-control-sm expected_result"
-                                                name="details[0][expected_result]" style="display: {{ old("details.$key.element_type" , $row['element']['element_type']) == "question"? "" : "none" }}">
+                                                name="details[0][expected_result]"
+                                                style="display: {{ old("details.$key.element_type" , qcRowElement($row)['element_type']) == "question"? "" : "none" }}"
+                                                {{ old("details.$key.element_type" , qcRowElement($row)['element_type']) == "question" ? "required" : '' }}>
                                                 <option value="" selected>@lang('global.expected_result')</option>
                                                 <option value="1" {{ old("details.$key.expected_result" , $row['expected_result']) == 1 ? "selected" : ""}}>@lang('global.yes')</option>
                                                 <option value="0" {{ old("details.$key.expected_result" , $row['expected_result']) == 0 ? "selected" : ""}}>@lang('global.no')</option>
@@ -155,9 +153,12 @@
                                         </td>
                                         <td>
                                             <input type="number" class="form-control form-control-sm min_range range"
-                                                   name="details[0][min_range]" style="display: {{ old("details.$key.element_type" , $row['element']['element_type']) == "range"? "" : "none" }}"
+                                                   step="0.0001"
+                                                   name="details[0][min_range]" style="display: {{ old("details.$key.element_type" , qcRowElement($row)['element_type']) == "range"? "" : "none" }}"
                                                    value="{{ old("details.$key.min_range" , $row['min_range']) }}" placeholder="@lang('global.min_range')"
-                                                   autocomplete="off">
+                                                   autocomplete="off"
+                                                   {{ old("details.$key.element_type" , qcRowElement($row)['element_type']) == "range" ? "required" : '' }}
+                                            >
                                             @if($errors->has("details.$key.min_range"))
                                                 <span id="jQueryName-error" class="error"
                                                       style="">{{ $errors->first("details.$key.min_range") }}</span>
@@ -165,9 +166,12 @@
                                         </td>
                                         <td>
                                             <input type="number" class="form-control form-control-sm max_range range"
-                                                   name="details[0][max_range]" style="display: {{ old("details.$key.element_type" , $row['element']['element_type']) == "range"? "" : "none" }}"
+                                                   step="0.0001"
+                                                   name="details[0][max_range]" style="display: {{ old("details.$key.element_type" , qcRowElement($row)['element_type']) == "range"? "" : "none" }}"
                                                    value="{{ old("details.$key.max_range" , $row['max_range']) }}" placeholder="@lang('global.max_range')"
-                                                   autocomplete="off">
+                                                   autocomplete="off"
+                                                {{ old("details.$key.element_type" , qcRowElement($row)['element_type']) == "range" ? "required" : '' }}
+                                            >
                                             @if($errors->has('max_range'))
                                                 <span id="jQueryName-error" class="error"
                                                       style="">{{ $errors->first("details.$key.max_range") }}</span>
@@ -177,7 +181,7 @@
                                             <input type="text"
                                                    class="form-control form-control-sm bg-readonly element-unit"
                                                    name="details[0][element_unit]"
-                                                   value="{{ old("details.$key.element_unit" , $row['element']['element_unit']) }}"
+                                                   value="{{ old("details.$key.element_unit" , qcRowElement($row)['element_unit']) }}"
                                                    readonly>
                                         </td>
                                         <td>
@@ -203,9 +207,8 @@
                                         <input value="0" type="hidden" name="id">
                                         <select
                                             class="form-control select2-single qc-element-id"
-                                            name="details[0][qc_element_id]" required
-                                            data-placeholder="@lang('global.element_name')">
-                                            <option value="">@lang('global.element_name')</option>
+                                            name="details[0][qc_element_id]" required>
+                                            <option label="&nbsp;">&nbsp; </option>
                                             @foreach($elements as $element)
                                                 <option value="{{ $element->id }}"
                                                         data-test-type="{{ $element->test_type }}"
@@ -242,6 +245,7 @@
                                     </td>
                                     <td>
                                         <input type="number" class="form-control form-control-sm min_range range"
+                                               step="0.0001"
                                                name="details[0][min_range]" style="display: none"
                                                value="{{ old('min_range') }}" placeholder="@lang('global.min_range')"
                                                autocomplete="off">
@@ -252,6 +256,7 @@
                                     </td>
                                     <td>
                                         <input type="number" class="form-control form-control-sm max_range range"
+                                               step="0.0001"
                                                name="details[0][max_range]" style="display: none"
                                                value="{{ old('max_range') }}" placeholder="@lang('global.max_range')"
                                                autocomplete="off">
@@ -306,7 +311,11 @@
 
             let body = $('body');
             let hasOldValue =   "{{ !is_null(old('details')) }}";
-            console.log(hasOldValue);
+            let values  =   [];
+
+            setTimeout( function () {
+                handleSelect2Values();
+            } , 200);
 
             $('.repeater').repeater({
                 isFirstItemUndeletable: true,
@@ -318,6 +327,7 @@
                     $(this).find('.element_unit').hide().prop('required' , false).val('');
                     $(this).find('.new-row').addClass('add-row');
                     $(this).find('.new-row').removeClass('new-row');
+                    $(this).find('.qc-element-id').val("").trigger('change');
                     $(this).show();
                     reInitSelect2($(this).find('.qc-element-id'));
                 }
@@ -348,6 +358,7 @@
                 let elementType =   selectedOption.data('element-type');
                 let elementUnit =   selectedOption.data('element-unit');
 
+
                 tr.find('.test-type').val(testType);
                 tr.find('.element-type').val(elementType);
                 tr.find('.element-unit').val(elementUnit);
@@ -356,17 +367,44 @@
                     tr.find('.expected_result').hide().prop('required' , false).val('');
                     tr.find('.min_range').show().prop('required' , true).val('');
                     tr.find('.max_range').show().prop('required' , true).val('');
+                    tr.find('.element-unit').show().prop('required' , true);
                 } else if(elementType === 'question') {
                     tr.find('.expected_result').show().prop('required' , true).val('');
                     tr.find('.min_range').hide().prop('required' , false).val('');
                     tr.find('.max_range').hide().prop('required' , false).val('');
+                    tr.find('.element-unit').hide().prop('required' , false).val('');
+                } else {
+                    tr.find('.expected_result').hide().prop('required' , true).val('');
+                    tr.find('.min_range').hide().prop('required' , false).val('');
+                    tr.find('.max_range').hide().prop('required' , false).val('');
+                    tr.find('.element-unit').hide().prop('required' , false).val('');
                 }
+                handleSelect2Values();
             });
 
+            let handleSelect2Values = () => {
+                values  =   body.find('select.qc-element-id').find(':selected').map(function(){
+                    if ($(this).val() > 0) {
+                        return $(this).val();
+                    }
+                }).toArray();
+                body.find('select.qc-element-id').each(function(index , elem){
+                    $(elem).find('option').each(function(optionIndex , option){
+                        if (jQuery.inArray($(option).val() , values) !== -1)
+                        {
+                            $(option).attr('disabled' , true);
+                        } else {
+                            $(option).attr('disabled' , false);
+                        }
+                    });
+                    $(elem).find('option:selected').attr('disabled' , false);
+                    reInitSelect2(elem)
+                });
+            };
+
             function reInitSelect2(selector) {
-                if ($(selector).data('select2')) {
-                    $(selector).select2('destroy');
-                }
+                $(selector).select2();
+                $(selector).select2('destroy');
                 $(selector).select2({
                     theme: "bootstrap",
                     maximumSelectionSize: 6,

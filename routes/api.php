@@ -16,6 +16,11 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('get-transports-data' , 'Api\SapController@getTransportsData');
+Route::post('set-transports-post-date' , 'Api\SapController@setTransactionPostDate');
+
+Route::post('get-scale-data' , 'MasterData\ScalesController@getScaleDataAjax');
 Route::get('user/{username}',function($username){
   return App\User::where('user_name',$username)->with('roles')->first();
 });
@@ -56,10 +61,14 @@ Route::get('qc_test/{en_name}',function($en_name) {
 });
 
 Route::get('truck_arrival/{driver_name}',function($driver_name){
-  return App\Models\Security\TruckArrival::where('driver_name',$driver_name)->first();
+  return App\Models\Security\Transports::where('driver_name',$driver_name)->first();
 });
 
 
 Route::get('qc_element/{em_name}',function($en_name){
   return App\Models\QC\QcElement::where('en_name',$en_name)->first();
+});
+
+Route::get('scales/{code}',function($code){
+    return App\Models\Scales\Scale::where('code',$code)->first();
 });

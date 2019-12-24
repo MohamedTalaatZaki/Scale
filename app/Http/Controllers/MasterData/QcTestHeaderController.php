@@ -25,14 +25,13 @@ class QcTestHeaderController extends Controller
     {
         $this->authorized('qc-test-headers.create');
         return  view('master-data.qc-test-header.create' , [
-            'groups'    =>  ItemGroup::query()->where('testable' , 1)->get(),
+            'groups'    =>  ItemGroup::query()->doesntHave('qcTestHeader')->where('testable' , 1)->get(),
             'elements'          =>  QcElement::query()->get(),
         ]);
     }
 
     public function store(Request $request)
     {
-
         $this->validate($request , [
             'en_name'                   =>  'required',
             'ar_name'                   =>  'required',
@@ -43,7 +42,6 @@ class QcTestHeaderController extends Controller
             'details.*.expected_result' =>  'required_if:details.*.element_type,=,question',
             'details.*.min_range'       =>  'required_if:details.*.element_type,=,range',
             'details.*.max_range'       =>  'required_if:details.*.element_type,=,range',
-            'details.*.element_unit'    =>  'required_if:details.*.element_type,=,range',
         ],[
             "item_group_id.required"=>trans("master.errors.item_group_id_required")
         ]);
@@ -66,9 +64,15 @@ class QcTestHeaderController extends Controller
     public function edit($id)
     {
         $this->authorized('qc-test-headers.edit');
+        $qcTest =   QcTestHeader::query()->with('details.element')->findOrFail($id);
+        $groups =   ItemGroup::query()
+            ->whereDoesntHave('qcTestHeader' , function ($q) use($qcTest) {
+                $q->where('item_group_id' , '!=' , $qcTest->item_group_id);})
+            ->where('testable' , 1)->get();
+
         return  view('master-data.qc-test-header.edit' , [
-            'qcTest'    =>  QcTestHeader::query()->with('details.element')->findOrFail($id),
-            'groups'    =>  ItemGroup::query()->where('testable' , 1)->get(),
+            'qcTest'    =>  $qcTest,
+            'groups'    =>  $groups,
             'elements'          =>  QcElement::query()->get(),
         ]);
     }
@@ -86,7 +90,6 @@ class QcTestHeaderController extends Controller
             'details.*.expected_result' =>  'required_if:details.*.element_type,=,question',
             'details.*.min_range'       =>  'required_if:details.*.element_type,=,range',
             'details.*.max_range'       =>  'required_if:details.*.element_type,=,range',
-            'details.*.element_unit'    =>  'required_if:details.*.element_type,=,range',
         ],[
             "item_group_id.required"=>trans("master.errors.item_group_id_required")
         ]);

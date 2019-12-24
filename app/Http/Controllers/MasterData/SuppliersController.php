@@ -79,7 +79,15 @@ class SuppliersController extends Controller
 
         if($supplier)
         {
-            $ItemGroupsIds  =   $supplier->items()->distinct()->pluck('item_group_id');
+            $ItemGroupsIds  =   $supplier->items()
+                ->when($request->has('type') , function ($q) use($request){
+                    $q->whereHas('type' , function ($query) use($request){
+                        $query->where('prefix' , $request->input('type'));
+                    });
+                })
+                ->distinct()
+                ->pluck('item_group_id');
+
             $itemGroups =   ItemGroup::query()->find($ItemGroupsIds);
             return response()->json(['itemGroups'   =>  $itemGroups->pluck( 'name' , 'id')]);
         } else {

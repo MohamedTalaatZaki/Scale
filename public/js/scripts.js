@@ -88,7 +88,7 @@ function loadStyle(href, callback) {
 
     /* Default Theme Color, Border Radius and  Direction */
     var theme = "dore.light.blue.min.css";
-    var direction = "ltr";
+    var direction = "{{ $page_dir }}";
     var radius = "rounded";
     //
     // if (typeof Storage !== "undefined") {

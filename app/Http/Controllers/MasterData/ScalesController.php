@@ -84,4 +84,10 @@ class ScalesController extends Controller
 
         return redirect()->action('MasterData\ScalesController@index')->with('success' , trans('global.scale_updated'));
     }
+
+    public function getScaleDataAjax(Request $request)
+    {
+        $scale  =   Scale::query()->where('ip_address' , $request->getClientIp())->first();
+        return $scale ? $scale : response("cannot find scale" , 400);
+    }
 }
