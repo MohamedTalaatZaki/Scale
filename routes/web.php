@@ -43,6 +43,8 @@ Route::middleware(['auth'])->group(function (){
     Route::resource('qc/arrived-trucks' , 'QC\ArrivedTrucksController');
     Route::resource('qc/samples-test' , 'QC\SamplesTestController');
 
+    Route::resource('production/truck-summary' , 'Production\TruckSummaryController');
+
     Route::resource('production/production-process' , 'Production\ProductionProcessController');
     Route::post('production/production-process-start' , 'Production\ProductionProcessController@startProcess')->name('startProcess');
     Route::get('production/production-process-transfer' , 'Production\ProductionProcessController@transferLine')->name('transferLine');

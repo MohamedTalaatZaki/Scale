@@ -6,6 +6,7 @@ use App\Models\Production\TransportLine;
 use App\Models\Security\TransportDetail;
 use App\Models\Security\Transports;
 use App\Traits\AuthorizeTrait;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -22,11 +23,11 @@ class TrucksScaleController extends Controller
     public function checkBarcode(Request $request) {
         $this->setPageLocale();
         $transportDetail    =   TransportDetail::query()
-            ->TransportCanWeight()
+            ->TransportCanWeight($request->input('transport_id'))
             ->with('transport')
             ->find($request->input('detail_id'));
 
-        $errorMsg           =   optional(TransportDetail::query()->find($request->input('detail_id')))->TransportCannotWeight();
+        $errorMsg           =   optional(TransportDetail::query()->find($request->input('detail_id')))->TransportCannotWeight($request->input('transport_id'));
         $cannotWeightMsg    =   $errorMsg ? $errorMsg : trans('global.unknown_transport');
 
         return response()->json(['transport'    =>  $transportDetail , 'cannot_weight_msg'    =>  $cannotWeightMsg ]);
@@ -35,8 +36,9 @@ class TrucksScaleController extends Controller
     public function saveTruckScaleWeight(Request $request)
     {
         $this->setPageLocale();
+        $transport = Transports::query()->find($request->input('transport_id'));
         $transportDetail    =   TransportDetail::query()
-            ->TransportCanWeight()
+            ->TransportCanWeight($transport->transport_number)
             ->where('transport_id' , $request->input('transport_id'))
             ->find($request->input('transport_detail_id'));
 
@@ -68,18 +70,21 @@ class TrucksScaleController extends Controller
 
     private function inWeight($transportDetail , Request $request)
     {
+        $transport = Transports::query()->find($request->input('transport_id'));
         $transportDetail->update([
+            'in_weight_time'=>Carbon::now(),
             'in_weight' => $request->input('weight'),
             'status' => 'in_process'
         ]);
 
         $nextTruck  =   TransportDetail::query()
-            ->TransportCanWeight()
+            ->where('transport_id' , $request->input('transport_id'))
+            ->TransportCanWeight($transport->transport_number)
             ->where('transport_id' , $request->input('transport_id'))
             ->where('id' , '!=' , $request->input('transport_detail_id'))
             ->first();
 
-        $this->createTransportLineTransaction($transportDetail->id);
+        $this->createTransportLineTransaction($transportDetail , $request->input('weight'));
 
         $transportDetail->transport()->update([
             'total_weight' => $transportDetail->transport->total_weight + $request->input('weight'),
@@ -98,12 +103,15 @@ class TrucksScaleController extends Controller
     private function outWeight($transportDetail , Request $request)
     {
         $transportDetail->update([
+            'out_weight_time'=>Carbon::now(),
             'out_weight' => $request->input('weight'),
             'status' => 'out_weight'
         ]);
 
         $transportDetail->LastTransportLine()->first()->update([
-            'weight'    =>  $transportDetail->in_weight - $request->input('weight'),
+            'weight'    =>  abs($transportDetail->in_weight - $request->input('weight')),
+            'weight_out'    =>  $request->input('weight'),
+            'weight_out_date'   =>  Carbon::now()
         ]);
 
         $nextTruck  =   TransportDetail::query()
@@ -132,10 +140,12 @@ class TrucksScaleController extends Controller
         ]);
 
         $transportDetail->LastTransportLine()->first()->update([
-            'weight'    =>  $request->input('weight'),
+            'weight'    =>  abs($transportDetail->in_weight - $request->input('weight')),
+            'weight_out'    =>  $request->input('weight'),
+            'weight_out_date'   =>  Carbon::now()
         ]);
 
-        $this->createTransportLineTransaction($transportDetail->id);
+        $this->createTransportLineTransaction($transportDetail , $request->input('weight'));
 
         $nextTruck  =   TransportDetail::query()
             ->TransportCanReWeight()
@@ -160,10 +170,12 @@ class TrucksScaleController extends Controller
         app()->setLocale('ar');
     }
 
-    private function createTransportLineTransaction($id)
+    private function createTransportLineTransaction($transportDetail , $weight)
     {
         TransportLine::query()->create([
-            'transport_detail_id'   =>  $id
+            'transport_detail_id'   =>  $transportDetail->id,
+            'weight_in'   =>  $weight,
+            'weight_in_date'   =>  Carbon::now(),
         ]);
     }
 }

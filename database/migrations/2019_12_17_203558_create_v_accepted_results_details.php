@@ -13,6 +13,7 @@ class CreateVAcceptedResultsDetails extends Migration
      */
     public function up()
     {
+        $this->down();
         DB::statement("       
         Create view v_accepted_results_details
         as
@@ -53,6 +54,6 @@ class CreateVAcceptedResultsDetails extends Migration
      */
     public function down()
     {
-        DB::statement('drop view v_accepted_results_details;');
+        DB::statement("drop view if exists v_accepted_results_details");
     }
 }
