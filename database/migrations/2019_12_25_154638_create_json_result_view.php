@@ -1,0 +1,72 @@
+<?php
+
+use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateJsonResultView extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        $this->down();
+        DB::statement("
+                    Create View v_json_result 
+                    As
+                    Select 
+                        id ,
+                        '{'
+                        +'\"trans_no\":'+'\"'+transport_number+'\"'
+                        +',\"trans_serial\":'+'\"'+cast(transport_detail as varchar(50))+'\"'
+                        +',\"driver_name\":'+'\"'+driver_name+'\"'
+                        +',\"national_id\":'+'\"'+driver_national_id+'\"'
+                        +',\"truck_plates\":'+'\"'+truck_plates+'\"'
+                        +',\"truck_type\":'+'\"'+truck_type+'\"'
+                        +',\"item\":'+'\"'+item_name+'\"'
+                        +',\"disc\":'+'\"'+cast(disc as varchar(50))+'%\"'
+                        +',\"in_w\":'+'\"'+cast(in_w as varchar(50))+'\"'
+                        +',\"out_w\":'+'\"'+cast(out_w as varchar(50))+'\"'
+                        +',\"disc_w\":'+'\"'+cast(disc_w as varchar(50))+'\"'
+                        +',\"net_w\":'+'\"'+cast(net_w as varchar(50))+'\"'
+                        +',\"unit\":'+'\"KG\"'
+                        +'}' as json_result
+            from (
+                    select t.id 
+                          ,td.id transport_detail
+                          ,t.transport_number
+                          ,t.driver_name
+                          ,t.driver_mobile
+                          ,t.driver_national_id
+                          ,td.truck_plates
+                          ,Case When is_trailer = 1 then 'المقطورة'
+                                when is_trailer = 0 then 'القاطرة/سيارة'
+                           End truck_type		  
+                          ,isnull(i.ar_name,'NA')  item_name 
+                          ,td.discount   disc
+                          ,td.in_weight  in_w
+                          ,td.out_weight out_w
+                          ,Cast((td.in_weight-td.out_weight)*(td.discount/100) as decimal(10,3)) disc_w
+                          ,Cast((td.in_weight-td.out_weight)-((td.in_weight-td.out_weight)*(td.discount/100)) as decimal(10,3)) net_w
+                    from transports t left join transport_details td
+                    on (t.id=td.transport_id)
+                    left join items i 
+                    on (i.id=td.item_id)
+                    where t.departure_time is not null  
+                ) o;
+        ");
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        DB::statement("Drop view if exists v_accepted_results_details");
+    }
+}
