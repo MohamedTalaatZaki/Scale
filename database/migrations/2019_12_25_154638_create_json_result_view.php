@@ -19,21 +19,19 @@ class CreateJsonResultView extends Migration
                     As
                     Select 
                         id ,
-                        '{'
-                        +'\"trans_no\":'+'\"'+transport_number+'\"'
-                        +',\"trans_serial\":'+'\"'+cast(transport_detail as varchar(50))+'\"'
-                        +',\"driver_name\":'+'\"'+driver_name+'\"'
-                        +',\"national_id\":'+'\"'+driver_national_id+'\"'
-                        +',\"truck_plates\":'+'\"'+truck_plates+'\"'
-                        +',\"truck_type\":'+'\"'+truck_type+'\"'
-                        +',\"item\":'+'\"'+item_name+'\"'
-                        +',\"disc\":'+'\"'+cast(disc as varchar(50))+'%\"'
-                        +',\"in_w\":'+'\"'+cast(in_w as varchar(50))+'\"'
-                        +',\"out_w\":'+'\"'+cast(out_w as varchar(50))+'\"'
-                        +',\"disc_w\":'+'\"'+cast(disc_w as varchar(50))+'\"'
-                        +',\"net_w\":'+'\"'+cast(net_w as varchar(50))+'\"'
-                        +',\"unit\":'+'\"KG\"'
-                        +'}' as json_result
+                        '{'  
+                        +'\"trans\":'+'\"'+transport_number+'\"'  
+                        +',\"serial\":'+'\"'+cast(transport_detail as varchar(50))+'\"'  
+                        +',\"driver\":'+'\"'+driver_name+'\"'  
+                        +',\"nat_id\":'+'\"'+driver_national_id+'\"'  
+                        +',\"plates\":'+'\"'+truck_plates+'\"'  
+                        +',\"type\":'+'\"'+truck_type+'\"'  
+                        +',\"item\":'+'\"'+item_name+'\"'  
+                        +',\"disc\":'+'\"'+cast(disc as varchar(50))+'%\"'  
+                        +',\"iw\":'+'\"'+cast(in_w as varchar(50))+'\"'  
+                        +',\"ow\":'+'\"'+cast(out_w as varchar(50))+'\"'  
+                        +',\"unit\":'+'\"KG\"'  
+                        +'}' as json_result  
             from (
                     select t.id 
                           ,td.id transport_detail
