@@ -19,19 +19,17 @@ class CreateJsonResultView extends Migration
                     As
                     Select 
                         id ,
-                        '{'  
-                        +'\"trans\":'+'\"'+transport_number+'\"'  
-                        +',\"serial\":'+'\"'+cast(transport_detail as varchar(50))+'\"'  
-                        +',\"driver\":'+'\"'+driver_name+'\"'  
-                        +',\"nat_id\":'+'\"'+driver_national_id+'\"'  
-                        +',\"plates\":'+'\"'+truck_plates+'\"'  
-                        +',\"type\":'+'\"'+truck_type+'\"'  
-                        +',\"item\":'+'\"'+item_name+'\"'  
-                        +',\"disc\":'+'\"'+cast(disc as varchar(50))+'%\"'  
-                        +',\"iw\":'+'\"'+cast(in_w as varchar(50))+'\"'  
-                        +',\"ow\":'+'\"'+cast(out_w as varchar(50))+'\"'  
-                        +',\"unit\":'+'\"KG\"'  
-                        +'}' as json_result  
+                        '{'    
+                        +'\"trans\":'+'\"'+transport_number+'\"'    
+                        +',\"serial\":'+'\"'+cast(transport_detail as varchar(50))+'\"'    
+                        +',\"driver\":'+'\"'+driver_name+'\"'    
+                        +',\"plates\":'+'\"'+truck_plates+'\"'    
+                        +',\"type\":'+'\"'+truck_type+'\"'    
+                        +',\"item\":'+'\"'+item_name+'\"'    
+                        +',\"disc\":'+'\"'+cast(disc as varchar(50))+'%\"'    
+                        +',\"iw\":'+'\"'+cast(in_w as varchar(50))+'\"'    
+                        +',\"ow\":'+'\"'+cast(out_w as varchar(50))+'\"'    
+                        +'}' as json_result 
             from (
                     select t.id 
                           ,td.id transport_detail
@@ -41,7 +39,7 @@ class CreateJsonResultView extends Migration
                           ,t.driver_national_id
                           ,td.truck_plates
                           ,Case When is_trailer = 1 then 'المقطورة'
-                                when is_trailer = 0 then 'القاطرة/سيارة'
+                                when is_trailer = 0 then 'سيارة'
                            End truck_type		  
                           ,isnull(i.ar_name,'NA')  item_name 
                           ,td.discount   disc
