@@ -33,22 +33,22 @@ class CreateJsonResultView extends Migration
                         +',\"unit\":'+'\"KG\"'  
                         +'}' as json_result  
             from (
-                    select t.id 
-                          ,td.id transport_detail
-                          ,t.transport_number
-                          ,t.driver_name
-                          ,t.driver_mobile
-                          ,t.driver_national_id
-                          ,td.truck_plates
-                          ,Case When is_trailer = 1 then 'المقطورة'
-                                when is_trailer = 0 then 'القاطرة/سيارة'
-                           End truck_type		  
-                          ,isnull(i.ar_name,'NA')  item_name 
-                          ,td.discount   disc
-                          ,td.in_weight  in_w
-                          ,td.out_weight out_w
-                          ,Cast((td.in_weight-td.out_weight)*(td.discount/100) as decimal(10,3)) disc_w
-                          ,Cast((td.in_weight-td.out_weight)-((td.in_weight-td.out_weight)*(td.discount/100)) as decimal(10,3)) net_w
+                  select t.id     
+                        ,td.id transport_detail    
+                        ,t.transport_number    
+                        ,[dbo].[fn_string_To_BASE64](isnull(t.driver_name,'NA')) driver_name
+                        ,isnull(t.driver_mobile,'NA')   driver_mobile 
+                        ,t.driver_national_id    
+                        ,td.truck_plates    
+                        ,Case When is_trailer = 1 then 'trailer'    
+                              when is_trailer = 0 then 'truck'    
+                        End truck_type        
+                        ,[dbo].[fn_string_To_BASE64](isnull(i.ar_name,'NA')) item_name   
+                        ,td.discount   disc    
+                        ,td.in_weight  in_w    
+                        ,td.out_weight out_w    
+                        ,Cast((td.in_weight-td.out_weight)*(td.discount/100) as decimal(10,3)) disc_w    
+                        ,Cast((td.in_weight-td.out_weight)-((td.in_weight-td.out_weight)*(td.discount/100)) as decimal(10,3)) net_w  
                     from transports t left join transport_details td
                     on (t.id=td.transport_id)
                     left join items i 
