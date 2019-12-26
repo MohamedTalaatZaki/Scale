@@ -19,19 +19,17 @@ class CreateJsonResultView extends Migration
                     As
                     Select 
                         id ,
-                        '{'  
-                        +'\"trans\":'+'\"'+transport_number+'\"'  
-                        +',\"serial\":'+'\"'+cast(transport_detail as varchar(50))+'\"'  
-                        +',\"driver\":'+'\"'+driver_name+'\"'  
-                        +',\"nat_id\":'+'\"'+driver_national_id+'\"'  
-                        +',\"plates\":'+'\"'+truck_plates+'\"'  
-                        +',\"type\":'+'\"'+truck_type+'\"'  
-                        +',\"item\":'+'\"'+item_name+'\"'  
-                        +',\"disc\":'+'\"'+cast(disc as varchar(50))+'%\"'  
-                        +',\"iw\":'+'\"'+cast(in_w as varchar(50))+'\"'  
-                        +',\"ow\":'+'\"'+cast(out_w as varchar(50))+'\"'  
-                        +',\"unit\":'+'\"KG\"'  
-                        +'}' as json_result  
+                        '{'    
+                        +'\"trans\":'+'\"'+transport_number+'\"'    
+                        +',\"serial\":'+'\"'+cast(transport_detail as varchar(50))+'\"'    
+                        +',\"driver\":'+'\"'+driver_name+'\"'    
+                        +',\"plates\":'+'\"'+truck_plates+'\"'    
+                        +',\"type\":'+'\"'+truck_type+'\"'    
+                        +',\"item\":'+'\"'+item_name+'\"'    
+                        +',\"disc\":'+'\"'+cast(disc as varchar(50))+'%\"'    
+                        +',\"iw\":'+'\"'+cast(in_w as varchar(50))+'\"'    
+                        +',\"ow\":'+'\"'+cast(out_w as varchar(50))+'\"'    
+                        +'}' as json_result 
             from (
                   select t.id     
                         ,td.id transport_detail    
