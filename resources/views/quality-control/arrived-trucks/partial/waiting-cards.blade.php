@@ -22,7 +22,7 @@
                                 <td colspan="2"><i class="fa fa-phone"></i> <span class="cardDriverMobile">{{ $truck->driver_mobile }}</span> </td>
                                 <td class="lab-btn" style="display: none">
                                     <a href="{{ route('samples-test.create' , ['transport_detail_id' => $detail->id]) }}" class="btn btn-warning btn-xs"><i class="fa fa-vials"></i></a>
-                                    <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-print"></i></a>
+                                    <a href="{{route('qc-label-rpt.index',['transport_detail_id' => $detail->id])}}" class="btn btn-primary btn-xs"  target="_blank"><i class="fa fa-print"></i></a>
                                 </td>
 
                             </tr>

@@ -92,8 +92,8 @@ Route::post('trucks-scale-check-barcode' , "Scale\TrucksScaleController@checkBar
 Route::post('trucks-scale-weight' , "Scale\TrucksScaleController@saveTruckScaleWeight")->name('trucks-scale.weight');
 
 //Reports
-Route::any('/getScalePrintOutRpt', 'ReportsController@getScalePrintOutRpt')->name('scale-printout-rpt.index');
-Route::any('/getQcLabelRpt', 'ReportsController@getQcLabelRpt')->name('qc-label-rpt.index');
+Route::get('getScalePrintOutRpt/{transport_id}', 'ReportsController@getScalePrintOutRpt')->name('scale-printout-rpt.index');
+Route::get('getQcLabelRpt/{transport_id}', 'ReportsController@getQcLabelRpt')->name('qc-label-rpt.index');
 
 
 Auth::routes();
