@@ -13,7 +13,6 @@ class SapController extends Controller
     public function getTransportsData(Request $request)
     {
         $transports = SapApiRaw::query()
-            ->whereNull('post_date')
             ->get();
         return $transports;
     }

@@ -61,17 +61,17 @@ class TransportsController extends Controller
 
         $departures    =   Transports::query()
             ->where('status' , 'departure')
-            ->where('created_at', '>=', Carbon::now()->subDay()->toDateTimeString())
+            ->where('updated_at', '>=', Carbon::now()->subDay()->toDateTimeString())
             ->paginate(25);
 
         $canceled   =   Transports::query()
             ->where('status' , 'canceled')
-            ->where('created_at', '>=', Carbon::now()->subDay()->toDateTimeString())
+            ->where('updated_at', '>=', Carbon::now()->subDay()->toDateTimeString())
             ->paginate(25);
 
         $rejected   =   Transports::query()
             ->where('status' , 'rejected')
-            ->where('created_at', '>=', Carbon::now()->subDay()->toDateTimeString())
+            ->where('updated_at', '>=', Carbon::now()->subDay()->toDateTimeString())
             ->paginate(25);
 
         $cancelReason   =   BlockedReason::all();
