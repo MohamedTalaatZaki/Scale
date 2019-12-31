@@ -41,38 +41,38 @@ class TransportsController extends Controller
                 $q->where('status' , 'arrived')->orWhere('status' , 'sampled');
             })
             ->whereHas('itemType' , function ($q){$q->where('prefix' , 'raw');})
-            ->paginate(15);
+            ->paginate(25);
 
         $rawTrucks  =   Transports::query()
             ->rawOrder()
-            ->paginate(15);
+            ->paginate(25);
 
         $scrapTrucks  =   Transports::query()
             ->scrapOrder()
-            ->paginate(15);
+            ->paginate(25);
 
         $finishTrucks  =   Transports::query()
             ->finishOrder()
-            ->paginate(15);
+            ->paginate(25);
 
         $inProcessTrucks    =   Transports::query()
             ->whereIn('status' , ['in_process' , 'out_weight'])
-            ->paginate(15);
+            ->paginate(25);
 
         $departures    =   Transports::query()
             ->where('status' , 'departure')
             ->where('created_at', '>=', Carbon::now()->subDay()->toDateTimeString())
-            ->paginate(15);
+            ->paginate(25);
 
         $canceled   =   Transports::query()
             ->where('status' , 'canceled')
             ->where('created_at', '>=', Carbon::now()->subDay()->toDateTimeString())
-            ->paginate(15);
+            ->paginate(25);
 
         $rejected   =   Transports::query()
             ->where('status' , 'rejected')
             ->where('created_at', '>=', Carbon::now()->subDay()->toDateTimeString())
-            ->paginate(15);
+            ->paginate(25);
 
         $cancelReason   =   BlockedReason::all();
 
