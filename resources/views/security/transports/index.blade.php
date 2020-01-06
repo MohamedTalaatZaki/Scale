@@ -61,35 +61,35 @@
                 <div class="card-header pl-0 pr-0">
                     <ul class="nav nav-tabs card-header-tabs  ml-0 mr-0" role="tablist">
                         <li class="nav-item w-20 text-center">
-                            <a class="nav-link {{ !request()->has('itemType') ? " active" : "" }}" id="first-tab_" data-toggle="tab" href="#firstFull" role="tab"
+                            <a class="nav-link" data-active-link="arrival" id="first-tab_" data-toggle="tab" href="#firstFull" role="tab"
                                aria-controls="first" aria-selected="true">
                                 @lang('global.arrival_trucks')
                                 <span class="badge badge-success mx-2">{{ $arrivalTrucks->total() }}</span>
                             </a>
                         </li>
                         <li class="nav-item w-15 text-center">
-                            <a class="nav-link {{ request()->has('itemType') ? " active" : "" }}" id="second-tab_" data-toggle="tab" href="#secondFull" role="tab"
-                               aria-controls="second" aria-selected="false">
+                            <a class="nav-link" data-active-link="waiting"
+                               id="second-tab_" data-toggle="tab" href="#secondFull" role="tab" aria-controls="second" aria-selected="false">
                                 @lang('global.waiting_trucks')
                                 <span class="badge badge-success mx-2">{{ $rawTrucks->total() + $scrapTrucks->total() + $finishTrucks->total() }}</span>
                             </a>
                         </li>
                         <li class="nav-item w-15 text-center">
-                            <a class="nav-link" id="third-tab_" data-toggle="tab" href="#thirdFull" role="tab"
+                            <a class="nav-link" data-active-link="in_process" id="third-tab_" data-toggle="tab" data-item-type="in_process" href="#thirdFull" role="tab"
                                aria-controls="third" aria-selected="false">
                                 @lang('global.in_process_trucks')
                                 <span class="badge badge-success mx-2">{{ $inProcessTrucks->total() }}</span>
                             </a>
                         </li>
                         <li class="nav-item w-15 text-center">
-                            <a class="nav-link" id="fourth-tab_" data-toggle="tab" href="#fourthFull" role="tab"
+                            <a class="nav-link" data-active-link="departures" id="fourth-tab_" data-toggle="tab" href="#fourthFull" role="tab"
                                aria-controls="fourth" aria-selected="false">
                                 @lang('global.departures_trucks')
                                 <span class="badge badge-success mx-2">{{ $departures->total() }}</span>
                             </a>
                         </li>
                         <li class="nav-item w-15 text-center">
-                            <a class="nav-link" id="canceled-tab_" data-toggle="tab" href="#canceledFull" role="tab"
+                            <a class="nav-link" data-active-link="canceled" id="canceled-tab_" data-toggle="tab" href="#canceledFull" role="tab"
                                aria-controls="fourth" aria-selected="false">
                                 @lang('global.canceled_trucks')
                                 <span class="badge badge-success mx-2">{{ $canceled->total() }}</span>
@@ -97,7 +97,7 @@
                         </li>
 
                         <li class="nav-item w-15 text-center">
-                            <a class="nav-link" id="rejected-tab_" data-toggle="tab" href="#rejectedFull" role="tab"
+                            <a class="nav-link" data-active-link="rejected" id="rejected-tab_" data-toggle="tab" href="#rejectedFull" role="tab"
                                aria-controls="fourth" aria-selected="false">
                                 @lang('global.rejected_trucks')
                                 <span class="badge badge-success mx-2">{{ $rejected->total() }}</span>
@@ -204,6 +204,11 @@
     <script src="{{ asset('js/swal.js') }}"></script>
     <script>
         $().ready(function () {
+
+            let activeLink  =  localStorage.getItem('active_tab');
+            $('.nav-link[data-active-link="'+activeLink+'"]').addClass('active');
+            $('[data-active-link-sub="'+activeLink+'"]').addClass('active show');
+
             if ("{{ Session::has('print') }}" == 1) {
              let transportId    =   "{{ Session::get('print') }}";
                 var win = window.open('{{ route('printLabels') }}?id='+transportId, '_blank');
@@ -290,6 +295,12 @@
                     $('.blockDiv').hide();
                 }
             });
+
+            $('.nav-link').on('click' , function(evt) {
+                let activeLink    =   $(this).data('active-link');
+                localStorage.setItem('active_tab' , activeLink);
+            });
+
             function govChange(govId , cityId = 0) {
                 let citySelect  =   $('.citySelect');
                 $.ajax({

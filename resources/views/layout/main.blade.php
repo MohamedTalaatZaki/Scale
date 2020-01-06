@@ -448,6 +448,9 @@
             localStorage.setItem('hasSub', hasSub ? '1' : '0');
 
             localStorage.setItem(classes[0], classes[1]);
+
+            localStorage.setItem('active_tab' , 'arrival');
+            localStorage.setItem('active_tab_sub' , 'arrival');
         });
 
         $("#switchDark").on("change", function (event) {

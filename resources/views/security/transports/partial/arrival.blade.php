@@ -1,4 +1,4 @@
-<div class="tab-pane fade {{ !request()->has('itemType') ? " active show" : "" }}" id="firstFull" role="tabpanel"
+<div class="tab-pane fade" data-active-link-sub="arrival" id="firstFull" role="tabpanel"
      aria-labelledby="first-tab_">
     <h6 class="mb-4">@lang('global.arrival_trucks')</h6>
     <table class="table">

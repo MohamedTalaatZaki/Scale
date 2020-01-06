@@ -1,4 +1,4 @@
-<div class="tab-pane fade" id="fourthFull" role="tabpanel" aria-labelledby="fourth-tab_">
+<div class="tab-pane fade"  data-active-link-sub="departure" id="fourthFull" role="tabpanel" aria-labelledby="fourth-tab_">
     <h6 class="mb-4">@lang('global.departures_trucks')</h6>
     <table class="table">
         <thead>

@@ -1,4 +1,4 @@
-<div class="tab-pane fade" id="canceledFull" role="tabpanel" aria-labelledby="canceled-tab_">
+<div class="tab-pane fade" data-active-link-sub="canceled" id="canceledFull" role="tabpanel" aria-labelledby="canceled-tab_">
     <h6 class="mb-4">@lang('global.canceled_trucks')</h6>
     <table class="table">
         <thead>
