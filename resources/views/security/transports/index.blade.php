@@ -32,6 +32,10 @@
         </div>
     </div>
 
+    @if($errors->has('reason_id'))
+        @include("components._validation")
+    @endif
+
     @isset($truckArrival)
         @include('security.transports.partial.edit')
     @else

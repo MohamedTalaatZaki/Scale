@@ -204,6 +204,7 @@ return [
         'item_group_id'   =>  'Item Group',
         'theoretical_weight'   =>  'Theoretical Weight',
         'arrival_time'   =>  'Arrival Time',
+        'reason_id' =>  'Block Reason',
     ],
 
 ];

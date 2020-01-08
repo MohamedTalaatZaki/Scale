@@ -1,6 +1,6 @@
 <form action="{{ route('transports.store') }}" method="post">
     @csrf
-    <div style="display: {{ $errors->count() > 0 ? 'flex' : 'none' }}" class="row create-arrival-truck">
+    <div style="display: {{ $errors->count() > 0 && !$errors->has('reason_id') ? 'flex' : 'none' }}" class="row create-arrival-truck">
         <div class="col-md-4">
             <div class="card">
                 <div class="card-body">

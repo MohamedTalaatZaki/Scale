@@ -203,27 +203,41 @@ class TransportsController extends Controller
     public function checkOut(Request $request)
     {
         $transport  =   Transports::query()->find($request->get('transport_id'));
+
+        if($request->has('block_driver'))
+        {
+            $this->validate($request , [
+                'reason_id' =>  'required'
+            ]);
+
+            $this->blockDriver($transport , $request);
+        }
+
         $transport->update([
             'departure_time' => Carbon::now(),
             'status' => 'departure',
         ]);
-        if($request->has('block_driver'))
-        {
-            $this->blockDriver($transport , $request);
-        }
+
         return redirect()->action('Security\TransportsController@index')->with('success' , trans('global.car_departure' , ['truck_plates_tractor' => $transport->truck_plates_tractor]));
     }
 
     public function cancel(Request $request) {
         $transport  =   Transports::query()->find($request->get('transport_id'));
+
+        if($request->has('block_driver'))
+        {
+            $this->validate($request , [
+                'reason_id' =>  'required'
+            ]);
+
+            $this->blockDriver($transport , $request);
+        }
+
         $transport->update([
             'departure_time' => Carbon::now(),
             'status' => 'canceled'
         ]);
-        if($request->has('block_driver'))
-        {
-            $this->blockDriver($transport , $request);
-        }
+
         return redirect()->action('Security\TransportsController@index')->with('success' , trans('global.car_canceled' , ['truck_plates_tractor' => $transport->truck_plates_tractor]));
     }
 
