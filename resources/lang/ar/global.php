@@ -212,7 +212,7 @@ return [
     'are_you_sure'  =>  'هل انت متاكد ؟',
     'write_something' =>  'يجب كتابة السبب',
     'cannot_save_contact_admin' =>  'لا يمكن حفظ البيانات تواصل مع مدير النظام',
-    'tested_trucks' =>  'شاحنات تم وزنها',
+    'tested_trucks' =>  'شاحنات تم اختبارها',
     'truck_plate'  =>  'رقم اللوحة',
     'qc_test_name'  =>  'اسم الاختبار',
     'created_by'    =>  'انشئ بواسطة',
