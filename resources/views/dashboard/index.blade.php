@@ -209,7 +209,7 @@
                         </div>
                         <div class="row">
                             <div class="col-lg-12 mb-5">
-                                <h6 class="mb-4">@lang('global.degree')</h6>
+                                <h6 class="mb-4"></h6>
                                 <div class="chart-container chart">
                                     <canvas id="qcResultsChart"></canvas>
                                     <input type="hidden"
