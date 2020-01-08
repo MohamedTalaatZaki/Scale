@@ -99,7 +99,7 @@ class TransportsController extends Controller
         $this->authorized('transports.create');
         $this->validate($request , [
             'driver_name'  =>  'required',
-            'driver_license'  =>  'required',
+            'driver_license'  =>  'nullable',
             'driver_national_id'  =>  'required|digits:14|numeric',
             'driver_mobile'  =>  'required|digits:11|numeric',
             'supplier_id'  =>  'required|exists:suppliers,id',
@@ -150,7 +150,7 @@ class TransportsController extends Controller
         $this->authorized('transports.edit');
         $this->validate($request , [
             'driver_name'  =>  'required',
-            'driver_license'  =>  'required',
+            'driver_license'  =>  'nullable',
             'driver_national_id'  =>  'required|digits:14|numeric',
             'driver_mobile'  =>  'required|digits:11|numeric',
             'supplier_id'  =>  'required|exists:suppliers,id',
