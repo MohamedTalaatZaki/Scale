@@ -304,4 +304,5 @@ return [
     'Net_weight_af_disc'   =>  'الوزن الصافي',
     'truck_summary' =>  'ملخص العمليات',
     'kg'    =>  'كيلو جرام',
+    'departure_at'  =>  'غادرت منذ',
 ];

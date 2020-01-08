@@ -205,7 +205,7 @@ return [
         'theoretical_weight'   =>  'Theoretical Weight',
         'arrival_time'   =>  'Arrival Time',
         'reason_id' =>  'Block Reason',
-        'kg'    =>  'KiloGram',
+
     ],
 
 ];
