@@ -20,10 +20,12 @@ class ScrapProcessController extends Controller
         $not_started_transport_details  =    TransportDetail::query()->ScrapNotStartedTransports()->get();
         $started_transport_details      =    TransportDetail::query()->ScrapStartedTransports()->get();
         $lines  =   Line::query()->where('is_active' , true)->where('type' , 'ScrapLine')->get();
+        $suppliers  =   Supplier::query()->get();
         return view('production.scrap-process.index' , [
             'not_started_transport_details' => $not_started_transport_details,
             'started_transport_details'     => $started_transport_details,
-            'lines' =>  $lines
+            'lines' =>  $lines,
+            'suppliers'    =>  $suppliers
         ]);
     }
 
@@ -31,6 +33,7 @@ class ScrapProcessController extends Controller
     {
         $this->authorized('scrapStartProcess');
         $this->validate($request , [
+            'supplier_id'   =>  'required',
             'item_group_id' =>  'required',
             'item_id' =>  'required',
             'line_id' =>  'required',
@@ -40,6 +43,7 @@ class ScrapProcessController extends Controller
 
         $transportDetail->transport()->update([
             'item_group_id' =>  $request->input('item_group_id'),
+            'supplier_id'   =>  $request->input('supplier_id')
         ]);
 
         $transportDetail->update([
