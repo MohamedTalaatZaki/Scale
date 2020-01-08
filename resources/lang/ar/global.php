@@ -303,4 +303,5 @@ return [
     'disc_weight'   =>  'كمية الخصم',
     'Net_weight_af_disc'   =>  'الوزن الصافي',
     'truck_summary' =>  'ملخص العمليات',
+    'kg'    =>  'كيلو جرام',
 ];
