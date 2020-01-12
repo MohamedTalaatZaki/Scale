@@ -65,7 +65,27 @@
                 <div class="modal-body">
 
                     <input id="detail_id" type="hidden" name="detail_id" value="">
-                    <input id="supplier_id" type="hidden" name="supplier_id" value="">
+{{--                    <input id="supplier_id" type="hidden" name="supplier_id" value="">--}}
+
+                    <div class="form-row">
+                        <div class="form-group col-md-12">
+                            <label for="supplier_id">@lang('global.supplier') *</label>
+                            <select id="supplier_id"
+                                    class="form-control select2-single lineSelect"
+                                    data-placeholder="@lang('global.select_supplier')"
+                                    name="supplier_id"
+                                    required
+                            >
+                                <option value='' selected></option>
+                                @foreach($suppliers as $supplier)
+                                    <option value="{{ $supplier->id }}"> {{ $supplier->name }} </option>
+                                @endforeach
+                            </select>
+                            @if($errors->has('supplier_id'))
+                                <div class="error" style="">{{ $errors->first('supplier_id') }}</div>
+                            @endif
+                        </div>
+                    </div>
 
                     <div class="form-row">
                         <div class="form-group col-md-12">

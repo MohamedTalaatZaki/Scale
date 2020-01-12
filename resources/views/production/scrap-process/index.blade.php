@@ -31,36 +31,27 @@
     <script src="{{ asset('js/swal.js') }}"></script>
     <script>
         $().ready(function(){
+
             $('#startModal').on('show.bs.modal' , function (event) {
                 let detail_id   =   $(event.relatedTarget).data('detail-id');
                 let supplier    =   $(event.relatedTarget).data('supplier-id');
                 let itemGroupId =   $(event.relatedTarget).data('item-group-id');
                 let itemsGroupSelect    =   $(this).find('.itemsGroupSelect');
-
                 $(this).find('#detail_id').val(detail_id);
-                $(this).find('#supplier_id').val(supplier);
+                $(this).find('#supplier_id').val(supplier).trigger('change.select2');
                 $('.day').val(moment().format('DD'));
                 $('.month').val(moment().format('MM'));
                 $('.year').val("0"+moment().format('YY'));
 
-                $.ajax({
-                    method: 'GET',
-                    url:    "{{ route('getSupplierItemGroups') }}",
-                    data:   { _token: "{{ csrf_token() }}" , id : supplier , type : 'scrap'},
-                    success : (response)    =>  {
-                        itemsGroupSelect.empty();
-                        let option = "<option value='' selected></option>";
-                        itemsGroupSelect.append(option);
-                        $.each(response.itemGroups , function (index , itemGroup) {
-                            let option = "<option value='"+index+"'>"+ itemGroup +"</option>";
-                            itemsGroupSelect.append(option);
-                        });
-                        reInitSelect2("#itemsGroupSelect");
-                        itemsGroupSelect.val(itemGroupId).trigger('change');
-                    }
-                });
+                getSupplierItemGroups(supplier , itemsGroupSelect, itemGroupId);
 
                 $('.batchNumStr').trigger('keyup');
+            });
+
+            $('#supplier_id').on('change' , function (evt) {
+                let supplier    =   $(this).val();
+                let itemsGroupSelect = $('#itemsGroupSelect');
+                getSupplierItemGroups(supplier , itemsGroupSelect, '');
             });
 
             $('#itemsGroupSelect').on('change' , function(){
@@ -141,6 +132,25 @@
                     theme: "bootstrap",
                     maximumSelectionSize: 6,
                     containerCssClass: ":all:"
+                });
+            }
+
+            function getSupplierItemGroups(supplier , itemsGroupSelect, itemGroupId){
+                $.ajax({
+                    method: 'GET',
+                    url:    "{{ route('getSupplierItemGroups') }}",
+                    data:   { _token: "{{ csrf_token() }}" , id : supplier , type : 'scrap'},
+                    success : (response)    =>  {
+                        itemsGroupSelect.empty();
+                        let option = "<option value='' selected></option>";
+                        itemsGroupSelect.append(option);
+                        $.each(response.itemGroups , function (index , itemGroup) {
+                            let option = "<option value='"+index+"'>"+ itemGroup +"</option>";
+                            itemsGroupSelect.append(option);
+                        });
+                        reInitSelect2("#itemsGroupSelect");
+                        itemsGroupSelect.val(itemGroupId).trigger('change');
+                    }
                 });
             }
         })
