@@ -35,7 +35,7 @@
                         @endif
                     </div>
                     <div class="form-group col-md-12">
-                        <label for="driver_license">@lang('global.driver_license') *</label>
+                        <label for="driver_license">@lang('global.driver_license')</label>
                         <input type="text"
                                class="form-control"
                                id="driver_license"
@@ -43,7 +43,7 @@
                                value="{{ old('driver_license') }}"
                                name="driver_license"
                                autocomplete="off"
-                               required>
+                               >
                         @if($errors->has('driver_license'))
                             <div class="error" style="">{{ $errors->first('driver_license') }}</div>
                         @endif
