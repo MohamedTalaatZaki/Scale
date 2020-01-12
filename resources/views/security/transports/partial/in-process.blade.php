@@ -1,4 +1,4 @@
-<div class="tab-pane fade" id="thirdFull" role="tabpanel" aria-labelledby="third-tab_">
+<div class="tab-pane fade" data-active-link-sub="in_process" id="thirdFull" role="tabpanel" aria-labelledby="third-tab_">
     <h6 class="mb-4">@lang('global.in_process_trucks')</h6>
     <table class="table">
         <thead>

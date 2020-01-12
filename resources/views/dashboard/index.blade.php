@@ -209,7 +209,7 @@
                         </div>
                         <div class="row">
                             <div class="col-lg-12 mb-5">
-                                <h6 class="mb-4">@lang('global.degree')</h6>
+                                <h6 class="mb-4"></h6>
                                 <div class="chart-container chart">
                                     <canvas id="qcResultsChart"></canvas>
                                     <input type="hidden"
@@ -230,9 +230,22 @@
     <script src="{{ asset('js/customCharts.js') }}"></script>
     <script>
         $().ready(function () {
-            $(".datetimePicker").datetimepicker({
+            $(".start_date").datetimepicker({
                 theme: '{{ Auth::user()->theme }}',
-                format : 'Y-m-d h:m'
+                format : 'Y-m-d h:m',
+                onChangeDateTime: function (evt) {
+                    $('#toDateInput').val('');
+                }
+            });
+
+            $(".end_date").datetimepicker({
+                theme: '{{ Auth::user()->theme }}',
+                format : 'Y-m-d h:m',
+                onShow:function( ct ){
+                    this.setOptions({
+                        minDate:jQuery('#fromDateInput').val()
+                    })
+                },
             });
 
             $('#ItemTypeFilter,#itemGroupFilter').on('change', function (evt) {

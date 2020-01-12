@@ -14,7 +14,7 @@ class SapController extends Controller
     {
         $transports = SapApiRaw::query()
             ->get();
-        return $transports;
+        return response()->json($transports , 200 , [] , JSON_UNESCAPED_UNICODE);
     }
 
     public function setTransactionPostDate(Request $request)

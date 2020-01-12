@@ -82,7 +82,7 @@ class Transports extends Model
 {
     protected $table    =   'transports';
     protected $guarded  =   ['id'];
-    protected $dates    =   ['arrival_time'];
+    protected $dates    =   ['arrival_time','departure_time'];
 
 
     public function details()

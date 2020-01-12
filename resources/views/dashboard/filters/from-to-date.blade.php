@@ -2,7 +2,7 @@
     <div class="form-group col-md-6">
         <label for="fromDateInput">@lang('global.from_date')</label>
         <input type="text"
-               class="form-control datetimePicker"
+               class="form-control start_date"
                id="fromDateInput"
                value="{{ request()->input('filter_from_date') }}"
                name="filter_from_date"
@@ -15,7 +15,7 @@
         <input type="text"
                value="{{ request()->input('filter_to_date') }}"
                name="filter_to_date"
-               class="form-control datetimePicker"
+               class="form-control end_date"
                id="toDateInput"
                placeholder="@lang('global.to_date')"
                autocomplete="off"

@@ -76,7 +76,7 @@
                             <div class="row">
                                 <div class="scale-content">
                                     <div class="scale-weight-text text-center">
-                                        <p class="scale-weight-text-elem" style="color: #0f0 ; font-size: 150px ; direction: ltr">000000 K.g</p>
+                                        <p class="scale-weight-text-elem" style="color: #0f0 ; font-size: 150px ; direction: ltr">000000 @lang('global.kg')</p>
                                     </div>
 
                                 </div>

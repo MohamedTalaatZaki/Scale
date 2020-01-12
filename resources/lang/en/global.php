@@ -305,5 +305,7 @@ return [
     'disc_weight'   =>  'Discount Weight',
     'Net_weight_af_disc'   =>  'Net Weight',
     'truck_summary' =>  'Truck Summary',
+    'departure_at'  =>  'Departure From',
+    'kg'    =>  'KiloGram',
 
 ];
