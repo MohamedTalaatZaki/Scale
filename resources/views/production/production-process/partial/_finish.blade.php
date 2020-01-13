@@ -33,7 +33,7 @@
                                        class="btn btn-success btn-sm mb-1 finishBtn">@lang('global.finish')</a>
                                 @endpermission
                                 @permission('transferLine')
-                                    <a href="{{ route('transferLine' , ['detail_id' => $detail->id]) }}"
+                                    <a href="{{ route('transferLine' , ['detail_id' => $detail->id]) }}" target="_blank"
                                        class="btn btn-danger btn-sm mb-1">@lang('global.transfer')</a>
                                 @endpermission
                             </td>
