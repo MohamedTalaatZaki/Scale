@@ -35,7 +35,7 @@
                                         <a href="{{ route('finishTransferLine' , ['detail_id' => $detail->id]) }}"
                                            class="btn btn-danger btn-sm mb-1">@lang('global.transfer')</a>
                                     @endpermission
-                                @else
+                                @elseif($detail->canPrintAfterWeight())
                                     <a href="{{ route('scale-printout-rpt.index',['transport_id'=>$detail->transport_id]) }}"  target="_blank" class="btn btn-danger btn-sm mb-1">@lang('global.print')</a>
                                 @endif
                             </td>

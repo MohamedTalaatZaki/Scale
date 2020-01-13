@@ -116,7 +116,6 @@ class Transports extends Model
         return $this->details()->where('status' , 'rejected');
     }
 
-
     public function governorate()
     {
         return $this->belongsTo(Governorate::class , 'governorate_id' , 'id');

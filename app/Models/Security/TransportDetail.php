@@ -65,6 +65,7 @@ class TransportDetail extends Model
     const START_LOAD    =   'start_load';
     const DEPARTURE     =   'departure';
     const CANCELED      =   'canceled';
+    const RETEST        =   'retest';
 
     public function transport()
     {
@@ -281,5 +282,10 @@ class TransportDetail extends Model
                 $query->whereNotNull('started_at');
             })
             ->whereIn('status' , ['start_load', 'out_weight']);
+    }
+
+    public function canPrintAfterWeight()
+    {
+        return $this->transport->details()->whereNull('out_weight_time')->count() > 0 ? false : true;
     }
 }
