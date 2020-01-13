@@ -214,14 +214,15 @@ class TransportDetail extends Model
     {
         return $this
             ->whereHas('transport' , function ($query){
-                $query->whereHas('itemType' , function($q){
+                $query->whereIn('status' , ['in_process', 'out_weight'])
+                    ->whereHas('itemType' , function($q){
                     return $q->where('prefix' , 'raw');
                 });
             })
             ->whereHas('LastTransportLine' , function ($query){
-                $query->whereNotNull('started_at')->whereNull('finished_at');
+                $query->whereNotNull('started_at');
             })
-            ->where('status' , 'start_unload');
+            ->whereIn('status' , ['start_unload', 'out_weight']);
     }
 
     public function scopeScrapNotStartedTransports()
@@ -242,14 +243,15 @@ class TransportDetail extends Model
     {
         return $this
             ->whereHas('transport' , function ($query){
-                $query->whereHas('itemType' , function($q){
+                $query->whereIn('status' , ['in_process', 'out_weight'])
+                    ->whereHas('itemType' , function($q){
                     return $q->where('prefix' , 'scrap');
                 });
             })
             ->whereHas('LastTransportLine' , function ($query){
-                $query->whereNotNull('started_at')->whereNull('finished_at');
+                $query->whereNotNull('started_at');
             })
-            ->where('status' , 'start_load');
+            ->whereIn('status' , ['start_load', 'out_weight']);
     }
 
     public function scopeFinishNotStartedTransports()
@@ -270,13 +272,14 @@ class TransportDetail extends Model
     {
         return $this
             ->whereHas('transport' , function ($query){
-                $query->whereHas('itemType' , function($q){
+                $query->whereIn('status' , ['in_process', 'out_weight'])
+                    ->whereHas('itemType' , function($q){
                     return $q->where('prefix' , 'finish');
                 });
             })
             ->whereHas('LastTransportLine' , function ($query){
-                $query->whereNotNull('started_at')->whereNull('finished_at');
+                $query->whereNotNull('started_at');
             })
-            ->where('status' , 'start_load');
+            ->whereIn('status' , ['start_load', 'out_weight']);
     }
 }
