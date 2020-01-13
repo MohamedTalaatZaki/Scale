@@ -25,15 +25,19 @@
                             <td>{{ $detail->itemGroup->name }}</td>
                             <td>{{ $detail->transport->arrival_time }}</td>
                             <td>
-                                @permission('finishFinishProcess')
-                                    <a href="#"
-                                       data-detail-id="{{ $detail->id }}"
-                                       class="btn btn-success btn-sm mb-1 finishBtn">@lang('global.finish')</a>
-                                @endpermission
-                                @permission('finishTransferLine')
-                                    <a href="{{ route('finishTransferLine' , ['detail_id' => $detail->id]) }}" target="_blank"
-                                       class="btn btn-danger btn-sm mb-1">@lang('global.transfer')</a>
-                                @endpermission
+                                @if(is_null($detail->out_weight_time))
+                                    @permission('finishFinishProcess')
+                                        <a href="#"
+                                           data-detail-id="{{ $detail->id }}"
+                                           class="btn btn-success btn-sm mb-1 finishBtn">@lang('global.finish')</a>
+                                    @endpermission
+                                    @permission('finishTransferLine')
+                                        <a href="{{ route('finishTransferLine' , ['detail_id' => $detail->id]) }}"
+                                           class="btn btn-danger btn-sm mb-1">@lang('global.transfer')</a>
+                                    @endpermission
+                                @else
+                                    <a href="{{ route('scale-printout-rpt.index',['transport_id'=>$detail->transport_id]) }}"  target="_blank" class="btn btn-danger btn-sm mb-1">@lang('global.print')</a>
+                                @endif
                             </td>
                         </tr>
                     @empty
