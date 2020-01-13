@@ -222,7 +222,7 @@ class TransportDetail extends Model
             ->whereHas('LastTransportLine' , function ($query){
                 $query->whereNotNull('started_at');
             })
-            ->whereIn('status' , ['start_load', 'out_weight']);
+            ->whereIn('status' , ['start_unload', 'out_weight']);
     }
 
     public function scopeScrapNotStartedTransports()
