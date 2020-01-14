@@ -305,6 +305,10 @@
                 localStorage.setItem('active_tab' , activeLink);
             });
 
+            $('.save-arrival').on('click',function(){
+                $(this).attr('hidden',true);
+            });
+
             function govChange(govId , cityId = 0) {
                 let citySelect  =   $('.citySelect');
                 $.ajax({

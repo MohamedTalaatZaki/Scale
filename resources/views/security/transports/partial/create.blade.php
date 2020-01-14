@@ -225,7 +225,7 @@
 
         <div class="col-md-12 mt-3">
             <div class="btn-group-sm text-center text-black-50">
-                <button type="submit" class="btn btn-primary submit-btn">@lang('global.save_print')</button>
+                <button type="submit" class="btn btn-primary submit-btn save-arrival">@lang('global.save_print')</button>
                 <button type="reset" class="btn btn-danger reset-close">@lang('global.reset_close')</button>
             </div>
         </div>
