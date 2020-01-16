@@ -129,6 +129,7 @@
                             <th>@lang('global.created_by')</th>
                             <th>@lang('global.created_at')</th>
                             <th>@lang('global.is_retest')</th>
+                            <th></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -144,10 +145,14 @@
                                 <td>{{ $header->createdBy->full_name }}</td>
                                 <td>{{ $header->created_at }}</td>
                                 <td><i class="simple-icon-{{ $header->test_type == 'r' ? 'check' : 'close' }}"></i></td>
+                                <td>
+                                    <a href="{{ route('qc-analysis-rpt.index',['test_id'=>$header->id]) }}" class="btn btn-primary btn-sm" target="_blank">@lang('global.print')
+                                    </a>
+                                </td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="7" class="text-center text-warning font-weight-bold">@lang('global.no_data')</td>
+                                <td colspan="8" class="text-center text-warning font-weight-bold">@lang('global.no_data')</td>
                             </tr>
                         @endforelse
                         </tbody>
