@@ -26,12 +26,4 @@ class ReportsController extends Controller
 
         return redirect()->away($this->repo_path.$html.$this->vars.$rpt.$values);
     }
-
-    public function getQcAnalysisRpt($request){
-                $values  =  '&value='.$request;
-                $html    =  "qc-analysis.html";
-                $rpt     =  "qc-testprintout";
-
-        return redirect()->away($this->repo_path.$html.$this->vars.$rpt.$values);
-    }
 }
