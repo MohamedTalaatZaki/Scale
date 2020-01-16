@@ -39,3 +39,12 @@ if ( ! function_exists('nextRowOrder')) {
         }
     }
 }
+
+if( !function_exists("check_app_for_brake_key")) {
+    function check_app_for_brake_key()
+    {
+        $key = base64_decode(env('LICENSE_KEY'));
+        return $key == 'SanaSoftWareLicenceSuccess2020@#$';
+    }
+
+}
