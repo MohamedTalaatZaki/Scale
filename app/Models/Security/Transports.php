@@ -188,7 +188,7 @@ class Transports extends Model
             ->where('status' , 'accepted')
             ->whereHas('itemType' , function($query){
                 return $query->where('prefix' , 'raw');
-            })->orderBy('updated_at' , $orderBy);
+            })->orderBy('updated_at' , $orderBy)->orderBy('order',$orderBy);
     }
 
     public function scopeScrapOrder($q , $orderBy = 'ASC') {
@@ -196,7 +196,7 @@ class Transports extends Model
             ->where('status' , 'waiting')
             ->whereHas('itemType' , function($query){
                 return $query->where('prefix' , 'scrap');
-            })->orderBy('updated_at' , $orderBy);
+            })->orderBy('updated_at' , $orderBy)->orderBy('order',$orderBy);;
     }
 
     public function scopeFinishOrder($q , $orderBy = 'ASC') {
@@ -204,7 +204,7 @@ class Transports extends Model
             ->where('status' , 'waiting')
             ->whereHas('itemType' , function($query){
                 return $query->where('prefix' , 'finish');
-            })->orderBy('updated_at' , $orderBy);
+            })->orderBy('updated_at' , $orderBy)->orderBy('order',$orderBy);;
     }
 
 }

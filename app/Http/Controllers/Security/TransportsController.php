@@ -57,21 +57,25 @@ class TransportsController extends Controller
 
         $inProcessTrucks    =   Transports::query()
             ->whereIn('status' , ['in_process' , 'out_weight'])
+            ->orderBy('updated_at','desc')
             ->paginate(25, ['*'], 'in_process_page');
 
         $departures    =   Transports::query()
             ->where('status' , 'departure')
             ->where('updated_at', '>=', Carbon::now()->subDay()->toDateTimeString())
+            ->orderBy('updated_at','desc')
             ->paginate(25, ['*'], 'departure_page');
 
         $canceled   =   Transports::query()
             ->where('status' , 'canceled')
             ->where('updated_at', '>=', Carbon::now()->subDay()->toDateTimeString())
+            ->orderBy('updated_at','desc')
             ->paginate(25, ['*'], 'canceled_page');
 
         $rejected   =   Transports::query()
             ->where('status' , 'rejected')
             ->where('updated_at', '>=', Carbon::now()->subDay()->toDateTimeString())
+            ->orderBy('updated_at','desc')
             ->paginate(25, ['*'], 'rejected_page');
 
         $cancelReason   =   BlockedReason::all();
