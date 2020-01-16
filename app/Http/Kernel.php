@@ -2,6 +2,8 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\CheckCsrfToken;
+use App\Http\Middleware\CheckDriverIsBloced;
 use App\Http\Middleware\LangMiddleware;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -36,7 +38,8 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \App\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
-            LangMiddleware::class
+            LangMiddleware::class,
+            CheckDriverIsBloced::class
         ],
 
         'api' => [

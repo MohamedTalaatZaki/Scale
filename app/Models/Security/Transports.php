@@ -8,6 +8,7 @@ use App\Models\Governorate;
 use App\Models\Items\ItemGroup;
 use App\Models\Items\ItemType;
 use App\Models\Supplier\Supplier;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -108,12 +109,14 @@ class Transports extends Model
 
     public function acceptedDetails()
     {
-        return $this->details()->where('status' , 'accepted');
+        return $this->details()->where('status' , 'accepted')
+            ->whereDate('updated_at' , '<' , Carbon::now()->subDay());
     }
 
     public function rejectedDetails()
     {
-        return $this->details()->where('status' , 'rejected');
+        return $this->details()->where('status' , 'rejected')
+            ->whereDate('updated_at' , '<' , Carbon::now()->subDay());
     }
 
     public function governorate()
