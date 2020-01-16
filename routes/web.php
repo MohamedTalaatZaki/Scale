@@ -94,6 +94,7 @@ Route::post('trucks-scale-weight' , "Scale\TrucksScaleController@saveTruckScaleW
 //Reports
 Route::get('getScalePrintOutRpt/{transport_id}', 'ReportsController@getScalePrintOutRpt')->name('scale-printout-rpt.index');
 Route::get('getQcLabelRpt/{transport_id}', 'ReportsController@getQcLabelRpt')->name('qc-label-rpt.index');
+Route::get('getQcAnalysisRpt/{test_id}', 'ReportsController@getQcAnalysisRpt')->name('qc-analysis-rpt.index');
 
 
 Auth::routes();
