@@ -30,7 +30,7 @@
                         <h5 class="mb-4">@lang('global.sample_test')</h5>
                     </div>
 
-
+                    @include('components._validation')
                     <form action="{{ route('samples-test.store') }}" method="post" id="sampleTest">
                         @csrf
 
@@ -109,8 +109,8 @@
                                                         required
                                                     >
                                                         <option value="" selected>@lang('global.result')</option>
-                                                        <option value="1" {{ old("details.$key.expected_result") === 1 ? "selected" : ""}}>@lang('global.yes')</option>
-                                                        <option value="0" {{ old("details.$key.expected_result") === 0 ? "selected" : ""}}>@lang('global.no')</option>
+                                                        <option value="1" {{ old("details.$key.sampled_expected_result" , -1) == 1 ? "selected" : ""}}>@lang('global.yes')</option>
+                                                        <option value="0" {{ old("details.$key.sampled_expected_result" , -1) == 0 ? "selected" : ""}}>@lang('global.no')</option>
                                                     </select>
                                                     <div style="position: absolute">
                                                         <div class="notify-error"></div>
@@ -124,7 +124,7 @@
                                                 <td>
                                                     <input type="number" class="form-control form-control-sm sample_range result-input"
                                                            name="details[{{ $key }}][sampled_range]" style="display: {{ old("details.$key.element_type" , $row['element']['element_type']) == "range"? "" : "none" }}"
-                                                           value="{{ old("details.$key.sample_range") }}" placeholder="@lang('global.sample_range')"
+                                                           value="{{ old("details.$key.sampled_range") }}" placeholder="@lang('global.sample_range')"
                                                            data-min="{{ $row->min_range }}"
                                                            data-max="{{ $row->max_range }}"
                                                            step="0.0001"
@@ -200,12 +200,21 @@
             let detailsCount    =   parseInt("{{ optional(optional(optional($transport_detail->testableType)->qcTestHeader)->details)->count() }}");
             let finalResult     =   -1;
 
+            if (parseInt("{{ count(old()) }}") > 1)
+            {
+                setTimeout(()=>{
+                    $('.expected_result').trigger('change');
+                    $('.sample_range').trigger('keyup');
+                } , 1000);
+            }
+
             $('.resultSwal').on('click' , function (evt) {
                 evt.preventDefault();
 
                 let swalText    =   $(this).data('type');
                 let selected    =   $(this).data('type-result');
                 let btnResult   =   parseInt($(this).data('result'));
+                let canAcceptRejected = parseInt("{{ Entrust::can('samples-test.acceptRejected') }}");
 
                 if ( !checkResults() )
                 {
@@ -224,37 +233,49 @@
                         cancelButtonText: '@lang('global.cancel')',
                         reverseButtons: true,
                     }).then((result) => {
-                        if (result.value && btnResult !== finalResult) {
-                            Swal.fire({
-                                text: '@lang('global.error_expected_result')',
-                                input: 'textarea',
-                                inputAttributes: {
-                                    autocapitalize: 'off',
-                                    required: true,
-                                    id:"reason",
-                                },
-                                inputValidator: (value) => {
-                                    if (!value) {
-                                        return '@lang('global.write_something')'
-                                    }
-                                },
-                                preConfirm: function() {
-                                    return new Promise((resolve, reject) => {
-                                        resolve({
-                                            reason: $('textarea#reason').val(),
+                        if (result.value && btnResult !== finalResult ) {
+                            if (canAcceptRejected === 1)
+                            {
+                                Swal.fire({
+                                    text: '@lang('global.error_expected_result')',
+                                    input: 'textarea',
+                                    inputAttributes: {
+                                        autocapitalize: 'off',
+                                        required: true,
+                                        id:"reason",
+                                    },
+                                    inputValidator: (value) => {
+                                        if (!value) {
+                                            return '@lang('global.write_something')'
+                                        }
+                                    },
+                                    preConfirm: function() {
+                                        return new Promise((resolve, reject) => {
+                                            resolve({
+                                                reason: $('textarea#reason').val(),
+                                            });
                                         });
-                                    });
-                                },
-                                showCancelButton: true,
-                                confirmButtonColor: '#3085d6',
-                                cancelButtonColor: '#d33',
-                                confirmButtonText: '@lang('global.save')',
-                                reverseButtons: true,
-                            }).then(function (data) {
-                                if(data.value) {
-                                    setFinalResultAndSubmit(selected , data.value.reason);
-                                }
-                            });
+                                    },
+                                    showCancelButton: true,
+                                    confirmButtonColor: '#3085d6',
+                                    cancelButtonColor: '#d33',
+                                    confirmButtonText: '@lang('global.save')',
+                                    reverseButtons: true,
+                                }).then(function (data) {
+                                    if(data.value) {
+                                        setFinalResultAndSubmit(selected , data.value.reason);
+                                    }
+                                });
+                            } else {
+                                Swal.fire({
+                                    title: "@lang('global.cannot_accept_rejected')",
+                                    confirmButtonText: "@lang('global.cancel')",
+                                    confirmButtonColor: '#d33',
+                                    showCancelButton: false,
+                                    reverseButtons: true,
+                                });
+                            }
+
                         } else if (result.value && btnResult === finalResult) {
                             setFinalResultAndSubmit(selected);
                         }
@@ -313,8 +334,8 @@
                 let min     =   parseFloat($(this).data('min'));
                 let max     =   parseFloat($(this).data('max'));
                 let tr      =   $(this).closest('tr');
-                console.log(value , min , max);
-                console.log(value >= min && value <= max);
+                // console.log(value , min , max);
+                // console.log(value >= min && value <= max);
                 if( value >= min && value <= max ) {
                     tr.find('.accepted').show();
                     tr.find('.rejected').hide();

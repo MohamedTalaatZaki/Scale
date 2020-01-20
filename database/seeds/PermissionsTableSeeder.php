@@ -485,6 +485,15 @@ class PermissionsTableSeeder extends Seeder
             'ar_description' => NULL,
         ]);
 
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'samples-test.acceptRejected',
+            'en_display_name' => 'Accept Rejected Sampled Test',
+            'ar_display_name' => ' قبول نتائج الأختبار المرفوضة',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+
         $subMenu = SubMenu::where('code', 16)->first();
 
         Permission::create([
