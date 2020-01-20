@@ -279,6 +279,7 @@ return [
     'check_out' =>  'تسجيل خروج السيارة',
     'production_done'  =>  'تم تسجيل انتهاء السيارة بنجاح',
     'finish_process'    =>  'عمليات المنتجات',
+    'raw_process'    =>  'عمليات الخامات',
     'finish_finish_confirmation'    =>  'هل انت متاكد من انتهاء العملية',
     'in_process'    =>  'في الداخل',
     'departed'  =>  'غادرت',
@@ -305,4 +306,5 @@ return [
     'truck_summary' =>  'ملخص العمليات',
     'kg'    =>  'كيلو جرام',
     'departure_at'  =>  'غادرت منذ',
+    'line_is_delay' =>  'هل الخط كان معطل ؟ ',
 ];
