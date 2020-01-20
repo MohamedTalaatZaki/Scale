@@ -68,6 +68,10 @@ class SamplesTestController extends Controller
 
         try {
 
+            if($request->has('reason') && !\Entrust::can('samples-test.acceptRejected'))
+            {
+                return redirect()->back()->with('failed' , trans('global.cannot_accept_rejected'));
+            }
             $transportDetail    =   TransportDetail::query()->find($request->get('transport_detail_id'));
             $header =   $transportDetail->sampleTestHeader()->create([
                 'transport_detail_id'   =>  $request->get('transport_detail_id'),
@@ -88,8 +92,8 @@ class SamplesTestController extends Controller
             return redirect()->action('QC\ArrivedTrucksController@index');
         } catch (\Exception $e) {
             DB::rollBack();
-            dd($e->getMessage() , $request->input());
-            return redirect()->back()->with('error' , trans('global.cannot_save_contact_admin'));
+//            dd($e->getMessage() , $request->input());
+            return redirect()->back()->with('failed' , trans('global.cannot_save_contact_admin'));
         }
 
 

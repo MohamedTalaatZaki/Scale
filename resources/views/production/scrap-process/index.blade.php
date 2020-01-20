@@ -101,6 +101,13 @@
                 Swal.fire({
                     title: '{{ trans('global.are_you_sure') }}',
                     text: "{{ trans('global.scrap_finish_confirmation') }}",
+                    html: "" +
+                        "<br/>" +
+                        "<h2>@lang('global.note')</h2><textarea id='finish_comment' class='form-control' style='background-color: white;color: black;font-weight: bolder'> </textarea>" +
+                        "<br/> <div class='form-check'>\n" +
+                        "<input type='checkbox' class='form-check-input' id='lineIsDelay' style='width:20px; height:20px;'>\n" +
+                        "<label class='form-check-label'><span style='font-weight: bolder'>@lang('global.line_is_delay')</span></label>\n" +
+                        "</div>",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
@@ -109,10 +116,16 @@
                     cancelButtonText: '{{trans('global.cancel')}}',
                 }).then((result) => {
                     if (result.value) {
+                        let finish_comment = $('#finish_comment').val();
+                        let lineIsDelay    = $('#lineIsDelay').is(':checked');
                         $.ajax({
                             url:    "{{ route('scrapFinishProcess') }}",
                             method: "post",
-                            data: {_token: "{{ csrf_token() }}" , detail_id : detailId},
+                            data: {_token: "{{ csrf_token() }}" ,
+                                detail_id : detailId,
+                                finish_comment : finish_comment,
+                                line_is_delay: + lineIsDelay
+                            },
                             success:    ()  =>  {
                                 $('#detail_'+detailId).remove();
                                 Swal.fire(

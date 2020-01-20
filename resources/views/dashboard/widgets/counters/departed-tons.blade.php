@@ -1,7 +1,7 @@
 @isset($departureCounters)
 <a href="#" class="card" style="cursor: default">
     <div class="card-body text-center">
-        <i class="iconsminds-clock"></i>
+        <i class="iconsminds-pointer"></i>
         <p class="card-text mb-0">@lang('global.departed')</p>
         <div class="container">
             <div class="row">
