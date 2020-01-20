@@ -3,7 +3,7 @@
 
     <div class="row">
         <div class="col-12">
-            <h1>@lang('global.production_process')</h1>
+            <h1>@lang('global.raw_process')</h1>
             <div class="text-zero top-right-button-container">
 
             </div>
@@ -13,7 +13,7 @@
                         <span class="default-cursor">@lang('global.production')</span>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="{{ route('production-process.index') }}">@lang('global.production_process')</a>
+                        <a href="{{ route('production-process.index') }}">@lang('global.raw_process')</a>
                     </li>
                 </ol>
             </nav>
@@ -118,17 +118,21 @@
                 let detailId    =   $(this).data('detail-id');
                 Swal.fire({
                     title: "{{ trans('global.has_discount') }}",
-                    input: 'number',
-                    inputAttributes: {
-                        autocapitalize: 'off',
-                        id: 'discount_percent',
-                    },
+                    html: "" +
+                        "<input class='form-control' id='discount_percent' type='number' style='background-color: white;color: black;font-weight: bolder'>" +
+                        "<br/>" +
+                        "<h2>@lang('global.note')</h2><textarea id='finish_comment' class='form-control' style='background-color: white;color: black;font-weight: bolder'> </textarea>" +
+                        "<br/> <div class='form-check'>\n" +
+                        "<input type='checkbox' class='form-check-input' id='lineIsDelay' style='width:20px; height:20px;'>\n" +
+                        "<label class='form-check-label'><span style='font-weight: bolder'>@lang('global.line_is_delay')</span></label>\n" +
+                        "</div>",
                     showCancelButton: true,
                     confirmButtonText: '{{trans('global.save')}}',
                     cancelButtonText: '{{trans('global.cancel')}}',
                     showLoaderOnConfirm: true,
-                    preConfirm: (discount) => {
-                        if (discount) {
+                    preConfirm: () => {
+                        let discount = $('#discount_percent').val();
+                        if (parseFloat(discount) >= 0) {
                           return true;
                         } else {
                             Swal.showValidationMessage("{{ trans('global.discount_perc_required') }}");
@@ -137,11 +141,19 @@
                     allowOutsideClick: () => !Swal.isLoading()
                 }).then((result) => {
                     if (result.value) {
-                        let discount = $('#discount_percent').val();
+                        let discount       = $('#discount_percent').val();
+                        let finish_comment = $('#finish_comment').val();
+                        let lineIsDelay    = $('#lineIsDelay').is(':checked');
+
                         $.ajax({
                             url:    "{{ route('finishProcess') }}",
                             method: "post",
-                            data: {_token: "{{ csrf_token() }}" , detail_id : detailId , discount : discount},
+                            data: {_token: "{{ csrf_token() }}" ,
+                                detail_id : detailId,
+                                discount : discount,
+                                finish_comment : finish_comment,
+                                line_is_delay: + lineIsDelay
+                            },
                             success:    ()  =>  {
                                 $('#detail_'+detailId).remove();
                                 Swal.fire(

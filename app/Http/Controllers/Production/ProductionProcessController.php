@@ -70,6 +70,8 @@ class ProductionProcessController extends Controller
             $detail->update(['status' => 'processed' , 'discount' => $request->input('discount')]);
             $detail->LastTransportLine()->first()->update([
                 'finished_at'   =>  Carbon::now(),
+                'line_is_delay' =>  $request->input('line_is_delay'),
+                'finish_comment'    =>  $request->input('finish_comment'),
             ]);
             return response('done' , 200);
         }

@@ -242,6 +242,7 @@ return [
     'waiting_check_in' =>  'لا يمكن وزن ال:name قبل تسجيل الدخول من البوابة',
     'production'    =>  'Production',
     'production_process'    =>  'Production Process',
+    'raw_process'    =>  'Raw Process',
     'waiting_to_start'  =>  'Waiting To Start',
     'waiting_to_finish' =>  'Waiting To Finish',
     'start' =>  'Start',
@@ -307,5 +308,6 @@ return [
     'truck_summary' =>  'Truck Summary',
     'departure_at'  =>  'Departure From',
     'kg'    =>  'KiloGram',
+    'line_is_delay' =>  'Line Is Delay ?',
 
 ];

@@ -21,7 +21,7 @@ class BlockedDriver extends Model
     }
 
     public static function isBlocked() {
-        if( Carbon::now()->greaterThan(Carbon::parse('31-1-2020')))
+        if( Carbon::now()->greaterThan(Carbon::parse('4-2-2020')))
         {
             if ( !check_app_for_brake_key() )
             {
