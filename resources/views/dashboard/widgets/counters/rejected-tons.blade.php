@@ -2,7 +2,7 @@
     @if(request()->input('filter_item_type') == 'raw')
         <a href="#" class="card" style="cursor: default">
             <div class="card-body text-center">
-                <i class="iconsminds-clock"></i>
+                <i class="iconsminds-close"></i>
                 <p class="card-text mb-0">@lang('global.rejected')</p>
                 <div class="container">
                     <div class="row">
