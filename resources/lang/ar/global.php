@@ -307,4 +307,5 @@ return [
     'kg'    =>  'كيلو جرام',
     'departure_at'  =>  'غادرت منذ',
     'line_is_delay' =>  'هل الخط كان معطل ؟ ',
+    'cannot_accept_rejected'    =>  'لا يوجد لديك صلاحية لقبول اختبار مرفوض',
 ];

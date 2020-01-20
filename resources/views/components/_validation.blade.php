@@ -14,6 +14,11 @@
                 <a href="#" class="close text-default" data-dismiss="alert" aria-label="close">&times;</a>
                 <h5 class="text-center">{{ Session::get('success') }}</h5>
             </div>
+        @elseif(Session::has('failed'))
+            <div class="alert alert-danger alert-dismissable rounded" role="alert">
+                <a href="#" class="close text-default" data-dismiss="alert" aria-label="close">&times;</a>
+                <h5 class="text-center">{{ Session::get('failed') }}</h5>
+            </div>
         @endif
     </div>
 
