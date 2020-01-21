@@ -129,7 +129,6 @@ class HomeController extends Controller
         $rawTableData       =   $dashboardData
             ->where('status' , TransportDetail::DEPARTURE)
             ->each(function($truck) use(&$TableCollection){
-                dd($truck->trucksLineTransactions);
             $truck->trucksLineTransactions->each(function($lineTransaction)use($TableCollection){
                 $TableCollection->push($lineTransaction);
             });
