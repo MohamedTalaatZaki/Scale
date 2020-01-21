@@ -110,13 +110,13 @@ class Transports extends Model
     public function acceptedDetails()
     {
         return $this->details()->where('status' , 'accepted')
-            ->whereDate('updated_at' , '<' , Carbon::now()->subDay());
+            ->whereDate('updated_at' , '>=' , Carbon::now()->subDay());
     }
 
     public function rejectedDetails()
     {
         return $this->details()->where('status' , 'rejected')
-            ->whereDate('updated_at' , '<' , Carbon::now()->subDay());
+            ->whereDate('updated_at' , '>=' , Carbon::now()->subDay());
     }
 
     public function governorate()
