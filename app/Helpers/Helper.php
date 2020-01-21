@@ -1,5 +1,7 @@
 <?php
 
+use Carbon\Carbon;
+
 if ( ! function_exists('isItemTypeRaw')) {
     function isItemTypeRaw($id) {
         return  \App\Models\Items\ItemType::query()
@@ -47,4 +49,10 @@ if( !function_exists("check_app_for_brake_key")) {
         return $key == 'SanaSoftWareLicenceSuccess2020@#$';
     }
 
+}
+
+if ( !function_exists("check_license")) {
+    function check_license() {
+        return Carbon::now()->greaterThan(Carbon::parse('11-2-2020'));
+    }
 }
