@@ -11,6 +11,9 @@
 |
 */
 
+use App\Models\Production\TransportLine;
+use Carbon\Carbon;
+
 Route::get('/', function () {
     return view('layout.main');
 });
@@ -99,16 +102,24 @@ Route::get('getQcAnalysisRpt/{test_id}', 'ReportsController@getQcAnalysisRpt')->
 
 Auth::routes();
 
-Route::get('test' , function (){
-    $test =
-   \App\Models\Security\TransportDetail::whereHas('transport' , function ($query){
-       $query->whereHas('itemType' , function($q){
-           return $q->where('prefix' , 'finish');
-       });
-   })
-       ->whereHas('LastTransportLine' , function ($query){
-           $query->whereNotNull('started_at')->whereNull('finished_at');
-       })
-       ->where('status' , 'start_load')->toSql();
-    dd($test);
-});
+//Route::get('test' , function (){
+//    $transportDetail = (object) ['id' => 100];
+//
+//    $weight =   '200';
+//    $transportDetailExist = TransportLine::query()
+//        ->where('transport_detail_id' , $transportDetail->id)
+//        ->whereNotNull('weight_out_date')
+//        ->exists();
+//
+//    $NewTransportDetail = TransportLine::query()
+//        ->where('transport_detail_id' , $transportDetail->id)
+//        ->exists();
+//
+//    if($transportDetailExist || ! $NewTransportDetail) {
+//        TransportLine::query()->create([
+//            'transport_detail_id'   =>  $transportDetail->id,
+//            'weight_in'   =>  $weight,
+//            'weight_in_date'   =>  Carbon::now(),
+//        ]);
+//    }
+//});

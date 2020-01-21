@@ -172,10 +172,21 @@ class TrucksScaleController extends Controller
 
     private function createTransportLineTransaction($transportDetail , $weight)
     {
-        TransportLine::query()->create([
-            'transport_detail_id'   =>  $transportDetail->id,
-            'weight_in'   =>  $weight,
-            'weight_in_date'   =>  Carbon::now(),
-        ]);
+        $transportDetailExist = TransportLine::query()
+            ->where('transport_detail_id' , $transportDetail->id)
+            ->whereNotNull('weight_out_date')
+            ->exists();
+
+        $NewTransportDetail = TransportLine::query()
+            ->where('transport_detail_id' , $transportDetail->id)
+            ->exists();
+
+        if($transportDetailExist || ! $NewTransportDetail) {
+            TransportLine::query()->create([
+                'transport_detail_id'   =>  $transportDetail->id,
+                'weight_in'   =>  $weight,
+                'weight_in_date'   =>  Carbon::now(),
+            ]);
+        }
     }
 }

@@ -9,6 +9,7 @@
             <th>@lang('global.supplier_name')</th>
             <th>@lang('global.mobile')</th>
             <th>@lang('global.truck_tractor_trailer')</th>
+            <th>@lang('global.item_type')</th>
             <th>@lang('global.arrival_time')</th>
             <th>@lang('global.waiting_time')</th>
             <th>@lang('global.actions')</th>
@@ -23,6 +24,7 @@
                 <td>{{ $truck->supplier->name }}</td>
                 <td>{{ $truck->driver_mobile }}</td>
                 <td>{{ $truck->truck_plates_tractor }}</td>
+                <td>{{ optional($truck->itemType)->name }}</td>
                 <td>{{ $truck->arrival_time }}</td>
                 <td>{{ $truck->arrival_time->diffForHumans() }}</td>
                 <td>
