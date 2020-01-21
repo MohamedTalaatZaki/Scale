@@ -20,7 +20,6 @@ class SamplesTestController extends Controller
     public function index()
     {
         $this->authorized('samples-test.index');
-        $sampleTestHeaders  =   SampleTestHeader::query()->orderByDesc('created_at')->paginate(25);
         $sampleTestHeaders  =   SampleTestHeader::query()
             ->filter(new SampledTestFilter(\request()))
             ->orderByDesc('created_at')

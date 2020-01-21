@@ -21,7 +21,9 @@
                     <tr>
                         <td colspan="2"><i class="fa fa-phone"></i> <span class="cardDriverMobile">{{ $truck->driver_mobile }}</span> </td>
                         <td class="lab-btn">
-                            <a href="{{ route('samples-test.edit' , ['id' =>  $detail->id]) }}" class="btn btn-danger btn-xs"><i class="fa fa-vials"></i></a>
+                            @permission('samples-test.edit')
+                                <a href="{{ route('samples-test.edit' , ['id' =>  $detail->id]) }}" class="btn btn-danger btn-xs"><i class="fa fa-vials"></i></a>
+                            @endpermission
                         </td>
 
                     </tr>
