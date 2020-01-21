@@ -66,11 +66,11 @@ class SamplesTestController extends Controller
 
         DB::beginTransaction();
 
-        try {           
-            // if( !is_null($request->input('reason')) && !\Entrust::can('samples-test.acceptRejected'));
-            // {
-            //     return redirect()->back()->with('failed' , trans('global.cannot_accept_rejected'));
-            // }
+        try {
+             if( $request->input('check_permission') && !\Entrust::can('samples-test.acceptRejected') )
+             {
+                 return redirect()->back()->with('failed' , trans('global.cannot_accept_rejected'));
+             }
 
             $transportDetail    =   TransportDetail::query()->find($request->get('transport_detail_id'));
             $header =   $transportDetail->sampleTestHeader()->create([

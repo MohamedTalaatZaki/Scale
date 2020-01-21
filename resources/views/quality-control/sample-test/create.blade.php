@@ -34,6 +34,7 @@
                     <form action="{{ route('samples-test.store') }}" method="post" id="sampleTest">
                         @csrf
 
+                        <input name="check_permission" id="check_permission" type="hidden" value="0">
                         <div class="form-row">
 
                             <div class="form-group col-md-3">
@@ -263,7 +264,7 @@
                                     reverseButtons: true,
                                 }).then(function (data) {
                                     if(data.value) {
-                                        setFinalResultAndSubmit(selected , data.value.reason);
+                                        setFinalResultAndSubmit(selected , data.value.reason, true);
                                     }
                                 });
                             } else {
@@ -284,9 +285,10 @@
                 }
             });
 
-            const setFinalResultAndSubmit  =   (result = "" , reason = "" )    =>  {
+            const setFinalResultAndSubmit  =   (result = "" , reason = "" , checkPermission = false)    =>  {
                 $('.final_result').val(result);
                 $('.final_reason').val(reason);
+                $('#check_permission').val(+ checkPermission);
 
                 $('#sampleTest').submit();
             };
