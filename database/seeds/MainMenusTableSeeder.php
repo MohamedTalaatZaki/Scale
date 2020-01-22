@@ -374,6 +374,7 @@ class MainMenusTableSeeder extends Seeder
             'aria_controls' => 'collapseTrucksSummary',
             'order' => 1,
         ]);
+        
         $group->subMenus()->createMany([
             [
                 'en_name' => 'Trucks Summery',

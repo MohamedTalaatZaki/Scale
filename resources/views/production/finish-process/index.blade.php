@@ -1,6 +1,6 @@
 @extends('layout.main')
 @section('content')
-
+    @include('components.scaleScreen')
     <div class="row">
         <div class="col-12">
             <h1>@lang('global.finish_process')</h1>
