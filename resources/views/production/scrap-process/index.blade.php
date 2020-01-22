@@ -1,6 +1,6 @@
 @extends('layout.main')
 @section('content')
-
+    @include('components.scaleScreen')
     <div class="row">
         <div class="col-12">
             <h1>@lang('global.scrap_process')</h1>
@@ -29,6 +29,7 @@
 @endsection
 @push('scripts')
     <script src="{{ asset('js/swal.js') }}"></script>
+
     <script>
         $().ready(function(){
 

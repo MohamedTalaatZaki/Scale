@@ -307,8 +307,8 @@ return [
     'Net_weight_af_disc'   =>  'Net Weight',
     'truck_summary' =>  'Truck Summary',
     'departure_at'  =>  'Departure From',
-    'kg'    =>  'KiloGram',
+    'kg'    =>  'Kg',
     'line_is_delay' =>  'Line Is Delay ?',
     'cannot_accept_rejected'    =>  "You Don't Have Permission To Accept Rejected Test",
-
+    'first_weight'  =>  'First Wight',
 ];

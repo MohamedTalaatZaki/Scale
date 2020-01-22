@@ -191,8 +191,9 @@
                                 showCancelButton: false,
                                 showConfirmButton: false,
                                 timerProgressBar: true
+                            }).then(() => {
+                                this.resetAll()
                             });
-                            this.resetAll();
                         } else {
                             this.transport = response.data.transport;
                         }
@@ -207,14 +208,15 @@
                     });
             },
             resetAll: function () {
-                this.transport = null;
-                this.barcode = [];
-                this.barcodeStr = "";
-                this.scanned = false;
-                this.weight = 0;
-                this.correctWeightCount = 0;
-                this.isCorrect = false;
-                $('#barcodeInput').focus();
+                window.location.reload();
+                // this.transport = null;
+                // this.barcode = [];
+                // this.barcodeStr = "";
+                // this.scanned = false;
+                // this.weight = 0;
+                // this.correctWeightCount = 0;
+                // this.isCorrect = false;
+                // $('#barcodeInput').focus();
             },
             saveScaleWeight : function() {
                 axios.post("{{ route("trucks-scale.weight") }}" , {
@@ -227,7 +229,7 @@
                             icon: 'success',
                             title: 'تم الوزن بنجاح',
                             text: response.data.swal_msg,
-                            timer: 30000,
+                            timer: 15000,
                             customClass: 'swal-wide',
                             showCancelButton: false,
                             showConfirmButton: false,
@@ -239,7 +241,7 @@
                         Swal.fire({
                             icon: 'error',
                             title: response.data.cannot_weight_msg,
-                            timer: 30000,
+                            timer: 15000,
                             customClass: 'swal-wide',
                             showCancelButton: false,
                             showConfirmButton: false,
@@ -280,8 +282,6 @@
                     this.websocket.close();
                     this.saveScaleWeight()
                 } else if(!this.isNumeric(evt.data)) {
-                    console.log(evt.data);
-                    this.resetAll();
                     this.websocket.close();
                     Swal.fire({
                         icon: 'error',
@@ -291,17 +291,18 @@
                         showCancelButton: false,
                         showConfirmButton: false,
                         timerProgressBar: true
+                    }).then(() => {
+                        this.resetAll();
                     });
 
                 }
-                // console.log(evt.data);
             },
             wsOnError : function(evt) {
                 Swal.fire({
                     icon: 'error',
                     title: 'غير قادر علي الاتصال بالميزان',
                     text: "ناسف لهذا الخطأ برجاء حاول مره اخري او تواصل مع الادارة",
-                    timer: 20000,
+                    timer: 10000,
                     customClass: 'swal-wide',
                     showCancelButton: false,
                     showConfirmButton: false,
