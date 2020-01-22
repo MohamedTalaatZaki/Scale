@@ -1,8 +1,13 @@
+
 <div class="row">
     <div class="col-md-12">
         <div class="card">
             <div class="card-body">
-                <h3 class="text-center">@lang('global.waiting_to_finish')</h3>
+                <h3 class="text-center">
+                    @lang('global.waiting_to_finish')
+{{--                    <br/>--}}
+{{--                    <h3 class="scale-weight-text-elem text-center"></h3>--}}
+                </h3>
                 <table class="table">
                     <thead>
                     <tr>
@@ -12,7 +17,7 @@
                         <th>@lang('global.driver_name')</th>
                         <th>@lang('global.item_group')</th>
                         <th>@lang('global.theoretical_weight')</th>
-                        <th>@lang('global.arrival_time')</th>
+                        <th>@lang('global.first_weight')</th>
                         <th>@lang('global.actions')</th>
                     </tr>
                     </thead>
@@ -25,7 +30,7 @@
                             <td>{{ $detail->transport->driver_name }}</td>
                             <td>{{ $detail->itemGroup->name }}</td>
                             <td>{{ $detail->transport->theoretical_weight }}</td>
-                            <td>{{ $detail->transport->arrival_time }}</td>
+                            <td>{{ $detail->in_weight }} @lang('global.kg')</td>
                             <td>
                                 @if(is_null($detail->out_weight_time))
                                     @permission('finishProcess')

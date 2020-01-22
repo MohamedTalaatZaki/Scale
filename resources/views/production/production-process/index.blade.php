@@ -1,6 +1,6 @@
 @extends('layout.main')
 @section('content')
-
+    @include('components.scaleScreen')
     <div class="row">
         <div class="col-12">
             <h1>@lang('global.raw_process')</h1>
@@ -25,12 +25,14 @@
     @include('production.production-process.partial._start')
     @include('production.production-process.partial._finish')
 
-
 @endsection
+
 @push('scripts')
     <script src="{{ asset('js/swal.js') }}"></script>
+
     <script>
         $().ready(function(){
+
             $('body,#discount_percent').on('keyup' , function (evt) {
                 let value = $('#discount_percent').val();
                 if (value < 0 || value > 100)
