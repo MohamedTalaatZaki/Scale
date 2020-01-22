@@ -188,7 +188,8 @@ class TrucksScaleController extends Controller
                     'weight_in'   =>  $weight,
                     'weight_in_date'   =>  Carbon::now(),
                 ]);
-            } catch (\Exception $exception){}
+            } catch (\Exception $exception) {}
+
         }
     }
 }
