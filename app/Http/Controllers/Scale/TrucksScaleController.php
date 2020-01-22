@@ -182,11 +182,13 @@ class TrucksScaleController extends Controller
             ->exists();
 
         if($transportDetailExist || ! $NewTransportDetail) {
-            TransportLine::query()->create([
-                'transport_detail_id'   =>  $transportDetail->id,
-                'weight_in'   =>  $weight,
-                'weight_in_date'   =>  Carbon::now(),
-            ]);
+            try{
+                TransportLine::query()->create([
+                    'transport_detail_id'   =>  $transportDetail->id,
+                    'weight_in'   =>  $weight,
+                    'weight_in_date'   =>  Carbon::now(),
+                ]);
+            } catch (\Exception $exception){}
         }
     }
 }

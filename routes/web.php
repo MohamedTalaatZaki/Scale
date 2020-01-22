@@ -102,7 +102,7 @@ Route::get('getQcAnalysisRpt/{test_id}', 'ReportsController@getQcAnalysisRpt')->
 
 Auth::routes();
 
-//Route::get('test' , function (){
+Route::get('test' , function (){
 //    $transportDetail = (object) ['id' => 100];
 //
 //    $weight =   '200';
@@ -122,4 +122,13 @@ Auth::routes();
 //            'weight_in_date'   =>  Carbon::now(),
 //        ]);
 //    }
-//});
+//    try{
+//        TransportLine::query()->create([
+//            'transport_detail_id'   =>  333
+//        ]);
+//        TransportLine::query()->create([
+//            'transport_detail_id'   =>  333
+//        ]);
+//    } catch (Exception $exception){}
+
+});
