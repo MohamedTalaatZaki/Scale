@@ -111,6 +111,7 @@
                                        placeholder="بأنتظار تمرير الورقة لقراءة الكود"
                                        id="barcodeInput"
                                        ref="barcodeInput"
+                                       autocomplete="off" 
                                        v-on:paste="OnPaste"
                                        >
                             </div>
