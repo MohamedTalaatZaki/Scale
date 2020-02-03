@@ -11,9 +11,7 @@ class TruckPlateFilter extends AbstractBasicFilter
     public function filter($value)
     {
         if($value != "") {
-            $this->builder->whereHas('transportDetail', function ($q) use ($value) {
-                $q->where('truck_plates', 'like', "%$value%");
-            });
+            $this->builder->where('truck_plates', 'like', "%$value%");
         }
     }
 }
