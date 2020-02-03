@@ -90,6 +90,16 @@
                                 <th>@lang('global.Net_weight_af_disc')</th>
                                 <th>@lang('global.actions')</th>
                             </tr>
+                            <tr style="background-color: rgba(0,123,255,0.25)">
+                                <th colspan="5">  </th>
+                                <th> {{ $total->sum('in_weight') }} </th>
+                                <th> {{ $total->sum('out_weight') }} </th>
+                                <th> - </th>
+                                <th> {{ $total->sum('disc_weight') }} </th>
+                                <th> {{ $total->sum('Net_weight_af_disc') }} </th>
+                                <th></th>
+                            </tr>
+
                         </thead>
                         <tbody>
                         @forelse($trucks as $truck)
