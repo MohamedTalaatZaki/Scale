@@ -56,7 +56,7 @@
                         </div>
                         <div class="form-group col-2">
                             <label>Truck Plates</label>
-                            <input class="form-control" value="{{ request()->input('truck_plates') }}" placeholder="Truck Plates" name="">
+                            <input class="form-control" value="{{ request()->input('truck_plates') }}" placeholder="Truck Plates" name="truck_plates">
                         </div>
                         <div class="form-group col-2">
                             <label>Item Name</label>
