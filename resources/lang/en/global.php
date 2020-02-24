@@ -313,4 +313,5 @@ return [
     'first_weight'  =>  'First Wight',
     'tons'  =>  'Tons',
     'current_line_group'   =>  'Production Lines',
+    'purchases' =>  'Purchases',
 ];

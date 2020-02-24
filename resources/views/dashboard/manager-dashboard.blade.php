@@ -73,8 +73,12 @@
                         <h5 class="card-title">@lang('global.production')</h5>
                         <div class="mb-4">
                             <p class="mb-2">
-                                <span>Total Weight</span>
+                                <span>@lang('global.total_weight')</span>
                                 <span class="float-right text-muted">{{ $weightLines->sum('weight') / 1000 }} @lang('global.tons')</span>
+                            </p>
+                            <p class="mb-2">
+                                <span>@lang('global.purchases')</span>
+                                <span class="float-right text-muted">{{ $total_trucks }} </span>
                             </p>
                             <div class="progress">
                                 <div class="progress-bar" role="progressbar" aria-valuenow="100" aria-valuemin="0"
@@ -97,6 +101,7 @@
 
                 </div>
             </div>
+
 
         </div>
 

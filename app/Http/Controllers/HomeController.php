@@ -116,6 +116,7 @@ class HomeController extends Controller
 
     public function managerIndex(Request $request)
     {
+
         $request->offsetSet('filter_item_type' , $request->input('filter_item_type' , 'raw'));
         $request->offsetSet('filter_from_date' , $request->input('filter_from_date' , Carbon::now()->subDay()->format('Y-m-d h:m')));
         $request->offsetSet('filter_to_date' , $request->input('filter_to_date' , Carbon::now()->format('Y-m-d h:m')));
@@ -137,9 +138,11 @@ class HomeController extends Controller
             return (object)['name'=> $line->name, 'group_name' => $line->lastTransport->transportDetail->ItemGroup->name];
         });
 
+
         return view('dashboard.manager-dashboard', [
             'dashboardData'=>$dashboardData,
             'weightLines'=>$weightLines,
+            'total_trucks'  =>  $dashboardData->count(),
             'lines' =>  $lines,
             'transportLinesWeight'=>$transportLines->sum('weight'),
             'item_types'=>ItemType::all(),
@@ -216,9 +219,14 @@ class HomeController extends Controller
 
     private function calcLinesWeight($transportLines){
         $totalWeight = $transportLines->sum('weight');
-        $lines = $transportLines->groupBy('line_id')->mapWithKeys(function($line) use($totalWeight){
+        $lines = $transportLines->groupBy('line_id')->mapWithKeys(function($line) use($totalWeight,$transportLines){
             if(isset($line->first()->line)){
-                return [ $line->first()->line->name => (object)[ 'weight'=> $line->sum('weight') , 'percentage' => ( ($line->sum('weight') / $totalWeight) * 100 )  ] ];
+
+                return [ $line->first()->line->name => (object)[
+                    'weight'=> $line->sum('weight') ,
+                    'percentage' => ( ($line->sum('weight') / $totalWeight) * 100 ) ,
+                    'transports_count' =>  $transportLines->groupBy('transport_number')->count()
+                ] ];
             } else {
                 return [];
             }

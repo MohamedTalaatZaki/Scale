@@ -310,5 +310,6 @@ return [
     'cannot_accept_rejected'    =>  'لا يوجد لديك صلاحية لقبول اختبار مرفوض',
     'first_weight'  =>  'الوزنة الاولى',
     'tons'  =>  'طن',
-    'current_line_group'   =>  'خطوط الانتاج'
+    'current_line_group'   =>  'خطوط الانتاج',
+    'purchases' =>  'عدد التوريدات',
 ];
