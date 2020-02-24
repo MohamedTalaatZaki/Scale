@@ -311,4 +311,6 @@ return [
     'line_is_delay' =>  'Line Is Delay ?',
     'cannot_accept_rejected'    =>  "You Don't Have Permission To Accept Rejected Test",
     'first_weight'  =>  'First Wight',
+    'tons'  =>  'Tons',
+    'current_line_group'   =>  'Production Lines',
 ];

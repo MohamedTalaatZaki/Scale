@@ -45,4 +45,14 @@ class Line extends Model
     public function getNameAttribute() {
         return $this->attributes['name']   = app()->getLocale() == 'ar' ? $this->ar_name : $this->en_name;
     }
+
+    public function transports()
+    {
+        return $this->hasMany(TransportLine::class , 'line_id' , 'id');
+    }
+
+    public function lastTransport()
+    {
+        return $this->hasOne(TransportLine::class , 'line_id' , 'id')->whereNotNull('line_id')->orderByDesc('started_at');
+    }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Filters\DashboardFilter;
 use App\Models\Items\ItemGroup;
 use App\Models\Items\ItemType;
+use App\Models\Production\Line;
 use App\Models\Production\TransportLine;
 use App\Models\QC\QcElement;
 use App\Models\QC\SampleTestHeader;
@@ -113,6 +114,45 @@ class HomeController extends Controller
         ]);
     }
 
+    public function managerIndex(Request $request)
+    {
+        $request->offsetSet('filter_item_type' , $request->input('filter_item_type' , 'raw'));
+        $request->offsetSet('filter_from_date' , $request->input('filter_from_date' , Carbon::now()->subDay()->format('Y-m-d h:m')));
+        $request->offsetSet('filter_to_date' , $request->input('filter_to_date' , Carbon::now()->format('Y-m-d h:m')));
+
+        $dashboardData  =   TruckInfo::query()
+            ->filter(new DashboardFilter($request))
+            ->with('trucksLineTransactions')
+            ->get();
+
+        /*
+         * End Counters In Tons
+         */
+
+        $transportLines =   $this->getTransportLines($dashboardData);
+
+        $weightLines    =   $this->calcLinesWeight($transportLines);
+
+        $lines          =   Line::query()->whereHas('lastTransport')->get()->map(function ($line){
+            return (object)['name'=> $line->name, 'group_name' => $line->lastTransport->transportDetail->ItemGroup->name];
+        });
+
+        return view('dashboard.manager-dashboard', [
+            'dashboardData'=>$dashboardData,
+            'weightLines'=>$weightLines,
+            'lines' =>  $lines,
+            'transportLinesWeight'=>$transportLines->sum('weight'),
+            'item_types'=>ItemType::all(),
+            'item_groups'=>ItemGroup::query()->ItemGroupsByPrefix($request->input('filter_item_type'))->get(),
+
+            'qcElements'=>QcElement::query()->where('element_type' , 'range')->get(),
+            'suppliers'=>Supplier::query()
+                ->SupplierByItemTypePrefix($request->input('filter_item_type'))
+                ->FilterByItemGroup($request->input('filter_item_group') , 0)
+                ->get()
+        ]);
+    }
+
     public function getSuppliersAndItemGroupByItemTypePrefix(Request $request)
     {
         return response()->json([
@@ -126,11 +166,11 @@ class HomeController extends Controller
 
     private function getTransportLines($dashboardData){
         $TableCollection =   new Collection();
-        $rawTableData       =   $dashboardData
+        $dashboardData
             ->where('status' , TransportDetail::DEPARTURE)
             ->each(function($truck) use(&$TableCollection){
             $truck->trucksLineTransactions->each(function($lineTransaction)use($TableCollection){
-                $TableCollection->push($lineTransaction);
+                if(!is_null($lineTransaction->line_id)) $TableCollection->push($lineTransaction);
             });
         });
 
@@ -169,9 +209,21 @@ class HomeController extends Controller
                 return [ $line->first()->line->name => $line->sum('weight') ];
             } else {
                 return [];
-            };
+            }
         });
         return $lines;
+    }
+
+    private function calcLinesWeight($transportLines){
+        $totalWeight = $transportLines->sum('weight');
+        $lines = $transportLines->groupBy('line_id')->mapWithKeys(function($line) use($totalWeight){
+            if(isset($line->first()->line)){
+                return [ $line->first()->line->name => (object)[ 'weight'=> $line->sum('weight') , 'percentage' => ( ($line->sum('weight') / $totalWeight) * 100 )  ] ];
+            } else {
+                return [];
+            }
+        });
+        return collect($lines)->sortByDesc('weight');
     }
 
     public function getQcElementByBatchNumber(Request $request)

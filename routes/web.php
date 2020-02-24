@@ -20,6 +20,7 @@ Route::get('/', function () {
 
 Route::middleware(['auth'])->group(function (){
     Route::get('/', 'HomeController@index')->name('home');
+    Route::get('/manager-index', 'HomeController@managerIndex')->name('managerHome');
 
     Route::resource('master-data/roles' , 'MasterData\RolesController');
     Route::resource('master-data/users' , 'MasterData\UsersController');
