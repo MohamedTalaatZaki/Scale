@@ -21,6 +21,6 @@ class TruckInfo extends Model
     }
     public function trucksLineTransactions()
     {
-        return $this->hasManyThrough(TransportLine::class,  TransportDetail::class, 'id');
+        return $this->hasManyThrough(TransportLine::class,  TransportDetail::class, 'transport_id' , 'transport_detail_id' );
     }
 }

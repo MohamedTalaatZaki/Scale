@@ -123,7 +123,7 @@ class HomeController extends Controller
 
         $dashboardData  =   TruckInfo::query()
             ->filter(new DashboardFilter($request))
-            ->with('trucksLineTransactions')
+            ->whereHas('trucksLineTransactions')
             ->get();
 
         /*
@@ -218,6 +218,7 @@ class HomeController extends Controller
     }
 
     private function calcLinesWeight($transportLines){
+
         $totalWeight = $transportLines->sum('weight');
         $lines = $transportLines->groupBy('line_id')->mapWithKeys(function($line) use($totalWeight,$transportLines){
             if(isset($line->first()->line)){
