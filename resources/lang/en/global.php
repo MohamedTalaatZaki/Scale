@@ -314,4 +314,5 @@ return [
     'tons'  =>  'Tons',
     'current_line_group'   =>  'Production Lines',
     'purchases' =>  'Purchases',
+    'manager_dashboard' =>  'Manager Dashboard',
 ];

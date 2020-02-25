@@ -116,6 +116,7 @@ class HomeController extends Controller
 
     public function managerIndex(Request $request)
     {
+        $this->authorized('managerHome');
 
         $request->offsetSet('filter_item_type' , $request->input('filter_item_type' , 'raw'));
         $request->offsetSet('filter_from_date' , $request->input('filter_from_date' , Carbon::now()->subDay()->format('Y-m-d h:m')));

@@ -70,6 +70,10 @@
             font-size: 30px;
             margin-bottom: 10px;
         }
+        .btn-manager-dashboard{
+            background-color: #232223;
+            color: #c0702f;
+        }
         @if(optional(Auth::user())->theme == 'light')
 
             table.table-bordered > thead > tr > th{

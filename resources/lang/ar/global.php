@@ -312,4 +312,5 @@ return [
     'tons'  =>  'طن',
     'current_line_group'   =>  'خطوط الانتاج',
     'purchases' =>  'عدد التوريدات',
+    'manager_dashboard' =>  'لوحة تحكم المديرين',
 ];

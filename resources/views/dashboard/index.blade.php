@@ -4,14 +4,16 @@
         <div class="row">
             {{--    Header Text     --}}
             <div class="col-12">
-                <h1>@lang('global.dashboard')</h1>
-                <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
-                    <ol class="breadcrumb pt-0">
-                        <li class="breadcrumb-item">
-                            <a href="#" class="default-cursor"></a>
-                        </li>
-                    </ol>
-                </nav>
+                <div>
+                    <h1>@lang('global.dashboard')</h1>
+                    @permission('managerHome')
+                    <span class="float-right">
+                        <a class="btn btn-primary btn-manager-dashboard" href="{{ route('managerHome') }}"> @lang('global.manager_dashboard') </a>
+                    </span>
+                    @endpermission
+                </div>
+
+
                 <div class="separator mb-5"></div>
             </div>
 

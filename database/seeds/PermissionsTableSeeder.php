@@ -18,12 +18,22 @@ class PermissionsTableSeeder extends Seeder
 
 
         DB::table('permissions')->truncate();
+
         $subMenu = SubMenu::where('code', 0)->first();
         Permission::create([
             'sub_menu_id' => $subMenu->id,
             'name' => 'home',
             'en_display_name' => 'Home',
             'ar_display_name' => 'لوحة التحكم',
+            'en_description' => NULL,
+            'ar_description' => NULL,
+        ]);
+
+        Permission::create([
+            'sub_menu_id' => $subMenu->id,
+            'name' => 'managerHome',
+            'en_display_name' => 'Manager Home',
+            'ar_display_name' => 'لوحة التحكم المديرين',
             'en_description' => NULL,
             'ar_description' => NULL,
         ]);
