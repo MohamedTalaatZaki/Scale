@@ -45,6 +45,8 @@ Route::middleware(['auth'])->group(function (){
     Route::resource('security/blocked-drivers' , 'Security\BlockedDriversController');
 
     Route::resource('qc/arrived-trucks' , 'QC\ArrivedTrucksController');
+    Route::resource('qc/arrived-trucks-single' , 'QC\ArrivedTrucksSingleController');
+
     Route::resource('qc/samples-test' , 'QC\SamplesTestController');
 
     Route::resource('production/truck-summary' , 'Production\TruckSummaryController');
