@@ -49,7 +49,6 @@ class SamplesTestController extends Controller
             return redirect()->action('QC\ArrivedTrucksController@index');
         }
 
-
         return view('quality-control.sample-test.create' , ['transport_detail'  =>  $transport_detail]);
     }
 
@@ -88,10 +87,14 @@ class SamplesTestController extends Controller
 
             DB::commit();
 
-            return redirect()->action('QC\ArrivedTrucksController@index');
+            if($request->input('single'))
+                return redirect()->action('QC\ArrivedTrucksSingleController@index');
+            else
+                return redirect()->action('QC\ArrivedTrucksController@index');
+
         } catch (\Exception $e) {
             DB::rollBack();
-//            dd($e->getMessage() , $request->input());
+            //dd($e->getMessage() , $request->input());
             return redirect()->back()->with('failed' , trans('global.cannot_save_contact_admin'));
         }
 

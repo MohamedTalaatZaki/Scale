@@ -315,4 +315,5 @@ return [
     'current_line_group'   =>  'Production Lines',
     'purchases' =>  'Purchases',
     'manager_dashboard' =>  'Manager Dashboard',
+    'pull_sample'=>'Pull Sample',
 ];

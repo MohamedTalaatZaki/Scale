@@ -8,7 +8,7 @@
             <nav class="breadcrumb-container d-none d-sm-block d-lg-inline-block" aria-label="breadcrumb">
                 <ol class="breadcrumb pt-0">
                     <li class="breadcrumb-item">
-                        <span class="default-cursor">@lang('global.master_data')</span>
+                        <span class="default-cursor">@lang('global.qc')</span>
                     </li>
                     <li class="breadcrumb-item">
                         <a href="javascript:void(0)" class="show-create-div">@lang('global.qc')</a>
