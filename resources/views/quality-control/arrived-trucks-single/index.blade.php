@@ -261,6 +261,11 @@
                                     <td>{{ $truck->driver_mobile }}</td>
                                     <td>{{$truck->arrival_time}}</td>
                                     <td class="lab-btn">
+                                        @permission('samples-test.edit')
+                                            <a href="{{ route('samples-test.edit' , ['id' =>  $detail->id]) }}" class="btn btn-danger btn-xs">
+                                                <i class="fa fa-vials"></i>
+                                            </a>
+                                        @endpermission
                                         <a href="{{ route('qc-analysis-rpt.index',['test_id'=>$detail->sampleTestHeader->last()->id]) }}" class="btn btn-primary btn-sm" target="_blank">
                                             <i class="fa fa-print"></i> @lang('global.print')
                                         </a>

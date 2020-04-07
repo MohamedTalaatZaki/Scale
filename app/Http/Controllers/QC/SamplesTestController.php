@@ -105,13 +105,16 @@ class SamplesTestController extends Controller
     public function edit($id) {
         $this->authorized('samples-test.edit');
         $transport_detail   =   TransportDetail::query()
-            ->where('id' , $id)
-            ->first();
+                                    ->where('id' , $id)
+                                    ->first();
 
         if($transport_detail) {
             $transport_detail->load('transport' , 'testableType.qcTestHeader.details');
         } else {
-            return redirect()->action('QC\ArrivedTrucksController@index');
+            if(env('SINGLE_QC'))
+                return redirect()->action('QC\ArrivedTrucksSingleController@index');
+            else
+                return redirect()->action('QC\ArrivedTrucksController@index');
         }
 
 
