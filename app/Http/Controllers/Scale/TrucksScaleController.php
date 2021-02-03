@@ -38,9 +38,9 @@ class TrucksScaleController extends Controller
         $this->setPageLocale();
         $transport = Transports::query()->find($request->input('transport_id'));
         $transportDetail    =   TransportDetail::query()
-            ->TransportCanWeight($transport->transport_number)
-            ->where('transport_id' , $request->input('transport_id'))
-            ->find($request->input('transport_detail_id'));
+                    ->TransportCanWeight($transport->transport_number)
+                    ->where('transport_id' , $request->input('transport_id'))
+                    ->find($request->input('transport_detail_id'));
 
         if($transportDetail) {
             $response   =   null;
@@ -78,11 +78,11 @@ class TrucksScaleController extends Controller
         ]);
 
         $nextTruck  =   TransportDetail::query()
-            ->where('transport_id' , $request->input('transport_id'))
-            ->TransportCanWeight($transport->transport_number)
-            ->where('transport_id' , $request->input('transport_id'))
-            ->where('id' , '!=' , $request->input('transport_detail_id'))
-            ->first();
+                        ->where('transport_id' , $request->input('transport_id'))
+                        ->TransportCanWeight($transport->transport_number)
+                        ->where('transport_id' , $request->input('transport_id'))
+                        ->where('id' , '!=' , $request->input('transport_detail_id'))
+                        ->first();
 
         $this->createTransportLineTransaction($transportDetail , $request->input('weight'));
 

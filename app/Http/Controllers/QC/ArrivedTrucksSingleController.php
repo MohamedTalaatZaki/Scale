@@ -16,7 +16,9 @@ class ArrivedTrucksSingleController extends Controller
         $this->authorized('arrived-trucks-single.index');
         $arrived    =   Transports::query()
             ->whereHas('testableType')
-            ->whereHas('arrivedDetails' )
+            ->whereHas('arrivedDetails',function($query){
+                $query->where('status','waiting');
+            })
             ->get();
 
         $sampled    =   Transports::query()
