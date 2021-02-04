@@ -242,6 +242,8 @@ class TransportsController extends Controller
             'status' => 'canceled'
         ]);
 
+        $transport->details()->update(['status'=>'canceled']);
+
         return redirect()->action('Security\TransportsController@index')->with('success' , trans('global.car_canceled' , ['truck_plates_tractor' => $transport->truck_plates_tractor]));
     }
 
