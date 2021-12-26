@@ -314,4 +314,7 @@ return [
     'purchases' =>  'عدد التوريدات',
     'manager_dashboard' =>  'لوحة تحكم المديرين',
     'pull_sample'=>'سحب عينة',
+    'decision' => 'القرار', 
+    'date' => 'التاريخ',
+    'time' => 'الوقت',
 ];

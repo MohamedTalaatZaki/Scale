@@ -316,4 +316,7 @@ return [
     'purchases' =>  'Purchases',
     'manager_dashboard' =>  'Manager Dashboard',
     'pull_sample'=>'Pull Sample',
+    'decision' => 'Decision', 
+    'date' => 'Date',
+    'time' => 'Time',
 ];

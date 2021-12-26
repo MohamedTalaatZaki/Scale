@@ -34,4 +34,13 @@ class ReportsController extends Controller
 
         return redirect()->away($this->repo_path.$html.$this->vars.$rpt.$values);
     }
+
+    public function getQcPivotRpt($request){
+
+        $values  =  '&value='.$request;
+        $html    =  "qc-pivot.html";
+        $rpt     =  "qc-pivot";
+
+        return redirect()->away($this->repo_path.$html.$this->vars.$rpt.$values);
+    }
 }

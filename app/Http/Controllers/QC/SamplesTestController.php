@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\QC;
 
 use App\Filters\SampledTestFilter;
+use App\Filters\SampledPivotFilter;
 use App\Models\QC\QcTestHeader;
+use App\Models\QC\SampleTestPivot;
 use App\Models\QC\SampleTestHeader;
 use App\Models\Security\TransportDetail;
 use App\Models\Supplier\Supplier;
+use App\Models\Items\ItemGroup;
+use App\Models\views\PivotTestDetails;
 use App\Traits\AuthorizeTrait;
 use App\User;
 use Illuminate\Http\Request;
@@ -35,6 +39,58 @@ class SamplesTestController extends Controller
             'qc_tests' =>  $qc_tests,
         ]);
     }
+
+
+    public function pivotResult()
+    {
+        $this->authorized('samples-test.index');
+        
+        $sampleTestHeaders  =  [];
+        $user = Auth::user()->id;
+
+        if(!empty(request()->input())){
+            $rpt = SampleTestPivot::where('user_id',$user)->delete();
+            $sampleTestHeaders  =   PivotTestDetails::query()
+                ->filter(new SampledPivotFilter(\request()))
+                ->orderByDesc('test_datetime');
+                
+            foreach ($sampleTestHeaders->get() as $test) {
+                    SampleTestPivot::create([
+                            "user_id"             =>  $user,
+                            "transport_header_id" =>  $test->transport_header_id,
+                            "transport_detail_id" =>  $test->transport_detail_id,
+                            "item_group_id"       =>  $test->item_group_id,
+                            "item_name"           =>  $test->item_name,
+                            "truck_plates"        =>  $test->truck_plates,
+                            "transport_no"        =>  $test->transport_no,
+                            "result"              =>  $test->result,
+                            "test_datetime"       =>  $test->test_datetime,
+                            "sample_test_header_id" => $test->sample_test_header_id,
+                            "test_date"             => $test->test_date,
+                            "test_time"             => $test->test_time,
+                            "brix"                  => $test->brix,
+                            "ph"                    => $test->ph,
+                            "acidity"               => $test->acidity,
+                            "ratio"                 => $test->ratio,
+                            "mold"                  => $test->mold,
+                            "damaged"               => $test->damaged,
+                        ]);
+                }    
+
+            $sampleTestHeaders =   $sampleTestHeaders->paginate(25);
+
+        }
+
+        $groups             =   ItemGroup::query()->get();
+
+        return view('quality-control.pivot-test.index' , [
+            'sampleTestHeaders'   =>  $sampleTestHeaders,
+            'groups' =>  $groups,
+            'user' => $user
+        ]);
+    }    
+
+
     public function create()
     {
         $this->authorized('samples-test.create');
