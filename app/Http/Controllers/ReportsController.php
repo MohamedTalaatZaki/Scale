@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 class ReportsController extends Controller
 {
@@ -40,6 +41,34 @@ class ReportsController extends Controller
         $values  =  '&value='.$request;
         $html    =  "qc-pivot.html";
         $rpt     =  "qc-pivot";
+
+        return redirect()->away($this->repo_path.$html.$this->vars.$rpt.$values);
+    }
+
+    public function getTruckSummary(Request $request){
+
+        $link = '';    
+
+        foreach ($request->input() as $key => $value) {
+             
+             if($key == 'from_date' || $key == 'to_date'){
+                $dt = Carbon::createFromFormat('m/d/Y',$value);
+                $value = $dt->format('Y-m-d');
+             }
+
+             $link = $link.'&'.$key.'='.$value;
+        }
+
+        $values  =  $link;
+        $html    =  "truck-summary-suppliers.html";
+        $rpt     =  "truck-summary-suppliers";
+
+        if($request->input('supplier_id') != null){
+
+                $html    =  "truck-summary.html";
+                $rpt     =  "truck-summary";            
+        }
+        //dd($this->repo_path.$html.$this->vars.$rpt.$values);
 
         return redirect()->away($this->repo_path.$html.$this->vars.$rpt.$values);
     }

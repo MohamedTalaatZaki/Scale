@@ -1,15 +1,14 @@
-
-
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Juhayna</title>
+    <title>Diplomate|Reports</title>
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/print-js@1.0.61/dist/print.min.js"></script>
 
     <link href="http://kendo.cdn.telerik.com/2015.3.930/styles/kendo.common.min.css" rel="stylesheet" id="common-css" />
     <link href="http://kendo.cdn.telerik.com/2015.3.930/styles/kendo.blueopal.min.css" rel="stylesheet" id="skin-css" />
@@ -19,7 +18,6 @@
     <script src="Scripts/themeSwitcher.js"></script>
 
     <script src="api/reports/js/telerikReportViewer-11.0.17.118.js"></script>
-
     <style>
         body {
             font-family: Verdana, Arial;
@@ -41,6 +39,12 @@
             width: 12em;
             height: 30px;
         }
+        .trv-parameters-area.preview .trv-parameters-area-content{
+            display: none;
+        }
+        .trv-parameters-area.preview div.trv-parameters-area-footer{
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -59,53 +63,56 @@
                 '#common-css',
                 '#skin-css');
 
-            var getUrlParameter = function getUrlParameter(sParam) {
-                var sPageURL = decodeURIComponent(window.location.search.substring(1)),
-                    sURLVariables = sPageURL.split('&'),
-                    sParameterName,
-                    i;
-
-                for (i = 0; i < sURLVariables.length; i++) {
+            var sPageURL = decodeURIComponent(window.location.search.substring(1));
+            var sURLVariables = sPageURL.split('&');
+            var params = {};
+            for (var i = 0; i < sURLVariables.length; i++) {
                     sParameterName = sURLVariables[i].split('=');
-
-                    if (sParameterName[0] === sParam) {
-                        return sParameterName[1] === undefined ? true : sParameterName[1];
+                   
+                    if((sParameterName[1]) && (sParameterName[1]).includes(',')){
+                        params[sParameterName[0]] = (sParameterName[1]).split(",");
+                    }else{
+                        params[sParameterName[0]] = sParameterName[1];
                     }
+                    //params[sParameterName[0]] = sParameterName[1];
                 }
-            };
-
             
-            getUrlParameter('val');
-
+            var printMode = /(chrome)/.test(navigator.userAgent.toLowerCase()) 
+                ? telerikReportViewer.PrintModes.FORCE_PDF_PLUGIN 
+                : telerikReportViewer.PrintModes.FORCE_PDF_FILE;
             $("#reportViewer1")
                 .telerik_ReportViewer({
                     // The URL of the service which will serve reports.
                     // The URL corresponds to the name of the controller class (ReportsController).
                     // For more information on how to configure the service please check http://www.telerik.com/help/reporting/telerik-reporting-rest-conception.html.
-                    serviceUrl: "/api/reports/",
+                    reportServer: {
+                        url: "http://185.227.111.169:83",
+                        username: "normal_user",
+                        password: "abc123"
+                    },
 
                     // The URL for the report viewer template. The template can be edited -
                     // new functionalities can be added and unneeded ones can be removed.
                     // For more information please check http://www.telerik.com/help/reporting/html5-report-viewer-templates.html.
-                    templateUrl: '/api/reports/resources/templates/telerikReportViewerTemplate.html',
-
+                    //templateUrl: '/api/reports/resources/templates/telerikReportViewerTemplate.html',
+                    templateUrl:"http://185.227.111.169:81/api/reports/resources/templates/telerikReportViewerTemplate.html",
                     //ReportSource - report description
                     reportSource: {
 
                         // The report can be set to a report file name (.trdx or .trdp report definition)
                         // or CLR type name (report class definition).
-                        report: getUrlParameter('rpt')+".trdp",
+                        report: params.rpt,
                         // Parameters name value dictionary
-                        parameters: {
-                            //Order_Number : getUrlParameter('val')
-                        }
+                        parameters: params 
+                        
                     },
 
                     // Specifies whether the viewer is in interactive or print preview mode.
                     // PRINT_PREVIEW - Displays the paginated report as if it is printed on paper. Interactivity is not enabled.
                     // INTERACTIVE - Displays the report in its original width and height without paging. Additionally interactivity is enabled.
-                    viewMode: telerikReportViewer.ViewModes.INTERACTIVE,
-
+                    viewMode: "PRINT_PREVIEW",
+		            parametersAreaVisible: false,
+                    //documentMapVisible:false,
                     // Sets the scale mode of the viewer.
                     // Three modes exist currently:
                     // FIT_PAGE - The whole report will fit on the page (will zoom in or out), regardless of its width and height.
@@ -116,6 +123,7 @@
                     // Zoom in and out the report using the scale
                     // 1.0 is equal to 100%, i.e. the original size of the report
                     scale: 1.0,
+                    printMode: printMode
                 });
         });
     </script>

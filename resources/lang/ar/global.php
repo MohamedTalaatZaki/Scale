@@ -304,6 +304,7 @@ return [
     'disc_weight'   =>  'كمية الخصم',
     'Net_weight_af_disc'   =>  'الوزن الصافي',
     'truck_summary' =>  'ملخص العمليات',
+    'truck_summary_report' =>  'طباعة ملخص العمليات',
     'kg'    =>  'كيلو جرام',
     'departure_at'  =>  'غادرت منذ',
     'line_is_delay' =>  'هل الخط كان معطل ؟ ',
@@ -317,4 +318,5 @@ return [
     'decision' => 'القرار', 
     'date' => 'التاريخ',
     'time' => 'الوقت',
+    'results_detail' => 'تفاصيل الاختبارات',
 ];

@@ -321,14 +321,15 @@
     var helper = selectBrowserHelper();
     var hasPdfPlugin = helper ? helper.hasPdfPlugin() : false;
     trv.printManager = function() {
-        var iframe;
+        //var iframe;
         function printDesktop(src) {
-            if (!iframe) {
-                iframe = document.createElement("IFRAME");
-                iframe.style.display = "none";
-            }
-            iframe.src = src;
-            document.body.appendChild(iframe);
+            //if (!iframe) {
+            //    iframe = document.createElement("IFRAME");
+            //    iframe.style.display = "none";
+            //}
+            //iframe.src = src;
+            //document.body.appendChild(iframe);
+            printJS({ printable: src, type: 'pdf', showModal: true });        
         }
         function printMobile(src) {
             window.open(src, "_self");

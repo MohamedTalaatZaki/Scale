@@ -306,6 +306,7 @@ return [
     'disc_weight'   =>  'Discount Weight',
     'Net_weight_af_disc'   =>  'Net Weight',
     'truck_summary' =>  'Truck Summary',
+    'truck_summary_report' =>  'Truck Summary - Print',
     'departure_at'  =>  'Departure From',
     'kg'    =>  'Kg',
     'line_is_delay' =>  'Line Is Delay ?',
@@ -319,4 +320,6 @@ return [
     'decision' => 'Decision', 
     'date' => 'Date',
     'time' => 'Time',
+    'results_detail' => 'Sample Result Details',
+
 ];

@@ -51,6 +51,7 @@ Route::middleware(['auth'])->group(function (){
     Route::get('qc/pivot-test' , 'QC\SamplesTestController@pivotResult')->name('pivot-test.index');
 
     Route::resource('production/truck-summary' , 'Production\TruckSummaryController');
+    Route::resource('production/truck-summary-report' , 'Production\TruckSummaryReportController');
 
     Route::resource('production/production-process' , 'Production\ProductionProcessController');
     Route::post('production/production-process-start' , 'Production\ProductionProcessController@startProcess')->name('startProcess');
@@ -103,6 +104,8 @@ Route::get('getScalePrintOutRpt/{transport_id}', 'ReportsController@getScalePrin
 Route::get('getQcLabelRpt/{transport_id}', 'ReportsController@getQcLabelRpt')->name('qc-label-rpt.index');
 Route::get('getQcAnalysisRpt/{test_id}', 'ReportsController@getQcAnalysisRpt')->name('qc-analysis-rpt.index');
 Route::get('getQcPivotRpt/{user}', 'ReportsController@getQcPivotRpt')->name('qc-pivot-rpt.index');
+Route::get('getTruckSummary' , 'ReportsController@getTruckSummary')->name('truck-summary-rpt.index');
+
 
 
 

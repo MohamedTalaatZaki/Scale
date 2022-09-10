@@ -22,4 +22,8 @@ class AbstractBasicFilter
         return $this->builder;
     }
 
+    public function filter2($value1,$value2){
+        return $this->builder;
+    }
+
 }

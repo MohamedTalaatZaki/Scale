@@ -12,7 +12,7 @@
                         <span class="default-cursor">@lang('global.qc')</span>
                     </li>
                     <li class="breadcrumb-item">
-                        <a href="{{ route('pivot-test.index') }}">@lang('global.tested_trucks')</a>
+                        <a href="{{ route('pivot-test.index') }}">@lang('global.results_detail')</a>
                     </li>
                 </ol>
             </nav>

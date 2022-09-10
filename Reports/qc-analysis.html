@@ -1,15 +1,14 @@
-
-
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Juhayna</title>
+    <title>Diplomate|Reports</title>
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/print-js@1.0.61/dist/print.min.js"></script>
 
     <link href="http://kendo.cdn.telerik.com/2015.3.930/styles/kendo.common.min.css" rel="stylesheet" id="common-css" />
     <link href="http://kendo.cdn.telerik.com/2015.3.930/styles/kendo.blueopal.min.css" rel="stylesheet" id="skin-css" />
@@ -19,7 +18,6 @@
     <script src="Scripts/themeSwitcher.js"></script>
 
     <script src="api/reports/js/telerikReportViewer-11.0.17.118.js"></script>
-
     <style>
         body {
             font-family: Verdana, Arial;
@@ -40,6 +38,12 @@
             float: right;
             width: 12em;
             height: 30px;
+        }
+        .trv-parameters-area.preview .trv-parameters-area-content{
+            display: none;
+        }
+        .trv-parameters-area.preview div.trv-parameters-area-footer{
+            display: none;
         }
     </style>
 </head>
@@ -73,10 +77,9 @@
                     }
                 }
             };
-
-            
-            getUrlParameter('val');
-
+            var printMode = /(chrome)/.test(navigator.userAgent.toLowerCase()) 
+                ? telerikReportViewer.PrintModes.FORCE_PDF_PLUGIN 
+                : telerikReportViewer.PrintModes.FORCE_PDF_FILE;
             $("#reportViewer1")
                 .telerik_ReportViewer({
                     // The URL of the service which will serve reports.
@@ -94,18 +97,19 @@
 
                         // The report can be set to a report file name (.trdx or .trdp report definition)
                         // or CLR type name (report class definition).
-                        report: getUrlParameter('rpt')+".trdp",
+                        report: getUrlParameter('type')+"/"+getUrlParameter('rpt')+".trdp",
                         // Parameters name value dictionary
                         parameters: {
-                            //Order_Number : getUrlParameter('val')
-                        }
+                            var  : getUrlParameter('value')
+                                    }
                     },
 
                     // Specifies whether the viewer is in interactive or print preview mode.
                     // PRINT_PREVIEW - Displays the paginated report as if it is printed on paper. Interactivity is not enabled.
                     // INTERACTIVE - Displays the report in its original width and height without paging. Additionally interactivity is enabled.
-                    viewMode: telerikReportViewer.ViewModes.INTERACTIVE,
-
+                    viewMode: "PRINT_PREVIEW",
+		            parametersAreaVisible: false,
+                    //documentMapVisible:false,
                     // Sets the scale mode of the viewer.
                     // Three modes exist currently:
                     // FIT_PAGE - The whole report will fit on the page (will zoom in or out), regardless of its width and height.
@@ -116,6 +120,7 @@
                     // Zoom in and out the report using the scale
                     // 1.0 is equal to 100%, i.e. the original size of the report
                     scale: 1.0,
+                    printMode: printMode
                 });
         });
     </script>

@@ -43,7 +43,7 @@ class SamplesTestController extends Controller
 
     public function pivotResult()
     {
-        $this->authorized('samples-test.index');
+        $this->authorized('pivot-test.index');
         
         $sampleTestHeaders  =  [];
         $user = Auth::user()->id;
@@ -153,9 +153,6 @@ class SamplesTestController extends Controller
             //dd($e->getMessage() , $request->input());
             return redirect()->back()->with('failed' , trans('global.cannot_save_contact_admin'));
         }
-
-
-
     }
 
     public function edit($id) {
