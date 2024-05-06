@@ -18,6 +18,7 @@ Route::get('/', function () {
     return view('layout.main');
 });
 
+
 Route::middleware(['auth'])->group(function (){
     Route::get('/', 'HomeController@index')->name('home');
     Route::get('/manager-dashboard', 'HomeController@managerIndex')->name('managerHome');
@@ -49,7 +50,8 @@ Route::middleware(['auth'])->group(function (){
 
     Route::resource('qc/samples-test' , 'QC\SamplesTestController');
     Route::get('qc/pivot-test' , 'QC\SamplesTestController@pivotResult')->name('pivot-test.index');
-
+    Route::get('export-tested-truck-excel', 'QC\SamplesTestController@exportTestedTruckExcel')->name('exportTestedTruckExcel');
+    
     Route::resource('production/truck-summary' , 'Production\TruckSummaryController');
     Route::resource('production/truck-summary-report' , 'Production\TruckSummaryReportController');
 

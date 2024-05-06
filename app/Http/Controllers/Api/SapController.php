@@ -12,8 +12,8 @@ class SapController extends Controller
 {
     public function getTransportsData(Request $request)
     {
-        $transports = SapApiRaw::query()
-            ->get();
+        $transports = SapApiRaw::query()->get();
+        //dd($transports);    
         return response()->json($transports , 200 , [] , JSON_UNESCAPED_UNICODE);
     }
 

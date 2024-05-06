@@ -17,6 +17,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Exports\TestedTruckExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SamplesTestController extends Controller
 {
@@ -43,52 +45,95 @@ class SamplesTestController extends Controller
 
     public function pivotResult()
     {
+        $transport_detail_id=1;
+        $from_date='2020-02-18';
+        $to_date='2020-02-22';
+
+        // dd("dPivotTestDetails",SampleTestPivot::getSampleTestResult($transport_detail_id,$from_date,$to_date));
+
         $this->authorized('pivot-test.index');
         
-        $sampleTestHeaders  =  [];
         $user = Auth::user()->id;
-
-        if(!empty(request()->input())){
-            $rpt = SampleTestPivot::where('user_id',$user)->delete();
-            $sampleTestHeaders  =   PivotTestDetails::query()
-                ->filter(new SampledPivotFilter(\request()))
-                ->orderByDesc('test_datetime');
-                
-            foreach ($sampleTestHeaders->get() as $test) {
-                    SampleTestPivot::create([
-                            "user_id"             =>  $user,
-                            "transport_header_id" =>  $test->transport_header_id,
-                            "transport_detail_id" =>  $test->transport_detail_id,
-                            "item_group_id"       =>  $test->item_group_id,
-                            "item_name"           =>  $test->item_name,
-                            "truck_plates"        =>  $test->truck_plates,
-                            "transport_no"        =>  $test->transport_no,
-                            "result"              =>  $test->result,
-                            "test_datetime"       =>  $test->test_datetime,
-                            "sample_test_header_id" => $test->sample_test_header_id,
-                            "test_date"             => $test->test_date,
-                            "test_time"             => $test->test_time,
-                            "brix"                  => $test->brix,
-                            "ph"                    => $test->ph,
-                            "acidity"               => $test->acidity,
-                            "ratio"                 => $test->ratio,
-                            "mold"                  => $test->mold,
-                            "damaged"               => $test->damaged,
-                        ]);
-                }    
-
-            $sampleTestHeaders =   $sampleTestHeaders->paginate(25);
-
-        }
-
         $groups             =   ItemGroup::query()->get();
 
         return view('quality-control.pivot-test.index' , [
-            'sampleTestHeaders'   =>  $sampleTestHeaders,
             'groups' =>  $groups,
-            'user' => $user
         ]);
-    }    
+    }  
+
+    public function exportTestedTruckExcel(Request $request) 
+    {
+
+        $from_date=$request->from_date;
+        $to_date=$request->to_date;
+        $item_group_id=$request->item_group_id;
+        ob_end_clean(); 
+        ob_start();
+        $data=SampleTestPivot::getSampleTestResult($item_group_id,$from_date,$to_date);
+        if(count($data) == 0){
+            return redirect()->back()->with('failed' , trans('global.no_data'));
+        }
+
+        $filename="TestedTrucks.xls";
+        return Excel::download( new TestedTruckExport($data),$filename,\Maatwebsite\Excel\Excel::XLS);
+
+        // return redirect()->back()->with('success' , trans('global.downloaded_success'));
+
+    }
+    // public function getTransportDetails(Request $request)
+    // {
+       
+    // }
+    //     public function pivotResult()
+    // {
+       
+
+    //     $this->authorized('pivot-test.index');
+        
+    //     $sampleTestHeaders  =  [];
+    //     $user = Auth::user()->id;
+
+    //     if(!empty(request()->input())){
+    //         $rpt = SampleTestPivot::where('user_id',$user)->delete();
+    //         $sampleTestHeaders  =   PivotTestDetails::query()
+    //             ->filter(new SampledPivotFilter(\request()))
+    //             ->orderByDesc('test_datetime');
+                
+    //         foreach ($sampleTestHeaders->get() as $test) {
+    //                 SampleTestPivot::create([
+    //                         "user_id"             =>  $user,
+    //                         "transport_header_id" =>  $test->transport_header_id,
+    //                         "transport_detail_id" =>  $test->transport_detail_id,
+    //                         "item_group_id"       =>  $test->item_group_id,
+    //                         "item_name"           =>  $test->item_name,
+    //                         "truck_plates"        =>  $test->truck_plates,
+    //                         "transport_no"        =>  $test->transport_no,
+    //                         "result"              =>  $test->result,
+    //                         "test_datetime"       =>  $test->test_datetime,
+    //                         "sample_test_header_id" => $test->sample_test_header_id,
+    //                         "test_date"             => $test->test_date,
+    //                         "test_time"             => $test->test_time,
+    //                         "brix"                  => $test->brix,
+    //                         "ph"                    => $test->ph,
+    //                         "acidity"               => $test->acidity,
+    //                         "ratio"                 => $test->ratio,
+    //                         "mold"                  => $test->mold,
+    //                         "damaged"               => $test->damaged,
+    //                     ]);
+    //             }    
+
+    //         $sampleTestHeaders =   $sampleTestHeaders->paginate(25);
+
+    //     }
+
+    //     $groups             =   ItemGroup::query()->get();
+
+    //     return view('quality-control.pivot-test.index' , [
+    //         'sampleTestHeaders'   =>  $sampleTestHeaders,
+    //         'groups' =>  $groups,
+    //         'user' => $user
+    //     ]);
+    // }   
 
 
     public function create()

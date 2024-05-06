@@ -67,8 +67,8 @@ return [
     |
     */
 
-    'timezone' => 'Africa/Cairo',
-
+    //'timezone' => 'Africa/Cairo', //+2
+      'timezone' => 'Africa/Nairobi', //+3
     /*
     |--------------------------------------------------------------------------
     | Application Locale Configuration
@@ -181,6 +181,8 @@ return [
         \App\Providers\RelationServiceProvider::class,
         \App\Providers\ComposerServiceProvider::class,
 
+        Maatwebsite\Excel\ExcelServiceProvider::class,
+
     ],
 
     /*
@@ -234,6 +236,8 @@ return [
 
         // Custom Package
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
+
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ],
 
 ];
